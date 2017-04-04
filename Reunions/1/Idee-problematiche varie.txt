@@ -1,0 +1,42 @@
+DOMANDE
+-	Politica aggiornamenti
+--Per un supporto costante la nostra azienda offre la possibilità di aggiornamenti in caso di segnalizioni da parte del cliente
+  di eventuali problemi di utilizzo o di funzionamento del prodotto. (€)
+-	Gestione data center (locale o remoto? Il server è in locale o si appoggia ad un servizio esterno?)
+--Data la necessità di utilizzo del prodotto da parte di più operatori contemporaneamente, è imprescindibile una gestione
+  centralizzata dei dati. A questo proposito, a seconda della disponibilità economica da investire, sono disponibili due alternative
+  di massima: 1)Acquistare e manutenere autonomamente un server in azienda. 
+                PRO: indipendenza dal provider di rete (anche senza connessione è possibile gestire i dati)
+                     raggiungimento di performance specifiche, potenzialmente non offerte da cloud esterni.
+             CONTRO: spesa non banale per l'installazione e la costante manutenzione dei macchinari;
+                     in caso di calamità o qual si voglia problema all'impianto in cui risiederanno i macchinari, è probabile una 
+                     perdita definitiva dei dati.
+              2)Affidare la gestione dei dati ad un ente esterno.
+                PRO: gestione e manutenzione
+
+PROPOSTE
+- E' possibile riassumere l'impostazione di massima del prodotto offerto con i seguenti punti:
+-- Una volta installato e pronto all'utilizzo il sistema quotidianamente (in orario non lavorativo) effettua un controllo sui dati presenti
+   e genera per ogni operatore la propria coda di bollette e ingiunzioni che dovrà approvare (lavoro giornaliero). 
+--La gestione della generazione del "lavoro" da smistare è demandata all'admin di sistema che, oltre a poter settare il costo dell'acqua,
+  la mora da applicare alle ingiunzioni, può, tramite il file di log generato in automatico quotidianamente, tener traccia di 
+  qualsiasi operazione di accesso e modifica ai dati da parte degli operatori.
+--Gli operatori, dopo aver effettuato l'operazione di login, avranno la possibilità di visionare il lavoro da svolgere (tramite 
+  la coda di bollette e quella di ingiunzioni) e procedere all'approvazione dei documenti da emettere, col sussidio di una sezione
+  apposita per le varie operazioni di CRUD.
+--La gestione dei pagamenti e l'invio di documenti (cartacei) è affidato a ditte esterne, mentre la comunicazione via mail è
+  garantita dal nostro software.
+
+
+-	Associare ogni bolletta/ingiunzioni ad un operatore (così da poter tener traccia del lavoro ed evitare che due operatori
+  lavorino sulla stessa bolletta)
+-	Assenza da lavoro di un operatore (il lavoro viene completato al rientro oppure viene smistato tra i vari operatori presenti?)
+-- Le ultime due scelte impongono l'inserimento/interfacciamento del turno dei dipendenti con il prodotto offerto.
+-	In assenza di connessione, tutto ciò che viene emesso verrà messo in coda di attesa fino al ripristino della connessione
+
+
+-	Divisione equa del lavoro ad aggiornamento del database
+-	Comunicazione di assenza servizio
+-	Sezione comunicazione operatore-admin
+
+-Descrizione giornata tipo 'operatore'

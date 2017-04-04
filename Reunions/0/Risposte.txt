@@ -1,0 +1,43 @@
+Tassa pagamento acqua
+
+1a.	La tassa per il consumo d’acqua  ogni quanto va pagata ? 
+  -> 3 MESI
+  •	Possibili pagamenti dilazionati nel tempo o pagamento in un’unica trance? 
+    -> NO
+  •	Possibilità di specificare il tipo di erogazione del servizio: a consumo o a pacchetto? 
+    -> A PACCHETTO
+1b. Fase contrattuale: 
+  -> NON CI RIGUARDA
+  •	In che modo un cliente può stipulare un nuovo contratto con l’azienda ( gli operatori possono segnalare possibili nuovi utenti )? O demandiamo tutto ad un ente esterno?
+    -> NON CI RIGUARDA
+
+2.	In caso di ritardo sul pagamento, si procederà direttamente al ricorso per la concessione del decreto ingiuntivo da parte del fornitore o si darà la possibilità di pagare con un ritardo massimo di ‘X’ giorni dalla scadenza ? 
+  -> DIRETTAMENTE ALL'INGIUNZIONE DA CONVALIDARE DALL'OPERATORE
+
+3.	Ricevuto il decreto ingiuntivo, il debitore come deve comportarsi?
+  •	Pagare solo il debito o rimborsare al creditore anche gli interessi di mora? 
+    -> ANCHE LA MORA
+  •	Il debitore può rateizzare il pagamento o ciò è possibile solo nel caso in cui il debitore si trova in condizioni disagiate documentabili? 
+    -> NON CI RIGUARDA
+  •	Può opporsi all’emissione del decreto ingiuntivo (ad esempio se c’è stato un errore nell’emissione e il “presunto” debitore ha tutti i documenti che attestano l’inesistenza in tutto o in parte del credito) ? 
+    -> SI E NEL CASO SI BLOCCA LA PRATICA E NEL CASO VENGA DIMOSTRATO CHE IL CLIENTE HA RAGIONE SI ELIMINA VICEVERSA SI CONFERMA E SI PROCEDE
+
+4.	La determinazione delle tariffe dipende esclusivamente dal consumo d’acqua e dal tipo di utilizzo oppure vi è anche una quota d’accesso indipendente dai consumi?
+Sono previste riduzioni tariffarie per i nuclei familiari in base alla situazione economica equivalente (ISEE)? 
+  -> SOLO DAL CONSUMO RILEVARTO DALL'OPERATORE, NON C'E' ALCUNA QUOTA FISSA
+
+5.	L’ingiunzione deve essere gestita dall’operatore di sistema o solamente dall’amministratore?
+  -> L'AMMINISTRATORE NON LO DOBBIAMO REALIZZARE, CI COMPETE SOLO L'OPERATORE
+
+6.	Come gestire la notifica di ricezione ingiunzione (come comportarsi nel caso di impossibilità nel notificare l’ingiunzione) ? 
+  -> ENTE ESTERNO
+
+7.	Come gestire problemi tecnici quali: 
+  -> NON CI RIGUARDA, I DATI SONO PREINSERITI NEL DATABASE (O LO POPOLIAMO A CASO O INSERIAMO DEI VALORI DI DEFAULT PER GLI ATTRIBUTI
+•	Persona non trovata;
+•	Dispositivo di rilevamento offline;
+•	Contatore guasto;
+•	Contatore analogico ( inserimento manuale dei dati);
+•	Dopo ‘X’ interventi  non riusciti da parte dell’operatore si procederà direttamente ad effettuare una stima sui consumi con successivo conguaglio;
+
+

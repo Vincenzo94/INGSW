@@ -1,0 +1,9 @@
+Domande incontro n°1:
+1)	Ci dobbiamo occupare anche della fase contrattuale o solo della rilevazione dati e invio dati al server?
+2)	Come gestire problemi tecnici come:
+  a.	Dispositivo di rilevamento offline
+  b.	Persona non trovata
+  c.	Contatore guasto
+  d.	Contatore analogico (inserimento manuale dei dati)
+3)	L’invio delle bollette da pagare deve essere cartaceo mediante ente esterno (poste), digitale mediante email o anche via web tramite una eventuale pagina web personale dedicata al cliente?
+4)	Ingiunzione di pagamento: come cosa e quando pagare
