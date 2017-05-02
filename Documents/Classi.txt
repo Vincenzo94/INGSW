@@ -1,0 +1,28 @@
+Boundary:
+	-Login;
+	-Main;
+	-Registry Management;
+	-Injuctions Queue;
+	-Bills Queue:
+	-Alter Holder;
+	-Add Holder;
+	-History Bills;
+	-History Injuctions:
+	-Send PDF;
+	-Build PDF;
+	-Delete Contract;
+
+Control:
+	-Performs Login;
+	-Manages Contract;
+	-Report errors in bills;
+	-Delete injuctions;
+	-Send Document:
+			+Bills;
+			+Injuctions;
+Entity:
+	-Bills+DAO;
+	-Injuctions+DAO;
+	-Contract+DAO;
+	-Operator;
+	-Error+DAO;
