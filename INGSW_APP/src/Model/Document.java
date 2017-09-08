@@ -10,6 +10,10 @@ package Model;
  * @author Andrea
  */
 public interface Document {
+    public Integer getGeneratedDate();
+    public Integer getInsertedDate();
+    public Integer getIussedDate();
+    public Integer getPaymentDate();
     public boolean toPdf();
     public boolean toMail();
     public boolean toPoste();
