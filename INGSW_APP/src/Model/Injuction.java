@@ -10,10 +10,22 @@ package Model;
  * @author Andrea
  */
 public class Injuction implements Document{
+    
+    private Integer generatedOn;
+    private Integer confirmedOn;
+    private String state;
+
+    public Integer getGeneratedOn() {
+        return generatedOn;
+    }
+
+    public Integer getConfirmedOn() {
+        return confirmedOn;
+    }
 
     @Override
     public String getState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return state;
     }
 
     @Override
