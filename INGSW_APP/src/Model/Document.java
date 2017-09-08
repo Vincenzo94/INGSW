@@ -10,13 +10,10 @@ package Model;
  * @author Andrea
  */
 public interface Document {
+    public String getState();
     public Integer getGeneratedDate();
     public Integer getInsertedDate();
     public Integer getIussedDate();
     public Integer getPaymentDate();
-    public boolean toPdf();
-    public boolean toMail();
-    public boolean toPoste();
-    public String getState();
-    
+    public void setManager(Strategy_Document db);
 }
