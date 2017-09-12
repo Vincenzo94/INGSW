@@ -16,13 +16,6 @@ public class Home extends javax.swing.JFrame {
     
     public Home() {
         initComponents();
-        JPanel regMan = new RegistryManagement();
-        JPanel injQueue = new InjuctionsQueue();
-        JPanel billQueue = new BillsQueue();
-        
-        jTabbedPane1.add("Registry Management", regMan);
-        jTabbedPane1.add("Injuctions Queue", injQueue);
-        jTabbedPane1.add("Bills Queue", billQueue);
     }
 
     /**
@@ -48,7 +41,9 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         pack();
