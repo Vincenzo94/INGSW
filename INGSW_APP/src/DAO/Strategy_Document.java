@@ -3,17 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package DAO;
+
+import Interface.Document;
+import Model.Contract;
 
 /**
  *
  * @author Andrea
  */
 public interface Strategy_Document {
-    public Document search();
-    public boolean update();
-    public boolean remove();
-    public boolean create();
+    public Document search(Document d);
+    public boolean update(Document d);
+    public boolean remove(Document d);
+    public boolean create(Document d);
     public boolean buildPdf(Document d);
     public boolean sendMail(Document d, Contract c);
     public boolean sendPost(Document d, Contract c);

@@ -5,58 +5,33 @@
  */
 package Model;
 
+import Interface.Document;
+import Interface.Observable;
+import Interface.Observer;
+
 /**
  *
  * @author Andrea
  */
 public class Bill implements Document{
-    private Strategy_Document manager;
-    private Integer generatedOn;
-    private Integer confirmedOn;
-    private Integer paidOn;
-    private Integer startPeriod;
-    private Integer endPeriod;
-    private Integer detectionValue;
-    private Integer detectionOn;
-    private String state;
+    
+    private Integer GeneratedDate;
+    private Integer ConfirmedDate;
+    private Integer PaymentDate;
+    private Integer StartPeriod;
+    private Integer EndPeriod;
+    private Integer DetectionValue;
+    private Integer DetectionOn;
+    private String State;
 
-
-    public Integer getGeneratedOn() {
-        return generatedOn;
-    }
-
-    public Integer getConfirmedOn() {
-        return confirmedOn;
-    }
-
-    public Integer getPaidOn() {
-        return paidOn;
-    }
-
-    public Integer getStartPeriod() {
-        return startPeriod;
-    }
-
-    public Integer getEndPeriod() {
-        return endPeriod;
-    }
-
-    public Integer getDetectionValue() {
-        return detectionValue;
-    }
-
-    public Integer getDetectionOn() {
-        return detectionOn;
-    }
-   
     @Override
     public String getState() {
-        return state;
+        return State;
     }
 
     @Override
     public Integer getGeneratedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return GeneratedDate;
     }
 
     @Override
@@ -66,17 +41,59 @@ public class Bill implements Document{
 
     @Override
     public Integer getIussedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return EndPeriod;
     }
 
     @Override
     public Integer getPaymentDate() {
+        return PaymentDate;
+    }
+
+    public void setGeneratedDate(Integer GeneratedDate) {
+        this.GeneratedDate = GeneratedDate;
+    }
+
+    public void setConfirmedDate(Integer ConfirmedDate) {
+        this.ConfirmedDate = ConfirmedDate;
+    }
+
+    public void setPaymentDate(Integer PaymentDate) {
+        this.PaymentDate = PaymentDate;
+    }
+
+    public void setStartPeriod(Integer StartPeriod) {
+        this.StartPeriod = StartPeriod;
+    }
+
+    public void setEndPeriod(Integer EndPeriod) {
+        this.EndPeriod = EndPeriod;
+    }
+
+    public void setDetectionValue(Integer DetectionValue) {
+        this.DetectionValue = DetectionValue;
+    }
+
+    public void setDetectionOn(Integer DetectionOn) {
+        this.DetectionOn = DetectionOn;
+    }
+
+    public void setState(String State) {
+        this.State = State;
+    }
+
+    @Override
+    public void attach(Observer o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setManager(Strategy_Document db) {
-        this.manager=db;
+    public void detach(Observer o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
+
+    @Override
+    public void alert() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

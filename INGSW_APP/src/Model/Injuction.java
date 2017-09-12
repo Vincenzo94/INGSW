@@ -5,32 +5,28 @@
  */
 package Model;
 
+import Interface.Document;
+import Interface.Observer;
+
 /**
  *
  * @author Andrea
  */
 public class Injuction implements Document{
     
-    private Integer generatedOn;
-    private Integer confirmedOn;
-    private String state;
-
-    public Integer getGeneratedOn() {
-        return generatedOn;
-    }
-
-    public Integer getConfirmedOn() {
-        return confirmedOn;
-    }
+    private Integer GeneratedDate;
+    private Integer ConfirmedDate;
+    private Integer PaymentDate;
+    private String State;
 
     @Override
     public String getState() {
-        return state;
+        return State;
     }
 
     @Override
     public Integer getGeneratedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return GeneratedDate;
     }
 
     @Override
@@ -45,12 +41,38 @@ public class Injuction implements Document{
 
     @Override
     public Integer getPaymentDate() {
+        return PaymentDate;
+    }
+
+    public void setGeneratedDate(Integer GeneratedDate) {
+        this.GeneratedDate = GeneratedDate;
+    }
+
+    public void setConfirmedDate(Integer ConfirmedDate) {
+        this.ConfirmedDate = ConfirmedDate;
+    }
+
+    public void setPaymentDate(Integer PaymentDate) {
+        this.PaymentDate = PaymentDate;
+    }
+
+    public void setState(String State) {
+        this.State = State;
+    }
+
+    @Override
+    public void attach(Observer o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setManager(Strategy_Document db) {
+    public void detach(Observer o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        
+
+    @Override
+    public void alert() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
