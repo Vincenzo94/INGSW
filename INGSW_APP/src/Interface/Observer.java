@@ -5,10 +5,12 @@
  */
 package Interface;
 
+import java.awt.Event;
+
 /**
  *
  * @author Andrea
  */
 public interface Observer {
-    public void update();
+    public void update(Event a);
 }

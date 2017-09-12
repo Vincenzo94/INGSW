@@ -5,16 +5,21 @@
  */
 package View;
 
+import Interface.Observable;
+import Interface.Observer;
+import java.util.LinkedList;
+
 /**
  *
  * @author Andrea
  */
-public class Login extends javax.swing.JFrame {
-
+public class Login extends javax.swing.JFrame implements Observable{
+    LinkedList<Observer> observer;
     /**
      * Creates new form Login
      */
     public Login() {
+        observer = new LinkedList<>();
         initComponents();
     }
 
@@ -39,7 +44,12 @@ public class Login extends javax.swing.JFrame {
 
         passwordLabel.setText("Password:");
 
-        usernameField.setText("jTextField1");
+        usernameField.setText("User");
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
 
         passwordField.setText("jPasswordField1");
 
@@ -89,8 +99,12 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+        Operator op = checkOperator()
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,4 +148,21 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void attach(Observer o) {
+        observer.add(o);
+    }
+
+    @Override
+    public void detach(Observer o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void alert() {
+        for (Observer o: observer){
+            o.udpate();
+        }
+    }
 }
