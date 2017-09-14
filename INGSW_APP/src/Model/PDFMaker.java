@@ -22,6 +22,10 @@ La scrittura avverrà tramite il metodo "drawImage".
 che dice se è stato creato o meno.
 In più la classe PDFMaker è stata salvata come <<interface>>. Renderla interfaccia
 è inutile visto che avrà sempre lo stesso comportamento in ogni caso. (o nel caso dell'entity boundary control resta così??)
+
+- modifica da fare: distinzione tra generazione ingiunzione e bolletta
+bolletta: il nome file sarà bill_clientID.pdf
+ingiunzione: il nome sarà injunction_clientID.pdf
 */
 public class PDFMaker {
     private final boolean status;
@@ -46,17 +50,16 @@ public class PDFMaker {
         }
         status = true;
     }
-    public boolean createPDF(String filename, Cliente client){
+    public boolean createPDF(Cliente client){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
         - Cliente must not be null
-        - The filename must be univoque
         
         post-conditions:
         - returns true if it creates a PDF
         */
-        String filepath = tmpDirectory + "\\" + filename + ".pdf";
+        String filepath = tmpDirectory + "\\" + client.getId() + ".pdf";
         boolean isCreated = false;
 
         if(!status)
