@@ -26,12 +26,6 @@ le bollette saranno del tipo bill_clientID.pdf
 */
 
 public class EMailSender {
-    /*
-    private final String sender = "ingsw.gr12@gmail.com";
-    private final String psw = "ingsw12a3v";
-    
-    rimuovere autenticazione in due passaggi, attivare permessi per app meno sicure
-    */
     private final String sender;
     private final String psw;
     private final String host;
@@ -40,8 +34,8 @@ public class EMailSender {
     private Session session;
     
     public EMailSender(){
-        sender = "testapi768@gmail.com";
-        psw = "provaprova1";
+        sender = "ingsw.gr12@gmail.com";
+        psw = "hxegtqrhgueywops";
         host = "smtp.gmail.com";
         basicPath = System.getProperty("user.dir") + "\\tmp";
         
