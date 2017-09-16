@@ -53,7 +53,7 @@ public class EMailSender {
             }
         );
     }
-    public boolean sendEmail(Client client){
+    public boolean sendEmail(Contract contract){
         /*
         pre-conditions:
         - receiver's email must be valid
@@ -62,12 +62,12 @@ public class EMailSender {
         - it sends the email to receiver
         */
         boolean result = false;
-        String documentName = client.getId() + ".pdf";
+        String documentName = contract.getId() + ".pdf";
         
         try{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(sender));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(client.getEmailAddress()));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contract.getEmailAddress()));
             message.setSubject("Bill");
             
             message.setContent(createMultipartMessage(documentName));

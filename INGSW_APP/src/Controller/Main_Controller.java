@@ -8,6 +8,7 @@ package Controller;
 import Model.Operator;
 import View.Home;
 import java.awt.Component;
+import java.sql.SQLException;
 
 /**
  *
@@ -21,12 +22,12 @@ public class Main_Controller {
     private static Main_Controller instance;
     private DatabaseManager DbManager;
     
-    private Main_Controller(){
+    private Main_Controller() throws SQLException{
         new Login_Controller(this);
         DbManager = DatabaseManager.getDbManager();
     }
     
-    public static Main_Controller getMain(){
+    public static Main_Controller getMain() throws SQLException{
         if(instance==null){
             instance=new Main_Controller();
         }
@@ -35,8 +36,7 @@ public class Main_Controller {
     
     public void loginDone(Operator o){
         operator=o;
-        actual = new Home();
-        
-        
+        Home actual = new Home();
+        actual.setVisible(true);
     }
 }

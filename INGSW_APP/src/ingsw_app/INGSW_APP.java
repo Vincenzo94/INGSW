@@ -5,7 +5,9 @@
  */
 package ingsw_app;
 
+import Controller.DatabaseManager;
 import Controller.Login_Controller;
+import Controller.Main_Controller;
 import View.Login;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,13 +27,9 @@ public class INGSW_APP {
     public static void main(String[] args) {
     java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                /*Login login = new Login();
-                login.setLocationRelativeTo(null);
-                login.pack();
-                login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                login.setVisible((true));*/
+                Main_Controller main;
                 try {
-                    Database.setDefaultConnection(Database.nuovaConnessione());
+                    main = Main_Controller.getMain();
                 } catch (SQLException ex) {
                     Logger.getLogger(INGSW_APP.class.getName()).log(Level.SEVERE, null, ex);
                 }

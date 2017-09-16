@@ -50,7 +50,7 @@ public class PDFMaker {
         }
         status = true;
     }
-    public boolean createPDF(Cliente client){
+    public boolean createPDF(Contract contract){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -59,13 +59,13 @@ public class PDFMaker {
         post-conditions:
         - returns true if it creates a PDF
         */
-        String filepath = tmpDirectory + "\\" + client.getId() + ".pdf";
+        String filepath = tmpDirectory + "\\" + contract.getId() + ".pdf";
         boolean isCreated = false;
 
         if(!status)
             throw new RuntimeException("PDFMaker state is not valid");
-        if(client == null)
-            throw new RuntimeException("Client is null");
+        if(contract == null)
+            throw new RuntimeException("Contract is null");
         if(new File(filepath).exists()){
             throw new RuntimeException("Another file with the same name already exists.");
         }
@@ -78,7 +78,7 @@ public class PDFMaker {
             PDPageContentStream printStream = new PDPageContentStream(bill, page);
             
             //drawingPDF
-            drawPDF(printStream, template, client);
+            drawPDF(printStream, template, contract);
             
             //saving and closing
             printStream.close();
@@ -91,7 +91,7 @@ public class PDFMaker {
         }
         return isCreated;
     }
-    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Cliente client) throws IOException{
+    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract) throws IOException{
         /*
         pre-conditions:
         - status must be on true
@@ -109,7 +109,7 @@ public class PDFMaker {
         printStream.setFont(PDType1Font.TIMES_ROMAN, 11);
         printStream.setLeading(10F);
         //writing
-        printStream.showText(client.getNomeCliente());
+        printStream.showText(contract.getName());
         printStream.newLine();
         //end text
         printStream.endText();

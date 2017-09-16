@@ -23,7 +23,7 @@ public class Operator {
         this.isDetector= isDetector;
         
     }
-    public Operator(Integer id, String passwd){
+    public Operator (Integer id, String passwd){
         this.id=id;
         this.password = passwd;
         this.isAdmin=null;
@@ -41,8 +41,9 @@ public class Operator {
     public Boolean getIsAdmin() {
         return isAdmin;
     }
-
-
     
+    public String getPassword() {
+        return password;
+    }
     
 }

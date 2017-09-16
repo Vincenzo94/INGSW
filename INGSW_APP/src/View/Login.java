@@ -39,18 +39,19 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        usernameLabel.setText("Username:");
+        usernameLabel.setText("ID");
 
         passwordLabel.setText("Password:");
 
-        usernameField.setText("User");
+        usernameField.setToolTipText("id");
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
 
-        passwordField.setText("jPasswordField1");
+        passwordField.setToolTipText("password");
+        passwordField.setAutoscrolls(false);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +73,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(usernameField)
                     .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loginButton)
@@ -102,7 +103,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     public String getPassword(){
-        return passwordField.getSelectedText();
+        return String.valueOf(passwordField.getPassword());
     }
     
     public Integer getUser(){
