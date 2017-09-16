@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 package View;
-
-import Interface.Observable;
-import Interface.Observer;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import java.util.Observer;
+import javax.swing.JButton;
 
 /**
  *
  * @author Andrea
  */
-public class Login extends javax.swing.JFrame implements Observable{
-    LinkedList<Observer> observer;
+public class Login extends javax.swing.JFrame {
+    LinkedList<ActionListener> listener;
     /**
      * Creates new form Login
      */
     public Login() {
-        observer = new LinkedList<>();
+        listener = new LinkedList<>();
         initComponents();
     }
 
@@ -36,7 +36,7 @@ public class Login extends javax.swing.JFrame implements Observable{
         passwordLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
-        loginButton = new javax.swing.JToggleButton();
+        loginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +76,8 @@ public class Login extends javax.swing.JFrame implements Observable{
                 .addContainerGap(162, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(loginButton)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,21 +90,36 @@ public class Login extends javax.swing.JFrame implements Observable{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(loginButton)
-                .addGap(20, 20, 20))
+                .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        Operator op = checkOperator()
-    }//GEN-LAST:event_loginButtonActionPerformed
-
+    public void addListener(ActionListener a){
+        listener.add(a);
+    }
+    
+    public String getPassword(){
+        return passwordField.getSelectedText();
+    }
+    
+    public Integer getUser(){
+        String user = usernameField.getText();
+        Integer id = Integer.valueOf(user);
+        return id;
+    }
+    
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        for(ActionListener a: listener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,27 +157,10 @@ public class Login extends javax.swing.JFrame implements Observable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton loginButton;
+    private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void attach(Observer o) {
-        observer.add(o);
-    }
-
-    @Override
-    public void detach(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void alert() {
-        for (Observer o: observer){
-            o.udpate();
-        }
-    }
 }

@@ -5,15 +5,14 @@
  */
 package Model;
 
-import Interface.Document;
-import Interface.Observable;
-import Interface.Observer;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Andrea
  */
-public class Bill implements Document{
+public class Bill extends Document{
     
     private Integer GeneratedDate;
     private Integer ConfirmedDate;
@@ -79,21 +78,6 @@ public class Bill implements Document{
 
     public void setState(String State) {
         this.State = State;
-    }
-
-    @Override
-    public void attach(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void detach(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void alert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

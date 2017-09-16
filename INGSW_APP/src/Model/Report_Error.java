@@ -5,14 +5,13 @@
  */
 package Model;
 
-import Interface.Observable;
-import Interface.Observer;
+import java.util.Observable;
 
 /**
  *
  * @author Andrea
  */
-public class Report_Error implements Observable{
+public class Report_Error extends Observable{
     private final Bill bill;
     private final Injuction inj;
     private final Contract con;
@@ -38,22 +37,5 @@ public class Report_Error implements Observable{
         this.bill=null;
         this.inj=null;
     }
-
-    @Override
-    public void attach(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void detach(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void alert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     
 }

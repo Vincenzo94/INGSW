@@ -35,7 +35,7 @@ public class INGSW_APP {
                 } catch (SQLException ex) {
                     Logger.getLogger(INGSW_APP.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                new Login_Controller();
+               // new Login_Controller();
             }
         });
     }

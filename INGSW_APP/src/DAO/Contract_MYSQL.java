@@ -5,14 +5,15 @@
  */
 package DAO;
 
-import DAO.Strategy_Contract;
 import Model.Contract;
+import DAO.DAO_Contract;
+import java.util.List;
 
 /**
  *
  * @author Andrea
  */
-public class Contract_MYSQL implements Strategy_Contract{
+public class Contract_MYSQL implements DAO_Contract{
 
     @Override
     public Contract search(Contract c) {
@@ -20,17 +21,27 @@ public class Contract_MYSQL implements Strategy_Contract{
     }
 
     @Override
-    public boolean update(Contract c) {
+    public void update(Contract c){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean remove(Contract c) {
+    public void remove(Contract c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean create(Contract c) {
+    public void create(Contract c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Contract> getAllContracts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Contract> getAllContracts(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -5,21 +5,44 @@
  */
 package Controller;
 
-import Interface.Observer;
+import DAO.DAO_Operator;
+import DAO.Operator_MYSQL;
+import Model.Operator;
 import View.Login;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author ansan
  */
-public class Login_Controller implements Observer{
+public class Login_Controller implements ActionListener{
     Login login = null;
-    Login_Controller(){
-        login = new Login();  
-    }
-    @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    Operator operator;
+    DAO_Operator DAO;
+    MainController main;
     
+    
+    Login_Controller(MainController m){
+        main=m;
+        this.DAO = new Operator_MYSQL();
+        login = new Login();
+        login.addListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Integer user = login.getUser();
+        String passw = login.getPassword();
+        operator=new Operator(user,passw);
+        operator = DAO.check(operator);
+        if(operator!=null){
+            main.loginDone(operator);
+        }
+        else{
+            //MOSTRARE POPUP ERRORE LOGIN
+        }
+    }
+
 }

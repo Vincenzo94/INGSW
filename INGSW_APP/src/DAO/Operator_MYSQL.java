@@ -11,16 +11,26 @@ import Model.Operator;
  *
  * @author ansan
  */
-public class Operator_MYSQL implements Strategy_Operator{
+public class Operator_MYSQL implements DAO_Operator{
     public String TABELLA = "Operator";
 
     @Override
-    public boolean isValid(Operator o) {
+    public Operator check(Operator o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean isAdmin(Operator o) {
+    public void update(Operator o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Operator o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void create(Operator o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

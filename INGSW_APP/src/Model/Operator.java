@@ -9,30 +9,40 @@ package Model;
  *
  * @author Andrea
  */
-//Classe implementata come Singleton
+
 public class Operator {
     private final Integer id;
     private final Boolean isAdmin;
+    private final Boolean isDetector;
     private final String password;
     
-    private Operator (Integer id, String passwd, Boolean isAdmin){
+    public Operator (Integer id, String passwd, Boolean isAdmin, Boolean isDetector){
         this.id=id;
         this.isAdmin = isAdmin;
         this.password = passwd;
-    }
-    
-    public static Operator checkOperator(String id, String passw){
-        id=null;
-        //Dopo aver verificato se esiste nel database restitusco 
-        //una nuova istanza di operatore, null altrimenti
+        this.isDetector= isDetector;
         
-        //return new Operator(id, passws, isAdmin);
-        return null;
+    }
+    public Operator(Integer id, String passwd){
+        this.id=id;
+        this.password = passwd;
+        this.isAdmin=null;
+        this.isDetector=null;
     }
 
-    private Integer getId() {
+    public Boolean getIsDetector() {
+        return isDetector;
+    }
+
+    public Integer getId() {
         return id;
     }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+
     
     
 }

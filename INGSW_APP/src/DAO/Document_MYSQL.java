@@ -5,14 +5,15 @@
  */
 package DAO;
 
-import Interface.Document;
 import Model.Contract;
+import Model.Document;
+import java.util.List;
 
 /**
  *
  * @author Andrea
  */
-public class Document_MYSQL implements Strategy_Document{
+public class Document_MYSQL implements DAO_Document{
 
     @Override
     public Document search(Document d) {
@@ -35,17 +36,12 @@ public class Document_MYSQL implements Strategy_Document{
     }
 
     @Override
-    public boolean buildPdf(Document d) {
+    public List<Document> getAllDocuments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean sendMail(Document d, Contract c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean sendPost(Document d, Contract c) {
+    public List<Document> getAllDocuments(Contract c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
