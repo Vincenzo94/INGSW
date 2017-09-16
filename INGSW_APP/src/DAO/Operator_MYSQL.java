@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  * @author ansan
  */
 public class Operator_MYSQL implements DAO_Operator{
-    public String TABELLA = "Operator";
+    private final String TABELLA = "Operator";
     Connection connection;
-    public Operator_MYSQL(DatabaseManager dbManager) throws SQLException{
-        connection = dbManager.getDbConnection();
+    public Operator_MYSQL(Connection connection) throws SQLException{
+        this.connection = connection;
     }
     private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA + " WHERE ID = ? AND `password` = ?";
 

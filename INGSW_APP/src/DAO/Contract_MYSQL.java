@@ -5,16 +5,30 @@
  */
 package DAO;
 
+import Controller.DatabaseManager;
 import Model.Contract;
 import DAO.DAO_Contract;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author Andrea
  */
 public class Contract_MYSQL implements DAO_Contract{
-
+    private Connection connection = null;
+    private final String TABELLA = "RegistryManagement_View";
+    private final String QUERY_GET_ALL_CONTRACT= "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA;
+    public Contract_MYSQL(Connection connection){
+        this.connection = connection;
+    }
     @Override
     public Contract search(Contract c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -37,7 +51,17 @@ public class Contract_MYSQL implements DAO_Contract{
 
     @Override
     public List<Contract> getAllContracts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Contract> contracts = new ArrayList<Contract>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(QUERY_GET_ALL_CONTRACT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                contracts.add(new Contract(rs.getInt("Contract ID"), rs.getString("Name"), rs.getString("Surname"), rs.getString("Tax C./VAT")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contracts;         
     }
 
     @Override

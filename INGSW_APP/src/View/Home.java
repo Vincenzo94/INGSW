@@ -6,14 +6,19 @@
 package View;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ansan
  */
 public class Home extends javax.swing.JFrame {
-
-    
+    public DefaultTableModel tableModelRegistryManagement;
+    public DefaultTableModel tableModelBillsQueue;
+    public DefaultTableModel tableModelInjuctionsQueue;
     public Home() {
+        tableModelRegistryManagement = new DefaultTableModel();
+        tableModelBillsQueue = new DefaultTableModel();
+        tableModelInjuctionsQueue = new DefaultTableModel();
         initComponents();
     }
 
@@ -88,23 +93,8 @@ public class Home extends javax.swing.JFrame {
 
         billingAddressValueLabel.setText("via Napoli");
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Name", "Surname", "Contract ID", "Tax C./VAT"
-            }
-        ));
+        table.setModel(tableModelRegistryManagement
+        );
         jScrollPane1.setViewportView(table);
 
         addressValueLabel.setText("via Napoli ancora");
@@ -239,33 +229,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Registry management", registryManagementPanel);
 
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Contract ID", "Reference bill", "Expired from", "Arrears"
-            }
-        ));
+        table1.setModel(tableModelInjuctionsQueue);
         jScrollPane2.setViewportView(table1);
 
         deleteButton.setText("Delete");
@@ -300,31 +264,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Injuctions queue", injuctionsQueuePanel);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Contract ID", "Reference detection", "Generated on", "Total", "Select"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable1.setModel(tableModelBillsQueue);
         jScrollPane3.setViewportView(jTable1);
 
         summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));

@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.sql.Date;
+
 
 /**
  *
@@ -12,50 +14,52 @@ package Model;
  */
 public class Injuction extends Document{
     
-    private Integer GeneratedDate;
-    private Integer ConfirmedDate;
-    private Integer PaymentDate;
-    private String State;
+    private Date PaymentDate;
 
     @Override
     public String getState() {
-        return State;
+        return state;
     }
 
     @Override
-    public Integer getGeneratedDate() {
+    public Date getGeneratedDate() {
         return GeneratedDate;
     }
 
     @Override
-    public Integer getInsertedDate() {
+    public Date getInsertedDate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integer getIussedDate() {
+    public Date getIussedDate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integer getPaymentDate() {
+    public Date getPaymentDate() {
         return PaymentDate;
     }
 
-    public void setGeneratedDate(Integer GeneratedDate) {
+    public void setGeneratedDate(Date GeneratedDate) {
         this.GeneratedDate = GeneratedDate;
     }
 
-    public void setConfirmedDate(Integer ConfirmedDate) {
+    public void setConfirmedDate(Date ConfirmedDate) {
         this.ConfirmedDate = ConfirmedDate;
     }
 
-    public void setPaymentDate(Integer PaymentDate) {
+    public void setPaymentDate(Date PaymentDate) {
         this.PaymentDate = PaymentDate;
     }
 
     public void setState(String State) {
-        this.State = State;
+        this.state = State;
+    }
+
+    @Override
+    public Integer getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

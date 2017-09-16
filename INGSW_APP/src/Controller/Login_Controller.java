@@ -27,7 +27,7 @@ public class Login_Controller implements ActionListener{
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
         dbManager = DatabaseManager.getDbManager();
-        this.DAO = new Operator_MYSQL(dbManager);
+        this.DAO = new Operator_MYSQL(dbManager.getDbConnection());
         login = new Login();
         login.setVisible(true);
         login.addListener(this);

@@ -10,17 +10,36 @@ package Model;
  * @author Andrea
  */
 public class Contract {
+    private Integer id;
+    private String eMail;
+    private String name;
+    private String surname;
+    private String taxCode;
 
-    String getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Contract(int ID, String name, String surname, String taxCode) {
+        this.id = ID;
+        this.name = name;
+        this.surname = surname;
+        this.taxCode = taxCode;
+    }
+    public Integer getId() {
+        return id;
     }
 
-    String getEmailAddress() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getEmailAddress() {
+        return eMail;
     }
 
-    String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getName() {
+        return name;
+    }
+
+    public Object getSurname() {
+        return surname;
+    }
+
+    public Object getTaxCode() {
+        return taxCode;
     }
 
     

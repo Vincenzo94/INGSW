@@ -5,10 +5,21 @@
  */
 package Controller;
 
+import DAO.Bill_MYSQL;
+import DAO.Contract_MYSQL;
+import DAO.DAO_Contract;
+import DAO.DAO_Document;
+import Model.Bill;
+import Model.Contract;
+import Model.Document;
+import Model.Injuction;
 import Model.Operator;
 import View.Home;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +31,19 @@ public class Main_Controller {
     private Operator operator;
     private Component actualView;
     private static Main_Controller instance;
-    private DatabaseManager DbManager;
+    private DatabaseManager dbManager;
+    DefaultTableModel tableModelRegistryManagement = null;
+    DefaultTableModel tableModelBillsQueue = null;
+    DefaultTableModel tableModelInjuctionsQueue = null;
+    private List<Contract> contracts = new ArrayList<>();
+    private List<Bill> bills = new ArrayList<>();
+    private List<Injuction> injuctions = new ArrayList<>();
+
+    private Home actual = null; 
     
     private Main_Controller() throws SQLException{
         new Login_Controller(this);
-        DbManager = DatabaseManager.getDbManager();
+        dbManager = DatabaseManager.getDbManager();
     }
     
     public static Main_Controller getMain() throws SQLException{
@@ -36,7 +55,42 @@ public class Main_Controller {
     
     public void loginDone(Operator o){
         operator=o;
-        Home actual = new Home();
+        actual = new Home();
         actual.setVisible(true);
+        initRegistryManagement();
+        initBillsQueue();
+        //initInjuctionsQueue();
+    }
+
+    private void initRegistryManagement() {
+        DAO_Contract daoContract = new Contract_MYSQL(dbManager.getDbConnection());
+        tableModelRegistryManagement = actual.tableModelRegistryManagement;
+        tableModelRegistryManagement.setRowCount(0);
+        String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
+        tableModelRegistryManagement.setColumnIdentifiers(columns);
+        contracts.clear();
+        contracts = daoContract.getAllContracts();
+        for(Contract temp : contracts){
+            Object[] row = {temp.getName(), temp.getSurname(), temp.getId(), temp.getTaxCode()};
+            tableModelRegistryManagement.addRow(row);
+        }
+    }
+
+    private void initBillsQueue() {
+        DAO_Document daoBill = new Bill_MYSQL(dbManager.getDbConnection());
+        tableModelBillsQueue = actual.tableModelBillsQueue;
+        tableModelBillsQueue.setRowCount(0);
+        String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total"};
+        tableModelBillsQueue.setColumnIdentifiers(columns);
+        bills.clear();
+        bills = daoBill.getAllDocuments();
+        for(Bill temp : bills){
+            Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal()};
+            tableModelBillsQueue.addRow(row);
+        }
+    }
+
+    private void initInjuctionsQueue() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,57 +15,70 @@ import java.util.Observer;
  */
 public class Bill extends Document{
     
-    private Integer GeneratedDate;
-    private Integer ConfirmedDate;
-    private Integer PaymentDate;
-    private Integer StartPeriod;
-    private Integer EndPeriod;
+    private String period;
+    private Date PaymentDate;
+    private Date StartPeriod;
+    private Date EndPeriod;
     private Integer DetectionValue;
-    private Integer DetectionOn;
-    private String State;
-
+    private Date DetectionOn;
+    private Date Deadline;
+    private final Integer contractID;
+    private final Float total;
+    public Bill(int contractID, Date detection, Date generatedOn, Float Total) {
+        this.contractID = contractID;
+        this.DetectionOn = detection;
+        this.GeneratedDate = generatedOn;
+        this.total = Total;
+    }
+    
+    public Integer getId(){
+        return id;
+    }
+    public String getPeriod(){
+        return period;
+    }
     @Override
     public String getState() {
-        return State;
+        return state;
     }
 
     @Override
-    public Integer getGeneratedDate() {
+    public Date getGeneratedDate() {
         return GeneratedDate;
     }
 
     @Override
-    public Integer getInsertedDate() {
+    public Date getInsertedDate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integer getIussedDate() {
+    public Date getIussedDate() {
         return EndPeriod;
     }
 
     @Override
-    public Integer getPaymentDate() {
+    public Date getPaymentDate() {
         return PaymentDate;
     }
 
-    public void setGeneratedDate(Integer GeneratedDate) {
+    public void setGeneratedDate(Date GeneratedDate) {
         this.GeneratedDate = GeneratedDate;
     }
 
-    public void setConfirmedDate(Integer ConfirmedDate) {
+    public void setConfirmedDate(Date ConfirmedDate) {
         this.ConfirmedDate = ConfirmedDate;
     }
 
-    public void setPaymentDate(Integer PaymentDate) {
+    public void setPaymentDate(Date PaymentDate) {
         this.PaymentDate = PaymentDate;
     }
 
-    public void setStartPeriod(Integer StartPeriod) {
+    public void setStartPeriod(Date StartPeriod) {
         this.StartPeriod = StartPeriod;
     }
 
-    public void setEndPeriod(Integer EndPeriod) {
+    public void setEndPeriod(Date EndPeriod) {
         this.EndPeriod = EndPeriod;
     }
 
@@ -72,12 +86,28 @@ public class Bill extends Document{
         this.DetectionValue = DetectionValue;
     }
 
-    public void setDetectionOn(Integer DetectionOn) {
+    public void setDetectionOn(Date DetectionOn) {
         this.DetectionOn = DetectionOn;
     }
 
     public void setState(String State) {
-        this.State = State;
+        this.state = State;
+    }
+
+    public Object getDeadline() {
+        return Deadline;
+    }
+
+    public Object getContractId() {
+        return contractID;
+    }
+
+    public Object getDetectionDate() {
+        return DetectionOn;
+    }
+
+    public Object getTotal() {
+        return total;
     }
 
 }
