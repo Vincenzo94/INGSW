@@ -9,7 +9,6 @@ import DAO.DAO_Operator;
 import DAO.Operator_MYSQL;
 import Model.Operator;
 import View.Login;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,13 +17,13 @@ import java.awt.event.ActionListener;
  * @author ansan
  */
 public class Login_Controller implements ActionListener{
-    Login login = null;
-    Operator operator;
-    DAO_Operator DAO;
-    MainController main;
+    private Login login = null;
+    private Operator operator;
+    private DAO_Operator DAO;
+    private Main_Controller main;
     
     
-    Login_Controller(MainController m){
+    Login_Controller(Main_Controller m){
         main=m;
         this.DAO = new Operator_MYSQL();
         login = new Login();

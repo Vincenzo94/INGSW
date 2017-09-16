@@ -6,7 +6,6 @@
 package View;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-import java.util.Observer;
 import javax.swing.JButton;
 
 /**
@@ -14,7 +13,7 @@ import javax.swing.JButton;
  * @author Andrea
  */
 public class Login extends javax.swing.JFrame {
-    LinkedList<ActionListener> listener;
+    private LinkedList<ActionListener> listener;
     /**
      * Creates new form Login
      */
