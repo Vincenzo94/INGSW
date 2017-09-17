@@ -6,6 +6,9 @@
 package Model;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.DAYS;
 
 
 /**
@@ -13,16 +16,32 @@ import java.sql.Date;
  * @author Andrea
  */
 public class Injuction extends Document{
+    private final Bill referredBill;
     
-    private Date paymentDate;
-
-    public Injuction(Integer id, String state, Date generatedDate, Date confirmedDate) {
+    public Injuction(Integer id, Date generatedDate, Date confirmedDate, String state, Bill bill) {
         super(id, state, generatedDate, confirmedDate);
+        this.referredBill = bill;
+        if(referredBill == null)
+            System.out.println("null");
+    }
+    public Bill getBill(){
+        return referredBill;
+    }
+    public Integer getContractID(){
+        return referredBill.getContractId();
     }
 
-    
-    public Date getPaymentDate() {
-        return paymentDate;
+    public Integer getBillID() {
+        return referredBill.getId();
+    }
+
+    public long getExpiredFrom() {
+        Long diffInMillies =  (new java.util.Date()).getTime() - referredBill.getDeadline().getTime();
+        return DAYS.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+
+    public Object getArrears() {//SERVIREBBE FLOAT O DOUBLE MA DA UN ERRORE STRANO
+        return new DecimalFormat("#0.00").format(getExpiredFrom() * 0.5 + 100 + referredBill.getTotal());
     }
 
     

@@ -60,7 +60,7 @@ public class Main_Controller {
         actual.setVisible(true);
         initRegistryManagement();
         initBillsQueue();
-        //initInjuctionsQueue();
+        initInjuctionsQueue();
     }
 
     private void initRegistryManagement() {
@@ -93,15 +93,15 @@ public class Main_Controller {
 
     private void initInjuctionsQueue() {
         DAO_Document daoInjuction = new Injuction_MYSQL(dbManager.getDbConnection());
-        tableModelInjuctionsQueue = actual.tableModelBillsQueue;
+        tableModelInjuctionsQueue = actual.tableModelInjuctionsQueue;
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
         injuctions.clear();
         injuctions = daoInjuction.getAllDocuments();
         for(Injuction temp : injuctions){
-            //Object[] row = {temp.getContractId(), temp.getReferenceBill(), temp.getExpiredFrom(), temp.getArrears()};
-            //tableModelInjuctionsQueue.addRow(row);
+            Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), temp.getArrears()};
+            tableModelInjuctionsQueue.addRow(row);
         }
     } 
 }

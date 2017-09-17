@@ -25,16 +25,13 @@ import java.sql.Date;
  */
 public class Bill_MYSQL implements DAO_Document {
     private Connection connection = null;
-    private final String TABELLA = "Bill_AUX";
-    private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA;
+    private final String TABLE = "Bill_AUX";
+    private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + DatabaseManager.schema + "." + TABLE;
     public Bill_MYSQL(Connection connection) {
         this.connection = connection;
     }
 
-    @Override
-    public Document search(Document d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public boolean update(Document d) {
@@ -59,6 +56,10 @@ public class Bill_MYSQL implements DAO_Document {
             Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return bills;         
+    }    
+
+    @Override
+    public Document search(Document d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
