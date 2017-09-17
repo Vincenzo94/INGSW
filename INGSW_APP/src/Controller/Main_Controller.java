@@ -9,6 +9,7 @@ import DAO.Bill_MYSQL;
 import DAO.Contract_MYSQL;
 import DAO.DAO_Contract;
 import DAO.DAO_Document;
+import DAO.Injuction_MYSQL;
 import Model.Bill;
 import Model.Contract;
 import Model.Document;
@@ -91,6 +92,16 @@ public class Main_Controller {
     }
 
     private void initInjuctionsQueue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager.getDbConnection());
+        tableModelInjuctionsQueue = actual.tableModelBillsQueue;
+        tableModelInjuctionsQueue.setRowCount(0);
+        String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
+        tableModelInjuctionsQueue.setColumnIdentifiers(columns);
+        injuctions.clear();
+        injuctions = daoInjuction.getAllDocuments();
+        for(Injuction temp : injuctions){
+            //Object[] row = {temp.getContractId(), temp.getReferenceBill(), temp.getExpiredFrom(), temp.getArrears()};
+            //tableModelInjuctionsQueue.addRow(row);
+        }
+    } 
 }

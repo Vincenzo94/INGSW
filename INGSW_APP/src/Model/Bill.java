@@ -15,99 +15,61 @@ import java.util.Observer;
  */
 public class Bill extends Document{
     
-    private String period;
-    private Date PaymentDate;
-    private Date StartPeriod;
-    private Date EndPeriod;
-    private Integer DetectionValue;
-    private Date DetectionOn;
-    private Date Deadline;
+    private final Date paymentDate;
+    private final Date startPeriod;
+    private final Date endPeriod;
+    private final Float detectionValue;
+    private final Date detectionDate;
+    private final Date deadline;
     private final Integer contractID;
+    private final Integer detectorID;
     private final Float total;
-    public Bill(int contractID, Date detection, Date generatedOn, Float Total) {
+    private final Float tax;
+    
+    
+    public Bill(Integer id, String state, Date generatedDate, Date confirmedDate,Date startPeriod, Date endPeriod, Float detectionValue, Date detectionDate, Integer contractID, Integer detectorID, Date paymentDate, Date deadline, Float total, Float tax){
+        super(id,state,generatedDate,confirmedDate);
+        this.startPeriod = startPeriod;
+        this.endPeriod = endPeriod;
+        this.detectionValue = detectionValue;
+        this.detectionDate = detectionDate;
         this.contractID = contractID;
-        this.DetectionOn = detection;
-        this.GeneratedDate = generatedOn;
-        this.total = Total;
+        this.detectorID = detectorID;
+        this.paymentDate = paymentDate;
+        this.deadline = deadline;
+        this.total = total;
+        this.tax = tax;
     }
     
-    public Integer getId(){
-        return id;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
     public String getPeriod(){
-        return period;
+        return getStartPeriod().toString().concat(" - "+getEndPeriod().toString());
     }
-    @Override
-    public String getState() {
-        return state;
+    public Date getStartPeriod() {
+        return endPeriod;
     }
-
-    @Override
-    public Date getGeneratedDate() {
-        return GeneratedDate;
+    public Date getEndPeriod() {
+        return startPeriod;
     }
-
-    @Override
-    public Date getInsertedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Float getDetectionValue(){
+        return detectionValue;
     }
-
-    @Override
-    public Date getIussedDate() {
-        return EndPeriod;
+    public Date getDetectionDate() {
+        return detectionDate;
     }
-
-    @Override
-    public Date getPaymentDate() {
-        return PaymentDate;
+    public Date getDeadline(){
+        return deadline;
     }
-
-    public void setGeneratedDate(Date GeneratedDate) {
-        this.GeneratedDate = GeneratedDate;
-    }
-
-    public void setConfirmedDate(Date ConfirmedDate) {
-        this.ConfirmedDate = ConfirmedDate;
-    }
-
-    public void setPaymentDate(Date PaymentDate) {
-        this.PaymentDate = PaymentDate;
-    }
-
-    public void setStartPeriod(Date StartPeriod) {
-        this.StartPeriod = StartPeriod;
-    }
-
-    public void setEndPeriod(Date EndPeriod) {
-        this.EndPeriod = EndPeriod;
-    }
-
-    public void setDetectionValue(Integer DetectionValue) {
-        this.DetectionValue = DetectionValue;
-    }
-
-    public void setDetectionOn(Date DetectionOn) {
-        this.DetectionOn = DetectionOn;
-    }
-
-    public void setState(String State) {
-        this.state = State;
-    }
-
-    public Object getDeadline() {
-        return Deadline;
-    }
-
-    public Object getContractId() {
+    public Integer getContractId() {
         return contractID;
     }
-
-    public Object getDetectionDate() {
-        return DetectionOn;
-    }
-
-    public Object getTotal() {
+    public Float getTotal() {
         return total;
+    }
+    public Float getTax(){
+        return tax;
     }
 
 }

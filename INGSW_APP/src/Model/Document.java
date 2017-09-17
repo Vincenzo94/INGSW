@@ -11,15 +11,37 @@ import java.util.Observable;
  *
  * @author Andrea
  */
-public abstract class Document extends Observable{
-    Integer id;
+public class Document extends Observable{
+    final Integer id;
     String state;
-    Date GeneratedDate;
-    Date ConfirmedDate;
-    public abstract Integer getId();
-    public abstract String getState();
-    public abstract Date getGeneratedDate();
-    public abstract Date getInsertedDate();
-    public abstract Date getIussedDate();
-    public abstract Date getPaymentDate();
+    final Date generatedDate;
+    Date confirmedDate;
+    public Document(Integer id, String state, Date generatedDate, Date confirmedDate){
+        this.id = id;
+        this.state = state;
+        this.generatedDate = generatedDate;
+        this.confirmedDate = confirmedDate;
+    }
+      
+    public Integer getId(){
+        return id;
+    }
+    public String getState(){
+        return state;
+    }
+    public  Date getGeneratedDate(){
+        return generatedDate;
+    }
+    public Date getConfirmedDate(){
+        return confirmedDate;
+    }
+    
+    
+    public void setState(String state) {
+        this.state = state;
+    }
+    public void setConfirmedDate(Date confirmedDate){
+            this.confirmedDate = confirmedDate;
+    }
 }
+

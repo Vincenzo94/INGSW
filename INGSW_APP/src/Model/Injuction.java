@@ -14,52 +14,15 @@ import java.sql.Date;
  */
 public class Injuction extends Document{
     
-    private Date PaymentDate;
+    private Date paymentDate;
 
-    @Override
-    public String getState() {
-        return state;
+    public Injuction(Integer id, String state, Date generatedDate, Date confirmedDate) {
+        super(id, state, generatedDate, confirmedDate);
     }
 
-    @Override
-    public Date getGeneratedDate() {
-        return GeneratedDate;
-    }
-
-    @Override
-    public Date getInsertedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Date getIussedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
+    
     public Date getPaymentDate() {
-        return PaymentDate;
-    }
-
-    public void setGeneratedDate(Date GeneratedDate) {
-        this.GeneratedDate = GeneratedDate;
-    }
-
-    public void setConfirmedDate(Date ConfirmedDate) {
-        this.ConfirmedDate = ConfirmedDate;
-    }
-
-    public void setPaymentDate(Date PaymentDate) {
-        this.PaymentDate = PaymentDate;
-    }
-
-    public void setState(String State) {
-        this.state = State;
-    }
-
-    @Override
-    public Integer getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return paymentDate;
     }
 
     

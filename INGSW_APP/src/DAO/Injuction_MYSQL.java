@@ -7,6 +7,7 @@ package DAO;
 
 import Model.Contract;
 import Model.Document;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -14,6 +15,10 @@ import java.util.List;
  * @author Andrea
  */
 public class Injuction_MYSQL implements DAO_Document{
+    private Connection connection = null;
+    public Injuction_MYSQL(Connection connection) {
+        this.connection = connection;
+    }
 
     @Override
     public Document search(Document d) {
@@ -26,22 +31,12 @@ public class Injuction_MYSQL implements DAO_Document{
     }
 
     @Override
-    public boolean remove(Document d) {
+    public List<?> getAllDocuments() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean create(Document d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Document> getAllDocuments() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Document> getAllDocuments(Contract c) {
+    public List<?> getAllDocuments(Contract c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
