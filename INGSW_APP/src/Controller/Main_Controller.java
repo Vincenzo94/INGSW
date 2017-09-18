@@ -12,7 +12,6 @@ import DAO.DAO_Document;
 import DAO.Injuction_MYSQL;
 import Model.Bill;
 import Model.Contract;
-import Model.Document;
 import Model.Injuction;
 import Model.Operator;
 import View.Home;
@@ -84,7 +83,8 @@ public class Main_Controller {
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
         bills.clear();
-        bills = daoBill.getAllDocuments();
+        bills = daoBill.getAllDocuments(operator);
+        daoBill.setManagedOperator(bills,operator);
         for(Bill temp : bills){
             Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal()};
             tableModelBillsQueue.addRow(row);
@@ -98,7 +98,8 @@ public class Main_Controller {
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
         injuctions.clear();
-        injuctions = daoInjuction.getAllDocuments();
+        injuctions = daoInjuction.getAllDocuments(operator);
+        daoInjuction.setManagedOperator(injuctions,operator);
         for(Injuction temp : injuctions){
             Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), temp.getArrears()};
             tableModelInjuctionsQueue.addRow(row);

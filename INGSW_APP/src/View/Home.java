@@ -91,23 +91,25 @@ public class Home extends javax.swing.JFrame {
 
         searchButton.setText("Search");
 
-        billingAddressValueLabel.setText("via Napoli");
-
         table.setModel(tableModelRegistryManagement
         );
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        table.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
-        addressValueLabel.setText("via Napoli ancora");
-
         addButton.setText("Add");
-
-        telephoneValueLabel.setText("081 222 32 65");
 
         nameLabel.setText("Name:");
 
         alterHolderButton.setText("Alter holder");
-
-        emailValueLabel.setText("emailingsw@gmail.com");
 
         removeButton.setText("Remove");
 
@@ -130,53 +132,55 @@ public class Home extends javax.swing.JFrame {
             .addGroup(registryManagementPanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registryManagementPanelLayout.createSequentialGroup()
-                            .addComponent(alterHolderButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(removeButton))
-                        .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(addressLabel)
-                                .addComponent(telephoneLabel)
-                                .addComponent(emailLabel))
-                            .addGap(45, 45, 45)
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                                    .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(telephoneValueLabel)
-                                        .addComponent(emailValueLabel))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(addressValueLabel))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(injuctionsButton))
-                        .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registryManagementPanelLayout.createSequentialGroup()
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(14, 14, 14)
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(surnameLabel))
-                            .addGap(14, 14, 14)
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(contractIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(contractIdLabel))
-                            .addGap(14, 14, 14)
-                            .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(taxCLabel)
-                                .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                                    .addComponent(taxCField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchButton)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
                     .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                        .addComponent(billingAddressLabel)
-                        .addGap(28, 28, 28)
-                        .addComponent(billingAddressValueLabel)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addComponent(alterHolderButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registryManagementPanelLayout.createSequentialGroup()
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addressLabel)
+                            .addComponent(telephoneLabel)
+                            .addComponent(emailLabel))
+                        .addGap(45, 45, 45)
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
+                                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(telephoneValueLabel)
+                                    .addComponent(emailValueLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addressValueLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(injuctionsButton))
+                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(surnameLabel))
+                        .addGap(14, 14, 14)
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(contractIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contractIdLabel))
+                        .addGap(14, 14, 14)
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(taxCLabel)
+                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
+                                .addComponent(taxCField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(searchButton))))
+                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
+                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addButton)
+                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
+                                .addComponent(billingAddressLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(billingAddressValueLabel)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         registryManagementPanelLayout.setVerticalGroup(
             registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +228,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(injuctionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Registry management", registryManagementPanel);
@@ -396,6 +400,14 @@ public class Home extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
+        
+    }//GEN-LAST:event_tableKeyPressed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
