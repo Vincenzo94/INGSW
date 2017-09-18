@@ -16,6 +16,8 @@ import Model.Injuction;
 import Model.Operator;
 import View.Home;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 //Classe implementata come singleton
-public class Main_Controller {
+public class Main_Controller implements MouseListener{
     private Operator operator;
     private Component actualView;
     private static Main_Controller instance;
@@ -57,6 +59,7 @@ public class Main_Controller {
         operator=o;
         actual = new Home();
         actual.setVisible(true);
+        actual.addListener(this);
         initRegistryManagement();
         initBillsQueue();
         initInjuctionsQueue();
@@ -64,7 +67,7 @@ public class Main_Controller {
 
     private void initRegistryManagement() {
         DAO_Contract daoContract = new Contract_MYSQL(dbManager.getDbConnection());
-        tableModelRegistryManagement = actual.tableModelRegistryManagement;
+        tableModelRegistryManagement = actual.getTableModelRegistryManagement();
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
         tableModelRegistryManagement.setColumnIdentifiers(columns);
@@ -78,7 +81,7 @@ public class Main_Controller {
 
     private void initBillsQueue() {
         DAO_Document daoBill = new Bill_MYSQL(dbManager.getDbConnection());
-        tableModelBillsQueue = actual.tableModelBillsQueue;
+        tableModelBillsQueue = actual.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
@@ -93,7 +96,7 @@ public class Main_Controller {
 
     private void initInjuctionsQueue() {
         DAO_Document daoInjuction = new Injuction_MYSQL(dbManager.getDbConnection());
-        tableModelInjuctionsQueue = actual.tableModelInjuctionsQueue;
+        tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
@@ -105,4 +108,48 @@ public class Main_Controller {
             tableModelInjuctionsQueue.addRow(row);
         }
     } 
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        switch(actual.checkTab(e.getComponent())){
+            case 1:{
+                Contract contract = contracts.get(actual.getSelectedContract());
+                actual.setBillingAddress(contract.getBillingAddress());
+                actual.setAddress(contract.getAddress());
+                actual.setTelephone(contract.getTelephone());
+                actual.setEmail(contract.getEmailAddress());
+                break;
+            }
+            case 3:{
+                Bill bill = bills.get(actual.getSelectedBill());
+                actual.setTax(bill.getTax());
+                actual.setTotal(bill.getTotal());
+                actual.setDetection(bill.getDetectionValue());
+                actual.setDetector(bill.getDetector());
+                actual.setDetectionDate(bill.getDetectionDate());
+                actual.setDeadline(bill.getDeadline());
+                break;
+            }
+        }       
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

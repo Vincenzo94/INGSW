@@ -159,7 +159,7 @@
                                   <Component id="addressLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="addressValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="telephoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="telephoneValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -176,7 +176,7 @@
                               <Component id="billsButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -360,6 +360,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table1MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -388,17 +391,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="summaryBillsPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="reportErrorButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="confirmButtonBills" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane3" alignment="1" pref="610" max="32767" attributes="0"/>
+                          <Component id="summaryBillsPanel" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
@@ -441,6 +442,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -471,7 +475,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="operatorIdValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="detectionDateValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="detetionValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="detectionValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="rateValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="dueDateValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="totalValueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -479,7 +483,7 @@
                               </Group>
                               <Component id="totalLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="386" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -499,7 +503,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="detectionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="detetionValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="detectionValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -547,34 +551,16 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="rateValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="5,00"/>
-                  </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="detetionValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="100"/>
-                  </Properties>
+                <Component class="javax.swing.JLabel" name="detectionValueLabel">
                 </Component>
                 <Component class="javax.swing.JLabel" name="operatorIdValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="12345"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="detectionDateValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="01/01/2018"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="dueDateValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="01/01/2018"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="totalValueLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="5,00"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="totalLabel">
                   <Properties>

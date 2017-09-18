@@ -71,5 +71,8 @@ public class Bill extends Document{
     public Float getTax(){
         return tax;
     }
+    public Integer getDetector() {
+        return detectorID;
+    }
 
 }

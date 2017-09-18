@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package View;
+import Controller.Main_Controller;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.sql.Date;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -12,13 +18,16 @@ import javax.swing.table.DefaultTableModel;
  * @author ansan
  */
 public class Home extends javax.swing.JFrame {
-    public DefaultTableModel tableModelRegistryManagement;
-    public DefaultTableModel tableModelBillsQueue;
-    public DefaultTableModel tableModelInjuctionsQueue;
+    private DefaultTableModel tableModelRegistryManagement;
+    private DefaultTableModel tableModelBillsQueue;
+    private DefaultTableModel tableModelInjuctionsQueue;
+    private LinkedList<MouseListener> listener;
+
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
         tableModelBillsQueue = new DefaultTableModel();
         tableModelInjuctionsQueue = new DefaultTableModel();
+        listener = new LinkedList<>();
         initComponents();
     }
 
@@ -72,7 +81,7 @@ public class Home extends javax.swing.JFrame {
         detectionDateLabel = new javax.swing.JLabel();
         dueDateLabel = new javax.swing.JLabel();
         rateValueLabel = new javax.swing.JLabel();
-        detetionValueLabel = new javax.swing.JLabel();
+        detectionValueLabel = new javax.swing.JLabel();
         operatorIdValueLabel = new javax.swing.JLabel();
         detectionDateValueLabel = new javax.swing.JLabel();
         dueDateValueLabel = new javax.swing.JLabel();
@@ -216,7 +225,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel)
                             .addComponent(addressValueLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(telephoneLabel)
                             .addComponent(telephoneValueLabel))
@@ -228,12 +237,17 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(injuctionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Registry management", registryManagementPanel);
 
         table1.setModel(tableModelInjuctionsQueue);
+        table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table1);
 
         deleteButton.setText("Delete");
@@ -269,6 +283,11 @@ public class Home extends javax.swing.JFrame {
         jTabbedPane2.addTab("Injuctions queue", injuctionsQueuePanel);
 
         jTable1.setModel(tableModelBillsQueue);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
@@ -282,18 +301,6 @@ public class Home extends javax.swing.JFrame {
         detectionDateLabel.setText("Detection date:");
 
         dueDateLabel.setText("Due date:");
-
-        rateValueLabel.setText("5,00");
-
-        detetionValueLabel.setText("100");
-
-        operatorIdValueLabel.setText("12345");
-
-        detectionDateValueLabel.setText("01/01/2018");
-
-        dueDateValueLabel.setText("01/01/2018");
-
-        totalValueLabel.setText("5,00");
 
         totalLabel.setText("Total:");
 
@@ -315,12 +322,12 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(operatorIdValueLabel)
                             .addComponent(detectionDateValueLabel)
-                            .addComponent(detetionValueLabel)
+                            .addComponent(detectionValueLabel)
                             .addComponent(rateValueLabel)
                             .addComponent(dueDateValueLabel)
                             .addComponent(totalValueLabel)))
                     .addComponent(totalLabel))
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         summaryBillsPanelLayout.setVerticalGroup(
             summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +343,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detectionLabel)
-                    .addComponent(detetionValueLabel))
+                    .addComponent(detectionValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(operatorIdLabel)
@@ -360,15 +367,14 @@ public class Home extends javax.swing.JFrame {
         billsQueuePanelLayout.setHorizontalGroup(
             billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billsQueuePanelLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3)
-                        .addComponent(summaryBillsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(billsQueuePanelLayout.createSequentialGroup()
                         .addComponent(reportErrorButton)
                         .addGap(48, 48, 48)
-                        .addComponent(confirmButtonBills)))
+                        .addComponent(confirmButtonBills))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                    .addComponent(summaryBillsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         billsQueuePanelLayout.setVerticalGroup(
@@ -406,9 +412,80 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_tableKeyPressed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        
+        for(MouseListener m: listener)
+            m.mouseClicked(evt);
     }//GEN-LAST:event_tableMouseClicked
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        for(MouseListener m: listener)
+            m.mouseClicked(evt);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
+        for(MouseListener m: listener)
+            m.mouseClicked(evt);    }//GEN-LAST:event_table1MouseClicked
+    public void addListener(MouseListener m){
+        listener.add(m);
+    }
+    
+    public DefaultTableModel getTableModelRegistryManagement(){
+        return tableModelRegistryManagement;
+    }
+    
+    public DefaultTableModel getTableModelBillsQueue(){
+        return tableModelBillsQueue;
+    }
+    
+    public DefaultTableModel getTableModelInjuctionsQueue(){
+        return tableModelInjuctionsQueue;
+    }
+    
+    //REGISTRY MANAGEMENT
+    public void setBillingAddress(String s){
+        billingAddressValueLabel.setText(s);
+    }
+    public void setAddress(String s){
+        addressValueLabel.setText(s);
+    }
+    public void setTelephone(String s){
+        telephoneValueLabel.setText(s);
+    }
+    public void setEmail(String s){
+        emailValueLabel.setText(s);
+    }
+    public Integer getSelectedContract(){
+        return table.getSelectedRow();
+    }
+    
+    //BILL
+    public Integer getSelectedBill(){
+        return jTable1.getSelectedRow();
+    }
+    public void setTax(Float tax){
+        rateValueLabel.setText(tax.toString());
+    }
+    public void setTotal(Float total){
+        totalValueLabel.setText(total.toString());
+    }
+    public void setDetection(Float detection){
+        detectionValueLabel.setText(detection.toString());
+    }
+    public void setDetector(Integer detector){
+        operatorIdValueLabel.setText(detector.toString());
+    }
+    public void setDetectionDate(Date date){
+        detectionDateValueLabel.setText(date.toString());
+    }
+    public void setDeadline(Date date){
+        dueDateValueLabel.setText(date.toString());
+    }
+    
+    public Integer checkTab(Component c){
+        if(c == table) return 1;
+        if(c == table1) return 2;
+        if(c == jTable1) return 3;
+        return 0;
+    }
     /**
      * @param args the command line arguments
      */
@@ -461,7 +538,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel detectionDateLabel;
     private javax.swing.JLabel detectionDateValueLabel;
     private javax.swing.JLabel detectionLabel;
-    private javax.swing.JLabel detetionValueLabel;
+    private javax.swing.JLabel detectionValueLabel;
     private javax.swing.JLabel dueDateLabel;
     private javax.swing.JLabel dueDateValueLabel;
     private javax.swing.JLabel emailLabel;
@@ -495,4 +572,5 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
 }
