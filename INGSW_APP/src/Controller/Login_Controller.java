@@ -9,6 +9,10 @@ import DAO.DAO_Operator;
 import DAO.Operator_MYSQL;
 import Model.Operator;
 import View.Login;
+import ingsw_app.INGSW_APP;
+import java.awt.FlowLayout;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -29,6 +33,9 @@ public class Login_Controller implements ActionListener{
         dbManager = DatabaseManager.getDbManager();
         this.DAO = new Operator_MYSQL(dbManager.getDbConnection());
         login = new Login();
+        INGSW_APP.device.setFullScreenWindow(login);
+        //login.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+        //login.pack();
         login.setVisible(true);
         login.addListener(this);
     }

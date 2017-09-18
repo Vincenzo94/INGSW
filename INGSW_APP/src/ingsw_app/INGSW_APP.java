@@ -5,27 +5,21 @@
  */
 package ingsw_app;
 
-import Controller.DatabaseManager;
-import Controller.Login_Controller;
 import Controller.Main_Controller;
-import View.Login;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author ansan
  */
 public class INGSW_APP {
-
-    /**
-     * @param args the command line arguments
-     */
+    public static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     public static void main(String[] args) {
-    java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Main_Controller main;
                 try {

@@ -15,7 +15,10 @@ import Model.Contract;
 import Model.Injuction;
 import Model.Operator;
 import View.Home;
+import ingsw_app.INGSW_APP;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -58,6 +61,7 @@ public class Main_Controller implements MouseListener{
     public void loginDone(Operator o){
         operator=o;
         actual = new Home();
+        INGSW_APP.device.setFullScreenWindow(actual);
         actual.setVisible(true);
         actual.addListener(this);
         initRegistryManagement();
@@ -150,6 +154,10 @@ public class Main_Controller implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Object getContentPane() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

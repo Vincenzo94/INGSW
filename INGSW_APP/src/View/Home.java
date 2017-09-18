@@ -5,6 +5,7 @@
  */
 package View;
 import Controller.Main_Controller;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -28,6 +29,7 @@ public class Home extends javax.swing.JFrame {
         tableModelBillsQueue = new DefaultTableModel();
         tableModelInjuctionsQueue = new DefaultTableModel();
         listener = new LinkedList<>();
+        //getContentPane().setLayout(new BorderLayout());
         initComponents();
     }
 
@@ -39,6 +41,7 @@ public class Home extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jTabbedPane2 = new javax.swing.JTabbedPane();
         registryManagementPanel = new javax.swing.JPanel();
@@ -47,15 +50,11 @@ public class Home extends javax.swing.JFrame {
         taxCField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
-        billingAddressValueLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        addressValueLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
-        telephoneValueLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         alterHolderButton = new javax.swing.JButton();
-        emailValueLabel = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
         removeButton = new javax.swing.JButton();
         surnameLabel = new javax.swing.JLabel();
@@ -66,6 +65,10 @@ public class Home extends javax.swing.JFrame {
         billingAddressLabel = new javax.swing.JLabel();
         contractIdField = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
+        billingAddressValueLabel = new javax.swing.JLabel();
+        addressValueLabel = new javax.swing.JLabel();
+        telephoneValueLabel = new javax.swing.JLabel();
+        emailValueLabel = new javax.swing.JLabel();
         injuctionsQueuePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
@@ -74,6 +77,7 @@ public class Home extends javax.swing.JFrame {
         billsQueuePanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        reportErrorButton = new javax.swing.JButton();
         summaryBillsPanel = new javax.swing.JPanel();
         rateLabel = new javax.swing.JLabel();
         detectionLabel = new javax.swing.JLabel();
@@ -87,19 +91,64 @@ public class Home extends javax.swing.JFrame {
         dueDateValueLabel = new javax.swing.JLabel();
         totalValueLabel = new javax.swing.JLabel();
         totalLabel = new javax.swing.JLabel();
-        confirmButtonBills = new javax.swing.JButton();
-        reportErrorButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane2.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+
+        registryManagementPanel.setLayout(new java.awt.GridBagLayout());
+
+        taxCLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         taxCLabel.setText("Tax C./VAT");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
+        registryManagementPanel.add(taxCLabel, gridBagConstraints);
 
+        telephoneLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         telephoneLabel.setText("Telephone:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        registryManagementPanel.add(telephoneLabel, gridBagConstraints);
 
+        taxCField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
+        registryManagementPanel.add(taxCField, gridBagConstraints);
+
+        emailLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         emailLabel.setText("eMail:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        registryManagementPanel.add(emailLabel, gridBagConstraints);
 
+        searchButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         searchButton.setText("Search");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 40);
+        registryManagementPanel.add(searchButton, gridBagConstraints);
 
+        table.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         table.setModel(tableModelRegistryManagement
         );
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,134 +163,187 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        addButton.setText("Add");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 525;
+        gridBagConstraints.ipady = 88;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        registryManagementPanel.add(jScrollPane1, gridBagConstraints);
 
+        addButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        addButton.setText("Add");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 0);
+        registryManagementPanel.add(addButton, gridBagConstraints);
+
+        nameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         nameLabel.setText("Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
+        registryManagementPanel.add(nameLabel, gridBagConstraints);
 
         alterHolderButton.setText("Alter holder");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 13, 0);
+        registryManagementPanel.add(alterHolderButton, gridBagConstraints);
 
+        nameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
+        registryManagementPanel.add(nameField, gridBagConstraints);
+
+        removeButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         removeButton.setText("Remove");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 13, 40);
+        registryManagementPanel.add(removeButton, gridBagConstraints);
 
+        surnameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         surnameLabel.setText("Surname:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
+        registryManagementPanel.add(surnameLabel, gridBagConstraints);
 
+        injuctionsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionsButton.setText("Injuctions");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 10, 500);
+        registryManagementPanel.add(injuctionsButton, gridBagConstraints);
 
+        surnameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
+        registryManagementPanel.add(surnameField, gridBagConstraints);
+
+        billsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsButton.setText("Bills");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(6, 500, 10, 0);
+        registryManagementPanel.add(billsButton, gridBagConstraints);
 
+        contractIdLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         contractIdLabel.setText("Contract ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
+        registryManagementPanel.add(contractIdLabel, gridBagConstraints);
 
+        billingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billingAddressLabel.setText("Billing address:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        registryManagementPanel.add(billingAddressLabel, gridBagConstraints);
 
+        contractIdField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
+        registryManagementPanel.add(contractIdField, gridBagConstraints);
+
+        addressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addressLabel.setText("Address:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        registryManagementPanel.add(addressLabel, gridBagConstraints);
 
-        javax.swing.GroupLayout registryManagementPanelLayout = new javax.swing.GroupLayout(registryManagementPanel);
-        registryManagementPanel.setLayout(registryManagementPanelLayout);
-        registryManagementPanelLayout.setHorizontalGroup(
-            registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                        .addComponent(alterHolderButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registryManagementPanelLayout.createSequentialGroup()
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressLabel)
-                            .addComponent(telephoneLabel)
-                            .addComponent(emailLabel))
-                        .addGap(45, 45, 45)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(telephoneValueLabel)
-                                    .addComponent(emailValueLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addressValueLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(injuctionsButton))
-                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(surnameLabel))
-                        .addGap(14, 14, 14)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contractIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contractIdLabel))
-                        .addGap(14, 14, 14)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(taxCLabel)
-                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                                .addComponent(taxCField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                                .addComponent(searchButton))))
-                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addButton)
-                            .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                                .addComponent(billingAddressLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(billingAddressValueLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
-        registryManagementPanelLayout.setVerticalGroup(
-            registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(addButton)
-                .addGap(15, 15, 15)
-                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(surnameLabel)
-                    .addComponent(contractIdLabel)
-                    .addComponent(taxCLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contractIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(taxCField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alterHolderButton)
-                    .addComponent(removeButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(registryManagementPanelLayout.createSequentialGroup()
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(billingAddressLabel)
-                            .addComponent(billingAddressValueLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressLabel)
-                            .addComponent(addressValueLabel))
-                        .addGap(12, 12, 12)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(telephoneLabel)
-                            .addComponent(telephoneValueLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel)
-                            .addComponent(emailValueLabel))
-                        .addGap(5, 5, 5))
-                    .addGroup(registryManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(injuctionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(billsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        billingAddressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        billingAddressValueLabel.setText("       ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        registryManagementPanel.add(billingAddressValueLabel, gridBagConstraints);
+
+        addressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        addressValueLabel.setText("      ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        registryManagementPanel.add(addressValueLabel, gridBagConstraints);
+
+        telephoneValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        telephoneValueLabel.setText("       ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        registryManagementPanel.add(telephoneValueLabel, gridBagConstraints);
+
+        emailValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailValueLabel.setText("       ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        registryManagementPanel.add(emailValueLabel, gridBagConstraints);
 
         jTabbedPane2.addTab("Registry management", registryManagementPanel);
 
+        injuctionsQueuePanel.setLayout(new java.awt.GridBagLayout());
+
+        table1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         table1.setModel(tableModelInjuctionsQueue);
         table1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -250,38 +352,39 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(table1);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 499;
+        gridBagConstraints.ipady = 296;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
+        injuctionsQueuePanel.add(jScrollPane2, gridBagConstraints);
+
+        deleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         deleteButton.setText("Delete");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(18, 0, 20, 500);
+        injuctionsQueuePanel.add(deleteButton, gridBagConstraints);
 
+        confirmButtonInjuctions.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         confirmButtonInjuctions.setText("Confirm");
-
-        javax.swing.GroupLayout injuctionsQueuePanelLayout = new javax.swing.GroupLayout(injuctionsQueuePanel);
-        injuctionsQueuePanel.setLayout(injuctionsQueuePanelLayout);
-        injuctionsQueuePanelLayout.setHorizontalGroup(
-            injuctionsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(injuctionsQueuePanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(injuctionsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(injuctionsQueuePanelLayout.createSequentialGroup()
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmButtonInjuctions)))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        injuctionsQueuePanelLayout.setVerticalGroup(
-            injuctionsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(injuctionsQueuePanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(injuctionsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteButton)
-                    .addComponent(confirmButtonInjuctions))
-                .addGap(20, 20, 20))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(18, 500, 20, 0);
+        injuctionsQueuePanel.add(confirmButtonInjuctions, gridBagConstraints);
 
         jTabbedPane2.addTab("Injuctions queue", injuctionsQueuePanel);
 
+        billsQueuePanel.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(tableModelBillsQueue);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -290,18 +393,58 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable1);
 
-        summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 588;
+        gridBagConstraints.ipady = 161;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
+        billsQueuePanel.add(jScrollPane3, gridBagConstraints);
 
+        reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        reportErrorButton.setText("Report error");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 375, 20, 40);
+        billsQueuePanel.add(reportErrorButton, gridBagConstraints);
+
+        summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
+        summaryBillsPanel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        rateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         rateLabel.setText("Rate (€ x m^3):");
 
+        detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionLabel.setText("Detection:");
 
+        operatorIdLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         operatorIdLabel.setText("Operator ID:");
 
+        detectionDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionDateLabel.setText("Detection date:");
 
+        dueDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         dueDateLabel.setText("Due date:");
 
+        rateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        operatorIdValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        detectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        dueDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        totalValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalLabel.setText("Total:");
 
         javax.swing.GroupLayout summaryBillsPanelLayout = new javax.swing.GroupLayout(summaryBillsPanel);
@@ -358,63 +501,35 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(dueDateValueLabel)))
         );
 
-        confirmButtonBills.setText("Confirm");
-
-        reportErrorButton.setText("Report error");
-
-        javax.swing.GroupLayout billsQueuePanelLayout = new javax.swing.GroupLayout(billsQueuePanel);
-        billsQueuePanel.setLayout(billsQueuePanelLayout);
-        billsQueuePanelLayout.setHorizontalGroup(
-            billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billsQueuePanelLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(billsQueuePanelLayout.createSequentialGroup()
-                        .addComponent(reportErrorButton)
-                        .addGap(48, 48, 48)
-                        .addComponent(confirmButtonBills))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-                    .addComponent(summaryBillsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(24, 24, 24))
-        );
-        billsQueuePanelLayout.setVerticalGroup(
-            billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billsQueuePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(summaryBillsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(billsQueuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmButtonBills)
-                    .addComponent(reportErrorButton))
-                .addGap(20, 20, 20))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 588;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        billsQueuePanel.add(summaryBillsPanel, gridBagConstraints);
 
         jTabbedPane2.addTab("Bills queue", billsQueuePanel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
-        );
+        getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("Logout");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-        
-    }//GEN-LAST:event_tableKeyPressed
-
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        for(MouseListener m: listener)
-            m.mouseClicked(evt);
-    }//GEN-LAST:event_tableMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         for(MouseListener m: listener)
@@ -424,6 +539,19 @@ public class Home extends javax.swing.JFrame {
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
         for(MouseListener m: listener)
             m.mouseClicked(evt);    }//GEN-LAST:event_table1MouseClicked
+
+    private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
+
+    }//GEN-LAST:event_tableKeyPressed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        for(MouseListener m: listener)
+        m.mouseClicked(evt);
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public void addListener(MouseListener m){
         listener.add(m);
     }
@@ -530,7 +658,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel billingAddressValueLabel;
     private javax.swing.JButton billsButton;
     private javax.swing.JPanel billsQueuePanel;
-    private javax.swing.JButton confirmButtonBills;
     private javax.swing.JButton confirmButtonInjuctions;
     private javax.swing.JTextField contractIdField;
     private javax.swing.JLabel contractIdLabel;
@@ -545,6 +672,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel emailValueLabel;
     private javax.swing.JButton injuctionsButton;
     private javax.swing.JPanel injuctionsQueuePanel;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
