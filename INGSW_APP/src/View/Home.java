@@ -18,7 +18,7 @@ public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelRegistryManagement;
     private DefaultTableModel tableModelBillsQueue;
     private DefaultTableModel tableModelInjuctionsQueue;
-    private LinkedList<MouseListener> listener;
+    private LinkedList<MouseListener> mouseListener;
     private LinkedList<ActionListener> actionListener;
 
     public Home() {
@@ -55,7 +55,7 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         };
-        listener = new LinkedList<>();
+        mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
         initComponents();
@@ -593,12 +593,12 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        for(MouseListener m: listener)
+        for(MouseListener m: mouseListener)
             m.mouseClicked(evt);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-        for(MouseListener m: listener)
+        for(MouseListener m: mouseListener)
             m.mouseClicked(evt);    }//GEN-LAST:event_table1MouseClicked
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
@@ -606,7 +606,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_tableKeyPressed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        for(MouseListener m: listener)
+        for(MouseListener m: mouseListener)
         m.mouseClicked(evt);
     }//GEN-LAST:event_tableMouseClicked
 
@@ -618,8 +618,9 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_searchButtonActionPerformed
+    @Override
     public void addMouseListener(MouseListener m){
-        listener.add(m);
+        mouseListener.add(m);
     }
     public void addActionListener(ActionListener a){
         actionListener.add(a);
@@ -700,40 +701,6 @@ public class Home extends javax.swing.JFrame {
         if(c == table1) return 2;
         if(c == jTable1) return 3;
         return 0;
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

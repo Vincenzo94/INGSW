@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
  *
  * @author ansan
  */
-public class Listener <T extends Controller> implements ActionListener,MouseListener{
+public class Listener <T> implements ActionListener,MouseListener{
     T controller;
     public Listener(T contr){
         controller=contr;

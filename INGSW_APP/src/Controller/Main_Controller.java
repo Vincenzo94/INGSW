@@ -6,8 +6,6 @@
 package Controller;
 
 import DAO.Bill_MYSQL;
-import DAO.Contract_MYSQL;
-import DAO.DAO_Contract;
 import DAO.DAO_Document;
 import DAO.Injuction_MYSQL;
 import Model.Bill;
@@ -15,7 +13,6 @@ import Model.Contract;
 import Model.Injuction;
 import Model.Operator;
 import View.Home;
-import ingsw_app.INGSW_APP;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +20,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 //Classe implementata come singleton
-public class Main_Controller implements ActionListener, MouseListener{
+public class Main_Controller{
     Controller current;
     private Operator operator;
     private Component actualView;
@@ -64,13 +60,28 @@ public class Main_Controller implements ActionListener, MouseListener{
         actual = new Home();
         //INGSW_APP.device.setFullScreenWindow(actual);
         actual.setVisible(true);
-        actual.addMouseListener(this);
-        actual.addActionListener(this);
+        actual.addMouseListener(new Listener(this){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                Main_Controller m = (Main_Controller)controller;
+                m.tableClicked(e);
+            }
+        });
+        actual.addActionListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             Main_Controller m = (Main_Controller)controller;
+                m.searchClicked();
+    }
+        });
         initBillsQueue();
         initInjuctionsQueue();
     }
-
     
+    
+    public void searchClicked(){
+        current=new Search_Controller(this,actual);
+    }    
 
     private void initBillsQueue() {
         DAO_Document daoBill = new Bill_MYSQL(dbManager);
@@ -102,7 +113,7 @@ public class Main_Controller implements ActionListener, MouseListener{
         }
     } 
     
-    public void mouseClicked(MouseEvent e) {
+    public void tableClicked(MouseEvent e) {
         switch(actual.checkTab(e.getComponent())){
             case 1:{
                 contracts = ((Search_Controller)current).getContracts();
@@ -131,31 +142,5 @@ public class Main_Controller implements ActionListener, MouseListener{
                 break;
             }
         }       
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Premuto search");
-        current = new Search_Controller(instance,actual);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

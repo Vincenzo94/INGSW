@@ -33,10 +33,6 @@ public class Search_Controller implements Controller{
         contracts = new ArrayList<>();
         initRegistryManagement();
     }
-
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     private void initRegistryManagement() {
         try {
