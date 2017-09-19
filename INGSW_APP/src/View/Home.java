@@ -234,6 +234,7 @@ public class Home extends javax.swing.JFrame {
         injuctionsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionsButton.setText("Injuctions");
         injuctionsButton.setEnabled(false);
+        injuctionsButton.setRolloverEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
@@ -353,6 +354,7 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
         registryManagementPanel.add(jPanel1, gridBagConstraints);
 
