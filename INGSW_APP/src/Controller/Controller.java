@@ -10,5 +10,5 @@ package Controller;
  * @author ansan
  */
 public interface Controller {
-    public void doAction(Object o);
+    
 }

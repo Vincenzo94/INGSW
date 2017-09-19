@@ -10,11 +10,7 @@ import DAO.Operator_MYSQL;
 import Model.Operator;
 import View.Login;
 import ingsw_app.INGSW_APP;
-import java.awt.FlowLayout;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
@@ -40,19 +36,15 @@ public class Login_Controller implements Controller{
         login.addListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
-                    controller.doAction(null);
+                    Login_Controller l = (Login_Controller) controller;
+                    l.doLogin();
             }
         });
     }
     
     
     public void doLogin(){
-                
-    }
-
-    @Override
-    public void doAction(Object o) {
-        Integer user = login.getUser();
+               Integer user = login.getUser();
                 String passw = login.getPassword();
                 operator=new Operator(user,passw);
                 operator = DAO.check(operator);
@@ -62,7 +54,7 @@ public class Login_Controller implements Controller{
                     }
                 else{
                     //MOSTRARE POPUP ERRORE LOGIN
-                    }
+                    } 
     }
 
 }
