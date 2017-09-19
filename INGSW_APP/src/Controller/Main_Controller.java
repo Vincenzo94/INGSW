@@ -16,9 +16,7 @@ import Model.Injuction;
 import Model.Operator;
 import View.Home;
 import ingsw_app.INGSW_APP;
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -87,13 +85,13 @@ public class Main_Controller implements MouseListener{
         DAO_Document daoBill = new Bill_MYSQL(dbManager.getDbConnection());
         tableModelBillsQueue = actual.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);
-        String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total"};
+        String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
         bills.clear();
         bills = daoBill.getAllDocuments(operator);
         daoBill.setManagedOperator(bills,operator);
         for(Bill temp : bills){
-            Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal()};
+            Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
             tableModelBillsQueue.addRow(row);
         }
     }
@@ -118,14 +116,21 @@ public class Main_Controller implements MouseListener{
         switch(actual.checkTab(e.getComponent())){
             case 1:{
                 Contract contract = contracts.get(actual.getSelectedContract());
+                actual.activeContractButtons();
                 actual.setBillingAddress(contract.getBillingAddress());
                 actual.setAddress(contract.getAddress());
                 actual.setTelephone(contract.getTelephone());
                 actual.setEmail(contract.getEmailAddress());
                 break;
             }
+            case 2:{
+                actual.activeInjuctionButtons();
+                break;
+            }
             case 3:{
                 Bill bill = bills.get(actual.getSelectedBill());
+                actual.activeBillConfirm();
+                actual.activeBillReportError();
                 actual.setTax(bill.getTax());
                 actual.setTotal(bill.getTotal());
                 actual.setDetection(bill.getDetectionValue());

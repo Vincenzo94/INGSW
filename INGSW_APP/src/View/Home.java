@@ -26,7 +26,23 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
-        tableModelBillsQueue = new DefaultTableModel();
+        tableModelBillsQueue = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Integer.class;
+                    case 2:
+                        return Date.class;
+                    case 3:
+                        return Float.class;
+                    default:
+                        return Boolean.class;
+                }
+            }
+        };
         tableModelInjuctionsQueue = new DefaultTableModel();
         listener = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
@@ -46,9 +62,7 @@ public class Home extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         registryManagementPanel = new javax.swing.JPanel();
         taxCLabel = new javax.swing.JLabel();
-        telephoneLabel = new javax.swing.JLabel();
         taxCField = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -56,15 +70,18 @@ public class Home extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         alterHolderButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
-        removeButton = new javax.swing.JButton();
+        removeContractButton = new javax.swing.JButton();
         surnameLabel = new javax.swing.JLabel();
         injuctionsButton = new javax.swing.JButton();
         surnameField = new javax.swing.JTextField();
         billsButton = new javax.swing.JButton();
         contractIdLabel = new javax.swing.JLabel();
-        billingAddressLabel = new javax.swing.JLabel();
         contractIdField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        billingAddressLabel = new javax.swing.JLabel();
         addressLabel = new javax.swing.JLabel();
+        telephoneLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
         billingAddressValueLabel = new javax.swing.JLabel();
         addressValueLabel = new javax.swing.JLabel();
         telephoneValueLabel = new javax.swing.JLabel();
@@ -72,8 +89,8 @@ public class Home extends javax.swing.JFrame {
         injuctionsQueuePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
-        deleteButton = new javax.swing.JButton();
-        confirmButtonInjuctions = new javax.swing.JButton();
+        injuctionDeleteButton = new javax.swing.JButton();
+        injuctionConfirmButton = new javax.swing.JButton();
         billsQueuePanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -91,6 +108,8 @@ public class Home extends javax.swing.JFrame {
         dueDateValueLabel = new javax.swing.JLabel();
         totalValueLabel = new javax.swing.JLabel();
         totalLabel = new javax.swing.JLabel();
+        selectAllButton = new javax.swing.JButton();
+        billConfirmButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,16 +129,6 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
         registryManagementPanel.add(taxCLabel, gridBagConstraints);
 
-        telephoneLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        telephoneLabel.setText("Telephone:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        registryManagementPanel.add(telephoneLabel, gridBagConstraints);
-
         taxCField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -128,16 +137,6 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
         registryManagementPanel.add(taxCField, gridBagConstraints);
-
-        emailLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        emailLabel.setText("eMail:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        registryManagementPanel.add(emailLabel, gridBagConstraints);
 
         searchButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         searchButton.setText("Search");
@@ -194,7 +193,9 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
         registryManagementPanel.add(nameLabel, gridBagConstraints);
 
+        alterHolderButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         alterHolderButton.setText("Alter holder");
+        alterHolderButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -211,14 +212,15 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
         registryManagementPanel.add(nameField, gridBagConstraints);
 
-        removeButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        removeButton.setText("Remove");
+        removeContractButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        removeContractButton.setText("Remove");
+        removeContractButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 13, 40);
-        registryManagementPanel.add(removeButton, gridBagConstraints);
+        registryManagementPanel.add(removeContractButton, gridBagConstraints);
 
         surnameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         surnameLabel.setText("Surname:");
@@ -231,14 +233,15 @@ public class Home extends javax.swing.JFrame {
 
         injuctionsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionsButton.setText("Injuctions");
+        injuctionsButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 3;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 10, 500);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 180);
         registryManagementPanel.add(injuctionsButton, gridBagConstraints);
 
         surnameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -252,14 +255,15 @@ public class Home extends javax.swing.JFrame {
 
         billsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsButton.setText("Bills");
+        billsButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.ipadx = 16;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 37;
         gridBagConstraints.ipady = 10;
-        gridBagConstraints.insets = new java.awt.Insets(6, 500, 10, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 40);
         registryManagementPanel.add(billsButton, gridBagConstraints);
 
         contractIdLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -271,16 +275,6 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
         registryManagementPanel.add(contractIdLabel, gridBagConstraints);
 
-        billingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billingAddressLabel.setText("Billing address:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        registryManagementPanel.add(billingAddressLabel, gridBagConstraints);
-
         contractIdField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -290,54 +284,77 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
         registryManagementPanel.add(contractIdField, gridBagConstraints);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary contract"));
+
+        billingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        billingAddressLabel.setText("Billing address:");
+
         addressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addressLabel.setText("Address:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        registryManagementPanel.add(addressLabel, gridBagConstraints);
+
+        telephoneLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        telephoneLabel.setText("Telephone:");
+
+        emailLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailLabel.setText("eMail:");
 
         billingAddressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billingAddressValueLabel.setText("       ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        registryManagementPanel.add(billingAddressValueLabel, gridBagConstraints);
 
         addressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addressValueLabel.setText("      ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        registryManagementPanel.add(addressValueLabel, gridBagConstraints);
 
         telephoneValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         telephoneValueLabel.setText("       ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        registryManagementPanel.add(telephoneValueLabel, gridBagConstraints);
 
         emailValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         emailValueLabel.setText("       ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(billingAddressLabel)
+                    .addComponent(addressLabel)
+                    .addComponent(telephoneLabel)
+                    .addComponent(emailLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(telephoneValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                    .addComponent(addressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(billingAddressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(billingAddressLabel)
+                    .addComponent(billingAddressValueLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addressLabel)
+                    .addComponent(addressValueLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telephoneLabel)
+                    .addComponent(telephoneValueLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel)
+                    .addComponent(emailValueLabel))
+                .addGap(6, 6, 6))
+        );
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        registryManagementPanel.add(emailValueLabel, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        registryManagementPanel.add(jPanel1, gridBagConstraints);
 
         jTabbedPane2.addTab("Registry management", registryManagementPanel);
 
@@ -364,21 +381,25 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
         injuctionsQueuePanel.add(jScrollPane2, gridBagConstraints);
 
-        deleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        deleteButton.setText("Delete");
+        injuctionDeleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        injuctionDeleteButton.setText("Delete");
+        injuctionDeleteButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(18, 0, 20, 500);
-        injuctionsQueuePanel.add(deleteButton, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(18, 40, 20, 0);
+        injuctionsQueuePanel.add(injuctionDeleteButton, gridBagConstraints);
 
-        confirmButtonInjuctions.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        confirmButtonInjuctions.setText("Confirm");
+        injuctionConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        injuctionConfirmButton.setText("Confirm");
+        injuctionConfirmButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(18, 500, 20, 0);
-        injuctionsQueuePanel.add(confirmButtonInjuctions, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(18, 0, 20, 40);
+        injuctionsQueuePanel.add(injuctionConfirmButton, gridBagConstraints);
 
         jTabbedPane2.addTab("Injuctions queue", injuctionsQueuePanel);
 
@@ -407,14 +428,16 @@ public class Home extends javax.swing.JFrame {
 
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
+        reportErrorButton.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 375, 20, 40);
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
         billsQueuePanel.add(reportErrorButton, gridBagConstraints);
 
         summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
+        summaryBillsPanel.setEnabled(false);
         summaryBillsPanel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         rateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -503,12 +526,31 @@ public class Home extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 588;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
         billsQueuePanel.add(summaryBillsPanel, gridBagConstraints);
+
+        selectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        selectAllButton.setText("Select all");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 40);
+        billsQueuePanel.add(selectAllButton, gridBagConstraints);
+
+        billConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        billConfirmButton.setText("Confirm");
+        billConfirmButton.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 240);
+        billsQueuePanel.add(billConfirmButton, gridBagConstraints);
 
         jTabbedPane2.addTab("Bills queue", billsQueuePanel);
 
@@ -569,6 +611,12 @@ public class Home extends javax.swing.JFrame {
     }
     
     //REGISTRY MANAGEMENT
+    public void activeContractButtons(){
+        alterHolderButton.setEnabled(true);
+        removeContractButton.setEnabled(true);
+        billsButton.setEnabled(true);
+        injuctionsButton.setEnabled(true);
+    }
     public void setBillingAddress(String s){
         billingAddressValueLabel.setText(s);
     }
@@ -606,6 +654,18 @@ public class Home extends javax.swing.JFrame {
     }
     public void setDeadline(Date date){
         dueDateValueLabel.setText(date.toString());
+    }
+    public void activeBillConfirm(){
+        billConfirmButton.setEnabled(true);
+    }
+    public void activeBillReportError() {
+        reportErrorButton.setEnabled(true);
+    }
+    
+    //INJUCTION
+    public void activeInjuctionButtons(){
+        injuctionConfirmButton.setEnabled(true);
+        injuctionDeleteButton.setEnabled(true);
     }
     
     public Integer checkTab(Component c){
@@ -654,14 +714,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressValueLabel;
     private javax.swing.JButton alterHolderButton;
+    private javax.swing.JButton billConfirmButton;
     private javax.swing.JLabel billingAddressLabel;
     private javax.swing.JLabel billingAddressValueLabel;
     private javax.swing.JButton billsButton;
     private javax.swing.JPanel billsQueuePanel;
-    private javax.swing.JButton confirmButtonInjuctions;
     private javax.swing.JTextField contractIdField;
     private javax.swing.JLabel contractIdLabel;
-    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel detectionDateLabel;
     private javax.swing.JLabel detectionDateValueLabel;
     private javax.swing.JLabel detectionLabel;
@@ -670,11 +729,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel dueDateValueLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel emailValueLabel;
+    private javax.swing.JButton injuctionConfirmButton;
+    private javax.swing.JButton injuctionDeleteButton;
     private javax.swing.JButton injuctionsButton;
     private javax.swing.JPanel injuctionsQueuePanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -687,9 +749,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel rateLabel;
     private javax.swing.JLabel rateValueLabel;
     private javax.swing.JPanel registryManagementPanel;
-    private javax.swing.JButton removeButton;
+    private javax.swing.JButton removeContractButton;
     private javax.swing.JButton reportErrorButton;
     private javax.swing.JButton searchButton;
+    private javax.swing.JButton selectAllButton;
     private javax.swing.JPanel summaryBillsPanel;
     private javax.swing.JTextField surnameField;
     private javax.swing.JLabel surnameLabel;
@@ -702,5 +765,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    
 
 }
