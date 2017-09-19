@@ -9,7 +9,6 @@ import DAO.Contract_MYSQL;
 import DAO.DAO_Contract;
 import Model.Contract;
 import View.Home;
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +20,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ansan
  */
-public class Search_Controller implements Controller{
+public class SearchContract_Controller implements Controller{
     private final Main_Controller main;
     private final Home actual;
     private DatabaseManager dbManager = null;
     private DefaultTableModel tableModelRegistryManagement = null;
     private List<Contract> contracts;
-    Search_Controller(Main_Controller instance, Home home) {
+    SearchContract_Controller(Main_Controller instance, Home home) {
         this.main = instance;
         this.actual = home;
         contracts = new ArrayList<>();
@@ -38,7 +37,7 @@ public class Search_Controller implements Controller{
         try {
             dbManager = DatabaseManager.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(Search_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         tableModelRegistryManagement = actual.getTableModelRegistryManagement();

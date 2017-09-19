@@ -16,6 +16,7 @@ public class AlterHolder extends javax.swing.JFrame {
      */
     public AlterHolder() {
         initComponents();
+        this.pack();
     }
 
     /**

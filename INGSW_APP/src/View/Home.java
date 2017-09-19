@@ -213,6 +213,11 @@ public class Home extends javax.swing.JFrame {
         alterHolderButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         alterHolderButton.setText("Alter holder");
         alterHolderButton.setEnabled(false);
+        alterHolderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterHolderButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -618,6 +623,12 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void alterHolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterHolderButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_alterHolderButtonActionPerformed
+    
     @Override
     public void addMouseListener(MouseListener m){
         mouseListener.add(m);
@@ -696,7 +707,14 @@ public class Home extends javax.swing.JFrame {
         injuctionDeleteButton.setEnabled(true);
     }
     
-    public Integer checkTab(Component c){
+    
+   public int checkButton(Component c){
+       if(c == searchButton) return 1;
+       if(c == alterHolderButton) return 2;
+       return 0;
+   }
+    
+    public int checkTab(Component c){
         if(c == table) return 1;
         if(c == table1) return 2;
         if(c == jTable1) return 3;

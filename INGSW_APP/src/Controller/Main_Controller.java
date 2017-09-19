@@ -21,6 +21,7 @@ import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,16 +72,32 @@ public class Main_Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
              Main_Controller m = (Main_Controller)controller;
-                m.searchClicked();
-    }
+             m.buttonCliked(e);            
+            }
         });
         initBillsQueue();
         initInjuctionsQueue();
     }
     
+    public void buttonCliked(ActionEvent e){
+            Component j = (Component)e.getSource();
+            int i=actual.checkButton(j);
+            switch(i){
+                case 1: searchClicked(); break;
+                case 2: alterholderCliked(); break;
+            }
+                }
+    
+    public void alterholderCliked(){
+        int row = actual.getSelectedContract();
+        actual.dispose();
+        current= new AlterContract_Controller(this,contracts.get(row));
+    }
+    
     
     public void searchClicked(){
-        current=new Search_Controller(this,actual);
+        current=new SearchContract_Controller(this,actual);
+        contracts=((SearchContract_Controller)current).getContracts();
     }    
 
     private void initBillsQueue() {
@@ -116,7 +133,7 @@ public class Main_Controller{
     public void tableClicked(MouseEvent e) {
         switch(actual.checkTab(e.getComponent())){
             case 1:{
-                contracts = ((Search_Controller)current).getContracts();
+                contracts = ((SearchContract_Controller)current).getContracts();
                 Contract contract = contracts.get(actual.getSelectedContract());
                 actual.activeContractButtons();
                 actual.setBillingAddress(contract.getBillingAddress());
