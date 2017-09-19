@@ -25,18 +25,9 @@ public class AddHolder extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        registryPanel = new javax.swing.JPanel();
-        nameLabel = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
-        surnameField = new javax.swing.JTextField();
-        surnameLabel = new javax.swing.JLabel();
-        taxCLabel = new javax.swing.JLabel();
-        taxCField = new javax.swing.JTextField();
-        telephoneField = new javax.swing.JTextField();
-        telephoneLabel = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         billAddress = new javax.swing.JPanel();
         streetField = new javax.swing.JTextField();
         streetLabel = new javax.swing.JLabel();
@@ -59,21 +50,229 @@ public class AddHolder extends javax.swing.JFrame {
         postalCode2Field = new javax.swing.JTextField();
         number2Field = new javax.swing.JTextField();
         city2Label = new javax.swing.JLabel();
+        registryPanel = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        surnameField = new javax.swing.JTextField();
+        surnameLabel = new javax.swing.JLabel();
+        taxCLabel = new javax.swing.JLabel();
+        taxCField = new javax.swing.JTextField();
+        telephoneField = new javax.swing.JTextField();
+        telephoneLabel = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
         createButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        billAddress.setBorder(javax.swing.BorderFactory.createTitledBorder("Bill address"));
+
+        streetField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        streetLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        streetLabel.setText("Street:");
+
+        cityField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        cityLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        cityLabel.setText("City:");
+
+        numberLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        numberLabel.setText("Number:");
+
+        numberField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        districtLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        districtLabel.setText("District:");
+
+        districtField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        postalCodeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        postalCodeLabel.setText("Postal code:");
+
+        postalCodeField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout billAddressLayout = new javax.swing.GroupLayout(billAddress);
+        billAddress.setLayout(billAddressLayout);
+        billAddressLayout.setHorizontalGroup(
+            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(streetLabel)
+                    .addGroup(billAddressLayout.createSequentialGroup()
+                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityLabel)
+                            .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(districtLabel)
+                            .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(billAddressLayout.createSequentialGroup()
+                                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numberLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(postalCodeLabel)
+                                    .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        billAddressLayout.setVerticalGroup(
+            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(billAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(streetLabel)
+                    .addComponent(postalCodeLabel)
+                    .addComponent(numberLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cityLabel)
+                    .addComponent(districtLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 40);
+        jPanel1.add(billAddress, gridBagConstraints);
+
+        address.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
+
+        city2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        district2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        district2Label.setText("District:");
+
+        postalCode2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        postalCode2Label.setText("Postal code:");
+
+        district2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        street2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        street2Label.setText("Street:");
+
+        street2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        number2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        number2Label.setText("Number:");
+
+        postalCode2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        number2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        city2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        city2Label.setText("City:");
+
+        javax.swing.GroupLayout addressLayout = new javax.swing.GroupLayout(address);
+        address.setLayout(addressLayout);
+        addressLayout.setHorizontalGroup(
+            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(street2Label)
+                    .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(city2Label))
+                .addGap(18, 18, 18)
+                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(district2Label)
+                    .addGroup(addressLayout.createSequentialGroup()
+                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(number2Label)
+                            .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(postalCode2Label)
+                            .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        addressLayout.setVerticalGroup(
+            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(addressLayout.createSequentialGroup()
+                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(addressLayout.createSequentialGroup()
+                                .addComponent(number2Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(addressLayout.createSequentialGroup()
+                                .addComponent(postalCode2Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(district2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addressLayout.createSequentialGroup()
+                        .addComponent(street2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(city2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.ipady = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 40);
+        jPanel1.add(address, gridBagConstraints);
+
         registryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Registry"));
 
+        nameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         nameLabel.setText("Name:");
 
+        nameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        surnameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        surnameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         surnameLabel.setText("Surname:");
 
+        taxCLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         taxCLabel.setText("Tax C./VAT:");
 
+        taxCField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        telephoneField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        telephoneLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         telephoneLabel.setText("Telephone:");
 
+        emailField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        emailLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         emailLabel.setText("eMail:");
 
         javax.swing.GroupLayout registryPanelLayout = new javax.swing.GroupLayout(registryPanel);
@@ -118,183 +317,38 @@ public class AddHolder extends javax.swing.JFrame {
                 .addComponent(emailLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        billAddress.setBorder(javax.swing.BorderFactory.createTitledBorder("Bill address"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 108;
+        gridBagConstraints.ipady = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 0);
+        jPanel1.add(registryPanel, gridBagConstraints);
 
-        streetLabel.setText("Street:");
-
-        cityLabel.setText("City:");
-
-        numberLabel.setText("Number");
-
-        districtLabel.setText("District:");
-
-        postalCodeLabel.setText("Postal code:");
-
-        javax.swing.GroupLayout billAddressLayout = new javax.swing.GroupLayout(billAddress);
-        billAddress.setLayout(billAddressLayout);
-        billAddressLayout.setHorizontalGroup(
-            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(streetLabel)
-                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel))
-                .addGap(18, 18, 18)
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel)
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numberLabel)
-                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postalCodeLabel)
-                            .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        billAddressLayout.setVerticalGroup(
-            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(numberLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(postalCodeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(districtLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addComponent(streetLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-
-        address.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
-
-        district2Label.setText("District:");
-
-        postalCode2Label.setText("Postal code:");
-
-        street2Label.setText("Street:");
-
-        number2Label.setText("Number");
-
-        city2Label.setText("City:");
-
-        javax.swing.GroupLayout addressLayout = new javax.swing.GroupLayout(address);
-        address.setLayout(addressLayout);
-        addressLayout.setHorizontalGroup(
-            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(street2Label)
-                    .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(city2Label))
-                .addGap(18, 18, 18)
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(district2Label)
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(number2Label)
-                            .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postalCode2Label)
-                            .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        addressLayout.setVerticalGroup(
-            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addComponent(number2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addComponent(postalCode2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(district2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addComponent(street2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(city2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-
+        createButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         createButton.setText("Create");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
+        jPanel1.add(createButton, gridBagConstraints);
 
+        backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
+        jPanel1.add(backButton, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(registryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(billAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(40, 40, 40))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(registryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(billAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(address, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createButton)
-                    .addComponent(backButton))
-                .addGap(20, 20, 20))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -349,6 +403,7 @@ public class AddHolder extends javax.swing.JFrame {
     private javax.swing.JLabel districtLabel;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField number2Field;

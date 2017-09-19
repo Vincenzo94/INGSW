@@ -26,7 +26,9 @@ public class Injuctions extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         summaryPanel = new javax.swing.JPanel();
@@ -43,6 +45,9 @@ public class Injuctions extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -60,24 +65,43 @@ public class Injuctions extends javax.swing.JFrame {
                 "Injuction number", "Bill ID", "State"
             }
         ));
+        jTable1.setPreferredSize(new java.awt.Dimension(225, 500));
         jScrollPane1.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
 
         summaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary"));
 
+        billsPeriodLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsPeriodLabel.setText("Bill's period of reference:");
 
+        billsPeriodValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsPeriodValueLabel.setText("value");
 
+        billsDueValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsDueValueLabel.setText("value");
 
+        billsDueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsDueLabel.setText("Bill's due date:");
 
+        detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionLabel.setText("Detection date:");
 
+        detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionValueLabel.setText("value");
 
+        paymentLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         paymentLabel.setText("Payment date:");
 
+        paymentValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         paymentValueLabel.setText("value");
 
         javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
@@ -103,7 +127,7 @@ public class Injuctions extends javax.swing.JFrame {
                         .addComponent(billsPeriodLabel)
                         .addGap(29, 29, 29)
                         .addComponent(billsPeriodValueLabel)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         summaryPanelLayout.setVerticalGroup(
             summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,38 +149,32 @@ public class Injuctions extends javax.swing.JFrame {
                     .addComponent(paymentValueLabel)))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 40);
+        jPanel1.add(summaryPanel, gridBagConstraints);
+
+        buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
+        jPanel1.add(buildPDFButton, gridBagConstraints);
 
+        backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
+        jPanel1.add(backButton, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buildPDFButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(summaryPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(summaryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buildPDFButton)
-                    .addComponent(backButton))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,6 +223,7 @@ public class Injuctions extends javax.swing.JFrame {
     private javax.swing.JButton buildPDFButton;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel paymentLabel;

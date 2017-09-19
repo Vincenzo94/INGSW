@@ -42,6 +42,8 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setToolTipText("Login");
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         loginButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

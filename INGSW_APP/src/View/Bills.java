@@ -26,7 +26,9 @@ public class Bills extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         consuptionDataPanel = new javax.swing.JPanel();
@@ -46,6 +48,9 @@ public class Bills extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -63,28 +68,51 @@ public class Bills extends javax.swing.JFrame {
                 "Invoice N.", "Period", "State", "Due date"
             }
         ));
+        jTable1.setMinimumSize(new java.awt.Dimension(160, 160));
+        jTable1.setPreferredSize(new java.awt.Dimension(160, 500));
         jScrollPane1.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
 
         consuptionDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Consuption data"));
 
+        taxLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         taxLabel.setText("Tax (€ x m^3):");
 
+        taxValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         taxValueLabel.setText("value");
 
+        totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalLabel.setText("Total (€):");
 
+        totalValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalValueLabel.setText("value");
 
+        detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionLabel.setText("Detection (m^3):");
 
+        detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionValueLabel.setText("value");
 
+        operatorIDLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         operatorIDLabel.setText("Operator ID:");
 
+        operatorIDValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         operatorIDValueLabel.setText("value");
 
+        detectionDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionDateLabel.setText("Detection date:");
 
+        datectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         datectionDateValueLabel.setText("value");
 
         javax.swing.GroupLayout consuptionDataPanelLayout = new javax.swing.GroupLayout(consuptionDataPanel);
@@ -140,44 +168,44 @@ public class Bills extends javax.swing.JFrame {
                     .addComponent(datectionDateValueLabel)))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 161;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        jPanel1.add(consuptionDataPanel, gridBagConstraints);
+
+        reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
+        jPanel1.add(reportErrorButton, gridBagConstraints);
 
+        buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 40);
+        jPanel1.add(buildPDFButton, gridBagConstraints);
 
+        backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
+        jPanel1.add(backButton, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                    .addComponent(consuptionDataPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(buildPDFButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(reportErrorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(consuptionDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(reportErrorButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buildPDFButton)
-                    .addComponent(backButton))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,6 +253,7 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JLabel detectionDateLabel;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel operatorIDLabel;
