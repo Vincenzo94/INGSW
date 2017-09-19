@@ -21,7 +21,7 @@ import java.sql.SQLException;
  *
  * @author ansan
  */
-public class Login_Controller implements Controller, ActionListener{
+public class Login_Controller implements Controller{
     private Login login = null;
     private Operator operator;
     private DAO_Operator DAO;
@@ -37,22 +37,32 @@ public class Login_Controller implements Controller, ActionListener{
         //login.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
         //login.pack();
         login.setVisible(true);
-        login.addListener(this);
+        login.addListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    controller.doAction(null);
+            }
+        });
+    }
+    
+    
+    public void doLogin(){
+                
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void doAction(Object o) {
         Integer user = login.getUser();
-        String passw = login.getPassword();
-        operator=new Operator(user,passw);
-        operator = DAO.check(operator);
-        if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-            login.dispose();
-            main.loginDone(operator);
-        }
-        else{
-            //MOSTRARE POPUP ERRORE LOGIN
-        }
+                String passw = login.getPassword();
+                operator=new Operator(user,passw);
+                operator = DAO.check(operator);
+                if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
+                    login.dispose();
+                main.loginDone(operator);
+                    }
+                else{
+                    //MOSTRARE POPUP ERRORE LOGIN
+                    }
     }
 
 }
