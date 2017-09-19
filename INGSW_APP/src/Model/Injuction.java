@@ -40,7 +40,7 @@ public class Injuction extends Document{
         return DAYS.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
-    public Object getArrears() {//SERVIREBBE FLOAT O DOUBLE MA DA UN ERRORE STRANO
+    public String getArrears() {//SERVIREBBE FLOAT O DOUBLE MA DA UN ERRORE STRANO
         return new DecimalFormat("#0.00").format(getExpiredFrom() * 0.5 + 100 + referredBill.getTotal());
     }
 

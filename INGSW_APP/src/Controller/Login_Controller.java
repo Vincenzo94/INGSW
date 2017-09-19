@@ -21,7 +21,7 @@ import java.sql.SQLException;
  *
  * @author ansan
  */
-public class Login_Controller implements ActionListener{
+public class Login_Controller implements Controller, ActionListener{
     private Login login = null;
     private Operator operator;
     private DAO_Operator DAO;

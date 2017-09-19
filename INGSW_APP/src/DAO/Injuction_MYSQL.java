@@ -25,24 +25,24 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class Injuction_MYSQL implements DAO_Document{
-    private Connection connection = null;
+    private DatabaseManager dbManager = null;
     private final String TABLE = "Injuction";
     private final String TABLE_BILL = "Bill_AUX";
     private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + DatabaseManager.schema + "." + TABLE + " WHERE MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ? LIMIT 5";
     private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + DatabaseManager.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
     private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + DatabaseManager.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
 
-    public Injuction_MYSQL(Connection connection) {
-        this.connection = connection;
+    public Injuction_MYSQL(DatabaseManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     private Bill getReferredBill(Integer billID) {
         Bill bill = null;
         try{
             System.out.println(QUERY_SEARCH_BILL_ID);
-            PreparedStatement statement = connection.prepareStatement(QUERY_SEARCH_BILL_ID, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement statement = dbManager.getStatement(QUERY_SEARCH_BILL_ID);
             statement.setInt(1, billID);
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = dbManager.doQuery(statement);
             rs.next();
             bill = new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15));
         } catch (SQLException ex) {
@@ -64,9 +64,9 @@ public class Injuction_MYSQL implements DAO_Document{
     public List<?> getAllDocuments(Operator o) {
     List<Injuction> injuctions = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_GET_ALL_INJUCTIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_INJUCTIONS);
             statement.setInt(1, o.getId());
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
                 injuctions.add(new Injuction(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), getReferredBill(rs.getInt(6))));
             }
@@ -85,17 +85,11 @@ public class Injuction_MYSQL implements DAO_Document{
     public <T extends Document> void setManagedOperator(List<T> document, Operator o) {
         for(T injuction: document){
             try {
-                connection.setAutoCommit(false);
-                PreparedStatement statement = connection.prepareStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
+                PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
                 statement.setInt(1, o.getId());
                 statement.setInt(2, injuction.getId());
-                if ( statement.executeUpdate() >= 0) {
-                    connection.commit();
-                } else {
-                    connection.rollback();
-                }
-                connection.setAutoCommit(true);
-                statement.close();
+                if(!dbManager.doUpdate(statement))
+                    throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +injuction.getId());
                 } catch (SQLException ex) {
                     Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
             }

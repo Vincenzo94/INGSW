@@ -8,6 +8,7 @@ package Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,13 +40,10 @@ public class DatabaseManager {
     }
     
     
-    public ResultSet doQuery(String query){
+    public ResultSet doQuery(PreparedStatement statement){
         ResultSet rs = null;
-        Statement statement = null;
         try {
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = statement.executeQuery(query);
-
+            rs = statement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,5 +55,33 @@ public class DatabaseManager {
     }
     public Connection getDbConnection(){
         return connection;
+    }
+
+    public PreparedStatement getStatement(String QUERY) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return statement;
+    }
+
+    public Boolean doUpdate(PreparedStatement statement) {
+        Boolean ret = false;
+        try {
+            connection.setAutoCommit(false);
+            if (statement.executeUpdate() >=0) {
+                    ret = true;
+                    connection.commit();
+                } else {
+                    connection.rollback();
+                }
+                connection.setAutoCommit(true);
+                statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
     }
 }

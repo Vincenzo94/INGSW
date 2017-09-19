@@ -4,15 +4,11 @@
  * and open the template in the editor.
  */
 package View;
-import Controller.Main_Controller;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.LinkedList;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -23,6 +19,7 @@ public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelBillsQueue;
     private DefaultTableModel tableModelInjuctionsQueue;
     private LinkedList<MouseListener> listener;
+    private LinkedList<ActionListener> actionListener;
 
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
@@ -33,7 +30,7 @@ public class Home extends javax.swing.JFrame {
                     case 0:
                         return Integer.class;
                     case 1:
-                        return Integer.class;
+                        return Date.class;
                     case 2:
                         return Date.class;
                     case 3:
@@ -43,8 +40,23 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         };
-        tableModelInjuctionsQueue = new DefaultTableModel();
+        tableModelInjuctionsQueue = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Integer.class;
+                    case 2:
+                        return Integer.class;
+                    default:
+                        return Float.class;
+                }
+            }
+        };
         listener = new LinkedList<>();
+        actionListener = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
         initComponents();
     }
@@ -140,6 +152,11 @@ public class Home extends javax.swing.JFrame {
 
         searchButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -596,8 +613,16 @@ public class Home extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    public void addListener(MouseListener m){
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_searchButtonActionPerformed
+    public void addMouseListener(MouseListener m){
         listener.add(m);
+    }
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
     }
     
     public DefaultTableModel getTableModelRegistryManagement(){
@@ -767,7 +792,4 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
-
-    
-
 }

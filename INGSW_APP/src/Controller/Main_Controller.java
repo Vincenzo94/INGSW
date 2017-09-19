@@ -17,10 +17,13 @@ import Model.Operator;
 import View.Home;
 import ingsw_app.INGSW_APP;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,22 +33,22 @@ import javax.swing.table.DefaultTableModel;
  */
 
 //Classe implementata come singleton
-public class Main_Controller implements MouseListener{
+public class Main_Controller implements ActionListener, MouseListener{
+    Controller current;
     private Operator operator;
     private Component actualView;
     private static Main_Controller instance;
     private DatabaseManager dbManager;
-    DefaultTableModel tableModelRegistryManagement = null;
     DefaultTableModel tableModelBillsQueue = null;
     DefaultTableModel tableModelInjuctionsQueue = null;
-    private List<Contract> contracts = new ArrayList<>();
+    private List<Contract> contracts = null;
     private List<Bill> bills = new ArrayList<>();
     private List<Injuction> injuctions = new ArrayList<>();
 
     private Home actual = null; 
     
     private Main_Controller() throws SQLException{
-        new Login_Controller(this);
+        current = new Login_Controller(this);
         dbManager = DatabaseManager.getDbManager();
     }
     
@@ -59,30 +62,18 @@ public class Main_Controller implements MouseListener{
     public void loginDone(Operator o){
         operator=o;
         actual = new Home();
-        INGSW_APP.device.setFullScreenWindow(actual);
+        //INGSW_APP.device.setFullScreenWindow(actual);
         actual.setVisible(true);
-        actual.addListener(this);
-        initRegistryManagement();
+        actual.addMouseListener(this);
+        actual.addActionListener(this);
         initBillsQueue();
         initInjuctionsQueue();
     }
 
-    private void initRegistryManagement() {
-        DAO_Contract daoContract = new Contract_MYSQL(dbManager.getDbConnection());
-        tableModelRegistryManagement = actual.getTableModelRegistryManagement();
-        tableModelRegistryManagement.setRowCount(0);
-        String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
-        tableModelRegistryManagement.setColumnIdentifiers(columns);
-        contracts.clear();
-        contracts = daoContract.getAllContracts();
-        for(Contract temp : contracts){
-            Object[] row = {temp.getName(), temp.getSurname(), temp.getId(), temp.getTaxCode()};
-            tableModelRegistryManagement.addRow(row);
-        }
-    }
+    
 
     private void initBillsQueue() {
-        DAO_Document daoBill = new Bill_MYSQL(dbManager.getDbConnection());
+        DAO_Document daoBill = new Bill_MYSQL(dbManager);
         tableModelBillsQueue = actual.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
@@ -97,7 +88,7 @@ public class Main_Controller implements MouseListener{
     }
 
     private void initInjuctionsQueue() {
-        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager.getDbConnection());
+        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
         tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
@@ -106,15 +97,15 @@ public class Main_Controller implements MouseListener{
         injuctions = daoInjuction.getAllDocuments(operator);
         daoInjuction.setManagedOperator(injuctions,operator);
         for(Injuction temp : injuctions){
-            Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), temp.getArrears()};
+            Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
             tableModelInjuctionsQueue.addRow(row);
         }
     } 
-
-    @Override
+    
     public void mouseClicked(MouseEvent e) {
         switch(actual.checkTab(e.getComponent())){
             case 1:{
+                contracts = ((Search_Controller)current).getContracts();
                 Contract contract = contracts.get(actual.getSelectedContract());
                 actual.activeContractButtons();
                 actual.setBillingAddress(contract.getBillingAddress());
@@ -143,6 +134,12 @@ public class Main_Controller implements MouseListener{
     }
 
     @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Premuto search");
+        current = new Search_Controller(instance,actual);
+    }
+
+    @Override
     public void mousePressed(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -159,10 +156,6 @@ public class Main_Controller implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private Object getContentPane() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

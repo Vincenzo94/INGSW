@@ -23,11 +23,11 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class Contract_MYSQL implements DAO_Contract{
-    private Connection connection = null;
+    private final DatabaseManager dbManager;
     private final String TABELLA = "Contract";
     private final String QUERY_GET_ALL_CONTRACT= "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA;
-    public Contract_MYSQL(Connection connection){
-        this.connection = connection;
+    public Contract_MYSQL(DatabaseManager dbManager){
+        this.dbManager = dbManager;
     }
     @Override
     public Contract search(Contract c) {
@@ -53,8 +53,9 @@ public class Contract_MYSQL implements DAO_Contract{
     public List<Contract> getAllContracts() {
         List<Contract> contracts = new ArrayList<Contract>();
         try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_GET_ALL_CONTRACT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = statement.executeQuery();
+            
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_CONTRACT);
+            ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
                 contracts.add(new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)));
             }
