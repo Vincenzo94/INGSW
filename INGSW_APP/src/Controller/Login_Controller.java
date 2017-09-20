@@ -12,7 +12,7 @@ import View.Login;
 import ingsw_app.INGSW_APP;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-
+import org.apache.log4j.Logger;
 /**
  *
  * @author ansan
@@ -23,13 +23,14 @@ public class Login_Controller implements Controller{
     private DAO_Operator DAO;
     private Main_Controller main;
     private DatabaseManager dbManager;
-    
+    static Logger log = Logger.getLogger(Login_Controller.class.getName());
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
         dbManager = DatabaseManager.getDbManager();
         this.DAO = new Operator_MYSQL(dbManager.getDbConnection());
         login = new Login();
         INGSW_APP.device.setFullScreenWindow(login);
+        
         //login.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
         //login.pack();
         login.setVisible(true);
@@ -50,7 +51,8 @@ public class Login_Controller implements Controller{
                 operator = DAO.check(operator);
                 if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
                     login.dispose();
-                main.loginDone(operator);
+                    main.loginDone(operator);
+                    log.info("Logged user: "+ user);
                     }
                 else{
                     //MOSTRARE POPUP ERRORE LOGIN
