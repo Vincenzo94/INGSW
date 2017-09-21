@@ -13,6 +13,7 @@ import ingsw_app.INGSW_APP;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 /**
  *
  * @author ansan
@@ -23,6 +24,7 @@ public class Login_Controller implements Controller{
     private DAO_Operator DAO;
     private Main_Controller main;
     private DatabaseManager dbManager;
+    
     static Logger log = Logger.getLogger(Login_Controller.class.getName());
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
@@ -52,6 +54,7 @@ public class Login_Controller implements Controller{
                 if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
                     login.dispose();
                     main.loginDone(operator);
+                    PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
                     log.info("Logged user: "+ user);
                     }
                 else{

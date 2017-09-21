@@ -39,7 +39,6 @@ public class Injuction_MYSQL implements DAO_Document{
     private Bill getReferredBill(Integer billID) {
         Bill bill = null;
         try{
-            System.out.println(QUERY_SEARCH_BILL_ID);
             PreparedStatement statement = dbManager.getStatement(QUERY_SEARCH_BILL_ID);
             statement.setInt(1, billID);
             ResultSet rs = dbManager.doQuery(statement);
