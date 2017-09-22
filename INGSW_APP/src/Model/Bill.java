@@ -27,8 +27,8 @@ public class Bill extends Document{
     private final Float tax;
     
     
-    public Bill(Integer id, String state, Date generatedDate, Date confirmedDate,Date startPeriod, Date endPeriod, Float detectionValue, Date detectionDate, Integer contractID, Integer detectorID, Date paymentDate, Date deadline, Float total, Float tax){
-        super(id,state,generatedDate,confirmedDate);
+    public Bill(Integer id, String state, Date generatedDate, Date confirmedDate,Date startPeriod, Date endPeriod, Float detectionValue, Date detectionDate, Integer contractID, Integer detectorID, Date paymentDate, Date deadline, Float total, Float tax, Integer operatorID){
+        super(id,state,generatedDate,confirmedDate, operatorID);
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;
         this.detectionValue = detectionValue;

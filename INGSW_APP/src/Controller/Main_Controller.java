@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import static Controller.Login_Controller.log;
 import DAO.Bill_MYSQL;
 import DAO.DAO_Document;
 import DAO.Injuction_MYSQL;
@@ -20,6 +21,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -37,6 +40,7 @@ public class Main_Controller{
     private List<Contract> contracts = null;
     private List<Bill> bills = new ArrayList<>();
     private List<Injuction> injuctions = new ArrayList<>();
+    static Logger log = Logger.getLogger(Main_Controller.class.getName());
 
     private Home actual = null; 
     
@@ -113,8 +117,15 @@ public class Main_Controller{
         tableModelBillsQueue.setColumnIdentifiers(columns);
         bills.clear();
         bills = daoBill.getAllDocuments(operator);
-        daoBill.setManagedOperator(bills,operator);
+        
         for(Bill temp : bills){
+            if(temp.getOperatorID() == null){
+                daoBill.setManagedOperator(temp,operator);
+                PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
+                log.info("User: "+ operator.getId()+" manages the bill "+temp.getId());
+            }
+            PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
+            log.info("User: "+ operator.getId()+" manages the bill "+temp.getId());
             Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
             tableModelBillsQueue.addRow(row);
         }
@@ -128,8 +139,14 @@ public class Main_Controller{
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
         injuctions.clear();
         injuctions = daoInjuction.getAllDocuments(operator);
-        daoInjuction.setManagedOperator(injuctions,operator);
         for(Injuction temp : injuctions){
+            if(temp.getOperatorID() == null){
+                daoInjuction.setManagedOperator(temp,operator);
+                PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
+                log.info("User: "+ operator.getId()+" manages the injuction "+temp.getId());
+            }
+            PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
+            log.info("User: "+ operator.getId()+" manages the injuction "+temp.getId());
             Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
             tableModelInjuctionsQueue.addRow(row);
         }

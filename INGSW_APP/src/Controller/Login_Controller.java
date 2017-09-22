@@ -52,10 +52,10 @@ public class Login_Controller implements Controller{
                 operator=new Operator(user,passw);
                 operator = DAO.check(operator);
                 if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-                    login.dispose();
-                    main.loginDone(operator);
                     PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
                     log.info("Logged user: "+ user);
+                    login.dispose();
+                    main.loginDone(operator);
                     }
                 else{
                     //MOSTRARE POPUP ERRORE LOGIN
