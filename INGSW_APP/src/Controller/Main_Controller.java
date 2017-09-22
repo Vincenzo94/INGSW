@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import static Controller.Login_Controller.log;
 import DAO.Bill_MYSQL;
 import DAO.DAO_Document;
 import DAO.Injuction_MYSQL;
@@ -86,6 +85,7 @@ public class Main_Controller{
                 case 1: searchClicked(); break;
                 case 2: alterholderCliked(); break;
                 case 3: selectAllClicked(); break;
+                case 4: deselectAllClicked(); break;
             }
                 }
     
@@ -104,9 +104,18 @@ public class Main_Controller{
     public void selectAllClicked(){
         DefaultTableModel table = actual.getTableModelBillsQueue();
         for(Integer i = 0; i < table.getRowCount(); i++)
-        table.setValueAt(true, i, 4);
-        actual.activeMultipleSelection(true);
+            table.setValueAt(true, i, 4);
+        actual.setMultipleSelection(true);
         actual.setSelectedBills(table.getRowCount());
+        actual.setSelectAllButton(false);
+    }
+    public void deselectAllClicked(){
+        DefaultTableModel table = actual.getTableModelBillsQueue();
+        for(Integer i = 0; i < table.getRowCount(); i++)
+            table.setValueAt(false, i, 4);
+        actual.setMultipleSelection(true);
+        actual.setSelectedBills(0);
+        actual.setSelectAllButton(true);
     }
 
     private void initBillsQueue() {
@@ -171,7 +180,7 @@ public class Main_Controller{
             case 3:{
                 List<Integer> bill = actual.getSelectedBill();
                 if(bill.size() ==  1){
-                    actual.activeMultipleSelection(false);
+                    actual.setMultipleSelection(false);
                     Bill temp = bills.get(bill.get(0));
                     actual.setTax(temp.getTax());
                     actual.setTotal(temp.getTotal());
@@ -181,7 +190,7 @@ public class Main_Controller{
                     actual.setDeadline(temp.getDeadline());
                 }
                 else{
-                    actual.activeMultipleSelection(true);
+                    actual.setMultipleSelection(true);
                     actual.setSelectedBills(bill.size());
                 }
                 actual.activeBillConfirm();

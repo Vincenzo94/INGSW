@@ -126,6 +126,7 @@ public class Home extends javax.swing.JFrame {
         totalLabel = new javax.swing.JLabel();
         selectAllButton = new javax.swing.JButton();
         billConfirmButton = new javax.swing.JButton();
+        deselectAllButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -628,6 +629,21 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 240);
         billsQueuePanel.add(billConfirmButton, gridBagConstraints);
 
+        deselectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        deselectAllButton.setText("Deselect all");
+        deselectAllButton.setEnabled(false);
+        deselectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deselectAllButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 240);
+        billsQueuePanel.add(deselectAllButton, gridBagConstraints);
+
         jTabbedPane2.addTab("Bills queue", billsQueuePanel);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
@@ -685,6 +701,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_selectAllButtonActionPerformed
+
+    private void deselectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselectAllButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_deselectAllButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -761,19 +782,16 @@ public class Home extends javax.swing.JFrame {
     public void activeBillReportError() {
         reportErrorButton.setEnabled(true);
     }
-    public void activeMultipleSelection(Boolean state){
-        if(state){
-            summaryBillPanel.setVisible(false);
-            summaryBillsPanel.setVisible(true);
-        }
-        else{
-            summaryBillPanel.setVisible(true);
-            summaryBillsPanel.setVisible(false);
-
-        }
+    public void setMultipleSelection(Boolean state){
+        summaryBillPanel.setVisible(!state);
+        summaryBillsPanel.setVisible(state);
     }
     public void setSelectedBills(Integer size) {
         selectedBillsValueLabel.setText(size.toString());
+    }
+    public void setSelectAllButton(boolean state) {
+        selectAllButton.setEnabled(state);
+        deselectAllButton.setEnabled(!state);
     }
     
     //INJUCTION
@@ -787,6 +805,7 @@ public class Home extends javax.swing.JFrame {
        if(c == searchButton) return 1;
        if(c == alterHolderButton) return 2;
        if(c == selectAllButton) return 3;
+       if(c == deselectAllButton) return 4;
        return 0;
    }
     
@@ -809,6 +828,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel billsQueuePanel;
     private javax.swing.JTextField contractIdField;
     private javax.swing.JLabel contractIdLabel;
+    private javax.swing.JButton deselectAllButton;
     private javax.swing.JLabel detectionDateLabel;
     private javax.swing.JLabel detectionDateValueLabel;
     private javax.swing.JLabel detectionLabel;
@@ -856,6 +876,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 }
