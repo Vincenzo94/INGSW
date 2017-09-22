@@ -12,8 +12,12 @@ import View.Login;
 import ingsw_app.INGSW_APP;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+<<<<<<< Updated upstream
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+=======
+//import org.apache.log4j.Logger;
+>>>>>>> Stashed changes
 /**
  *
  * @author ansan
@@ -24,8 +28,12 @@ public class Login_Controller implements Controller{
     private DAO_Operator DAO;
     private Main_Controller main;
     private DatabaseManager dbManager;
+<<<<<<< Updated upstream
     
     static Logger log = Logger.getLogger(Login_Controller.class.getName());
+=======
+    //static Logger log = Logger.getLogger(Login_Controller.class.getName());
+>>>>>>> Stashed changes
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
         dbManager = DatabaseManager.getDbManager();
@@ -56,6 +64,10 @@ public class Login_Controller implements Controller{
                     log.info("Logged user: "+ user);
                     login.dispose();
                     main.loginDone(operator);
+<<<<<<< Updated upstream
+=======
+                    //log.info("Logged user: "+ user);
+>>>>>>> Stashed changes
                     }
                 else{
                     //MOSTRARE POPUP ERRORE LOGIN
