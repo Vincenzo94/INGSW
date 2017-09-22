@@ -15,13 +15,10 @@ import Model.Operator;
 import View.Home;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,9 +30,8 @@ import javax.swing.table.DefaultTableModel;
 public class Main_Controller{
     Controller current;
     private Operator operator;
-    private Component actualView;
     private static Main_Controller instance;
-    private DatabaseManager dbManager;
+    private final DatabaseManager dbManager;
     DefaultTableModel tableModelBillsQueue = null;
     DefaultTableModel tableModelInjuctionsQueue = null;
     private List<Contract> contracts = null;
@@ -85,6 +81,7 @@ public class Main_Controller{
             switch(i){
                 case 1: searchClicked(); break;
                 case 2: alterholderCliked(); break;
+                case 3: selectAllClicked(); break;
             }
                 }
     
@@ -96,9 +93,17 @@ public class Main_Controller{
     
     
     public void searchClicked(){
-        current=new SearchContract_Controller(this,actual);
+        current=new SearchContract_Controller(this,actual.getTableModelRegistryManagement());
         contracts=((SearchContract_Controller)current).getContracts();
-    }    
+    }
+
+    public void selectAllClicked(){
+        DefaultTableModel table = actual.getTableModelBillsQueue();
+        for(Integer i = 0; i < table.getRowCount(); i++)
+        table.setValueAt(true, i, 4);
+        actual.activeMultipleSelection(true);
+        actual.setSelectedBills(table.getRowCount());
+    }
 
     private void initBillsQueue() {
         DAO_Document daoBill = new Bill_MYSQL(dbManager);
@@ -147,15 +152,24 @@ public class Main_Controller{
                 break;
             }
             case 3:{
-                Bill bill = bills.get(actual.getSelectedBill());
+                List<Integer> bill = actual.getSelectedBill();
+                if(bill.size() ==  1){
+                    actual.activeMultipleSelection(false);
+                    Bill temp = bills.get(bill.get(0));
+                    actual.setTax(temp.getTax());
+                    actual.setTotal(temp.getTotal());
+                    actual.setDetection(temp.getDetectionValue());
+                    actual.setDetector(temp.getDetector());
+                    actual.setDetectionDate(temp.getDetectionDate());
+                    actual.setDeadline(temp.getDeadline());
+                }
+                else{
+                    actual.activeMultipleSelection(true);
+                    actual.setSelectedBills(bill.size());
+                }
                 actual.activeBillConfirm();
                 actual.activeBillReportError();
-                actual.setTax(bill.getTax());
-                actual.setTotal(bill.getTotal());
-                actual.setDetection(bill.getDetectionValue());
-                actual.setDetector(bill.getDetector());
-                actual.setDetectionDate(bill.getDetectionDate());
-                actual.setDeadline(bill.getDeadline());
+                
                 break;
             }
         }       

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -108,6 +109,9 @@ public class Home extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         reportErrorButton = new javax.swing.JButton();
         summaryBillsPanel = new javax.swing.JPanel();
+        selectedBillsValueLabel = new javax.swing.JLabel();
+        selectedBillsLabel = new javax.swing.JLabel();
+        summaryBillPanel = new javax.swing.JPanel();
         rateLabel = new javax.swing.JLabel();
         detectionLabel = new javax.swing.JLabel();
         operatorIdLabel = new javax.swing.JLabel();
@@ -376,7 +380,8 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
         registryManagementPanel.add(jPanel1, gridBagConstraints);
 
@@ -462,7 +467,49 @@ public class Home extends javax.swing.JFrame {
 
         summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
         summaryBillsPanel.setEnabled(false);
-        summaryBillsPanel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        summaryBillsPanel.setVisible(true);
+        summaryBillsPanel.setFont(new java.awt.Font("Dialog", 0, 18));
+
+        selectedBillsValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        selectedBillsValueLabel.setText("0");
+
+        selectedBillsLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        selectedBillsLabel.setText("Selected: ");
+
+        javax.swing.GroupLayout summaryBillsPanelLayout = new javax.swing.GroupLayout(summaryBillsPanel);
+        summaryBillsPanel.setLayout(summaryBillsPanelLayout);
+        summaryBillsPanelLayout.setHorizontalGroup(
+            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(selectedBillsLabel)
+                .addGap(37, 37, 37)
+                .addComponent(selectedBillsValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1480, Short.MAX_VALUE))
+        );
+        summaryBillsPanelLayout.setVerticalGroup(
+            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectedBillsLabel)
+                    .addComponent(selectedBillsValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 588;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
+        billsQueuePanel.add(summaryBillsPanel, gridBagConstraints);
+
+        summaryBillPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
+        summaryBillPanel.setEnabled(false);
+        summaryBillPanel.setVisible(false);
+        summaryBillPanel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         rateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         rateLabel.setText("Rate (€ x m^3):");
@@ -494,22 +541,22 @@ public class Home extends javax.swing.JFrame {
         totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalLabel.setText("Total:");
 
-        javax.swing.GroupLayout summaryBillsPanelLayout = new javax.swing.GroupLayout(summaryBillsPanel);
-        summaryBillsPanel.setLayout(summaryBillsPanelLayout);
-        summaryBillsPanelLayout.setHorizontalGroup(
-            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout summaryBillPanelLayout = new javax.swing.GroupLayout(summaryBillPanel);
+        summaryBillPanel.setLayout(summaryBillPanelLayout);
+        summaryBillPanelLayout.setHorizontalGroup(
+            summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryBillPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rateLabel)
                     .addComponent(detectionLabel)
                     .addComponent(operatorIdLabel)
-                    .addGroup(summaryBillsPanelLayout.createSequentialGroup()
-                        .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(summaryBillPanelLayout.createSequentialGroup()
+                        .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(detectionDateLabel)
                             .addComponent(dueDateLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(operatorIdValueLabel)
                             .addComponent(detectionDateValueLabel)
                             .addComponent(detectionValueLabel)
@@ -519,31 +566,31 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(totalLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        summaryBillsPanelLayout.setVerticalGroup(
-            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
+        summaryBillPanelLayout.setVerticalGroup(
+            summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryBillPanelLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rateLabel)
                     .addComponent(rateValueLabel))
                 .addGap(6, 6, 6)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalLabel)
                     .addComponent(totalValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detectionLabel)
                     .addComponent(detectionValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(operatorIdLabel)
                     .addComponent(operatorIdValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detectionDateLabel)
                     .addComponent(detectionDateValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dueDateLabel)
                     .addComponent(dueDateValueLabel)))
         );
@@ -555,10 +602,15 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 588;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        billsQueuePanel.add(summaryBillsPanel, gridBagConstraints);
+        billsQueuePanel.add(summaryBillPanel, gridBagConstraints);
 
         selectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         selectAllButton.setText("Select all");
+        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectAllButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -628,6 +680,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_alterHolderButtonActionPerformed
+
+    private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_selectAllButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -673,8 +730,12 @@ public class Home extends javax.swing.JFrame {
     }
     
     //BILL
-    public Integer getSelectedBill(){
-        return jTable1.getSelectedRow();
+    public List<Integer> getSelectedBill(){
+        List<Integer> l = new LinkedList<Integer>();
+        for(Integer i = 0; i < tableModelBillsQueue.getRowCount(); i++)
+            if((Boolean)tableModelBillsQueue.getValueAt(i,4) == true)
+                l.add(i);
+        return l;
     }
     public void setTax(Float tax){
         rateValueLabel.setText(tax.toString());
@@ -700,6 +761,20 @@ public class Home extends javax.swing.JFrame {
     public void activeBillReportError() {
         reportErrorButton.setEnabled(true);
     }
+    public void activeMultipleSelection(Boolean state){
+        if(state){
+            summaryBillPanel.setVisible(false);
+            summaryBillsPanel.setVisible(true);
+        }
+        else{
+            summaryBillPanel.setVisible(true);
+            summaryBillsPanel.setVisible(false);
+
+        }
+    }
+    public void setSelectedBills(Integer size) {
+        selectedBillsValueLabel.setText(size.toString());
+    }
     
     //INJUCTION
     public void activeInjuctionButtons(){
@@ -711,6 +786,7 @@ public class Home extends javax.swing.JFrame {
    public int checkButton(Component c){
        if(c == searchButton) return 1;
        if(c == alterHolderButton) return 2;
+       if(c == selectAllButton) return 3;
        return 0;
    }
     
@@ -765,6 +841,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton reportErrorButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton selectAllButton;
+    private javax.swing.JLabel selectedBillsLabel;
+    private javax.swing.JLabel selectedBillsValueLabel;
+    private javax.swing.JPanel summaryBillPanel;
     private javax.swing.JPanel summaryBillsPanel;
     private javax.swing.JTextField surnameField;
     private javax.swing.JLabel surnameLabel;
@@ -777,4 +856,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    
 }

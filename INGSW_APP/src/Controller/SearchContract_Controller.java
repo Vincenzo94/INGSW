@@ -22,13 +22,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchContract_Controller implements Controller{
     private final Main_Controller main;
-    private final Home actual;
     private DatabaseManager dbManager = null;
     private DefaultTableModel tableModelRegistryManagement = null;
     private List<Contract> contracts;
-    SearchContract_Controller(Main_Controller instance, Home home) {
+    SearchContract_Controller(Main_Controller instance, DefaultTableModel table) {
         this.main = instance;
-        this.actual = home;
+        this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
         initRegistryManagement();
     }
@@ -40,7 +39,6 @@ public class SearchContract_Controller implements Controller{
             Logger.getLogger(SearchContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
-        tableModelRegistryManagement = actual.getTableModelRegistryManagement();
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
         tableModelRegistryManagement.setColumnIdentifiers(columns);
