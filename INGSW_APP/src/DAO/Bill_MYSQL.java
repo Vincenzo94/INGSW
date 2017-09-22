@@ -53,7 +53,7 @@ public class Bill_MYSQL implements DAO_Document {
             statement.setInt(1, o.getId());
             ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
-                bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15)));
+                bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,17 +67,15 @@ public class Bill_MYSQL implements DAO_Document {
     }
 
     @Override
-    public <T extends Document> void setManagedOperator(List<T> document, Operator o) {
-        for(T bill: document){
-            try {
-                PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
-                statement.setInt(1, o.getId());
-                statement.setInt(2, bill.getId());
-                if(!dbManager.doUpdate(statement))
-                    throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +bill.getId());
-                } catch (SQLException ex) {
-                    Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    public <T extends Document> void setManagedOperator(T document, Operator o) {
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
+            statement.setInt(1, o.getId());
+            statement.setInt(2, document.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
+            } catch (SQLException ex) {
+                Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -21,5 +21,5 @@ public interface DAO_Document {
     public <T extends Document> List<T> getAllDocuments(Operator o);
     public <T> List<T> getAllDocuments(Contract c);
 
-    public <T extends Document> void setManagedOperator(List<T> document, Operator o);
+    public <T extends Document> void setManagedOperator(T document, Operator o);
 }

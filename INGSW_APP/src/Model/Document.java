@@ -16,11 +16,13 @@ public class Document extends Observable{
     String state;
     final Date generatedDate;
     Date confirmedDate;
-    public Document(Integer id, String state, Date generatedDate, Date confirmedDate){
+    Integer operatorID;
+    public Document(Integer id, String state, Date generatedDate, Date confirmedDate, Integer operatorID){
         this.id = id;
         this.state = state;
         this.generatedDate = generatedDate;
         this.confirmedDate = confirmedDate;
+        this.operatorID = operatorID;
     }
       
     public Integer getId(){
@@ -34,6 +36,10 @@ public class Document extends Observable{
     }
     public Date getConfirmedDate(){
         return confirmedDate;
+    }
+    
+    public Integer getOperatorID(){
+        return operatorID;
     }
     
     

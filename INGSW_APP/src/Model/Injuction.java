@@ -18,8 +18,8 @@ import static java.util.concurrent.TimeUnit.DAYS;
 public class Injuction extends Document{
     private final Bill referredBill;
     
-    public Injuction(Integer id, Date generatedDate, Date confirmedDate, String state, Bill bill) {
-        super(id, state, generatedDate, confirmedDate);
+    public Injuction(Integer id, Date generatedDate, Date confirmedDate, String state, Bill bill, Integer operatorID) {
+        super(id, state, generatedDate, confirmedDate, operatorID);
         this.referredBill = bill;
         if(referredBill == null)
             System.out.println("null");
