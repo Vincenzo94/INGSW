@@ -5,6 +5,8 @@
  */
 package View;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Andrea
@@ -14,7 +16,7 @@ public class AlterHolder extends javax.swing.JFrame {
     /**
      * Creates new form AlterHolder
      */
-    public AlterHolder() {
+    public AlterHolder(){
         initComponents();
         this.pack();
     }
@@ -68,7 +70,7 @@ public class AlterHolder extends javax.swing.JFrame {
         city2Label = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -112,7 +114,7 @@ public class AlterHolder extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
             .addGroup(registryPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLabel)
                     .addComponent(surnameLabel)
                     .addComponent(taxCLabel)
@@ -122,8 +124,8 @@ public class AlterHolder extends javax.swing.JFrame {
                     .addComponent(surnameField)
                     .addComponent(taxCField)
                     .addComponent(telephoneField)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                .addGap(162, 162, 162))
         );
         registryPanelLayout.setVerticalGroup(
             registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,26 +207,32 @@ public class AlterHolder extends javax.swing.JFrame {
             .addGroup(billAddressLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(streetLabel)
-                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel))
-                .addGap(18, 18, 18)
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel)
                     .addGroup(billAddressLayout.createSequentialGroup()
                         .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numberLabel)
-                            .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(streetLabel)
+                            .addComponent(streetField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(cityLabel))
+                        .addGap(66, 66, 66)
+                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(districtField, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                            .addGroup(billAddressLayout.createSequentialGroup()
+                                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numberLabel)
+                                    .addComponent(numberField, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                                .addGap(3, 3, 3))
+                            .addGroup(billAddressLayout.createSequentialGroup()
+                                .addComponent(districtLabel)
+                                .addGap(38, 38, 38)))
+                        .addGap(50, 50, 50)
                         .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(postalCodeLabel)
-                            .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billAddressLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterBillAddressButton)
+                            .addGroup(billAddressLayout.createSequentialGroup()
+                                .addComponent(postalCodeField)
+                                .addGap(3, 3, 3))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billAddressLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(alterBillAddressButton)))
                 .addContainerGap())
         );
         billAddressLayout.setVerticalGroup(
@@ -305,26 +313,30 @@ public class AlterHolder extends javax.swing.JFrame {
             .addGroup(addressLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(street2Label)
-                    .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(city2Label))
-                .addGap(18, 18, 18)
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(district2Label)
                     .addGroup(addressLayout.createSequentialGroup()
                         .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(number2Label)
-                            .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(street2Label)
+                            .addComponent(street2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(city2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(city2Label))
+                        .addGap(65, 65, 65)
+                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(district2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                            .addComponent(district2Label)
+                            .addGroup(addressLayout.createSequentialGroup()
+                                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(number2Label)
+                                    .addComponent(number2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                                .addGap(3, 3, 3)))
+                        .addGap(51, 51, 51)
                         .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(postalCode2Label)
-                            .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterAddressButton)
+                            .addGroup(addressLayout.createSequentialGroup()
+                                .addComponent(postalCode2Field)
+                                .addGap(3, 3, 3))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(alterAddressButton)))
                 .addContainerGap())
         );
         addressLayout.setVerticalGroup(
@@ -387,39 +399,95 @@ public class AlterHolder extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alterBillAddressButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlterHolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlterHolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlterHolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlterHolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AlterHolder().setVisible(true);
-            }
-        });
+    public String getCity1(){
+        return cityField.getText();
+    }
+    public String getCity2(){
+        return city2Field.getText();
+    }
+    public String getDistrict1(){
+        return districtField.getText();
+    }
+    public String getDistrict2(){
+        return district2Field.getText();
+    }
+    public String getEmail(){
+        return emailField.getText();
+    }
+    public String getPersonName(){
+        return nameField.getText();
+    }
+    public String getSurname(){
+        return surnameField.getText();
+    }
+    public String getTelephone(){
+        return telephoneField.getText();
+    }
+    public Integer getNumber1(){
+        return Integer.valueOf(numberField.getText());
+    }
+    public Integer getNumber2(){
+        return Integer.valueOf(number2Field.getText());
+    }
+    public String getZip1(){
+        return postalCodeField.getText();
+    }
+    public String getZip2(){
+        return postalCode2Field.getText();
+    }
+    public String getStreet1(){
+        return streetField.getText();
+    }
+    public String getStreet2(){
+        return street2Field.getText();
+    }
+    public String getTaxC(){
+        return taxCField.getText();
+    }
+    public void setCity1(String t){
+        cityField.setText(t);
+    }
+    public void setCity2(String t){
+        city2Field.setText(t);
+    }
+    public void setDistrict1(String t){
+        districtField.setText(t);
+    }
+    public void setDistrict2(String t){
+        district2Field.setText(t);
+    }
+    public void setEmail(String t){
+        emailField.setText(t);
+    }
+    public void setPersonName(String t){
+        nameField.setText(t);
+    }
+    public void setSurname(String t){
+        surnameField.setText(t);
+    }
+    public void setTelephone(String t){
+        telephoneField.setText(t);
+    }
+    public void setNumber1(Integer t){
+        numberField.setText(t.toString());
+    }
+    public void setNumber2(Integer t){
+        number2Field.setText(t.toString());
+    }
+    public void setZip1(String t){
+        postalCodeField.setText(t);
+    }
+    public void setZip2(String t){
+        postalCode2Field.setText(t);
+    }
+    public void setStreet1(String t){
+        streetField.setText(t);
+    }
+    public void setStreet2(String t){
+        street2Field.setText(t);
+    }
+    public void setTaxC(String t){
+        taxCField.setText(t);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
