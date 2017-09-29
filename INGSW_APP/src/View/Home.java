@@ -632,6 +632,11 @@ public class Home extends javax.swing.JFrame {
         billConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billConfirmButton.setText("Confirm");
         billConfirmButton.setEnabled(false);
+        billConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                billConfirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -739,6 +744,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void billConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billConfirmButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_billConfirmButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -849,6 +859,7 @@ public class Home extends javax.swing.JFrame {
        if(c == jMenuItem1) return 5;
        if(c == help) return 6;
        if(c == addButton) return 7;
+       if(c == billConfirmButton) return 8;
        return 0;
    }
     

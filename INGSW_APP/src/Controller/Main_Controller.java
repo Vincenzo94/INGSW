@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -39,12 +40,15 @@ public class Main_Controller{
     private Operator operator;
     private static Main_Controller instance;
     private final DatabaseManager dbManager;
+    
     private DefaultTableModel tableModelBillsQueue = null;
     private DefaultTableModel tableModelInjuctionsQueue = null;
     private final DefaultTableCellRenderer defaultRender;
+    
     private List<Contract> contracts = null;
     private List<Bill> bills = new ArrayList<>();
     private List<Injuction> injuctions = new ArrayList<>();
+    
     static Logger log = Logger.getLogger(Main_Controller.class.getName());
     
     private Home actual = null; 
@@ -106,12 +110,24 @@ public class Main_Controller{
             case 5: logOut(); break;
             case 6: help(); break;
             case 7: addClicked(); break;
+            case 8: confirmClicked(); break;
         }
     }
     
     public void back(){
         current=null;
         actual.setVisible(true);
+    }
+    
+    private void confirmClicked(){
+        LinkedList<Bill> selected=new LinkedList<>();
+        for(Integer i: actual.getSelectedBill()){
+            selected.add(bills.get(i));
+        }
+        if(selected.size()==1)
+            current = new ConfirmBill_Controller(selected.getFirst());
+        else
+            current = new ConfirmBill_Controller(selected);
     }
     
     private void addClicked(){
