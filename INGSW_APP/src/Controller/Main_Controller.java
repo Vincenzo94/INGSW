@@ -95,7 +95,7 @@ public class Main_Controller{
         initInjuctionsQueue();
     }
     
-    public void buttonCliked(ActionEvent e){
+    private void buttonCliked(ActionEvent e){
         Component j = (Component)e.getSource();
         int i=actual.checkButton(j);
         switch(i){
@@ -104,13 +104,23 @@ public class Main_Controller{
             case 3: selectAllClicked(); break;
             case 4: deselectAllClicked(); break;
             case 5: logOut(); break;
+            case 6: help(); break;
+        }
+    }
+    
+    private void help(){
+        int i = actual.selectedPanel();
+        switch (i){
+            case 0: Popup_Controller.getPopup_C().showPopup("Primo pannello"); break;
+            case 1: Popup_Controller.getPopup_C().showPopup("Secondo pannello"); break;
+            case 2: Popup_Controller.getPopup_C().showPopup("Terzo pannello");break;
         }
     }
     
     private void logOut(){
         try{
-            instance=null;
             actual.dispose();
+            instance=null;
             new Main_Controller();
         }
         catch(SQLException e){
@@ -118,18 +128,18 @@ public class Main_Controller{
         }
     }
     
-    public void alterholderCliked(){
+    private void alterholderCliked(){
         int row = actual.getSelectedContract();
         current= new AlterContract_Controller(this,contracts.get(row));
     }
     
     
-    public void searchClicked(){
+    private void searchClicked(){
         current=new SearchContract_Controller(this,actual.getTableModelRegistryManagement());
         contracts=((SearchContract_Controller)current).getContracts();
     }
 
-    public void selectAllClicked(){
+    private void selectAllClicked(){
         DefaultTableModel table = actual.getTableModelBillsQueue();
         for(Integer i = 0; i < table.getRowCount(); i++)
             table.setValueAt(true, i, 4);
@@ -139,7 +149,8 @@ public class Main_Controller{
         actual.activeBillConfirm(true);
         actual.activeBillReportError(false);
     }
-    public void deselectAllClicked(){
+    
+    private void deselectAllClicked(){
         DefaultTableModel table = actual.getTableModelBillsQueue();
         for(Integer i = 0; i < table.getRowCount(); i++)
             table.setValueAt(false, i, 4);
@@ -197,7 +208,7 @@ public class Main_Controller{
         }
     } 
     
-    public void tableClicked(MouseEvent e) {
+    private void tableClicked(MouseEvent e) {
         switch(actual.checkTab(e.getComponent())){
             case 1:{
                 contracts = ((SearchContract_Controller)current).getContracts();

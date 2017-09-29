@@ -22,6 +22,8 @@ public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelInjuctionsQueue;
     private LinkedList<MouseListener> mouseListener;
     private LinkedList<ActionListener> actionListener;
+    
+    
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
         tableModelBillsQueue = new DefaultTableModel(){
@@ -73,7 +75,7 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        homePane = new javax.swing.JTabbedPane();
         registryManagementPanel = new javax.swing.JPanel();
         taxCLabel = new javax.swing.JLabel();
         taxCField = new javax.swing.JTextField();
@@ -130,12 +132,13 @@ public class Home extends javax.swing.JFrame {
         deselectAllButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        logOut = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        help = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane2.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
 
         registryManagementPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -388,7 +391,7 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
         registryManagementPanel.add(jPanel1, gridBagConstraints);
 
-        jTabbedPane2.addTab("Registry management", registryManagementPanel);
+        homePane.addTab("Registry management", registryManagementPanel);
 
         injuctionsQueuePanel.setLayout(new java.awt.GridBagLayout());
 
@@ -433,7 +436,7 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(18, 0, 20, 40);
         injuctionsQueuePanel.add(injuctionConfirmButton, gridBagConstraints);
 
-        jTabbedPane2.addTab("Injuctions queue", injuctionsQueuePanel);
+        homePane.addTab("Injuctions queue", injuctionsQueuePanel);
 
         billsQueuePanel.setLayout(new java.awt.GridBagLayout());
 
@@ -646,23 +649,32 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 240);
         billsQueuePanel.add(deselectAllButton, gridBagConstraints);
 
-        jTabbedPane2.addTab("Bills queue", billsQueuePanel);
+        homePane.addTab("Bills queue", billsQueuePanel);
 
-        getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(homePane, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
 
-        logOut.setText("Logout");
-        logOut.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Logout");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logOutActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(logOut);
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("?");
+
+        help.setText("Help");
+        help.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpActionPerformed(evt);
+            }
+        });
+        jMenu2.add(help);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -685,13 +697,8 @@ public class Home extends javax.swing.JFrame {
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         for(MouseListener m: mouseListener)
-        m.mouseClicked(evt);
+            m.mouseClicked(evt);
     }//GEN-LAST:event_tableMouseClicked
-
-    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_logOutActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         for(ActionListener a: actionListener)
@@ -712,6 +719,16 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_deselectAllButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void helpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_helpActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -819,7 +836,8 @@ public class Home extends javax.swing.JFrame {
        if(c == alterHolderButton) return 2;
        if(c == selectAllButton) return 3;
        if(c == deselectAllButton) return 4;
-       if(c == logOut) return 5;
+       if(c == jMenuItem1) return 5;
+       if(c == help) return 6;
        return 0;
    }
     
@@ -828,6 +846,10 @@ public class Home extends javax.swing.JFrame {
         if(c == table1) return 2;
         if(c == jTable1) return 3;
         return 0;
+    }
+    
+    public int selectedPanel(){
+        return homePane.getSelectedIndex();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -851,6 +873,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel dueDateValueLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel emailValueLabel;
+    private javax.swing.JMenuItem help;
+    private javax.swing.JTabbedPane homePane;
     private javax.swing.JButton injuctionConfirmButton;
     private javax.swing.JButton injuctionDeleteButton;
     private javax.swing.JButton injuctionsButton;
@@ -858,13 +882,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JMenuItem logOut;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel operatorIdLabel;
