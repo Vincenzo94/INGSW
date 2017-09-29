@@ -204,6 +204,11 @@ public class Home extends javax.swing.JFrame {
 
         addButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -729,6 +734,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_helpActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_addButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -838,6 +848,7 @@ public class Home extends javax.swing.JFrame {
        if(c == deselectAllButton) return 4;
        if(c == jMenuItem1) return 5;
        if(c == help) return 6;
+       if(c == addButton) return 7;
        return 0;
    }
     

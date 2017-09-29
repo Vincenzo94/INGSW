@@ -105,7 +105,18 @@ public class Main_Controller{
             case 4: deselectAllClicked(); break;
             case 5: logOut(); break;
             case 6: help(); break;
+            case 7: addClicked(); break;
         }
+    }
+    
+    public void back(){
+        current=null;
+        actual.setVisible(true);
+    }
+    
+    private void addClicked(){
+        actual.dispose();
+        current= new AddContract_Controller(this);
     }
     
     private void help(){
