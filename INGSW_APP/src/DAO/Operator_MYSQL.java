@@ -7,7 +7,6 @@ package DAO;
 
 import Controller.DatabaseManager;
 import Model.Operator;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,9 +19,9 @@ import java.util.logging.Logger;
  */
 public class Operator_MYSQL implements DAO_Operator{
     private final String TABLE = "Operator";
-    Connection connection;
-    public Operator_MYSQL(Connection connection) throws SQLException{
-        this.connection = connection;
+    DatabaseManager dbManager;
+    public Operator_MYSQL(DatabaseManager dbManager) throws SQLException{
+        this.dbManager = dbManager;
     }
     private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + DatabaseManager.schema + "." + TABLE + " WHERE ID = ? AND `password` = ?";
 
@@ -30,10 +29,10 @@ public class Operator_MYSQL implements DAO_Operator{
     public Operator check(Operator o) {
     Operator loggedOperator = null;
     try {
-            PreparedStatement statement = connection.prepareStatement(QUERY_CHECK_OPERATOR, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement statement = dbManager.getStatement(QUERY_CHECK_OPERATOR);
             statement.setInt(1,o.getId());
             statement.setString(2, o.getPassword());
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
                 loggedOperator = new Operator(rs.getInt("ID"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getBoolean("isDetector"));
             }

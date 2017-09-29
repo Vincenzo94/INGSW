@@ -46,7 +46,7 @@ public class Contract_MYSQL implements DAO_Contract{
     private final String QUERY_ADD_BILLING_ADDRESS = " UPDATE "+DatabaseManager.schema+"."+TABELLA
                                                    + " SET UPDATED_BY = ?, BILLING_ADDRESS = ? WHERE ID = ?";
     private final String QUERY_GET_BILLING_ADDRESS = " SELECT ID FROM "+DatabaseManager.schema+"."+TABELLA_ADDRESS
-                                                   + " WHERE city = ?, district = ?, street = ?, zipCode = ?, number = ? LIMIT 1";     
+                                                   + " WHERE city = ? AND district = ? AND street = ? AND zipCode = ? AND number = ? ORDER BY ID DESC LIMIT 1";     
     public Contract_MYSQL(DatabaseManager dbManager){
         this.dbManager = dbManager;
     }
@@ -191,6 +191,7 @@ public class Contract_MYSQL implements DAO_Contract{
             statement.setString(3,street);
             statement.setString(4,zip);
             statement.setInt(5,number);
+            System.out.println(statement.toString());
             ResultSet rs = dbManager.doQuery(statement);
             rs.next();
             id = rs.getInt(1);

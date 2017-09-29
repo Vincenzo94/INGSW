@@ -40,7 +40,7 @@ public class Login_Controller implements Controller{
         main=m;
         dbManager = DatabaseManager.getDbManager();
         popupController = Popup_Controller.getPopup_C();
-        this.DAO = new Operator_MYSQL(dbManager.getDbConnection());
+        this.DAO = new Operator_MYSQL(dbManager);
         login = new Login();
         //INGSW_APP.device.setFullScreenWindow(login);
         login.pack();

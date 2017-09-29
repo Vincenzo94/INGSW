@@ -19,7 +19,6 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class DatabaseManager {
-    private ResultSet result;
     private static DatabaseManager instance;
     static private Connection connection;
     public static final String schema = "ingwsw_andread";
@@ -52,9 +51,7 @@ public class DatabaseManager {
     private Connection connect() throws SQLException{
         return DriverManager.getConnection("jdbc:mysql://sql425.your-server.de:3306/ingwsw_andread", "ingwsw_andreau", "q9d3GLLfzTdy7Y5X");    
     }
-    public Connection getDbConnection(){
-        return connection;
-    }
+ 
 
     public PreparedStatement getStatement(String QUERY) {
         PreparedStatement statement = null;
