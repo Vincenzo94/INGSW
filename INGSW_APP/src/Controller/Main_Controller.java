@@ -124,6 +124,8 @@ public class Main_Controller{
         actual.setMultipleSelection(true);
         actual.setSelectedBills(table.getRowCount());
         actual.setSelectAllButton(false);
+        actual.activeBillConfirm(true);
+        actual.activeBillReportError(false);
     }
     public void deselectAllClicked(){
         DefaultTableModel table = actual.getTableModelBillsQueue();
@@ -132,6 +134,8 @@ public class Main_Controller{
         actual.setMultipleSelection(true);
         actual.setSelectedBills(0);
         actual.setSelectAllButton(true);
+        actual.activeBillConfirm(false);
+        actual.activeBillReportError(false);
     }
 
     private void initBillsQueue() {
