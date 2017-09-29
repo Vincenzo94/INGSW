@@ -7,7 +7,6 @@ package Controller;
 
 import View.Popup;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 /**
  *
  * @author vincenzo94
@@ -29,6 +28,7 @@ public class Popup_Controller implements Controller {
     }
     public void showPopup(String t){
         view = new Popup(t);
+        view.setResizable(false);
         view.addListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package View;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JButton;

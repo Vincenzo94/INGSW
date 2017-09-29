@@ -87,6 +87,6 @@ public class Login_Controller implements Controller{
     }
     
     public void helpCliked(){
-        popupController.showPopup("To login in, you have to insert your ID and Password and then click on Login button");
+        popupController.showPopup("To log in you have to insert your ID and Password and then click on \"Login\" button");
     }
 }
