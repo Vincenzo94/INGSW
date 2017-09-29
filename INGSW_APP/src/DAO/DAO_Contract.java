@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Contract;
+import Model.Operator;
 import java.util.List;
 
 /**
@@ -16,9 +17,15 @@ public interface DAO_Contract {
     //Metodo che accetta un contratto con dati incompleti
     // e restuisce lo stesso contratto con tutti i dati oppure null se non esiste.
     public Contract search(Contract c);
-    public void update(Contract c);
+    public void update_Registry(Contract c, Operator o);
+    public void update_UpdatedBy(Contract c, Operator o);
+    public void update_BillingAddress(Contract c, Operator o);
+    public void update_Address(Contract c, Operator o);
+    public Integer getBillingAddress(String city, String district, String street, String zip, Integer number);
     public void remove(Contract c);
     public void create(Contract c);
     public List<Contract> getAllContracts();
     public List<Contract> getAllContracts(String s);
+
+    public void addBillingAddress(Contract contract, Operator operator);
 }

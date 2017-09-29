@@ -49,6 +49,8 @@ public class AlterHolder extends javax.swing.JFrame {
         emailField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
         alterRegistryButton = new javax.swing.JButton();
+        mobileLabel = new javax.swing.JLabel();
+        mobileField = new javax.swing.JTextField();
         billAddress = new javax.swing.JPanel();
         streetField = new javax.swing.JTextField();
         streetLabel = new javax.swing.JLabel();
@@ -80,31 +82,102 @@ public class AlterHolder extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         registryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Registry"));
+        registryPanel.setLayout(new java.awt.GridBagLayout());
 
         nameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         nameLabel.setText("Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 17, 0, 0);
+        registryPanel.add(nameLabel, gridBagConstraints);
 
         nameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 289;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 17);
+        registryPanel.add(nameField, gridBagConstraints);
 
         surnameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 289;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 17);
+        registryPanel.add(surnameField, gridBagConstraints);
 
         surnameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         surnameLabel.setText("Surname:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 0, 0);
+        registryPanel.add(surnameLabel, gridBagConstraints);
 
         taxCLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         taxCLabel.setText("Tax C./VAT:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 17, 0, 0);
+        registryPanel.add(taxCLabel, gridBagConstraints);
 
         taxCField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 289;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 0, 17);
+        registryPanel.add(taxCField, gridBagConstraints);
 
         telephoneField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.ipadx = 122;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
+        registryPanel.add(telephoneField, gridBagConstraints);
 
         telephoneLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        telephoneLabel.setText("Telephone:");
+        telephoneLabel.setText("Phone:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 0, 0);
+        registryPanel.add(telephoneLabel, gridBagConstraints);
 
         emailField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 289;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 17);
+        registryPanel.add(emailField, gridBagConstraints);
 
         emailLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         emailLabel.setText("eMail:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 17, 0, 0);
+        registryPanel.add(emailLabel, gridBagConstraints);
 
         alterRegistryButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         alterRegistryButton.setText("Alter");
@@ -113,94 +186,138 @@ public class AlterHolder extends javax.swing.JFrame {
                 alterRegistryButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 90, 17, 17);
+        registryPanel.add(alterRegistryButton, gridBagConstraints);
 
-        javax.swing.GroupLayout registryPanelLayout = new javax.swing.GroupLayout(registryPanel);
-        registryPanel.setLayout(registryPanelLayout);
-        registryPanelLayout.setHorizontalGroup(
-            registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registryPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterRegistryButton)
-                .addGap(19, 19, 19))
-            .addGroup(registryPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLabel)
-                    .addComponent(surnameLabel)
-                    .addComponent(taxCLabel)
-                    .addComponent(telephoneLabel)
-                    .addComponent(emailLabel)
-                    .addComponent(nameField)
-                    .addComponent(surnameField)
-                    .addComponent(taxCField)
-                    .addComponent(telephoneField)
-                    .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
-                .addGap(162, 162, 162))
-        );
-        registryPanelLayout.setVerticalGroup(
-            registryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registryPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(surnameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(taxCLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(taxCField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(telephoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(emailLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterRegistryButton)
-                .addContainerGap())
-        );
+        mobileLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        mobileLabel.setText("Mobile:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 41, 0, 0);
+        registryPanel.add(mobileLabel, gridBagConstraints);
+
+        mobileField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 122;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 41, 0, 17);
+        registryPanel.add(mobileField, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.ipadx = 150;
+        gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 0);
         jPanel1.add(registryPanel, gridBagConstraints);
 
         billAddress.setBorder(javax.swing.BorderFactory.createTitledBorder("Bill address"));
+        billAddress.setLayout(new java.awt.GridBagLayout());
 
         streetField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 246;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
+        billAddress.add(streetField, gridBagConstraints);
 
         streetLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         streetLabel.setText("Street:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 17, 0, 0);
+        billAddress.add(streetLabel, gridBagConstraints);
 
         cityField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 246;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
+        billAddress.add(cityField, gridBagConstraints);
 
         cityLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cityLabel.setText("City:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 0, 0);
+        billAddress.add(cityLabel, gridBagConstraints);
 
         numberLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         numberLabel.setText("Number");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 20, 0, 0);
+        billAddress.add(numberLabel, gridBagConstraints);
 
         numberField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 65;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        billAddress.add(numberField, gridBagConstraints);
 
         districtLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         districtLabel.setText("District:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 20, 0, 0);
+        billAddress.add(districtLabel, gridBagConstraints);
 
         districtField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 139;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        billAddress.add(districtField, gridBagConstraints);
 
         postalCodeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         postalCodeLabel.setText("Postal code:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 0, 0, 0);
+        billAddress.add(postalCodeLabel, gridBagConstraints);
 
         postalCodeField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 128;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 17);
+        billAddress.add(postalCodeField, gridBagConstraints);
 
         alterBillAddressButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         alterBillAddressButton.setText("Alter");
@@ -209,73 +326,12 @@ public class AlterHolder extends javax.swing.JFrame {
                 alterBillAddressButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout billAddressLayout = new javax.swing.GroupLayout(billAddress);
-        billAddress.setLayout(billAddressLayout);
-        billAddressLayout.setHorizontalGroup(
-            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(streetLabel)
-                            .addComponent(streetField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(cityField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(cityLabel))
-                        .addGap(66, 66, 66)
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(districtField, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numberLabel)
-                                    .addComponent(numberField, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
-                                .addGap(3, 3, 3))
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(districtLabel)
-                                .addGap(38, 38, 38)))
-                        .addGap(50, 50, 50)
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postalCodeLabel)
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(postalCodeField)
-                                .addGap(3, 3, 3))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billAddressLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(alterBillAddressButton)))
-                .addContainerGap())
-        );
-        billAddressLayout.setVerticalGroup(
-            billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addGroup(billAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(numberLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(numberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(billAddressLayout.createSequentialGroup()
-                                .addComponent(postalCodeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(districtLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(billAddressLayout.createSequentialGroup()
-                        .addComponent(streetLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alterBillAddressButton)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 17, 17);
+        billAddress.add(alterBillAddressButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -287,28 +343,90 @@ public class AlterHolder extends javax.swing.JFrame {
         jPanel1.add(billAddress, gridBagConstraints);
 
         address.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
+        address.setLayout(new java.awt.GridBagLayout());
 
         city2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 246;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
+        address.add(city2Field, gridBagConstraints);
 
         district2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         district2Label.setText("District:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 20, 0, 0);
+        address.add(district2Label, gridBagConstraints);
 
         postalCode2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         postalCode2Label.setText("Postal code:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 0, 0, 0);
+        address.add(postalCode2Label, gridBagConstraints);
 
         district2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 139;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        address.add(district2Field, gridBagConstraints);
 
         street2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         street2Label.setText("Street:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 17, 0, 0);
+        address.add(street2Label, gridBagConstraints);
 
         street2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 246;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
+        address.add(street2Field, gridBagConstraints);
 
         number2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         number2Label.setText("Number");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 20, 0, 0);
+        address.add(number2Label, gridBagConstraints);
 
         postalCode2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 128;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 17);
+        address.add(postalCode2Field, gridBagConstraints);
 
         number2Field.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 68;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        address.add(number2Field, gridBagConstraints);
 
         alterAddressButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         alterAddressButton.setText("Alter");
@@ -317,74 +435,21 @@ public class AlterHolder extends javax.swing.JFrame {
                 alterAddressButtonActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 17, 17);
+        address.add(alterAddressButton, gridBagConstraints);
 
         city2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         city2Label.setText("City:");
-
-        javax.swing.GroupLayout addressLayout = new javax.swing.GroupLayout(address);
-        address.setLayout(addressLayout);
-        addressLayout.setHorizontalGroup(
-            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(street2Label)
-                            .addComponent(street2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(city2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(city2Label))
-                        .addGap(65, 65, 65)
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(district2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addComponent(district2Label)
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(number2Label)
-                                    .addComponent(number2Field, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
-                                .addGap(3, 3, 3)))
-                        .addGap(51, 51, 51)
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postalCode2Label)
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addComponent(postalCode2Field)
-                                .addGap(3, 3, 3))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(alterAddressButton)))
-                .addContainerGap())
-        );
-        addressLayout.setVerticalGroup(
-            addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addGroup(addressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addComponent(number2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(number2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(addressLayout.createSequentialGroup()
-                                .addComponent(postalCode2Label)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postalCode2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(district2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(district2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addressLayout.createSequentialGroup()
-                        .addComponent(street2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(street2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(city2Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(city2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(alterAddressButton)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 0, 0);
+        address.add(city2Label, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -463,8 +528,11 @@ public class AlterHolder extends javax.swing.JFrame {
     public String getSurname(){
         return surnameField.getText();
     }
-    public String getTelephone(){
+    public String getPhone(){
         return telephoneField.getText();
+    }
+    public String getMobile(){
+        return mobileField.getText();
     }
     public Integer getNumber1(){
         return Integer.valueOf(numberField.getText());
@@ -508,8 +576,11 @@ public class AlterHolder extends javax.swing.JFrame {
     public void setSurname(String t){
         surnameField.setText(t);
     }
-    public void setTelephone(String t){
+    public void setPhone(String t){
         telephoneField.setText(t);
+    }
+    public void setMobile(String t){
+        mobileField.setText(t);
     }
     public void setNumber1(Integer t){
         numberField.setText(t.toString());
@@ -551,6 +622,8 @@ public class AlterHolder extends javax.swing.JFrame {
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField mobileField;
+    private javax.swing.JLabel mobileLabel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField number2Field;

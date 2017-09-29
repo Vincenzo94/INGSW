@@ -11,7 +11,9 @@ import Model.Contract;
 import View.AlterHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,11 +41,17 @@ public class AlterContract_Controller implements Controller{
     }
 
     private void init() {
+        try {
+            dbManager = DatabaseManager.getDbManager();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         view.setPersonName(contract.getName());
         view.setSurname(contract.getSurname());
         view.setTaxC(contract.getTaxCode());
         view.setEmail(contract.getEmailAddress());
-        view.setTelephone(contract.getTelephone());
+        view.setPhone(contract.getPhone());
+        view.setMobile(contract.getMobile());
         if(contract.getBillingAddress() != null){
             view.setCity1(contract.getBillingCity());
             view.setDistrict1(contract.getBillingDistrict());
@@ -68,15 +76,37 @@ public class AlterContract_Controller implements Controller{
                 contract.setName(view.getPersonName());
                 contract.setSurname(view.getSurname());
                 contract.setTaxCode(view.getTaxC());
-                String phone = view.getTelephone();
-                Integer i = phone.indexOf("-");
-                contract.setPhone(phone.substring(0, i-2));
-                contract.setMobile(phone.substring(i+2));
+                contract.setPhone(view.getPhone());
+                contract.setMobile(view.getMobile());
                 contract.seteMail(view.getEmail());
-                daoContract.update(contract);
+                daoContract.update_Registry(contract,main.getOperator());
             } break;
-            case 2:  break;
-            case 3: break;
+            case 2:{
+                if(contract.getBillingAddress() != null){
+                    contract.setBillingCity(view.getCity1());
+                    contract.setBillingDistrict(view.getDistrict1());
+                    contract.setBillingStreet(view.getStreet1());
+                    contract.setBillingZipCode(view.getZip1());
+                    contract.setBillingNumber(view.getNumber1());
+                    daoContract.update_BillingAddress(contract,main.getOperator());
+                }
+                else{
+                    contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
+                    daoContract.addBillingAddress(contract,main.getOperator());
+                }
+                    
+                
+                break;
+            }
+            case 3:{
+                contract.setCity(view.getCity2());
+                contract.setDistrict(view.getDistrict2());
+                contract.setStreet(view.getStreet2());
+                contract.setZipCode(view.getZip2());
+                contract.setNumber(view.getNumber2());
+                daoContract.update_Address(contract,main.getOperator());
+                break;
+            }
         }
     }
     

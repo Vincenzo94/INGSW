@@ -24,11 +24,17 @@ public class Contract {
     private String mobile;
     private Address billingAddress;
     private final Address address;
+
+    
+
+   
+
+    
     
     private class Address{
         private String city;
 
-        
+        private Integer id;
         private String district;
         private String street;
         private Integer number;
@@ -40,6 +46,17 @@ public class Contract {
             this.street = street;
             this.number = number;
             this.zip = zip;
+        }
+        public Address(Integer id,String city, String district, String street, Integer number, String zip){
+            this.id = id;
+            this.city = city;
+            this.district = district;
+            this.street = street;
+            this.number = number;
+            this.zip = zip;
+        }
+        public Integer getID(){
+            return id;
         }
         public String getCity() {
             return city;
@@ -97,6 +114,10 @@ public class Contract {
             billingAddress = new Address(billingCity, billingDistrict, billingStreet,billingNumber, billingZip);
         address = new Address(city,district,street,number,zip);
     }
+    
+    public void addBillingAddress(String city, String district, String street, String zip, Integer number) {
+        billingAddress = new Address(city,district,street,number,zip);
+    }
     public Integer getId() {
         return id;
     }
@@ -116,7 +137,6 @@ public class Contract {
     public String getTaxCode() {
         return taxCode;
     }
-
     public String getBillingCity() {
         return billingAddress.getCity();
     }
@@ -137,7 +157,7 @@ public class Contract {
             return null;
         return billingAddress.getStreet()+billingAddress.getNumber()+", "+billingAddress.getCity()+", "+billingAddress.getDistrict()+", "+billingAddress.getZip();
     }
-
+   
     public String getCity() {
         return address.getCity();
     }
@@ -155,6 +175,12 @@ public class Contract {
     }
     public String getAddress(){
         return address.getStreet()+address.getNumber()+", "+address.getZip()+", "+address.getDistrict()+", "+address.getCity();
+    }
+    public String getPhone(){
+        return phone;
+    }
+    public String getMobile(){
+        return mobile;
     }
     public String getTelephone() {
         if(phone == null)
@@ -197,6 +223,43 @@ public class Contract {
         this.mobile = mobile;
     }
     
+    public void setNumber(Integer number) {
+        address.setNumber(number);
+    }
 
+    public void setCity(String city) {
+        address.setCity(city);
+    }
+
+    public void setDistrict(String district) {
+        address.setDistrict(district);
+    }
+
+    public void setStreet(String street) {
+        address.setStreet(street);
+    }
+
+    public void setZipCode(String zip) {
+        address.setZip(zip);
+    }
+    public void setBillingNumber(Integer number) {
+        billingAddress.setNumber(number);
+    }
+
+    public void setBillingCity(String city) {
+        billingAddress.setCity(city);
+    }
+
+    public void setBillingDistrict(String district) {
+        billingAddress.setDistrict(district);
+    }
+
+    public void setBillingStreet(String street) {
+        billingAddress.setStreet(street);
+    }
+
+    public void setBillingZipCode(String zip) {
+        billingAddress.setZip(zip);
+    }
     
 }

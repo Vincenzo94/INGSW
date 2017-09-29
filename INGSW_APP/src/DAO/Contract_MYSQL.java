@@ -7,6 +7,7 @@ package DAO;
 
 import Controller.DatabaseManager;
 import Model.Contract;
+import Model.Operator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,8 +23,30 @@ import java.util.logging.Logger;
  */
 public class Contract_MYSQL implements DAO_Contract{
     private final DatabaseManager dbManager;
-    private final String TABELLA = "Contract_Address";
-    private final String QUERY_GET_ALL_CONTRACT= "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA;
+    private final String TABELLA = "Contract";
+    private final String TABELLA_AUX = "Contract_Address";
+    private final String TABELLA_ADDRESS = "Address";
+    private final String QUERY_GET_ALL_CONTRACT = "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA_AUX;
+    private final String QUERY_UPDATE_CONTRACT = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+                                               + " SET name = ?, surname = ?, taxCode = ?, phone = ?,"
+                                               + " mobile = ?, eMail = ?, UPDATED_BY = ?"
+                                               + " WHERE id = ?";
+    private final String QUERY_UPDATE_BILLING_ADDRESS = "UPDATE "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+                                                      + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
+                                                      + " WHERE ID = (SELECT BILLING_ADDRESS FROM " + DatabaseManager.schema +"."+TABELLA
+                                                      + " WHERE ID = ?)";
+    private final String QUERY_UPDATE_ADDRESS = "UPDATE "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+                                                      + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
+                                                      + " WHERE ID = (SELECT ADDRESS FROM " + DatabaseManager.schema +"."+TABELLA
+                                                      + " WHERE ID = ?)";
+    private final String QUERY_UPDATE_OPERATOR = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+                                               + " SET UPDATED_BY = ? WHERE ID = ?";
+    private final String QUERY_INSERT_BILLING_ADDRESS = " INSERT INTO "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+                                                      + " (city,district,zipCode,street,number) VALUES (?, ?, ?, ?, ?)";
+    private final String QUERY_ADD_BILLING_ADDRESS = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+                                                   + " SET UPDATED_BY = ?, BILLING_ADDRESS = ? WHERE ID = ?";
+    private final String QUERY_GET_BILLING_ADDRESS = " SELECT ID FROM "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+                                                   + " WHERE city = ?, district = ?, street = ?, zipCode = ?, number = ? LIMIT 1";     
     public Contract_MYSQL(DatabaseManager dbManager){
         this.dbManager = dbManager;
     }
@@ -33,10 +56,69 @@ public class Contract_MYSQL implements DAO_Contract{
     }
 
     @Override
-    public void update(Contract c){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update_UpdatedBy(Contract c, Operator o){
+        PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_OPERATOR);
+        try {
+            statement.setInt(1,o.getId());
+            statement.setInt(2, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+    @Override
+    public void update_Registry(Contract c, Operator o){
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_CONTRACT);
+            statement.setString(1, c.getName());
+            statement.setString(2, c.getSurname());
+            statement.setString(3, c.getTaxCode());
+            statement.setString(4, c.getPhone());
+            statement.setString(5, c.getMobile());
+            statement.setString(6, c.getEmailAddress());
+            statement.setInt(7, o.getId());
+            statement.setInt(8, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public void update_BillingAddress(Contract c, Operator o){
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_BILLING_ADDRESS);
+            statement.setString(1, c.getBillingCity());
+            statement.setString(2, c.getBillingDistrict());
+            statement.setString(3, c.getBillingZip());
+            statement.setString(4, c.getBillingStreet());
+            statement.setInt(5, c.getBillingNumber());
+            statement.setInt(6, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+            update_UpdatedBy(c,o);
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public void update_Address(Contract c, Operator o){
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_ADDRESS);
+            statement.setString(1, c.getCity());
+            statement.setString(2, c.getDistrict());
+            statement.setString(3, c.getZip());
+            statement.setString(4, c.getStreet());
+            statement.setInt(5, c.getNumber());
+            statement.setInt(6, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+            update_UpdatedBy(c,o);
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @Override
     public void remove(Contract c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -66,6 +148,56 @@ public class Contract_MYSQL implements DAO_Contract{
     @Override
     public List<Contract> getAllContracts(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addBillingAddress(Contract c, Operator o) {
+        try {
+
+            PreparedStatement statement = dbManager.getStatement(QUERY_INSERT_BILLING_ADDRESS);
+            statement.setString(1, c.getBillingCity());
+            statement.setString(2, c.getBillingDistrict());
+            statement.setString(3, c.getBillingZip());
+            statement.setString(4, c.getBillingStreet());
+            statement.setInt(5, c.getBillingNumber());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+            setBillingAddress(c,o);
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void setBillingAddress(Contract c, Operator o) {
+        try {
+            Integer id = getBillingAddress(c.getBillingCity(),c.getBillingDistrict(),c.getBillingStreet(),c.getBillingZip(),c.getBillingNumber());
+            PreparedStatement statement = dbManager.getStatement(QUERY_ADD_BILLING_ADDRESS);
+            statement.setInt(1, o.getId());
+            statement.setInt(2, id);
+            statement.setInt(3, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to update Contract " +c.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public Integer getBillingAddress(String city, String district, String street, String zip, Integer number){
+        Integer id = null;
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_BILLING_ADDRESS);
+            statement.setString(1,city);
+            statement.setString(2,district);
+            statement.setString(3,street);
+            statement.setString(4,zip);
+            statement.setInt(5,number);
+            ResultSet rs = dbManager.doQuery(statement);
+            rs.next();
+            id = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;         
     }
     
 }

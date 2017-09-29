@@ -56,19 +56,19 @@ public class Login_Controller implements Controller{
     
     
     public void doLogin(){
-               Integer user = login.getUser();
-                String passw = login.getPassword();
-                operator=new Operator(user,passw);
-                operator = DAO.check(operator);
-                if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-                    PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
-                    log.info("Logged user: "+ user);
-                    login.dispose();
-                    main.loginDone(operator);
-                    }
-                else{
-                    popupController.showPopup("Invalid ID and/or Password!");
-                } 
+        Integer user = login.getUser();
+        String passw = login.getPassword();
+        operator=new Operator(user,passw);
+        operator = DAO.check(operator);
+        if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
+            PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
+            log.info("Logged user: "+ user);
+            login.dispose();
+            main.loginDone(operator);
+            }
+        else{
+            popupController.showPopup("Invalid ID and/or Password!");
+        } 
     }
     
     public void buttonCliked(ActionEvent e){

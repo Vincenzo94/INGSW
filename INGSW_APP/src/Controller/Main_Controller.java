@@ -50,7 +50,6 @@ public class Main_Controller{
     private List<Injuction> injuctions = new ArrayList<>();
     
     static Logger log = Logger.getLogger(Main_Controller.class.getName());
-    
     private Home actual = null; 
     
     private Main_Controller() throws SQLException{
@@ -75,6 +74,9 @@ public class Main_Controller{
         return instance;
     }
     
+    public Operator getOperator() {
+        return operator;
+    }
     public void loginDone(Operator o){
         operator=o;
         actual = new Home();
@@ -157,7 +159,7 @@ public class Main_Controller{
     
     private void alterholderCliked(){
         int row = actual.getSelectedContract();
-        current= new AlterContract_Controller(this,contracts.get(row));
+        new AlterContract_Controller(this,contracts.get(row));
     }
     
     
