@@ -7,8 +7,6 @@ package DAO;
 
 import Controller.DatabaseManager;
 import Model.Contract;
-import DAO.DAO_Contract;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class Contract_MYSQL implements DAO_Contract{
     private final DatabaseManager dbManager;
-    private final String TABELLA = "Contract";
+    private final String TABELLA = "Contract_Address";
     private final String QUERY_GET_ALL_CONTRACT= "SELECT * FROM " + DatabaseManager.schema + "." + TABELLA;
     public Contract_MYSQL(DatabaseManager dbManager){
         this.dbManager = dbManager;
@@ -51,13 +49,13 @@ public class Contract_MYSQL implements DAO_Contract{
 
     @Override
     public List<Contract> getAllContracts() {
-        List<Contract> contracts = new ArrayList<Contract>();
+        List<Contract> contracts = new ArrayList<>();
         try {
             
             PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_CONTRACT);
             ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
-                contracts.add(new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)));
+                contracts.add(new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getInt(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getInt(20)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);

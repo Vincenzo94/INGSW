@@ -10,7 +10,12 @@ import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 /**
  *
  * @author ansan
@@ -21,7 +26,6 @@ public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelInjuctionsQueue;
     private LinkedList<MouseListener> mouseListener;
     private LinkedList<ActionListener> actionListener;
-
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
         tableModelBillsQueue = new DefaultTableModel(){
@@ -56,6 +60,7 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         };
+        
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
@@ -458,12 +463,12 @@ public class Home extends javax.swing.JFrame {
 
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
-        reportErrorButton.setEnabled(false);
+        reportErrorButton.setVisible(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 240);
         billsQueuePanel.add(reportErrorButton, gridBagConstraints);
 
         summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
@@ -626,7 +631,7 @@ public class Home extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 240);
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
         billsQueuePanel.add(billConfirmButton, gridBagConstraints);
 
         deselectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -776,11 +781,11 @@ public class Home extends javax.swing.JFrame {
     public void setDeadline(Date date){
         dueDateValueLabel.setText(date.toString());
     }
-    public void activeBillConfirm(){
-        billConfirmButton.setEnabled(true);
+    public void activeBillConfirm(Boolean state){
+        billConfirmButton.setEnabled(state);
     }
-    public void activeBillReportError() {
-        reportErrorButton.setEnabled(true);
+    public void activeBillReportError(Boolean state) {
+        reportErrorButton.setVisible(state);
     }
     public void setMultipleSelection(Boolean state){
         summaryBillPanel.setVisible(!state);
@@ -793,11 +798,18 @@ public class Home extends javax.swing.JFrame {
         selectAllButton.setEnabled(state);
         deselectAllButton.setEnabled(!state);
     }
+    public JTable getBillTable() {
+        return jTable1;
+    }
+
     
     //INJUCTION
     public void activeInjuctionButtons(){
         injuctionConfirmButton.setEnabled(true);
         injuctionDeleteButton.setEnabled(true);
+    }
+      public JTable getInjuctionTable() {
+        return table1;
     }
     
     
@@ -876,6 +888,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    
+
+    
 
     
 

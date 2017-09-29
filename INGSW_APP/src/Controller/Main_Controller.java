@@ -19,7 +19,12 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -34,16 +39,27 @@ public class Main_Controller{
     private Operator operator;
     private static Main_Controller instance;
     private final DatabaseManager dbManager;
-    DefaultTableModel tableModelBillsQueue = null;
-    DefaultTableModel tableModelInjuctionsQueue = null;
+    private DefaultTableModel tableModelBillsQueue = null;
+    private DefaultTableModel tableModelInjuctionsQueue = null;
+    private final DefaultTableCellRenderer defaultRender;
     private List<Contract> contracts = null;
     private List<Bill> bills = new ArrayList<>();
     private List<Injuction> injuctions = new ArrayList<>();
     static Logger log = Logger.getLogger(Main_Controller.class.getName());
-
+    
     private Home actual = null; 
     
     private Main_Controller() throws SQLException{
+        defaultRender = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object
+                value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                    table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
         current = new Login_Controller(this);
         dbManager = DatabaseManager.getDbManager();
     }
@@ -70,10 +86,11 @@ public class Main_Controller{
         actual.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
-             Main_Controller m = (Main_Controller)controller;
-             m.buttonCliked(e);            
+                Main_Controller m = (Main_Controller)controller;
+                m.buttonCliked(e);            
             }
         });
+        
         initBillsQueue();
         initInjuctionsQueue();
     }
@@ -91,7 +108,6 @@ public class Main_Controller{
     
     public void alterholderCliked(){
         int row = actual.getSelectedContract();
-        actual.dispose();
         current= new AlterContract_Controller(this,contracts.get(row));
     }
     
@@ -124,6 +140,8 @@ public class Main_Controller{
         tableModelBillsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
+        setDefaultRender(actual.getBillTable());
+        
         bills.clear();
         bills = daoBill.getAllDocuments(operator);
         
@@ -158,6 +176,8 @@ public class Main_Controller{
             log.info("User: "+ operator.getId()+" manages the injuction "+temp.getId());
             Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
             tableModelInjuctionsQueue.addRow(row);
+            setDefaultRender(actual.getInjuctionTable());
+
         }
     } 
     
@@ -187,17 +207,38 @@ public class Main_Controller{
                     actual.setDetection(temp.getDetectionValue());
                     actual.setDetector(temp.getDetector());
                     actual.setDetectionDate(temp.getDetectionDate());
-                    actual.setDeadline(temp.getDeadline());
+                    actual.setDeadline(temp.getDeadline()); 
+                    actual.activeBillConfirm(true);
+                    actual.activeBillReportError(true);
+
+
                 }
-                else{
+                else if(bill.size() > 1){
+                    actual.activeBillReportError(false);
+                    actual.activeBillConfirm(true);
                     actual.setMultipleSelection(true);
                     actual.setSelectedBills(bill.size());
                 }
-                actual.activeBillConfirm();
-                actual.activeBillReportError();
-                
+                else{
+                    actual.activeBillConfirm(false);
+                    actual.activeBillReportError(false);
+                    actual.setMultipleSelection(true);
+                    actual.setSelectedBills(bill.size());
+                }
                 break;
             }
         }       
+    }
+
+    private void setDefaultRender(JTable table) {
+        TableColumnModel tableModel = table.getColumnModel();
+        TableColumn tableColumn;
+        Integer columns = table.getColumnCount();
+        if(table.getColumnName(columns-1).equals("Selected"))
+            columns--;
+        for(Integer i = 0; i < columns; i++){
+            tableColumn = tableModel.getColumn(i);
+            tableColumn.setCellRenderer(defaultRender);
+        }
     }
 }
