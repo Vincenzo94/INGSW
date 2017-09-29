@@ -17,13 +17,13 @@ public class Contract {
     private String name;
     private String surname;
     private String taxCode;
-    private Date start;
+    private final Date start;
     private Date end;
     private Date modified;
     private String phone;
     private String mobile;
     private Address billingAddress;
-    private Address address;
+    private final Address address;
     
     private class Address{
         private String city;
@@ -164,6 +164,39 @@ public class Contract {
         else
             return phone.concat(" - "+mobile);
     }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+    
 
     
 }

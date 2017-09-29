@@ -96,15 +96,15 @@ public class Main_Controller{
     }
     
     public void buttonCliked(ActionEvent e){
-            Component j = (Component)e.getSource();
-            int i=actual.checkButton(j);
-            switch(i){
-                case 1: searchClicked(); break;
-                case 2: alterholderCliked(); break;
-                case 3: selectAllClicked(); break;
-                case 4: deselectAllClicked(); break;
-            }
-                }
+        Component j = (Component)e.getSource();
+        int i=actual.checkButton(j);
+        switch(i){
+            case 1: searchClicked(); break;
+            case 2: alterholderCliked(); break;
+            case 3: selectAllClicked(); break;
+            case 4: deselectAllClicked(); break;
+        }
+    }
     
     public void alterholderCliked(){
         int row = actual.getSelectedContract();

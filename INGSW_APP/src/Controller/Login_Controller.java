@@ -11,17 +11,11 @@ import Model.Operator;
 import View.Login;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-<<<<<<< Updated upstream
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-<<<<<<< HEAD
-=======
-//import org.apache.log4j.Logger;
->>>>>>> Stashed changes
-=======
+
 import java.awt.Component;
 import View.Popup;
->>>>>>> Code
 /**
  *
  * @author ansan
@@ -33,21 +27,15 @@ public class Login_Controller implements Controller{
     private DAO_Operator DAO;
     private Main_Controller main;
     private DatabaseManager dbManager;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+
     
-=======
     private Popup_Controller Popup_Control;
     private Login_Controller l;
     private Popup popup=null;
     Popup_Controller popupController ;
 
 
->>>>>>> Code
     static Logger log = Logger.getLogger(Login_Controller.class.getName());
-=======
-    //static Logger log = Logger.getLogger(Login_Controller.class.getName());
->>>>>>> Stashed changes
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
         dbManager = DatabaseManager.getDbManager();
@@ -77,10 +65,6 @@ public class Login_Controller implements Controller{
                     log.info("Logged user: "+ user);
                     login.dispose();
                     main.loginDone(operator);
-<<<<<<< Updated upstream
-=======
-                    //log.info("Logged user: "+ user);
->>>>>>> Stashed changes
                     }
                 else{
                     popupController.showPopup("Invalid ID and/or Password!");

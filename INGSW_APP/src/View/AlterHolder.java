@@ -5,7 +5,10 @@
  */
 package View;
 
-import javax.swing.JTextField;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -13,14 +16,16 @@ import javax.swing.JTextField;
  */
 public class AlterHolder extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AlterHolder
-     */
+    private final List<ActionListener> actionListener;
     public AlterHolder(){
+        actionListener = new LinkedList<>();
         initComponents();
         this.pack();
     }
 
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,6 +108,11 @@ public class AlterHolder extends javax.swing.JFrame {
 
         alterRegistryButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         alterRegistryButton.setText("Alter");
+        alterRegistryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterRegistryButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout registryPanelLayout = new javax.swing.GroupLayout(registryPanel);
         registryPanel.setLayout(registryPanelLayout);
@@ -302,6 +312,11 @@ public class AlterHolder extends javax.swing.JFrame {
 
         alterAddressButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         alterAddressButton.setText("Alter");
+        alterAddressButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterAddressButtonActionPerformed(evt);
+            }
+        });
 
         city2Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         city2Label.setText("City:");
@@ -382,12 +397,17 @@ public class AlterHolder extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
         jPanel1.add(backButton, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -396,9 +416,32 @@ public class AlterHolder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void alterBillAddressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterBillAddressButtonActionPerformed
-        // TODO add your handling code here:
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
     }//GEN-LAST:event_alterBillAddressButtonActionPerformed
 
+    private void alterRegistryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterRegistryButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_alterRegistryButtonActionPerformed
+
+    private void alterAddressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterAddressButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_alterAddressButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    public Integer checkButton(Component c) {
+        if(c == alterRegistryButton) return 1;
+        if(c == alterBillAddressButton) return 2;
+        if(c == alterAddressButton) return 3;
+        return 0;
+    }
+    
     public String getCity1(){
         return cityField.getText();
     }
@@ -530,4 +573,6 @@ public class AlterHolder extends javax.swing.JFrame {
     private javax.swing.JTextField telephoneField;
     private javax.swing.JLabel telephoneLabel;
     // End of variables declaration//GEN-END:variables
+
+    
 }
