@@ -810,6 +810,26 @@ public class Home extends javax.swing.JFrame {
         return table.getSelectedRow();
     }
     
+    public String getNameSearch(){
+        return nameField.getText();
+    }
+    
+    public String getSurnameSearch(){
+        return surnameField.getText();
+    }
+    
+    public String getTaxSearch(){
+        return taxCField.getText();
+    }
+    
+    public Integer getIdSearch(){
+        String i = contractIdField.getText();
+        if(i.length()!=0)
+            return Integer.valueOf(contractIdField.getText());
+        else
+            return null;
+    }
+    
     //BILL
     public List<Integer> getSelectedBill(){
         List<Integer> l = new LinkedList<Integer>();

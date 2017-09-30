@@ -78,6 +78,7 @@ public class Main_Controller{
     public Operator getOperator() {
         return operator;
     }
+    
     public void loginDone(Operator o){
         operator=o;
         actual = new Home();
@@ -182,10 +183,17 @@ public class Main_Controller{
         current = new AlterContract_Controller(this,contracts.get(row));
     }
     
-    
     private void searchClicked(){
-        current=new SearchContract_Controller(this,actual.getTableModelRegistryManagement());
-        contracts=((SearchContract_Controller)current).getContracts();
+        Contract bag=null;
+        String name=actual.getNameSearch();
+        String surname=actual.getSurnameSearch();
+        String tax=actual.getTaxSearch();
+        Integer id=actual.getIdSearch();
+        System.out.println("prova :"+Integer.valueOf(""));
+        if(name.length()!=0 || surname.length()!=0 || tax.length()!=0 || id!=null)
+            bag=new Contract(id,null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
+        current=new SearchContract_Controller(this,actual.getTableModelRegistryManagement(),bag);
+        contracts =((SearchContract_Controller)current).getContracts();
     }
 
     private void selectAllClicked(){
@@ -236,6 +244,7 @@ public class Main_Controller{
             tableModelBillsQueue.addRow(row);
         }
     }
+    
     private void initInjuctionsQueue() {
         tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
         tableModelInjuctionsQueue.setRowCount(0);
@@ -243,6 +252,7 @@ public class Main_Controller{
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
         
     } 
+    
     private void updateInjuctionsQueue(){
         DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
         tableModelInjuctionsQueue.setRowCount(0);
