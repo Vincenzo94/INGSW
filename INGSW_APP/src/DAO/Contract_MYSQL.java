@@ -146,7 +146,12 @@ public class Contract_MYSQL implements DAO_Contract{
     }
 
     @Override
-    public List<Contract> getAllContracts(String s) {
+    public List<Contract> getAllContracts(Contract c) {
+        String name = c.getName();
+        String surname = c.getSurname();
+        String tax= c.getTaxCode();
+        Integer id = c.getId();
+        //Bisogna creare la query che prenda solo i contratti con questi parametri (usare operatore LIKE%)
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

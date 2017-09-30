@@ -24,7 +24,11 @@ public class SearchContract_Controller implements Controller{
     private  DatabaseManager dbManager;
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
-    SearchContract_Controller(Main_Controller instance, DefaultTableModel table) {
+    Contract bag;
+    
+    
+    SearchContract_Controller(Main_Controller instance, DefaultTableModel table, Contract c) {
+        this.bag=c;
         this.main = instance;
         this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
@@ -42,11 +46,14 @@ public class SearchContract_Controller implements Controller{
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
         tableModelRegistryManagement.setColumnIdentifiers(columns);
         contracts.clear();
-        contracts = daoContract.getAllContracts();
+        if(bag==null)
+            contracts = daoContract.getAllContracts();
+        else
+            contracts = daoContract.getAllContracts(bag);
         for(Contract temp : contracts){
-            Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
-            tableModelRegistryManagement.addRow(row);
-        }
+                Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
+                tableModelRegistryManagement.addRow(row);
+            }
     }
 
     public List<Contract> getContracts() {
