@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JTable;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -22,6 +23,7 @@ public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelInjuctionsQueue;
     private LinkedList<MouseListener> mouseListener;
     private LinkedList<ActionListener> actionListener;
+    private LinkedList<ChangeListener> changeListener;
     
     
     public Home() {
@@ -61,6 +63,7 @@ public class Home extends javax.swing.JFrame {
         
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
+        changeListener = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
         initComponents();
     }
@@ -139,6 +142,11 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        homePane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                homePaneStateChanged(evt);
+            }
+        });
 
         registryManagementPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -749,6 +757,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_billConfirmButtonActionPerformed
+
+    private void homePaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_homePaneStateChanged
+        for(ChangeListener a: changeListener)
+            a.stateChanged(evt);
+    }//GEN-LAST:event_homePaneStateChanged
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -756,6 +769,10 @@ public class Home extends javax.swing.JFrame {
     }
     public void addActionListener(ActionListener a){
         actionListener.add(a);
+    }
+    
+    public void addChangeListener(ChangeListener a){
+        changeListener.add(a);
     }
     
     public DefaultTableModel getTableModelRegistryManagement(){
@@ -870,7 +887,7 @@ public class Home extends javax.swing.JFrame {
         return 0;
     }
     
-    public int selectedPanel(){
+    public int getSelectedPanel(){
         return homePane.getSelectedIndex();
     }
 
