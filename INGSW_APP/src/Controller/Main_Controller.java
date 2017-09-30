@@ -105,15 +105,15 @@ public class Main_Controller{
             }
         });
         
-        //initBillsQueue();
-        //initInjuctionsQueue();
+        initBillsQueue();
+        initInjuctionsQueue();
     }
     
     private void changePane(){
         int i = actual.getSelectedPanel();
         switch(i){
-            case 1: initInjuctionsQueue(); break;
-            case 2: initBillsQueue(); break;
+            case 1: updateInjuctionsQueue(); break;
+            case 2: updateBillsQueue(); break;
         }
     }
     
@@ -144,6 +144,7 @@ public class Main_Controller{
         for(Integer i: actual.getSelectedBill()){
             selected.add(bills.get(i));
         }
+        actual.setEnabled(false);
         if(selected.size()==1)
             current = new ConfirmBill_Controller(selected.getFirst());
         else
@@ -210,14 +211,17 @@ public class Main_Controller{
     }
 
     private void initBillsQueue() {
-        DAO_Document daoBill = new Bill_MYSQL(dbManager);
         tableModelBillsQueue = actual.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
         setDefaultRender(actual.getBillTable());
-        
+    }
+
+    private void updateBillsQueue(){
+        DAO_Document daoBill = new Bill_MYSQL(dbManager);
         bills.clear();
+        tableModelBillsQueue.setRowCount(0);
         bills = daoBill.getAllDocuments(operator);
         
         for(Bill temp : bills){
@@ -232,13 +236,16 @@ public class Main_Controller{
             tableModelBillsQueue.addRow(row);
         }
     }
-
     private void initInjuctionsQueue() {
-        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
         tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
+        
+    } 
+    private void updateInjuctionsQueue(){
+        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
+        tableModelInjuctionsQueue.setRowCount(0);
         injuctions.clear();
         injuctions = daoInjuction.getAllDocuments(operator);
         for(Injuction temp : injuctions){
@@ -254,7 +261,7 @@ public class Main_Controller{
             setDefaultRender(actual.getInjuctionTable());
 
         }
-    } 
+    }
     
     private void tableClicked(MouseEvent e) {
         switch(actual.checkTab(e.getComponent())){
