@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author Andrea
@@ -50,11 +51,13 @@ public AddContract_Controller(Main_Controller main){
     
     private void createClicked(){
         DatabaseManager dbManager = null;
+        
         try {
             dbManager = DatabaseManager.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(AlterContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         String billingCity = view.getCity1();
         String billingDistrict = view.getDistrict1();

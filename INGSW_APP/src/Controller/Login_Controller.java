@@ -11,8 +11,6 @@ import Model.Operator;
 import View.Login;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.awt.Component;
 import View.Popup;
@@ -35,7 +33,6 @@ public class Login_Controller implements Controller{
     Popup_Controller popupController ;
 
 
-    static Logger log = Logger.getLogger(Login_Controller.class.getName());
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
         dbManager = DatabaseManager.getDbManager();
@@ -61,8 +58,7 @@ public class Login_Controller implements Controller{
         operator=new Operator(user,passw);
         operator = DAO.check(operator);
         if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-            PropertyConfigurator.configure("src/ingsw_app/log4j.properties");
-            log.info("Logged user: "+ user);
+            Log_Controller.writeLog("Logged user: "+ user,Login_Controller.class);
             login.dispose();
             main.loginDone(operator);
             }
