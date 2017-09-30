@@ -535,10 +535,16 @@ public class AlterHolder extends javax.swing.JFrame {
         return mobileField.getText();
     }
     public Integer getNumber1(){
-        return Integer.valueOf(numberField.getText());
+        String number = numberField.getText();
+        if(number.equals(""))
+            return null;
+        return Integer.valueOf(number);
     }
     public Integer getNumber2(){
-        return Integer.valueOf(number2Field.getText());
+        String number = number2Field.getText();
+        if(number.equals(""))
+            return null;
+        return Integer.valueOf(number);
     }
     public String getZip1(){
         return postalCodeField.getText();

@@ -12,18 +12,20 @@ import java.sql.Date;
  * @author Andrea
  */
 public class Contract {
-    private final Integer id;
+    private Integer id;
     private String eMail;
     private String name;
     private String surname;
     private String taxCode;
-    private final Date start;
+    private  Date start;
     private Date end;
     private Date modified;
     private String phone;
     private String mobile;
     private Address billingAddress;
     private final Address address;
+
+    
 
     
 
@@ -114,6 +116,25 @@ public class Contract {
             billingAddress = new Address(billingCity, billingDistrict, billingStreet,billingNumber, billingZip);
         address = new Address(city,district,street,number,zip);
     }
+    public Contract(String name, String surname, String taxCode, String phone, String eMail, String mobile,String city,String district,String zip,String street,Integer number,String billingCity,String billingDistrict,String billingZip, String billingStreet, Integer billingNumber) {
+        this.name = name;
+        this.surname = surname;
+        this.taxCode = taxCode;
+        this.eMail = eMail;
+        this.mobile = mobile;
+        this.phone = phone;
+        billingAddress = new Address(billingCity, billingDistrict, billingStreet,billingNumber, billingZip);
+        address = new Address(city,district,street,number,zip);
+    }
+    public Contract(String name, String surname, String taxCode, String phone, String eMail, String mobile,String city,String district,String zip,String street,Integer number) {
+        this.name = name;
+        this.surname = surname;
+        this.taxCode = taxCode;
+        this.eMail = eMail;
+        this.mobile = mobile;
+        this.phone = phone;
+        address = new Address(city,district,street,number,zip);
+    }
     
     public void addBillingAddress(String city, String district, String street, String zip, Integer number) {
         billingAddress = new Address(city,district,street,number,zip);
@@ -153,9 +174,20 @@ public class Contract {
         return billingAddress.getZip();
     }
     public String getBillingAddress(){
-        if(billingAddress == null)
-            return null;
-        return billingAddress.getStreet()+billingAddress.getNumber()+", "+billingAddress.getCity()+", "+billingAddress.getDistrict()+", "+billingAddress.getZip();
+        String city=null;
+        String street=null;
+        String zip=null;
+        String district=null;
+        if(billingAddress != null){
+            street = billingAddress.getStreet();
+            city = billingAddress.getCity();
+            district = billingAddress.getDistrict();
+            zip = billingAddress.getZip();
+            if((street.equals("")&&district.equals("")&&city.equals("")&&zip.equals("")))
+                return null;
+            return street+" "+billingAddress.getNumber()+", "+city+", "+district+", "+zip;
+        }
+        return null;
     }
    
     public String getCity() {
@@ -261,5 +293,10 @@ public class Contract {
     public void setBillingZipCode(String zip) {
         billingAddress.setZip(zip);
     }
+    
+    public void setBillingAddress(Address ba) {
+        billingAddress = null;
+    }
+    
     
 }

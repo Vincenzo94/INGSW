@@ -4,9 +4,15 @@
  * and open the template in the editor.
  */
 package Controller;
+import DAO.Contract_MYSQL;
+import DAO.DAO_Contract;
+import Model.Contract;
 import View.AddHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,7 +20,8 @@ import java.awt.event.ActionEvent;
  */
 public class AddContract_Controller implements Controller{
     private AddHolder view;
-    Main_Controller main;
+    private final Main_Controller main;
+    private Contract contract;
 
 public AddContract_Controller(Main_Controller main){
         this.main=main;
@@ -23,8 +30,8 @@ public AddContract_Controller(Main_Controller main){
         view.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
-                   AddContract_Controller m = (AddContract_Controller)controller;
-                   m.buttonClicked(e);
+                AddContract_Controller m = (AddContract_Controller)controller;
+                m.buttonClicked(e);
             }
         });
     }
@@ -42,6 +49,22 @@ public AddContract_Controller(Main_Controller main){
     }
     
     private void createClicked(){
+        DatabaseManager dbManager = null;
+        try {
+            dbManager = DatabaseManager.getDbManager();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DAO_Contract daoContract = new Contract_MYSQL(dbManager);
+        String billingCity = view.getCity1();
+        String billingDistrict = view.getDistrict1();
+        String billingZip = view.getZip1();
+        String billingStreet = view.getStreet1();
         
+        if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals(""))
+            contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
+        else
+            contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
+        daoContract.create(contract,main.getOperator());
     }
 }

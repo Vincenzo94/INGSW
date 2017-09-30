@@ -82,20 +82,26 @@ public class AlterContract_Controller implements Controller{
                 daoContract.update_Registry(contract,main.getOperator());
             } break;
             case 2:{
-                if(contract.getBillingAddress() != null){
-                    contract.setBillingCity(view.getCity1());
-                    contract.setBillingDistrict(view.getDistrict1());
-                    contract.setBillingStreet(view.getStreet1());
-                    contract.setBillingZipCode(view.getZip1());
+                String street = view.getStreet1();
+                String city = view.getCity1();
+                String district = view.getDistrict1();
+                String zip = view.getZip1();
+                if(contract.getBillingAddress() != null && !street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
+                    contract.setBillingCity(city);
+                    contract.setBillingDistrict(district);
+                    contract.setBillingStreet(street);
+                    contract.setBillingZipCode(zip);
                     contract.setBillingNumber(view.getNumber1());
                     daoContract.update_BillingAddress(contract,main.getOperator());
                 }
-                else{
+                else if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
                     contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
-                    daoContract.addBillingAddress(contract,main.getOperator());
+                    daoContract.addBillingAddress(contract);
                 }
-                    
-                
+                else if(contract.getBillingAddress() != null)
+                    contract.setBillingAddress(null);
+                daoContract.setBillingAddress(contract);
+                daoContract.update_UpdatedBy(contract, main.getOperator());
                 break;
             }
             case 3:{

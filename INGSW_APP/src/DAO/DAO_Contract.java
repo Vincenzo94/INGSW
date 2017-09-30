@@ -21,13 +21,13 @@ public interface DAO_Contract {
     public void update_UpdatedBy(Contract c, Operator o);
     public void update_BillingAddress(Contract c, Operator o);
     public void update_Address(Contract c, Operator o);
-    public Integer getBillingAddress(String city, String district, String street, String zip, Integer number);
     public void remove(Contract c);
-    public void create(Contract c);
+    public void create(Contract c, Operator o);
     public List<Contract> getAllContracts();
     //Metodo che restuisce una lista di contratti 
     //corrispondenti alla ricerca con i dati del contratto passato.
     public List<Contract> getAllContracts(Contract c);
+    public void addBillingAddress(Contract contract);
+    public void setBillingAddress(Contract contract);
 
-    public void addBillingAddress(Contract contract, Operator operator);
 }
