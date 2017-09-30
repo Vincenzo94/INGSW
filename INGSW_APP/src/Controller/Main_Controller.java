@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -96,9 +97,25 @@ public class Main_Controller{
                 m.buttonCliked(e);            
             }
         });
+        actual.addChangeListener(new Listener(this){
+            @Override
+            public void stateChanged(ChangeEvent e){
+                Main_Controller m = (Main_Controller)controller;
+                m.changePane();
+            }
+        });
         
-        initBillsQueue();
-        initInjuctionsQueue();
+        //initBillsQueue();
+        //initInjuctionsQueue();
+    }
+    
+    private void changePane(){
+        int i = actual.getSelectedPanel();
+        switch(i){
+            case 1: initInjuctionsQueue(); break;
+            case 2: initBillsQueue(); break;
+        }
+        System.out.println("Aggiorno il tab :"+i);
     }
     
     private void buttonCliked(ActionEvent e){
@@ -139,7 +156,7 @@ public class Main_Controller{
     }
     
     private void help(){
-        int i = actual.selectedPanel();
+        int i = actual.getSelectedPanel();
         switch (i){
             case 0: Popup_Controller.getPopup_C().showPopup("Primo pannello"); break;
             case 1: Popup_Controller.getPopup_C().showPopup("Secondo pannello"); break;

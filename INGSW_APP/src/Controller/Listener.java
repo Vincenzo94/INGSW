@@ -9,12 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author ansan
  */
-public class Listener <T> implements ActionListener,MouseListener{
+public class Listener <T> implements ActionListener,MouseListener,ChangeListener{
     T controller;
     public Listener(T contr){
         controller=contr;
@@ -47,6 +49,10 @@ public class Listener <T> implements ActionListener,MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    } 
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
