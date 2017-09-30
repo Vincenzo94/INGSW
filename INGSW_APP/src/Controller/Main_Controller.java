@@ -119,6 +119,7 @@ public class Main_Controller{
     public void back(){
         current=null;
         actual.setVisible(true);
+        actual.setEnabled(true);
     }
     
     private void confirmClicked(){
@@ -133,7 +134,7 @@ public class Main_Controller{
     }
     
     private void addClicked(){
-        actual.dispose();
+        actual.setEnabled(false);
         current= new AddContract_Controller(this);
     }
     
@@ -159,7 +160,8 @@ public class Main_Controller{
     
     private void alterholderCliked(){
         int row = actual.getSelectedContract();
-        new AlterContract_Controller(this,contracts.get(row));
+        actual.setEnabled(false);
+        current = new AlterContract_Controller(this,contracts.get(row));
     }
     
     

@@ -33,6 +33,7 @@ public AddContract_Controller(Main_Controller main){
         Component j = (Component)e.getSource();
         int i=view.checkButton(j);
         if(i==1){
+            view.dispose();
             main.back();
         }
         else{
