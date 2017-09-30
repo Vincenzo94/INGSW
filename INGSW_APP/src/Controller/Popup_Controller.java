@@ -27,7 +27,13 @@ public class Popup_Controller implements Controller {
         return instance;
     }
     public void showPopup(String t){
-        view = new Popup(t);
+        if(view==null){
+            view = new Popup(t);
+        }
+        else{
+           view.dispose();
+           view = new Popup(t);
+        }
         view.setResizable(false);
         view.addListener(new Listener(this){
             @Override

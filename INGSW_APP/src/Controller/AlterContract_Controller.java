@@ -71,7 +71,7 @@ public class AlterContract_Controller implements Controller{
         Integer button = view.checkButton(c);
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         switch(button){
-            case 0: view.dispose(); break;
+            case 0: view.dispose(); main.back(); break;
             case 1:{
                 contract.setName(view.getPersonName());
                 contract.setSurname(view.getSurname());
