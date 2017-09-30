@@ -134,7 +134,7 @@ public class Main_Controller{
     }
     
     public void back(){
-        current=null;
+        //current=null;
         actual.setVisible(true);
         actual.setEnabled(true);
         changePane();
@@ -191,7 +191,7 @@ public class Main_Controller{
         Integer id=actual.getIdSearch();
         if(name.length()!=0 || surname.length()!=0 || tax.length()!=0 || id!=null)
             bag=new Contract(id,null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
-        current=new SearchContract_Controller(this,actual.getTableModelRegistryManagement(),bag);
+        current = new SearchContract_Controller(this,actual.getTableModelRegistryManagement(),bag);
         contracts =((SearchContract_Controller)current).getContracts();
     }
 
