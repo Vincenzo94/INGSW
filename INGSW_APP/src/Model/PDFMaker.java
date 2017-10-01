@@ -2,6 +2,7 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -50,7 +51,7 @@ public class PDFMaker {
         }
         status = true;
     }
-    public boolean createPDF(Contract contract){
+    public boolean createPDF(Contract contract, Bill billObject){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -78,7 +79,7 @@ public class PDFMaker {
             PDPageContentStream printStream = new PDPageContentStream(bill, page);
             
             //drawingPDF
-            drawPDF(printStream, template, contract);
+            drawPDF(printStream, template, contract, billObject);
             
             //saving and closing
             printStream.close();
@@ -87,11 +88,11 @@ public class PDFMaker {
             isCreated = true;
         }
         catch (IOException e){
-            System.out.println("Missing items for the bill's creating. The operation will be interrupted.");
+            System.out.println("Error in the bill's creating. The operation will be interrupted.");
         }
         return isCreated;
     }
-    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract) throws IOException{
+    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill) throws IOException{
         /*
         pre-conditions:
         - status must be on true
@@ -101,17 +102,107 @@ public class PDFMaker {
         */
         
         //inserting template
-        printStream.drawImage(template, -40F, -400F);
+        printStream.drawImage(template,0F, 0F, 615F, 795F);
         //startText
         printStream.beginText();
         //setting parameters
-        printStream.newLineAtOffset(25, 700);
-        printStream.setFont(PDType1Font.TIMES_ROMAN, 11);
+        printStream.newLineAtOffset(75, 690);
+        printStream.setFont(PDType1Font.COURIER, 9);
         printStream.setLeading(10F);
         //writing
-        printStream.showText(contract.getName());
+        printStream.newLine();
+        printStream.newLine();
+        printStream.showText(contract.getName() + " " + contract.getSurname());
+        printStream.newLine();
+        printStream.showText(contract.getStreet());
+        printStream.newLine();
+        printStream.showText(contract.getDistrict());
+        printStream.newLine();
+        printStream.showText(contract.getCity());
+        printStream.newLine();
+        printStream.showText(contract.getZip());
         printStream.newLine();
         //end text
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(425, 690);
+        printStream.setFont(PDType1Font.COURIER, 12);
+        printStream.setLeading(10F);
+        printStream.showText("" + contract.getId());
+        printStream.newLine();
+        printStream.newLine();
+        printStream.newLine();
+        printStream.showText("" + bill.getDeadline());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(75, 495);
+        printStream.setFont(PDType1Font.HELVETICA, 20);
+        printStream.setLeading(10F);
+        printStream.showText(" " + bill.getPeriod());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(73, 410);
+        printStream.setFont(PDType1Font.COURIER, 9);
+        printStream.setLeading(11F);
+        printStream.showText(contract.getStreet() + ", " + contract.getDistrict());
+        printStream.newLine();
+        printStream.showText(contract.getCity() + ", " + contract.getZip());
+        printStream.newLine();
+        printStream.showText(contract.getEmailAddress());
+        printStream.newLine();
+        printStream.showText(contract.getPhone() + " - " + contract.getMobile());
+        printStream.newLine();
+        printStream.showText(contract.getTaxCode());
+        printStream.newLine();
+        printStream.newLine();
+        if(contract.getBillingAddress() != null){
+            printStream.showText("Billing address:");
+            printStream.newLine();
+            printStream.showText(contract.getBillingStreet() + ", " + contract.getBillingDistrict());
+            printStream.newLine();
+            printStream.showText(contract.getBillingCity() + ", " + contract.getBillingZip());
+            printStream.newLine();
+        }
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(425, 410);
+        printStream.setFont(PDType1Font.COURIER, 35);
+        printStream.setLeading(10F);
+        printStream.showText("€ " + bill.getTotal());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(440, 370);
+        printStream.setFont(PDType1Font.COURIER_BOLD, 9);
+        printStream.setLeading(10F);
+        printStream.showText("" + bill.getDeadline());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(180, 130);
+        printStream.setFont(PDType1Font.COURIER, 9);
+        printStream.setLeading(11F);
+        printStream.showText("" + contract.getId());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(380, 130);
+        printStream.setFont(PDType1Font.COURIER, 9);
+        printStream.setLeading(11F);
+        printStream.showText("€ " + bill.getTotal());
+        printStream.endText();
+        
+        printStream.beginText();
+        printStream.newLineAtOffset(139, 107);
+        printStream.setFont(PDType1Font.COURIER, 9);
+        printStream.setLeading(11F);
+        Random r = new Random();
+        for(int i = 0; i < 20; i++)
+            printStream.showText("" + r.nextInt(10));
         printStream.endText();
     }
 }
