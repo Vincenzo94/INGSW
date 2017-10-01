@@ -38,7 +38,7 @@ public class Main_Controller{
     Controller current;
     private Operator operator;
     private static Main_Controller instance;
-    private final DatabaseManager dbManager;
+    private final Database_Controller dbManager;
     
     private DefaultTableModel tableModelBillsQueue = null;
     private DefaultTableModel tableModelInjuctionsQueue = null;
@@ -62,7 +62,7 @@ public class Main_Controller{
             }
         };
         current = new Login_Controller(this);
-        dbManager = DatabaseManager.getDbManager();
+        dbManager = Database_Controller.getDbManager();
     }
     
     public static Main_Controller getMain() throws SQLException{
@@ -112,6 +112,7 @@ public class Main_Controller{
         switch(i){
             case 1: updateInjuctionsQueue(); break;
             case 2: updateBillsQueue(); break;
+            case 0: searchClicked(); break; 
         }
     }
     
@@ -127,6 +128,7 @@ public class Main_Controller{
             case 6: help(); break;
             case 7: addClicked(); break;
             case 8: confirmClicked(); break;
+            case 9: removeClicked(); break;
         }
     }
     
@@ -144,9 +146,9 @@ public class Main_Controller{
         }
         actual.setEnabled(false);
         if(selected.size()==1)
-            current = new ConfirmBill_Controller(selected.getFirst());
+            current = new ConfirmBill_Controller(selected.getFirst(),this);
         else
-            current = new ConfirmBill_Controller(selected);
+            current = new ConfirmBill_Controller(selected,this);
     }
     
     private void addClicked(){
@@ -164,14 +166,8 @@ public class Main_Controller{
     }
     
     private void logOut(){
-        try{
-            actual.dispose();
-            instance=null;
-            new Main_Controller();
-        }
-        catch(SQLException e){
-            
-        }
+        actual.dispose();
+        instance=null;
     }
     
     private void alterholderCliked(){
@@ -179,7 +175,12 @@ public class Main_Controller{
         actual.setEnabled(false);
         current = new AlterContract_Controller(this,contracts.get(row));
     }
-    
+    private void removeClicked() {
+        System.out.println("Rimuovo");
+        int row = actual.getSelectedContract();
+        actual.setEnabled(false);
+        current = new RemoveContract_Controller(this, contracts.get(row));
+    }
     private void searchClicked(){
         Contract bag=null;
         String name=actual.getNameSearch();
@@ -325,4 +326,6 @@ public class Main_Controller{
             tableColumn.setCellRenderer(defaultRender);
         }
     }
+
+    
 }

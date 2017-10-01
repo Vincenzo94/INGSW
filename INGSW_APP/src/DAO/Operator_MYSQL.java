@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Controller.DatabaseManager;
+import Controller.Database_Controller;
 import Model.Operator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,11 +19,11 @@ import java.util.logging.Logger;
  */
 public class Operator_MYSQL implements DAO_Operator{
     private final String TABLE = "Operator";
-    DatabaseManager dbManager;
-    public Operator_MYSQL(DatabaseManager dbManager) throws SQLException{
+    Database_Controller dbManager;
+    public Operator_MYSQL(Database_Controller dbManager) throws SQLException{
         this.dbManager = dbManager;
     }
-    private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + DatabaseManager.schema + "." + TABLE + " WHERE ID = ? AND `password` = ?";
+    private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE ID = ? AND `password` = ?";
 
     @Override
     public Operator check(Operator o) {

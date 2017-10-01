@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class AlterContract_Controller implements Controller{
     private final Contract contract;
     private final Main_Controller main;
-    private DatabaseManager dbManager;
+    private Database_Controller dbManager;
     AlterHolder view;
     
     public AlterContract_Controller(Main_Controller main, Contract contract) {
@@ -42,7 +42,7 @@ public class AlterContract_Controller implements Controller{
 
     private void init() {
         try {
-            dbManager = DatabaseManager.getDbManager();
+            dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
             Logger.getLogger(AlterContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

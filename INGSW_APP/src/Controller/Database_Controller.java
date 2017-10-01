@@ -18,21 +18,21 @@ import java.util.logging.Logger;
  *
  * @author Andrea
  */
-public class DatabaseManager {
-    private static DatabaseManager instance;
+public class Database_Controller {
+    private static Database_Controller instance;
     static private Connection connection;
     public static final String schema = "ingwsw_andread";
-    private DatabaseManager(){
+    private Database_Controller(){
         try{
             connection = connect();
         } catch (SQLException ex){
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public static DatabaseManager getDbManager() throws SQLException{
+    public static Database_Controller getDbManager() throws SQLException{
         if(instance==null || connection.isClosed()){
-            instance = new DatabaseManager();
+            instance = new Database_Controller();
         }
         return instance;
     }
@@ -43,7 +43,7 @@ public class DatabaseManager {
         try {
             rs = statement.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
     }
@@ -58,7 +58,7 @@ public class DatabaseManager {
         try {
             statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return statement;
     }
@@ -76,7 +76,7 @@ public class DatabaseManager {
                 connection.setAutoCommit(true);
                 statement.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }

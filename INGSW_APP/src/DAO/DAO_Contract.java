@@ -24,8 +24,6 @@ public interface DAO_Contract {
     public void remove(Contract c);
     public void create(Contract c, Operator o);
     public List<Contract> getAllContracts();
-    //Metodo che restuisce una lista di contratti 
-    //corrispondenti alla ricerca con i dati del contratto passato.
     public List<Contract> getAllContracts(Contract c);
     public void addBillingAddress(Contract contract);
     public void setBillingAddress(Contract contract);

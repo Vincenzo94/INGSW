@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchContract_Controller implements Controller{
     private final Main_Controller main;
-    private  DatabaseManager dbManager;
+    private  Database_Controller dbManager;
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
     Contract bag;
@@ -37,7 +37,7 @@ public class SearchContract_Controller implements Controller{
     
     private void initRegistryManagement() {
         try {
-            dbManager = DatabaseManager.getDbManager();
+            dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
             Logger.getLogger(SearchContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

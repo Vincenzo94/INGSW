@@ -5,16 +5,22 @@
  */
 package View;
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
 /**
  *
  * @author Andrea
  */
 public class BuildPDFMultiple extends javax.swing.JFrame {
+    private final LinkedList<ActionListener> actionListener;
 
     /**
      * Creates new form BuildPDFMultiple
      */
     public BuildPDFMultiple() {
+        actionListener= new LinkedList<>();
         initComponents();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +55,12 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Contract ID");
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Reference detection");
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Generated on");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Total");
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -65,6 +77,11 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
         previewPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         previewPDFButton.setText("Preview PDF");
+        previewPDFButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previewPDFButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -74,6 +91,11 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
         sendPDFsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sendPDFsButton.setText("Send PDFs");
+        sendPDFsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendPDFsButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -84,6 +106,11 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -93,7 +120,28 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
+    }
+    private void previewPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewPDFButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);            
+    }//GEN-LAST:event_previewPDFButtonActionPerformed
 
+    private void sendPDFsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPDFsButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);            
+    }//GEN-LAST:event_sendPDFsButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);            
+    }//GEN-LAST:event_backButtonActionPerformed
+    public Integer checkButton(Component j) {
+        if(j == backButton) return 1;
+        if(j == previewPDFButton) return 2;
+        return 3;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -103,4 +151,6 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     private javax.swing.JButton previewPDFButton;
     private javax.swing.JButton sendPDFsButton;
     // End of variables declaration//GEN-END:variables
+
+    
 }

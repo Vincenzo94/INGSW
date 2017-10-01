@@ -50,10 +50,10 @@ public AddContract_Controller(Main_Controller main){
     }
     
     private void createClicked(){
-        DatabaseManager dbManager = null;
+        Database_Controller dbManager = null;
         
         try {
-            dbManager = DatabaseManager.getDbManager();
+            dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
             Logger.getLogger(AddContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Controller.DatabaseManager;
+import Controller.Database_Controller;
 import Model.Bill;
 import Model.Injuction;
 import Model.Contract;
@@ -24,14 +24,14 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class Injuction_MYSQL implements DAO_Document{
-    private DatabaseManager dbManager = null;
+    private Database_Controller dbManager = null;
     private final String TABLE = "Injuction";
     private final String TABLE_BILL = "Bill_AUX";
-    private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + DatabaseManager.schema + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
-    private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + DatabaseManager.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
-    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + DatabaseManager.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
+    private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + Database_Controller.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
+    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
 
-    public Injuction_MYSQL(DatabaseManager dbManager) {
+    public Injuction_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
     }
 

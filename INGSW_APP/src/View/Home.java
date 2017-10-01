@@ -260,6 +260,11 @@ public class Home extends javax.swing.JFrame {
         removeContractButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         removeContractButton.setText("Remove");
         removeContractButton.setEnabled(false);
+        removeContractButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeContractButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
@@ -762,6 +767,11 @@ public class Home extends javax.swing.JFrame {
         for(ChangeListener a: changeListener)
             a.stateChanged(evt);
     }//GEN-LAST:event_homePaneStateChanged
+
+    private void removeContractButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeContractButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_removeContractButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -897,6 +907,7 @@ public class Home extends javax.swing.JFrame {
        if(c == help) return 6;
        if(c == addButton) return 7;
        if(c == billConfirmButton) return 8;
+       if(c == removeContractButton) return 9;
        return 0;
    }
     

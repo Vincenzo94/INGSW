@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Controller.DatabaseManager;
+import Controller.Database_Controller;
 import Model.Bill;
 import Model.Contract;
 import Model.Document;
@@ -23,12 +23,12 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class Bill_MYSQL implements DAO_Document {
-    private DatabaseManager dbManager = null;
+    private Database_Controller dbManager = null;
     private final String TABLE_VIEW = "Bill_AUX";
     private final String TABLE = "Bill";
-    private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + DatabaseManager.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
-    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + DatabaseManager.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
-    public Bill_MYSQL(DatabaseManager dbManager) {
+    private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
+    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    public Bill_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
     }
 

@@ -24,7 +24,7 @@ public class Login_Controller implements Controller{
     private Operator operator;
     private DAO_Operator DAO;
     private Main_Controller main;
-    private DatabaseManager dbManager;
+    private Database_Controller dbManager;
 
     
     private Popup_Controller Popup_Control;
@@ -35,7 +35,7 @@ public class Login_Controller implements Controller{
 
     Login_Controller(Main_Controller m) throws SQLException{
         main=m;
-        dbManager = DatabaseManager.getDbManager();
+        dbManager = Database_Controller.getDbManager();
         popupController = Popup_Controller.getPopup_C();
         this.DAO = new Operator_MYSQL(dbManager);
         login = new Login();

@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Controller.DatabaseManager;
+import Controller.Database_Controller;
 import Model.Contract;
 import Model.Operator;
 import java.sql.PreparedStatement;
@@ -22,42 +22,44 @@ import java.util.logging.Logger;
  * @author Andrea
  */
 public class Contract_MYSQL implements DAO_Contract{
-    private final DatabaseManager dbManager;
+    private final Database_Controller dbManager;
     private final String TABELLA = "Contract";
     private final String TABELLA_AUX = "Contract_Address";
     private final String TABELLA_ADDRESS = "Address";
-    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + DatabaseManager.schema + "." + TABELLA_AUX;
-    private final String QUERY_SEARCH_CONTRACT = " SELECT * FROM " + DatabaseManager.schema + "." + TABELLA_AUX
+    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX;
+    private final String QUERY_SEARCH_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX
                                                + " WHERE name LIKE ? AND surname LIKE ? AND ID LIKE ? AND taxCode LIKE ?";
     
-    private final String QUERY_UPDATE_CONTRACT = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+    private final String QUERY_UPDATE_CONTRACT = " UPDATE "+Database_Controller.schema+"."+TABELLA
                                                + " SET name = ?, surname = ?, taxCode = ?, phone = ?,"
                                                + " mobile = ?, eMail = ?, UPDATED_BY = ?"
                                                + " WHERE id = ?";
-    private final String QUERY_UPDATE_BILLING_ADDRESS = "UPDATE "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_UPDATE_BILLING_ADDRESS = "UPDATE "+Database_Controller.schema+"."+TABELLA_ADDRESS
                                                       + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
-                                                      + " WHERE ID = (SELECT BILLING_ADDRESS FROM " + DatabaseManager.schema +"."+TABELLA
+                                                      + " WHERE ID = (SELECT BILLING_ADDRESS FROM " + Database_Controller.schema +"."+TABELLA
                                                       + " WHERE ID = ?)";
-    private final String QUERY_UPDATE_ADDRESS = "UPDATE "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_UPDATE_ADDRESS = "UPDATE "+Database_Controller.schema+"."+TABELLA_ADDRESS
                                                       + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
-                                                      + " WHERE ID = (SELECT ADDRESS FROM " + DatabaseManager.schema +"."+TABELLA
+                                                      + " WHERE ID = (SELECT ADDRESS FROM " + Database_Controller.schema +"."+TABELLA
                                                       + " WHERE ID = ?)";
-    private final String QUERY_UPDATE_OPERATOR = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+    private final String QUERY_UPDATE_OPERATOR = " UPDATE "+Database_Controller.schema+"."+TABELLA
                                                + " SET UPDATED_BY = ? WHERE ID = ?";
-    private final String QUERY_INSERT_ADDRESS = " INSERT INTO "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_INSERT_ADDRESS = " INSERT INTO "+Database_Controller.schema+"."+TABELLA_ADDRESS
                                                       + " (city,district,zipCode,street,number) VALUES (?, ?, ?, ?, ?)";
-    private final String QUERY_SET_BILLING_ADDRESS = " UPDATE "+DatabaseManager.schema+"."+TABELLA
+    private final String QUERY_SET_BILLING_ADDRESS = " UPDATE "+Database_Controller.schema+"."+TABELLA
                                                    + " SET BILLING_ADDRESS = ? WHERE ID = ?";   
     
-    private final String QUERY_GET_ADDRESS = " SELECT ID FROM "+DatabaseManager.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_GET_ADDRESS = " SELECT ID FROM "+Database_Controller.schema+"."+TABELLA_ADDRESS
                                            + " WHERE city = ? AND district = ? AND street = ? AND zipCode = ? AND number = ? ORDER BY ID DESC LIMIT 1";
-    private final String QUERY_INSERT_CONTRACT = " INSERT INTO "+DatabaseManager.schema+"."+TABELLA
+    private final String QUERY_INSERT_CONTRACT = " INSERT INTO "+Database_Controller.schema+"."+TABELLA
                                                + " (name, surname, taxCode, phone, eMail, mobile, ADDRESS, INSERTED_BY)"
                                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String QUERY_INSERT_CONTRACT_BILLING_ADDRESS = " INSERT INTO "+DatabaseManager.schema+"."+TABELLA
+    private final String QUERY_INSERT_CONTRACT_BILLING_ADDRESS = " INSERT INTO "+Database_Controller.schema+"."+TABELLA
                                                + " (name, surname, taxCode, phone, eMail, mobile, ADDRESS, INSERTED_BY, BILLING_ADDRESS)"
                                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    public Contract_MYSQL(DatabaseManager dbManager){
+    private final String QUERY_REMOVE_CONTRACT = " DELETE FROM "+Database_Controller.schema+"."+TABELLA
+                                               + " WHERE ID = ?";
+    public Contract_MYSQL(Database_Controller dbManager){
         this.dbManager = dbManager;
     }
     @Override
@@ -134,7 +136,14 @@ public class Contract_MYSQL implements DAO_Contract{
     }
     @Override
     public void remove(Contract c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_REMOVE_CONTRACT);
+            statement.setInt(1, c.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to remove Contract "+c.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Contract_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
