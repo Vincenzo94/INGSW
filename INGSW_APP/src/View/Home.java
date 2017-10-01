@@ -139,7 +139,8 @@ public class Home extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         help = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12");
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         homePane.addChangeListener(new javax.swing.event.ChangeListener() {

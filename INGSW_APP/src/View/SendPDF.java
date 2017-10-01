@@ -31,7 +31,10 @@ public class SendPDF extends javax.swing.JFrame {
         messageErrorLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Send PDF");
+        setAlwaysOnTop(true);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         stateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

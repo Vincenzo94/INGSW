@@ -43,7 +43,10 @@ public class ReportError extends javax.swing.JFrame {
         sendButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Report Error");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 

@@ -27,7 +27,10 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Send PDF's");
+        setAlwaysOnTop(true);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -120,12 +123,13 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         getContentPane().add(jPanel1, gridBagConstraints);
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setText("jButton1");
+        jButton1.setText("OK");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 20, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 20, 40);
         getContentPane().add(jButton1, gridBagConstraints);
 
         pack();

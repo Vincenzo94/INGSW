@@ -13,6 +13,7 @@ import Model.Contract;
 import Model.Injuction;
 import Model.Operator;
 import View.Home;
+import ingsw_app.INGSW_APP;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -20,6 +21,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
@@ -168,6 +171,12 @@ public class Main_Controller{
     private void logOut(){
         actual.dispose();
         instance=null;
+        try {
+            instance = new Main_Controller();
+        } catch (SQLException ex) {
+            Logger.getLogger(Main_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     private void alterholderCliked(){

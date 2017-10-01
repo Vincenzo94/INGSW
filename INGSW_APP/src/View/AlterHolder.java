@@ -77,7 +77,10 @@ public class AlterHolder extends javax.swing.JFrame {
         city2Label = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Alter Holder");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 

@@ -42,7 +42,10 @@ private LinkedList<ActionListener> listener;
         messageLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Information");
+        setAlwaysOnTop(true);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         messageLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

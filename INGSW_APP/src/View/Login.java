@@ -33,7 +33,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         loginButton = new javax.swing.JButton();
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
@@ -42,11 +41,10 @@ public class Login extends javax.swing.JFrame {
         helpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INGSW_GR12 - Login");
+        setAlwaysOnTop(true);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setToolTipText("Login");
-        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         loginButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         loginButton.setText("Login");
@@ -56,11 +54,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 15);
-        jPanel1.add(loginButton, gridBagConstraints);
+        getContentPane().add(loginButton, gridBagConstraints);
 
         usernameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         usernameField.setText("2");
@@ -75,9 +73,8 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 15);
-        jPanel1.add(usernameField, gridBagConstraints);
+        getContentPane().add(usernameField, gridBagConstraints);
 
         passwordField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         passwordField.setText("ingsw");
@@ -93,29 +90,28 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 15);
-        jPanel1.add(passwordField, gridBagConstraints);
+        getContentPane().add(passwordField, gridBagConstraints);
 
         passwordLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         passwordLabel.setText("Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 15);
-        jPanel1.add(passwordLabel, gridBagConstraints);
+        getContentPane().add(passwordLabel, gridBagConstraints);
 
         usernameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        usernameLabel.setText("ID");
+        usernameLabel.setText("ID:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 61;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 15);
-        jPanel1.add(usernameLabel, gridBagConstraints);
+        getContentPane().add(usernameLabel, gridBagConstraints);
 
+        helpButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         helpButton.setText("Help");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,15 +119,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 36, 0);
-        jPanel1.add(helpButton, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 23, 0, 0);
+        getContentPane().add(helpButton, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,7 +183,6 @@ public class Login extends javax.swing.JFrame {
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton helpButton;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;

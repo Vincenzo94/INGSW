@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 import java.awt.Component;
 import View.Popup;
+import static ingsw_app.INGSW_APP.device;
 /**
  *
  * @author ansan
@@ -39,7 +40,7 @@ public class Login_Controller implements Controller{
         popupController = Popup_Controller.getPopup_C();
         this.DAO = new Operator_MYSQL(dbManager);
         login = new Login();
-        //INGSW_APP.device.setFullScreenWindow(login);
+        //device.setFullScreenWindow(login);
         login.pack();
         login.setVisible(true);
         login.addListener(new Listener(this){

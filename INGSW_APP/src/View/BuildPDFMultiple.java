@@ -33,7 +33,10 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         sendPDFsButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Build PDF's");
+        setAlwaysOnTop(true);
+        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N

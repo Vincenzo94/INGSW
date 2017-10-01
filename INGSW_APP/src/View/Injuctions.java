@@ -37,7 +37,10 @@ public class Injuctions extends javax.swing.JFrame {
         buildPDFButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Injuctions");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 

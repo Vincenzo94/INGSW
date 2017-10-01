@@ -33,7 +33,9 @@ public class DeleteContract extends javax.swing.JFrame {
         yesButton = new javax.swing.JButton();
         noButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("INGSW_GR12 - Remove Contract");
+        setAlwaysOnTop(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
