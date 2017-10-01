@@ -438,6 +438,11 @@ public class Home extends javax.swing.JFrame {
         injuctionDeleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionDeleteButton.setText("Delete");
         injuctionDeleteButton.setEnabled(false);
+        injuctionDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                injuctionDeleteButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -773,6 +778,11 @@ public class Home extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_removeContractButtonActionPerformed
+
+    private void injuctionDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_injuctionDeleteButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_injuctionDeleteButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -897,6 +907,9 @@ public class Home extends javax.swing.JFrame {
       public JTable getInjuctionTable() {
         return table1;
     }
+    public Integer getSelectedInjuction() {
+        return table1.getSelectedRow();
+    }
     
     
    public int checkButton(Component c){
@@ -909,6 +922,7 @@ public class Home extends javax.swing.JFrame {
        if(c == addButton) return 7;
        if(c == billConfirmButton) return 8;
        if(c == removeContractButton) return 9;
+       if(c == injuctionDeleteButton) return 10;
        return 0;
    }
     
@@ -985,6 +999,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    
 
     
 

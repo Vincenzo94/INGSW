@@ -18,6 +18,7 @@ import java.util.List;
 public interface DAO_Document {
     public Document search(Document d);
     public boolean update(Document d);
+    public void remove(Document d);
     public <T extends Document> List<T> getAllDocuments(Operator o);
     public <T> List<T> getAllDocuments(Contract c);
 

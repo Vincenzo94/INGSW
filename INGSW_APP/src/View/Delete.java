@@ -6,6 +6,8 @@
 package View;
 
 import Controller.Listener;
+import Model.Contract;
+import Model.Injuction;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -15,13 +17,21 @@ import java.util.List;
  *
  * @author Andrea
  */
-public class DeleteContract extends javax.swing.JFrame {
+public class Delete extends javax.swing.JFrame {
     private List<ActionListener> listener;
-    
-    public DeleteContract() {
+    private final String REMOVE_MSG = "Are you sure you want to delete the ";
+    public Delete(Injuction injuction) {
         listener = new LinkedList<>();
         initComponents();
         this.pack();
+        jLabel1.setText(REMOVE_MSG+"injuction "+injuction.getId());
+    }
+
+    public Delete(Contract contract) {
+        listener = new LinkedList<>();
+        initComponents();
+        this.pack();
+        jLabel1.setText(REMOVE_MSG+"contract "+contract.getId());
     }
 
     

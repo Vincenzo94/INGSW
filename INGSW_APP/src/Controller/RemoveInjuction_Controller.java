@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import DAO.Contract_MYSQL;
-import DAO.DAO_Contract;
-import Model.Contract;
+import DAO.DAO_Document;
+import DAO.Injuction_MYSQL;
+import Model.Injuction;
 import View.Delete;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -19,21 +18,21 @@ import java.util.logging.Logger;
  *
  * @author ansan
  */
-public class RemoveContract_Controller implements Controller {
-    private final Contract contract;
-    private final Main_Controller main;
-    private Database_Controller dbManager;
-    private Delete view;
-    public RemoveContract_Controller(Main_Controller main, Contract contract) {
-        this.contract = contract;
+public class RemoveInjuction_Controller implements Controller {
+    Database_Controller dbController;
+    Main_Controller main;
+    Delete view;
+    Injuction injuction;
+    RemoveInjuction_Controller(Main_Controller main,Injuction injuction){
         this.main = main;
-        view = new Delete(contract);
+        this.injuction = injuction;
+        view = new Delete(injuction);
         view.setVisible(true);
         view.addActionListener(new Listener(this){
            @Override
            public void actionPerformed(ActionEvent e){
-               RemoveContract_Controller rc = (RemoveContract_Controller)controller;
-               rc.buttonClicked(e);
+               RemoveInjuction_Controller ri = (RemoveInjuction_Controller)controller;
+               ri.buttonClicked(e);
            }
         });
     }
@@ -43,16 +42,15 @@ public class RemoveContract_Controller implements Controller {
         Integer button = view.checkButton(c);
         if(button == 2){
             try {
-                dbManager = Database_Controller.getDbManager();
+                dbController = Database_Controller.getDbManager();
             } catch (SQLException ex) {
                 Logger.getLogger(RemoveContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-            DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
-            daoContract.remove(contract);
+            DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
+            daoDocument.remove(injuction);
             view.dispose();
         }
         view.dispose();
         main.back();
     }
-    
 }

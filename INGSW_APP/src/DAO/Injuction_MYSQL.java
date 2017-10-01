@@ -30,6 +30,8 @@ public class Injuction_MYSQL implements DAO_Document{
     private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
     private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + Database_Controller.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
     private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    private String QUERY_REMOVE = " DELETE FROM " + Database_Controller.schema + "." + TABLE 
+                                + " WHERE ID = ?";
 
     public Injuction_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
@@ -87,6 +89,18 @@ public class Injuction_MYSQL implements DAO_Document{
         statement.setInt(2, document.getId());
         if(!dbManager.doUpdate(statement))
             throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void remove(Document document) {
+        try {
+        PreparedStatement statement = dbManager.getStatement(QUERY_REMOVE);
+        statement.setInt(1, document.getId());
+        if(!dbManager.doUpdate(statement))
+            throw new SQLException("Unable to remove Injuction " +document.getId());
         } catch (SQLException ex) {
             Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }

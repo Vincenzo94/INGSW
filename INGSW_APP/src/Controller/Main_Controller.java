@@ -131,7 +131,8 @@ public class Main_Controller{
             case 6: help(); break;
             case 7: addClicked(); break;
             case 8: confirmClicked(); break;
-            case 9: removeClicked(); break;
+            case 9: removeContractClicked(); break;
+            case 10: removeInjuctionClicked(); break;
         }
     }
     
@@ -184,11 +185,15 @@ public class Main_Controller{
         actual.setEnabled(false);
         current = new AlterContract_Controller(this,contracts.get(row));
     }
-    private void removeClicked() {
-        System.out.println("Rimuovo");
+    private void removeContractClicked() {
         int row = actual.getSelectedContract();
         actual.setEnabled(false);
         current = new RemoveContract_Controller(this, contracts.get(row));
+    }
+    private void removeInjuctionClicked() {
+        int row = actual.getSelectedInjuction();
+        actual.setEnabled(false);
+        current = new RemoveInjuction_Controller(this, injuctions.get(row));
     }
     private void searchClicked(){
         Contract bag=null;
@@ -335,6 +340,8 @@ public class Main_Controller{
             tableColumn.setCellRenderer(defaultRender);
         }
     }
+
+    
 
     
 }
