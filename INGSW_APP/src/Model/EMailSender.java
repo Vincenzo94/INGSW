@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -37,13 +41,17 @@ public class EMailSender {
     private static String basicPath;
     private Properties props;
     private static Session session;
+    private static Integer cont;
+    private static Object sync;
+
     
     private EMailSender(){
         sender = "ingsw.gr12@gmail.com";
         psw = "hxegtqrhgueywops";
         host = "smtp.gmail.com";
         basicPath = "././tmp";
-        
+        cont = 0;
+        sync = new Object();
         props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -58,14 +66,33 @@ public class EMailSender {
             }
         );
     }
-    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills){
+    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills) {
         if(instance == null)
             instance = new EMailSender();
         Map<Integer,String> results = new HashMap<>();
         for(Bill b: bills.keySet()){
             Contract c = bills.get(b);
-            String result = sendEmail(c);
-            results.put(c.getId(),result);
+            new Thread(){
+                public void run(){
+                    String result = sendEmail(c);
+                    synchronized(results){
+                        results.put(c.getId(),result);
+                    }
+                    synchronized(sync){
+                        cont++;
+                        sync.notifyAll();
+                    }
+                }
+            }.start();
+        }
+        while(cont<bills.size()){
+            synchronized(sync){
+                try {
+                    sync.wait();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(EMailSender.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         return results;
     }

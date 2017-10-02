@@ -57,7 +57,8 @@ public class Home extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(700, 700));
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        homePane.setPreferredSize(null);
+        homePane.setMinimumSize(new java.awt.Dimension(1121, 875));
+        homePane.setPreferredSize(new java.awt.Dimension(1121, 875));
         homePane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 homePaneStateChanged(evt);

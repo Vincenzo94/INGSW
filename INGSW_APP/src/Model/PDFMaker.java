@@ -35,11 +35,12 @@ In più la classe PDFMaker è stata salvata come <<interface>>. Renderla interfa
 bolletta: il nome file sarà bill_clientID.pdf
 ingiunzione: il nome sarà injunction_clientID.pdf
 */
-public class PDFMaker {
+public class PDFMaker{
     private static boolean status;
     private static String templateDirectory;
     private static String tmpDirectory;
     private static PDFMaker instance;
+    volatile private static Boolean ret = true;
     private PDFMaker(){
         /*
         pre-conditions: 
@@ -48,6 +49,7 @@ public class PDFMaker {
         post-conditions:
         - status is setted on "true".
         */
+        ret = true;
         templateDirectory ="././images/template.jpg";
         tmpDirectory = "././tmp";
         //creates the "tmp" directory if it doesn't exists
@@ -59,14 +61,20 @@ public class PDFMaker {
         status = true;
     }
     public static boolean createPDF(Map<Bill,Contract> bills){
-        Boolean ret = true;
         for(Bill b: bills.keySet())
-           if(!createPDF(bills.get(b),b,null))
-               ret = false;
+            new Thread(){
+                public void run(){
+                    if(!createPDF(bills.get(b),b,null)){
+                        synchronized(ret){
+                            ret = false;
+                        }
+                    }
+                }
+            }.start();
         return ret;
     }
 
-    public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
+    synchronized public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -75,6 +83,7 @@ public class PDFMaker {
         post-conditions:
         - returns true if it creates a PDF
         */
+        
         if(instance == null)
             instance = new PDFMaker();
         String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";

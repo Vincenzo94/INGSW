@@ -76,6 +76,7 @@ public class Registry_Controller implements Controller{
     
     public void back(){
         actual.setEnabled(true);
+        searchClicked();
     } 
     
     public Operator getOperator() {

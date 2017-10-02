@@ -141,6 +141,7 @@ public class InjuctionsQueue_Controller implements Controller{
     
     public void back(){
         actual.setEnabled(true);
+        updateInjuctionsQueue();
     }
     
 }

@@ -48,7 +48,7 @@ public class BillsQueuePanel extends javax.swing.JPanel {
         };
             mouseListener = new LinkedList<>();
             actionListener = new LinkedList<>();
-             initComponents();
+            initComponents();
     }
 
     /**
