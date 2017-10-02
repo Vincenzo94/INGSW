@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,11 +36,11 @@ bolletta: il nome file sarà bill_clientID.pdf
 ingiunzione: il nome sarà injunction_clientID.pdf
 */
 public class PDFMaker {
-    private final boolean status;
-    private final String templateDirectory;
-    private final String tmpDirectory;
-    
-    public PDFMaker(){
+    private static boolean status;
+    private static String templateDirectory;
+    private static String tmpDirectory;
+    private static PDFMaker instance;
+    private PDFMaker(){
         /*
         pre-conditions: 
         - the "images" directory must exists and it must contains the "template.jpg" file.
@@ -55,7 +58,15 @@ public class PDFMaker {
         }
         status = true;
     }
-    public boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
+    public static boolean createPDF(Map<Bill,Contract> bills){
+        Boolean ret = true;
+        for(Bill b: bills.keySet())
+           if(!createPDF(bills.get(b),b,null))
+               ret = false;
+        return ret;
+    }
+
+    public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -64,6 +75,8 @@ public class PDFMaker {
         post-conditions:
         - returns true if it creates a PDF
         */
+        if(instance == null)
+            instance = new PDFMaker();
         String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
         try {
             Files.deleteIfExists(Paths.get(filepath));
@@ -77,7 +90,7 @@ public class PDFMaker {
         if(contract == null)
             throw new RuntimeException("Contract is null");
         if(new File(filepath).exists()){
-            throw new RuntimeException("Another file with the same name already exists.");
+            return true;//throw new RuntimeException("Another file with the same name already exists.");
         }
         
         try{
@@ -101,7 +114,7 @@ public class PDFMaker {
         }
         return isCreated;
     }
-    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill, Injuction injunction) throws IOException{
+    private static void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill, Injuction injunction) throws IOException{
         /*
         pre-conditions:
         - status must be on true

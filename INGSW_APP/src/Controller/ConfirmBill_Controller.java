@@ -19,6 +19,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +37,13 @@ import javax.swing.table.TableColumnModel;
  * @author Andrea
  */
 public class ConfirmBill_Controller implements Controller{
-    private final LinkedList<Bill> bills;
+    private final Map<Bill,Contract>  bills;
     private final Bill bill;
     private final BillsQueue_Controller controller;
     private final BuildPDF view;
     private final BuildPDFMultiple views;
     private SendPDF sendPDFview;
     Contract contract;
-    List<Contract> contracts;
     private DefaultTableModel tableModelMultipleBill = null;
     private DefaultTableCellRenderer defaultRender = null;
     private Database_Controller dbController;
@@ -52,7 +52,7 @@ public class ConfirmBill_Controller implements Controller{
 
     
     public ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
-        bills=l;
+        bills= new HashMap<>();
         views=new BuildPDFMultiple();
         view=null;
         bill=null;
@@ -90,16 +90,16 @@ public class ConfirmBill_Controller implements Controller{
         DAO_Contract daoContract = new Contract_MYSQL(dbController);
         for(Bill b: l){
             Contract tmp = daoContract.getContract(b.getContractID());
-            contracts.add(tmp);
+            bills.put(b, tmp);
         }
-        PDFMaker.createPDF(contracts,null);
+        PDFMaker.createPDF(bills);
         initMultiSelect();
     }
     
     public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
         bill=b;
         bills=null;
-        this.main = main;
+        this.controller = main;
         Database_Controller dbController = null;
         try {
             dbController = Database_Controller.getDbManager();
@@ -135,7 +135,7 @@ public class ConfirmBill_Controller implements Controller{
                     view.dispose();
                 else
                     views.dispose();
-                main.back(); 
+                controller.back(); 
                 break;
             } 
             case 2: previewPressed(); break;
@@ -160,10 +160,10 @@ public class ConfirmBill_Controller implements Controller{
             });
         }
         else{
-            results = EMailSender.sendEmail(contracts);
+            results = EMailSender.sendEmail(bills);
             views.dispose();
             sendPDFviewMultiple = new SendPDFMultiple(results);
-            sendPDFviewMultiple.show();
+            sendPDFviewMultiple.setVisible(true);
             sendPDFviewMultiple.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -180,12 +180,12 @@ public class ConfirmBill_Controller implements Controller{
     }
 
     private void okClicked(){
-        sendPDFview.dispose();
+        sendPDFviewMultiple.dispose();
         if(views != null){
-            views.show();
+            views.setVisible(true);
         }
         else
-            main.back(); 
+            controller.back(); 
     }
 
     private void setDefaultRender(JTable billTable) {
@@ -204,7 +204,7 @@ public class ConfirmBill_Controller implements Controller{
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total"};
         tableModelMultipleBill.setColumnIdentifiers(columns);
         setDefaultRender(views.getBillTable());
-        for(Bill temp : bills){
+        for(Bill temp : bills.keySet()){
             Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal()};
             tableModelMultipleBill.addRow(row);
         }

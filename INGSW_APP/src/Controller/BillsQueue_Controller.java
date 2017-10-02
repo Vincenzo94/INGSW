@@ -80,32 +80,30 @@ public class BillsQueue_Controller implements Controller{
     
     private void tableClicked(){
         List<Integer> bill = actual.getSelectedBill();
-                if(bill.size() ==  1){
-                    actual.setMultipleSelection(false);
-                    Bill temp = bills.get(bill.get(0));
-                    actual.setTax(temp.getTax());
-                    actual.setTotal(temp.getTotal());
-                    actual.setDetection(temp.getDetectionValue());
-                    actual.setDetector(temp.getDetector());
-                    actual.setDetectionDate(temp.getDetectionDate());
-                    actual.setDeadline(temp.getDeadline()); 
-                    actual.activeBillConfirm(true);
-                    actual.activeBillReportError(true);
-
-
-                }
-                else if(bill.size() > 1){
-                    actual.activeBillReportError(false);
-                    actual.activeBillConfirm(true);
-                    actual.setMultipleSelection(true);
-                    actual.setSelectedBills(bill.size());
-                }
-                else{
-                    actual.activeBillConfirm(false);
-                    actual.activeBillReportError(false);
-                    actual.setMultipleSelection(true);
-                    actual.setSelectedBills(bill.size());
-                }        
+            if(bill.size() ==  1){
+                actual.setMultipleSelection(false);
+                Bill temp = bills.get(bill.get(0));
+                actual.setTax(temp.getTax());
+                actual.setTotal(temp.getTotal());
+                actual.setDetection(temp.getDetectionValue());
+                actual.setDetector(temp.getDetector());
+                actual.setDetectionDate(temp.getDetectionDate());
+                actual.setDeadline(temp.getDeadline()); 
+                actual.activeBillConfirm(true);
+                actual.activeBillReportError(true);
+            }
+            else if(bill.size() > 1){
+                actual.activeBillReportError(false);
+                actual.activeBillConfirm(true);
+                actual.setMultipleSelection(true);
+                actual.setSelectedBills(bill.size());
+            }
+            else{
+                actual.activeBillConfirm(false);
+                actual.activeBillReportError(false);
+                actual.setMultipleSelection(true);
+                actual.setSelectedBills(bill.size());
+            }
     }
     
     private void buttonClicked(Component c){
@@ -157,7 +155,7 @@ public class BillsQueue_Controller implements Controller{
                 Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
             }
             Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
-            Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
+            Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
             tableModelBillsQueue.addRow(row);
         }
     }

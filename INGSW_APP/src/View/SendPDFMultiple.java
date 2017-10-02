@@ -19,15 +19,30 @@ import javax.swing.table.DefaultTableModel;
 public class SendPDFMultiple extends javax.swing.JFrame {
     String error;
     private final List<ActionListener> actionListener;
+    DefaultTableModel model;
 
     public SendPDFMultiple(Map<Integer,String> contracts) {
+        model = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    default:
+                        return Boolean.class;
+                }
+            }
+        };
+        model.setRowCount(0);
+        String[] columns = {"Contract ID", "Address", "eMail"};
+        model.setColumnIdentifiers(columns);
         for(Integer c: contracts.keySet()){
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Boolean res = contracts.get(c)==null;
-            if(res)
+            if(!res)
                 error=error+contracts.get(c)+"\n";
             model.addRow(new Object[]{c, true, res});
         }
+        initComponents();
         if(error==null){
             jPanel1.setVisible(false);
         }
@@ -35,7 +50,6 @@ public class SendPDFMultiple extends javax.swing.JFrame {
             jPanel1.setVisible(true);
             jLabel2.setText(error);
         }
-        initComponents();
         actionListener = new LinkedList<>();
     }
 
@@ -66,38 +80,7 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Contract ID", "Address", "eMail"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTable1.setModel(model);
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
