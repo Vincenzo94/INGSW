@@ -26,18 +26,20 @@ le bollette saranno del tipo bill_clientID.pdf
 */
 
 public class EMailSender {
-    private final String sender;
-    private final String psw;
-    private final String host;
-    private final String basicPath;
+
+    private static EMailSender instance;
+    private static String sender;
+    private static String psw;
+    private static String host;
+    private static String basicPath;
     private Properties props;
-    private Session session;
+    private static Session session;
     
-    public EMailSender(){
+    private EMailSender(){
         sender = "ingsw.gr12@gmail.com";
         psw = "hxegtqrhgueywops";
         host = "smtp.gmail.com";
-        basicPath = System.getProperty("user.dir") + "\\tmp";
+        basicPath = "././tmp";
         
         props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -53,7 +55,9 @@ public class EMailSender {
             }
         );
     }
-    public boolean sendEmail(Contract contract){
+    public static boolean sendEmail(Contract contract){
+        if(instance == null)
+            instance = new EMailSender();
         /*
         pre-conditions:
         - receiver's email must be valid
@@ -63,7 +67,6 @@ public class EMailSender {
         */
         boolean result = false;
         String documentName = contract.getId() + ".pdf";
-        
         try{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(sender));
@@ -72,9 +75,7 @@ public class EMailSender {
             
             message.setContent(createMultipartMessage(documentName));
             
-            System.out.println("Prima dell invio");
             Transport.send(message);
-            System.out.println("Messaggio inviato");
             result = true;
         }
         catch(MessagingException e){
@@ -82,7 +83,7 @@ public class EMailSender {
         }
         return result;
     }
-    private Multipart createMultipartMessage(String documentName){
+    static private Multipart createMultipartMessage(String documentName){
         /*
         pre-conditions:
         - Document must exists
@@ -90,7 +91,7 @@ public class EMailSender {
         post-conditions:
         - this methods creates a message ready to be sent
         */
-        String absolutePath = basicPath + "\\" + documentName;
+        String absolutePath = basicPath + "/" + documentName;
         if(!new File(absolutePath).exists())
             throw new RuntimeException("Document doesn't exists.");
         
@@ -114,12 +115,6 @@ public class EMailSender {
             i.printStackTrace();
         }
         return multipart;
-    }/*
-    public static void main(String[] args){
-        EMailSender e = new EMailSender();
-        if(e.sendEmail(new Client()))
-            System.out.println("well done");
     }
-*/
 }
 

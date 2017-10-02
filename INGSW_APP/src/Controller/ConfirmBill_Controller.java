@@ -9,9 +9,11 @@ import DAO.Contract_MYSQL;
 import DAO.DAO_Contract;
 import Model.Bill;
 import Model.Contract;
+import Model.EMailSender;
 import Model.PDFMaker;
 import View.BuildPDF;
 import View.BuildPDFMultiple;
+import View.SendPDF;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -29,6 +31,8 @@ public class ConfirmBill_Controller implements Controller{
     private final Main_Controller main;
     private final BuildPDF view;
     private final BuildPDFMultiple views;
+    private SendPDF sendPDFview;
+    Contract contract;
 
     
     public ConfirmBill_Controller(LinkedList<Bill> l,Main_Controller main){
@@ -51,6 +55,7 @@ public class ConfirmBill_Controller implements Controller{
         bill=b;
         bills=null;
         this.main = main;
+        
         PDFMaker pdfMaker = new PDFMaker();
         Database_Controller dbController = null;
         try {
@@ -59,9 +64,16 @@ public class ConfirmBill_Controller implements Controller{
             Logger.getLogger(ConfirmBill_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        Contract contract = daoContract.getContract(b.getContractID());
+        contract = daoContract.getContract(b.getContractID());
         pdfMaker.createPDF(contract, b,null);
         view= new BuildPDF(b);
+        view.addActionListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
+                c.buttonCliked(e);            
+            }
+        });
         views=null;
         view.setVisible(true);
         
@@ -69,19 +81,46 @@ public class ConfirmBill_Controller implements Controller{
 
     private void buttonCliked(ActionEvent e) {
         Component j = (Component)e.getSource();
-        Integer i = views.checkButton(j);
+        Integer i;
+        if(view != null)
+            i = view.checkButton(j);
+        else
+            i = views.checkButton(j);
         switch(i){
             case 1: view.dispose(); main.back(); break;
             case 2: previewPressed(); break;
-            case 3: sendCliecked(); break;
+            case 3: sendClicked(); break;
         }
     }
 
-    private void sendCliecked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void sendClicked() {
+        Boolean result;
+        result = EMailSender.sendEmail(contract);
+        if(view!=null) view.dispose();
+        else views.dispose();
+        sendPDFview = new SendPDF(result);
+        sendPDFview.show();
+        sendPDFview.addActionListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
+                c.okClicked();
+            }
+        });
     }
 
     private void previewPressed() {
         
     }
+
+    private void okClicked(){
+        sendPDFview.dispose();
+        if(views != null){
+            views.show();
+        }
+        else
+            main.back(); 
+    }
+
+
 }
