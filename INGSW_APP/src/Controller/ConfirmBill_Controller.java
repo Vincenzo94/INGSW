@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import DAO.Bill_MYSQL;
 import DAO.Contract_MYSQL;
 import DAO.DAO_Contract;
+import DAO.DAO_Document;
 import Model.Bill;
 import Model.Contract;
 import Model.EMailSender;
@@ -21,7 +23,6 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,7 +101,6 @@ public class ConfirmBill_Controller implements Controller{
         bill=b;
         bills=null;
         this.controller = main;
-        Database_Controller dbController = null;
         try {
             dbController = Database_Controller.getDbManager();
         } catch (SQLException ex) {
@@ -144,13 +144,14 @@ public class ConfirmBill_Controller implements Controller{
     }
 
     private void sendClicked() {
+        DAO_Document daoDocument = new Bill_MYSQL(dbController);
         String result;
         Map<Integer,String> results;
         if(view!=null){
             result = EMailSender.sendEmail(contract);
             view.dispose();
             sendPDFview = new SendPDF(result);
-            sendPDFview.show();
+            sendPDFview.setVisible(true);
             sendPDFview.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -158,6 +159,8 @@ public class ConfirmBill_Controller implements Controller{
                 c.okClicked();
                 }
             });
+            bill.setState("Issued");
+            daoDocument.setState(bill);
         }
         else{
             results = EMailSender.sendEmail(bills);
@@ -171,6 +174,10 @@ public class ConfirmBill_Controller implements Controller{
                 c.okClicked();
                 }
             });
+            for(Bill b:bills.keySet()){
+                b.setState("Issued");
+                daoDocument.setState(b);
+            }
         }
         
     }
@@ -180,12 +187,14 @@ public class ConfirmBill_Controller implements Controller{
     }
 
     private void okClicked(){
-        sendPDFviewMultiple.dispose();
         if(views != null){
-            views.setVisible(true);
+            sendPDFviewMultiple.dispose();
         }
-        else
-            controller.back(); 
+        else{
+            sendPDFview.dispose();
+            view.dispose();
+        }
+        controller.back(); 
     }
 
     private void setDefaultRender(JTable billTable) {

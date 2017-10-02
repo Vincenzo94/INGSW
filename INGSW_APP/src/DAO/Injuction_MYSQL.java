@@ -105,5 +105,10 @@ public class Injuction_MYSQL implements DAO_Document{
             Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void setState(Document d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

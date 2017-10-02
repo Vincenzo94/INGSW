@@ -131,6 +131,7 @@ public class BillsQueue_Controller implements Controller{
     
     public void back(){
         actual.setEnabled(true);
+        updateBillsQueue();
     }
     
     
@@ -141,6 +142,7 @@ public class BillsQueue_Controller implements Controller{
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
         setDefaultRender(actual.getBillTable());
+        actual.setMultipleSelection(true);
     }
 
     void updateBillsQueue(){

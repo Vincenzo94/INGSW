@@ -28,6 +28,7 @@ public class Bill_MYSQL implements DAO_Document {
     private final String TABLE = "Bill";
     private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
     private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    private String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
     public Bill_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
     }
@@ -35,8 +36,16 @@ public class Bill_MYSQL implements DAO_Document {
     
 
     @Override
-    public boolean update(Document d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setState(Document d) {
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_STATE);
+            statement.setString(1, d.getState());
+            statement.setInt(2, d.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to set State to " +d.getId());
+            } catch (SQLException ex) {
+                Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -81,6 +90,11 @@ public class Bill_MYSQL implements DAO_Document {
 
     @Override
     public void remove(Document d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(Document d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
@@ -35,11 +33,12 @@ In più la classe PDFMaker è stata salvata come <<interface>>. Renderla interfa
 bolletta: il nome file sarà bill_clientID.pdf
 ingiunzione: il nome sarà injunction_clientID.pdf
 */
-public class PDFMaker {
+public class PDFMaker{
     private static boolean status;
     private static String templateDirectory;
     private static String tmpDirectory;
     private static PDFMaker instance;
+    volatile private static Boolean ret = true;
     private PDFMaker(){
         /*
         pre-conditions: 
@@ -48,6 +47,7 @@ public class PDFMaker {
         post-conditions:
         - status is setted on "true".
         */
+        ret = true;
         templateDirectory ="././images/template.jpg";
         tmpDirectory = "././tmp";
         //creates the "tmp" directory if it doesn't exists
@@ -59,10 +59,16 @@ public class PDFMaker {
         status = true;
     }
     public static boolean createPDF(Map<Bill,Contract> bills){
-        Boolean ret = true;
         for(Bill b: bills.keySet())
-           if(!createPDF(bills.get(b),b,null))
-               ret = false;
+            new Thread(){
+                public void run(){
+                    if(!createPDF(bills.get(b),b,null)){
+                        synchronized(ret){
+                            ret = false;
+                        }
+                    }
+                }
+            }.start();
         return ret;
     }
 
@@ -75,14 +81,10 @@ public class PDFMaker {
         post-conditions:
         - returns true if it creates a PDF
         */
+        
         if(instance == null)
             instance = new PDFMaker();
         String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
-        try {
-            Files.deleteIfExists(Paths.get(filepath));
-        } catch (IOException ex) {
-            Logger.getLogger(PDFMaker.class.getName()).log(Level.SEVERE, null, ex);
-        }
         boolean isCreated = false;
 
         if(!status)
@@ -90,7 +92,7 @@ public class PDFMaker {
         if(contract == null)
             throw new RuntimeException("Contract is null");
         if(new File(filepath).exists()){
-            return true;//throw new RuntimeException("Another file with the same name already exists.");
+            return true;
         }
         
         try{

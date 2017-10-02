@@ -3,9 +3,10 @@ package Model;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -30,26 +31,19 @@ le bollette saranno del tipo bill_clientID.pdf
 
 public class EMailSender {
 
-    private static EMailSender instance;
-    private static String sender;
-    private static String psw;
-    private static String host;
-    private static String basicPath;
-    private Properties props;
-    private static Session session;
-    
-    private EMailSender(){
-        sender = "ingsw.gr12@gmail.com";
-        psw = "hxegtqrhgueywops";
-        host = "smtp.gmail.com";
-        basicPath = "././tmp";
-        
-        props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "25");
-        session = Session.getInstance(props,
+    private final static String sender = "ingsw.gr12@gmail.com";;
+    private final static String psw = "hxegtqrhgueywops";
+    private final static String host = "smtp.gmail.com";;
+    private final static String basicPath = "././tmp";;
+    private final static Properties props = new Properties(){
+        {
+            this.put("mail.smtp.auth", "true");
+            this.put("mail.smtp.starttls.enable", "true");
+            this.put("mail.smtp.host", host);
+            this.put("mail.smtp.port", "25");
+            }
+    };
+    private final static Session session=Session.getInstance(props,
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -57,22 +51,44 @@ public class EMailSender {
                 }
             }
         );
+    private static Integer cont=0;
+    private final static Object sync=new Object();
+
+    
+    private EMailSender(){
     }
-    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills){
-        if(instance == null)
-            instance = new EMailSender();
-        Map<Integer,String> results = new HashMap<>();
+    
+    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills) {
+        final Map<Integer,String> results = new HashMap<>();
         for(Bill b: bills.keySet()){
             Contract c = bills.get(b);
-            String result = sendEmail(c);
-            results.put(c.getId(),result);
+            new Thread(){
+                @Override
+                public void run(){
+                    String result = sendEmail(c);
+                    synchronized(results){
+                        results.put(c.getId(),result);
+                    }
+                    synchronized(sync){
+                        cont++;
+                        sync.notifyAll();
+                    }
+                }
+            }.start();
+        }
+        while(cont<bills.size()){
+            synchronized(sync){
+                try {
+                    sync.wait();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(EMailSender.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         return results;
     }
 
     public static String sendEmail(Contract contract){
-        if(instance == null)
-            instance = new EMailSender();
         /*
         pre-conditions:
         - receiver's email must be valid

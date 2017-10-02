@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package DAO;
-import Model.Bill;
 import Model.Contract;
 import Model.Document;
-import Model.Injuction;
 import Model.Operator;
 import java.util.List;
 
@@ -21,6 +19,6 @@ public interface DAO_Document {
     public void remove(Document d);
     public <T extends Document> List<T> getAllDocuments(Operator o);
     public <T> List<T> getAllDocuments(Contract c);
-
+    public void setState(Document d);
     public <T extends Document> void setManagedOperator(T document, Operator o);
 }
