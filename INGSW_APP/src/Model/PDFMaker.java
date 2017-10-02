@@ -51,7 +51,7 @@ public class PDFMaker {
         }
         status = true;
     }
-    public boolean createPDF(Contract contract, Bill billObject){
+    public boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -79,7 +79,7 @@ public class PDFMaker {
             PDPageContentStream printStream = new PDPageContentStream(bill, page);
             
             //drawingPDF
-            drawPDF(printStream, template, contract, billObject);
+            drawPDF(printStream, template, contract, billObject, injunction);
             
             //saving and closing
             printStream.close();
@@ -92,7 +92,7 @@ public class PDFMaker {
         }
         return isCreated;
     }
-    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill) throws IOException{
+    private void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill, Injuction injunction) throws IOException{
         /*
         pre-conditions:
         - status must be on true
@@ -101,6 +101,9 @@ public class PDFMaker {
         - the PDFFile is drawn and ready to be saved
         */
         
+        float totalAmount = bill.getTotal();
+        if(injunction != null)
+            totalAmount += Float.parseFloat(injunction.getArrears());
         //inserting template
         printStream.drawImage(template,0F, 0F, 615F, 795F);
         //startText
@@ -168,11 +171,24 @@ public class PDFMaker {
         }
         printStream.endText();
         
+        if(injunction != null){
+            printStream.beginText();
+            printStream.newLineAtOffset(245, 410);
+            printStream.setFont(PDType1Font.COURIER_BOLD, 9);
+            printStream.setLeading(11F);
+            printStream.showText("Injunction reffered");
+            printStream.newLine();
+            printStream.showText("to bill: " + injunction.getBillID());
+            printStream.newLine();
+            printStream.showText("Arrears: " + injunction.getArrears());
+            printStream.endText();
+        }
+        
         printStream.beginText();
         printStream.newLineAtOffset(425, 410);
         printStream.setFont(PDType1Font.COURIER, 35);
         printStream.setLeading(10F);
-        printStream.showText("€ " + bill.getTotal());
+        printStream.showText("€ " + totalAmount);
         printStream.endText();
         
         printStream.beginText();
@@ -193,7 +209,7 @@ public class PDFMaker {
         printStream.newLineAtOffset(380, 130);
         printStream.setFont(PDType1Font.COURIER, 9);
         printStream.setLeading(11F);
-        printStream.showText("€ " + bill.getTotal());
+        printStream.showText("€ " + totalAmount);
         printStream.endText();
         
         printStream.beginText();
