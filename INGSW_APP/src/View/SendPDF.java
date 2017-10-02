@@ -21,10 +21,10 @@ public class SendPDF extends javax.swing.JFrame {
      * Creates new form Send
      * @param result
      */
-    public SendPDF(Boolean result) {
+    public SendPDF(String result) {
         actionListener = new LinkedList<>();
         initComponents();
-        if(result){
+        if(result == null){
             emailImageOK.setVisible(true);
             emailImageNOK.setVisible(false);
             logAddressErrorPanel.setVisible(false);
@@ -33,7 +33,7 @@ public class SendPDF extends javax.swing.JFrame {
             emailImageOK.setVisible(false);
             emailImageNOK.setVisible(true);
             logAddressErrorPanel.setVisible(true);
-            messageErrorLabel.setText("There is an error with eMail");
+            messageErrorLabel.setText(result);
         }
             
     }

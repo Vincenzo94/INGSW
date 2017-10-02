@@ -46,7 +46,6 @@ public class PDFMaker {
         - status is setted on "true".
         */
         templateDirectory ="././images/template.jpg";
-        System.out.println(templateDirectory);
         tmpDirectory = "././tmp";
         //creates the "tmp" directory if it doesn't exists
         new File(tmpDirectory).mkdir();

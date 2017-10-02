@@ -2,6 +2,9 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -55,7 +58,18 @@ public class EMailSender {
             }
         );
     }
-    public static boolean sendEmail(Contract contract){
+    public static Map<Integer,String> sendEmail(List<Contract> contracts){
+        if(instance == null)
+            instance = new EMailSender();
+        Map<Integer,String> results = new HashMap<>();
+        for(Contract c: contracts){
+            String result = sendEmail(c);
+            results.put(c.getId(),result);
+        }
+        return results;
+    }
+
+    public static String sendEmail(Contract contract){
         if(instance == null)
             instance = new EMailSender();
         /*
@@ -65,7 +79,7 @@ public class EMailSender {
         post-conditions:
         - it sends the email to receiver
         */
-        boolean result = false;
+        String result = "Error sending eMail to "+contract.getEmailAddress()+" ("+contract.getId()+")";
         String documentName = contract.getId() + ".pdf";
         try{
             Message message = new MimeMessage(session);
@@ -76,7 +90,7 @@ public class EMailSender {
             message.setContent(createMultipartMessage(documentName));
             
             Transport.send(message);
-            result = true;
+            result = null;
         }
         catch(MessagingException e){
             System.out.println("Receiver's email is not valid");
