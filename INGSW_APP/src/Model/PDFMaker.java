@@ -2,7 +2,12 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -62,6 +67,11 @@ public class PDFMaker {
         - returns true if it creates a PDF
         */
         String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
+        try {
+            Files.deleteIfExists(Paths.get(filepath));
+        } catch (IOException ex) {
+            Logger.getLogger(PDFMaker.class.getName()).log(Level.SEVERE, null, ex);
+        }
         boolean isCreated = false;
 
         if(!status)
