@@ -7,10 +7,8 @@ package View;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.sql.Date;
 import java.util.LinkedList;
-import java.util.List;
-import javax.swing.JTable;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -19,53 +17,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Home extends javax.swing.JFrame {
     private DefaultTableModel tableModelRegistryManagement;
-    private DefaultTableModel tableModelBillsQueue;
-    private DefaultTableModel tableModelInjuctionsQueue;
     private LinkedList<MouseListener> mouseListener;
     private LinkedList<ActionListener> actionListener;
     private LinkedList<ChangeListener> changeListener;
-    
-    
+    private LinkedList<Component> panel;
     public Home() {
         tableModelRegistryManagement = new DefaultTableModel();
-        tableModelBillsQueue = new DefaultTableModel(){
-            @Override
-            public Class getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return Integer.class;
-                    case 1:
-                        return Date.class;
-                    case 2:
-                        return Date.class;
-                    case 3:
-                        return Float.class;
-                    default:
-                        return Boolean.class;
-                }
-            }
-        };
-        tableModelInjuctionsQueue = new DefaultTableModel(){
-            @Override
-            public Class getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return Integer.class;
-                    case 1:
-                        return Integer.class;
-                    case 2:
-                        return Integer.class;
-                    default:
-                        return Float.class;
-                }
-            }
-        };
+        initComponents();
         
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         changeListener = new LinkedList<>();
+        panel = new LinkedList<>();
         //getContentPane().setLayout(new BorderLayout());
-        initComponents();
+        panel.add(new RegistryPanel());
+        panel.add(new InjuctionsQueuePanel());
+        panel.add(new BillsQueuePanel());
+        
+        homePane.addTab("Registry Management", panel.get(0));
+        homePane.addTab("Injuctions Queue", panel.get(1));
+        homePane.addTab("Bills Queue", panel.get(2));
+
     }
 
     /**
@@ -76,71 +48,17 @@ public class Home extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         homePane = new javax.swing.JTabbedPane();
-        registryManagementPanel = new javax.swing.JPanel();
-        taxCLabel = new javax.swing.JLabel();
-        taxCField = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        addButton = new javax.swing.JButton();
-        nameLabel = new javax.swing.JLabel();
-        alterHolderButton = new javax.swing.JButton();
-        nameField = new javax.swing.JTextField();
-        removeContractButton = new javax.swing.JButton();
-        surnameLabel = new javax.swing.JLabel();
-        injuctionsButton = new javax.swing.JButton();
-        surnameField = new javax.swing.JTextField();
-        billsButton = new javax.swing.JButton();
-        contractIdLabel = new javax.swing.JLabel();
-        contractIdField = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        billingAddressLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
-        telephoneLabel = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        billingAddressValueLabel = new javax.swing.JLabel();
-        addressValueLabel = new javax.swing.JLabel();
-        telephoneValueLabel = new javax.swing.JLabel();
-        emailValueLabel = new javax.swing.JLabel();
-        injuctionsQueuePanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        table1 = new javax.swing.JTable();
-        injuctionDeleteButton = new javax.swing.JButton();
-        injuctionConfirmButton = new javax.swing.JButton();
-        billsQueuePanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        reportErrorButton = new javax.swing.JButton();
-        summaryBillsPanel = new javax.swing.JPanel();
-        selectedBillsValueLabel = new javax.swing.JLabel();
-        selectedBillsLabel = new javax.swing.JLabel();
-        summaryBillPanel = new javax.swing.JPanel();
-        rateLabel = new javax.swing.JLabel();
-        detectionLabel = new javax.swing.JLabel();
-        operatorIdLabel = new javax.swing.JLabel();
-        detectionDateLabel = new javax.swing.JLabel();
-        dueDateLabel = new javax.swing.JLabel();
-        rateValueLabel = new javax.swing.JLabel();
-        detectionValueLabel = new javax.swing.JLabel();
-        operatorIdValueLabel = new javax.swing.JLabel();
-        detectionDateValueLabel = new javax.swing.JLabel();
-        dueDateValueLabel = new javax.swing.JLabel();
-        totalValueLabel = new javax.swing.JLabel();
-        totalLabel = new javax.swing.JLabel();
-        selectAllButton = new javax.swing.JButton();
-        billConfirmButton = new javax.swing.JButton();
-        deselectAllButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         help = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGSW_GR12");
+        setSize(new java.awt.Dimension(700, 700));
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         homePane.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -148,538 +66,6 @@ public class Home extends javax.swing.JFrame {
                 homePaneStateChanged(evt);
             }
         });
-
-        registryManagementPanel.setLayout(new java.awt.GridBagLayout());
-
-        taxCLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        taxCLabel.setText("Tax C./VAT");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
-        registryManagementPanel.add(taxCLabel, gridBagConstraints);
-
-        taxCField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
-        registryManagementPanel.add(taxCField, gridBagConstraints);
-
-        searchButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        searchButton.setText("Search");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 40);
-        registryManagementPanel.add(searchButton, gridBagConstraints);
-
-        table.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        table.setModel(tableModelRegistryManagement
-        );
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
-            }
-        });
-        table.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tableKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 525;
-        gridBagConstraints.ipady = 88;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        registryManagementPanel.add(jScrollPane1, gridBagConstraints);
-
-        addButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        addButton.setText("Add");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 0);
-        registryManagementPanel.add(addButton, gridBagConstraints);
-
-        nameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        nameLabel.setText("Name:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
-        registryManagementPanel.add(nameLabel, gridBagConstraints);
-
-        alterHolderButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        alterHolderButton.setText("Alter holder");
-        alterHolderButton.setEnabled(false);
-        alterHolderButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alterHolderButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 40, 13, 0);
-        registryManagementPanel.add(alterHolderButton, gridBagConstraints);
-
-        nameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
-        registryManagementPanel.add(nameField, gridBagConstraints);
-
-        removeContractButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        removeContractButton.setText("Remove");
-        removeContractButton.setEnabled(false);
-        removeContractButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeContractButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 13, 40);
-        registryManagementPanel.add(removeContractButton, gridBagConstraints);
-
-        surnameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        surnameLabel.setText("Surname:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
-        registryManagementPanel.add(surnameLabel, gridBagConstraints);
-
-        injuctionsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        injuctionsButton.setText("Injuctions");
-        injuctionsButton.setEnabled(false);
-        injuctionsButton.setRolloverEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 180);
-        registryManagementPanel.add(injuctionsButton, gridBagConstraints);
-
-        surnameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
-        registryManagementPanel.add(surnameField, gridBagConstraints);
-
-        billsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billsButton.setText("Bills");
-        billsButton.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 37;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 40);
-        registryManagementPanel.add(billsButton, gridBagConstraints);
-
-        contractIdLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        contractIdLabel.setText("Contract ID:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 40, 0, 0);
-        registryManagementPanel.add(contractIdLabel, gridBagConstraints);
-
-        contractIdField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
-        registryManagementPanel.add(contractIdField, gridBagConstraints);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary contract"));
-
-        billingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billingAddressLabel.setText("Billing address:");
-
-        addressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        addressLabel.setText("Address:");
-
-        telephoneLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        telephoneLabel.setText("Telephone:");
-
-        emailLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        emailLabel.setText("eMail:");
-
-        billingAddressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billingAddressValueLabel.setText("       ");
-
-        addressValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        addressValueLabel.setText("      ");
-
-        telephoneValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        telephoneValueLabel.setText("       ");
-
-        emailValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        emailValueLabel.setText("       ");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(billingAddressLabel)
-                    .addComponent(addressLabel)
-                    .addComponent(telephoneLabel)
-                    .addComponent(emailLabel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(telephoneValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                    .addComponent(addressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(billingAddressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(emailValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(billingAddressLabel)
-                    .addComponent(billingAddressValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressLabel)
-                    .addComponent(addressValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telephoneLabel)
-                    .addComponent(telephoneValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(emailValueLabel))
-                .addGap(6, 6, 6))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        registryManagementPanel.add(jPanel1, gridBagConstraints);
-
-        homePane.addTab("Registry management", registryManagementPanel);
-
-        injuctionsQueuePanel.setLayout(new java.awt.GridBagLayout());
-
-        table1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        table1.setModel(tableModelInjuctionsQueue);
-        table1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(table1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 499;
-        gridBagConstraints.ipady = 296;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
-        injuctionsQueuePanel.add(jScrollPane2, gridBagConstraints);
-
-        injuctionDeleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        injuctionDeleteButton.setText("Delete");
-        injuctionDeleteButton.setEnabled(false);
-        injuctionDeleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                injuctionDeleteButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 20, 0);
-        injuctionsQueuePanel.add(injuctionDeleteButton, gridBagConstraints);
-
-        injuctionConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        injuctionConfirmButton.setText("Confirm");
-        injuctionConfirmButton.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(18, 0, 20, 40);
-        injuctionsQueuePanel.add(injuctionConfirmButton, gridBagConstraints);
-
-        homePane.addTab("Injuctions queue", injuctionsQueuePanel);
-
-        billsQueuePanel.setLayout(new java.awt.GridBagLayout());
-
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(tableModelBillsQueue);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTable1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 588;
-        gridBagConstraints.ipady = 161;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
-        billsQueuePanel.add(jScrollPane3, gridBagConstraints);
-
-        reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        reportErrorButton.setText("Report error");
-        reportErrorButton.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 240);
-        billsQueuePanel.add(reportErrorButton, gridBagConstraints);
-
-        summaryBillsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
-        summaryBillsPanel.setEnabled(false);
-        summaryBillsPanel.setVisible(true);
-        summaryBillsPanel.setFont(new java.awt.Font("Dialog", 0, 18));
-
-        selectedBillsValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        selectedBillsValueLabel.setText("0");
-
-        selectedBillsLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        selectedBillsLabel.setText("Selected: ");
-
-        javax.swing.GroupLayout summaryBillsPanelLayout = new javax.swing.GroupLayout(summaryBillsPanel);
-        summaryBillsPanel.setLayout(summaryBillsPanelLayout);
-        summaryBillsPanelLayout.setHorizontalGroup(
-            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectedBillsLabel)
-                .addGap(37, 37, 37)
-                .addComponent(selectedBillsValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1480, Short.MAX_VALUE))
-        );
-        summaryBillsPanelLayout.setVerticalGroup(
-            summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(summaryBillsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectedBillsLabel)
-                    .addComponent(selectedBillsValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 588;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        billsQueuePanel.add(summaryBillsPanel, gridBagConstraints);
-
-        summaryBillPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary bills"));
-        summaryBillPanel.setEnabled(false);
-        summaryBillPanel.setVisible(false);
-        summaryBillPanel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        rateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        rateLabel.setText("Rate (€ x m^3):");
-
-        detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionLabel.setText("Detection:");
-
-        operatorIdLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        operatorIdLabel.setText("Operator ID:");
-
-        detectionDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionDateLabel.setText("Detection date:");
-
-        dueDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        dueDateLabel.setText("Due date:");
-
-        rateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        operatorIdValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        detectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        dueDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        totalValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        totalLabel.setText("Total:");
-
-        javax.swing.GroupLayout summaryBillPanelLayout = new javax.swing.GroupLayout(summaryBillPanel);
-        summaryBillPanel.setLayout(summaryBillPanelLayout);
-        summaryBillPanelLayout.setHorizontalGroup(
-            summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rateLabel)
-                    .addComponent(detectionLabel)
-                    .addComponent(operatorIdLabel)
-                    .addGroup(summaryBillPanelLayout.createSequentialGroup()
-                        .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(detectionDateLabel)
-                            .addComponent(dueDateLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(operatorIdValueLabel)
-                            .addComponent(detectionDateValueLabel)
-                            .addComponent(detectionValueLabel)
-                            .addComponent(rateValueLabel)
-                            .addComponent(dueDateValueLabel)
-                            .addComponent(totalValueLabel)))
-                    .addComponent(totalLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        summaryBillPanelLayout.setVerticalGroup(
-            summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(summaryBillPanelLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rateLabel)
-                    .addComponent(rateValueLabel))
-                .addGap(6, 6, 6)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalLabel)
-                    .addComponent(totalValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(detectionLabel)
-                    .addComponent(detectionValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(operatorIdLabel)
-                    .addComponent(operatorIdValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(detectionDateLabel)
-                    .addComponent(detectionDateValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(summaryBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dueDateLabel)
-                    .addComponent(dueDateValueLabel)))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 588;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        billsQueuePanel.add(summaryBillPanel, gridBagConstraints);
-
-        selectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        selectAllButton.setText("Select all");
-        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectAllButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 40);
-        billsQueuePanel.add(selectAllButton, gridBagConstraints);
-
-        billConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billConfirmButton.setText("Confirm");
-        billConfirmButton.setEnabled(false);
-        billConfirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                billConfirmButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
-        billsQueuePanel.add(billConfirmButton, gridBagConstraints);
-
-        deselectAllButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        deselectAllButton.setText("Deselect all");
-        deselectAllButton.setEnabled(false);
-        deselectAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deselectAllButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 240);
-        billsQueuePanel.add(deselectAllButton, gridBagConstraints);
-
-        homePane.addTab("Bills queue", billsQueuePanel);
-
         getContentPane().add(homePane, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
@@ -711,44 +97,6 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        for(MouseListener m: mouseListener)
-            m.mouseClicked(evt);
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-        for(MouseListener m: mouseListener)
-            m.mouseClicked(evt);    }//GEN-LAST:event_table1MouseClicked
-
-    private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
-
-    }//GEN-LAST:event_tableKeyPressed
-
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        for(MouseListener m: mouseListener)
-            m.mouseClicked(evt);
-    }//GEN-LAST:event_tableMouseClicked
-
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_searchButtonActionPerformed
-
-    private void alterHolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterHolderButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_alterHolderButtonActionPerformed
-
-    private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_selectAllButtonActionPerformed
-
-    private void deselectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselectAllButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_deselectAllButtonActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
@@ -759,30 +107,10 @@ public class Home extends javax.swing.JFrame {
             a.actionPerformed(evt);
     }//GEN-LAST:event_helpActionPerformed
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void billConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billConfirmButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_billConfirmButtonActionPerformed
-
     private void homePaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_homePaneStateChanged
         for(ChangeListener a: changeListener)
             a.stateChanged(evt);
     }//GEN-LAST:event_homePaneStateChanged
-
-    private void removeContractButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeContractButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_removeContractButtonActionPerformed
-
-    private void injuctionDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_injuctionDeleteButtonActionPerformed
-        for(ActionListener a: actionListener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_injuctionDeleteButtonActionPerformed
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -796,208 +124,55 @@ public class Home extends javax.swing.JFrame {
         changeListener.add(a);
     }
     
-    public DefaultTableModel getTableModelRegistryManagement(){
-        return tableModelRegistryManagement;
-    }
-    
-    public DefaultTableModel getTableModelBillsQueue(){
-        return tableModelBillsQueue;
-    }
-    
-    public DefaultTableModel getTableModelInjuctionsQueue(){
-        return tableModelInjuctionsQueue;
-    }
-    
+//    public DefaultTableModel getTableModelRegistryManagement(){
+//        return tableModelRegistryManagement;
+//    }
+//    
+//    public DefaultTableModel getTableModelBillsQueue(){
+//        return tableModelBillsQueue;
+//    }
+//    
+//    public DefaultTableModel getTableModelInjuctionsQueue(){
+//        return tableModelInjuctionsQueue;
+//    }
+//    
     //REGISTRY MANAGEMENT
-    public void activeContractButtons(){
-        alterHolderButton.setEnabled(true);
-        removeContractButton.setEnabled(true);
-        billsButton.setEnabled(true);
-        injuctionsButton.setEnabled(true);
-    }
-    public void setBillingAddress(String s){
-        billingAddressValueLabel.setText(s);
-    }
-    public void setAddress(String s){
-        addressValueLabel.setText(s);
-    }
-    public void setTelephone(String s){
-        telephoneValueLabel.setText(s);
-    }
-    public void setEmail(String s){
-        emailValueLabel.setText(s);
-    }
-    public Integer getSelectedContract(){
-        return table.getSelectedRow();
-    }
     
-    public String getNameSearch(){
-        return nameField.getText();
-    }
-    
-    public String getSurnameSearch(){
-        return surnameField.getText();
-    }
-    
-    public String getTaxSearch(){
-        return taxCField.getText();
-    }
-    
-    public Integer getIdSearch(){
-        String i = contractIdField.getText();
-        if(i.length()!=0)
-            return Integer.valueOf(contractIdField.getText());
-        else
-            return null;
-    }
     
     //BILL
-    public List<Integer> getSelectedBill(){
-        List<Integer> l = new LinkedList<Integer>();
-        for(Integer i = 0; i < tableModelBillsQueue.getRowCount(); i++)
-            if((Boolean)tableModelBillsQueue.getValueAt(i,4) == true)
-                l.add(i);
-        return l;
-    }
-    public void setTax(Float tax){
-        rateValueLabel.setText(tax.toString());
-    }
-    public void setTotal(Float total){
-        totalValueLabel.setText(total.toString());
-    }
-    public void setDetection(Float detection){
-        detectionValueLabel.setText(detection.toString());
-    }
-    public void setDetector(Integer detector){
-        operatorIdValueLabel.setText(detector.toString());
-    }
-    public void setDetectionDate(Date date){
-        detectionDateValueLabel.setText(date.toString());
-    }
-    public void setDeadline(Date date){
-        dueDateValueLabel.setText(date.toString());
-    }
-    public void activeBillConfirm(Boolean state){
-        billConfirmButton.setEnabled(state);
-    }
-    public void activeBillReportError(Boolean state) {
-        reportErrorButton.setVisible(state);
-    }
-    public void setMultipleSelection(Boolean state){
-        summaryBillPanel.setVisible(!state);
-        summaryBillsPanel.setVisible(state);
-    }
-    public void setSelectedBills(Integer size) {
-        selectedBillsValueLabel.setText(size.toString());
-    }
-    public void setSelectAllButton(boolean state) {
-        selectAllButton.setEnabled(state);
-        deselectAllButton.setEnabled(!state);
-    }
-    public JTable getBillTable() {
-        return jTable1;
-    }
-
+    
     
     //INJUCTION
-    public void activeInjuctionButtons(){
-        injuctionConfirmButton.setEnabled(true);
-        injuctionDeleteButton.setEnabled(true);
-    }
-      public JTable getInjuctionTable() {
-        return table1;
-    }
-    public Integer getSelectedInjuction() {
-        return table1.getSelectedRow();
-    }
     
     
    public int checkButton(Component c){
-       if(c == searchButton) return 1;
-       if(c == alterHolderButton) return 2;
-       if(c == selectAllButton) return 3;
-       if(c == deselectAllButton) return 4;
-       if(c == jMenuItem1) return 5;
-       if(c == help) return 6;
-       if(c == addButton) return 7;
-       if(c == billConfirmButton) return 8;
-       if(c == removeContractButton) return 9;
-       if(c == injuctionDeleteButton) return 10;
+       if(c == jMenuItem1) return 1;
+       if(c == help) return 2;
        return 0;
    }
     
-    public int checkTab(Component c){
-        if(c == table) return 1;
-        if(c == table1) return 2;
-        if(c == jTable1) return 3;
-        return 0;
-    }
-    
+//    public int checkTab(Component c){
+//        if(c == table) return 1;
+//        if(c == table1) return 2;
+//        if(c == jTable1) return 3;
+//        return 0;
+//    }
+//    
     public int getSelectedPanel(){
         return homePane.getSelectedIndex();
     }
+    
+    public Component getPanel(int i){        
+        return panel.get(i);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
-    private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel addressValueLabel;
-    private javax.swing.JButton alterHolderButton;
-    private javax.swing.JButton billConfirmButton;
-    private javax.swing.JLabel billingAddressLabel;
-    private javax.swing.JLabel billingAddressValueLabel;
-    private javax.swing.JButton billsButton;
-    private javax.swing.JPanel billsQueuePanel;
-    private javax.swing.JTextField contractIdField;
-    private javax.swing.JLabel contractIdLabel;
-    private javax.swing.JButton deselectAllButton;
-    private javax.swing.JLabel detectionDateLabel;
-    private javax.swing.JLabel detectionDateValueLabel;
-    private javax.swing.JLabel detectionLabel;
-    private javax.swing.JLabel detectionValueLabel;
-    private javax.swing.JLabel dueDateLabel;
-    private javax.swing.JLabel dueDateValueLabel;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JLabel emailValueLabel;
     private javax.swing.JMenuItem help;
     private javax.swing.JTabbedPane homePane;
-    private javax.swing.JButton injuctionConfirmButton;
-    private javax.swing.JButton injuctionDeleteButton;
-    private javax.swing.JButton injuctionsButton;
-    private javax.swing.JPanel injuctionsQueuePanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel operatorIdLabel;
-    private javax.swing.JLabel operatorIdValueLabel;
-    private javax.swing.JLabel rateLabel;
-    private javax.swing.JLabel rateValueLabel;
-    private javax.swing.JPanel registryManagementPanel;
-    private javax.swing.JButton removeContractButton;
-    private javax.swing.JButton reportErrorButton;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JButton selectAllButton;
-    private javax.swing.JLabel selectedBillsLabel;
-    private javax.swing.JLabel selectedBillsValueLabel;
-    private javax.swing.JPanel summaryBillPanel;
-    private javax.swing.JPanel summaryBillsPanel;
-    private javax.swing.JTextField surnameField;
-    private javax.swing.JLabel surnameLabel;
-    private javax.swing.JTable table;
-    private javax.swing.JTable table1;
-    private javax.swing.JTextField taxCField;
-    private javax.swing.JLabel taxCLabel;
-    private javax.swing.JLabel telephoneLabel;
-    private javax.swing.JLabel telephoneValueLabel;
-    private javax.swing.JLabel totalLabel;
-    private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
 
     

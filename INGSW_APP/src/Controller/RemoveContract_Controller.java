@@ -21,12 +21,12 @@ import java.util.logging.Logger;
  */
 public class RemoveContract_Controller implements Controller {
     private final Contract contract;
-    private final Main_Controller main;
+    private final Registry_Controller controller;
     private Database_Controller dbManager;
     private Delete view;
-    public RemoveContract_Controller(Main_Controller main, Contract contract) {
+    public RemoveContract_Controller(Registry_Controller main, Contract contract) {
         this.contract = contract;
-        this.main = main;
+        this.controller = main;
         view = new Delete(contract);
         view.setVisible(true);
         view.addActionListener(new Listener(this){
@@ -52,7 +52,7 @@ public class RemoveContract_Controller implements Controller {
             view.dispose();
         }
         view.dispose();
-        main.back();
+        controller.back();
     }
     
 }

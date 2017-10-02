@@ -19,17 +19,17 @@ import java.util.LinkedList;
 public class ConfirmBill_Controller implements Controller{
     private final LinkedList<Bill> bills;
     private final Bill bill;
-    private final Main_Controller main;
+    private final BillsQueue_Controller controller;
     private final BuildPDF view;
     private final BuildPDFMultiple views;
 
     
-    public ConfirmBill_Controller(LinkedList<Bill> l,Main_Controller main){
+    public ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
         bills=l;
         views=new BuildPDFMultiple();
         view=null;
         bill=null;
-        this.main = main;
+        this.controller = main;
         views.setVisible(true);
         views.addActionListener(new Listener(this){
             @Override
@@ -40,10 +40,10 @@ public class ConfirmBill_Controller implements Controller{
         });
     }
     
-    public ConfirmBill_Controller(Bill b,Main_Controller main){
+    public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
         bill=b;
         bills=null;
-        this.main = main;
+        this.controller = main;
         view= new BuildPDF("Prova");
         views=null;
         view.setVisible(true);
@@ -54,7 +54,7 @@ public class ConfirmBill_Controller implements Controller{
         Component j = (Component)e.getSource();
         Integer i = views.checkButton(j);
         switch(i){
-            case 1: view.dispose(); main.back(); break;
+            case 1: view.dispose(); controller.back(); break;
             case 2: previewPressed(); break;
             case 3: sendCliecked(); break;
         }

@@ -21,11 +21,11 @@ import java.util.logging.Logger;
  */
 public class AddContract_Controller implements Controller{
     private AddHolder view;
-    private final Main_Controller main;
+    private final Registry_Controller controller;
     private Contract contract;
 
-public AddContract_Controller(Main_Controller main){
-        this.main=main;
+public AddContract_Controller(Registry_Controller controller){
+        this.controller=controller;
         view= new AddHolder();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
@@ -42,7 +42,7 @@ public AddContract_Controller(Main_Controller main){
         int i=view.checkButton(j);
         if(i==1){
             view.dispose();
-            main.back();
+            controller.back();
         }
         else{
             createClicked();
@@ -68,6 +68,6 @@ public AddContract_Controller(Main_Controller main){
             contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
         else
             contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
-        daoContract.create(contract,main.getOperator());
+        daoContract.create(contract,controller.getOperator());
     }
 }

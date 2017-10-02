@@ -21,12 +21,12 @@ import java.util.logging.Logger;
  */
 public class AlterContract_Controller implements Controller{
     private final Contract contract;
-    private final Main_Controller main;
+    private final Registry_Controller controller;
     private Database_Controller dbManager;
     AlterHolder view;
     
-    public AlterContract_Controller(Main_Controller main, Contract contract) {
-        this.main=main;
+    public AlterContract_Controller(Registry_Controller main, Contract contract) {
+        this.controller=main;
         this.contract=contract;
         view=new AlterHolder();
         view.setVisible(true);
@@ -71,7 +71,7 @@ public class AlterContract_Controller implements Controller{
         Integer button = view.checkButton(c);
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         switch(button){
-            case 0: view.dispose(); main.back(); break;
+            case 0: view.dispose(); controller.back(); break;
             case 1:{
                 contract.setName(view.getPersonName());
                 contract.setSurname(view.getSurname());
@@ -79,7 +79,7 @@ public class AlterContract_Controller implements Controller{
                 contract.setPhone(view.getPhone());
                 contract.setMobile(view.getMobile());
                 contract.seteMail(view.getEmail());
-                daoContract.update_Registry(contract,main.getOperator());
+                daoContract.update_Registry(contract,controller.getOperator());
             } break;
             case 2:{
                 String street = view.getStreet1();
@@ -92,7 +92,7 @@ public class AlterContract_Controller implements Controller{
                     contract.setBillingStreet(street);
                     contract.setBillingZipCode(zip);
                     contract.setBillingNumber(view.getNumber1());
-                    daoContract.update_BillingAddress(contract,main.getOperator());
+                    daoContract.update_BillingAddress(contract,controller.getOperator());
                 }
                 else if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
                     contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
@@ -101,7 +101,7 @@ public class AlterContract_Controller implements Controller{
                 else if(contract.getBillingAddress() != null)
                     contract.setBillingAddress(null);
                 daoContract.setBillingAddress(contract);
-                daoContract.update_UpdatedBy(contract, main.getOperator());
+                daoContract.update_UpdatedBy(contract, controller.getOperator());
                 break;
             }
             case 3:{
@@ -110,7 +110,7 @@ public class AlterContract_Controller implements Controller{
                 contract.setStreet(view.getStreet2());
                 contract.setZipCode(view.getZip2());
                 contract.setNumber(view.getNumber2());
-                daoContract.update_Address(contract,main.getOperator());
+                daoContract.update_Address(contract,controller.getOperator());
                 break;
             }
         }

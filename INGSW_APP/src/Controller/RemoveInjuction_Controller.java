@@ -20,11 +20,11 @@ import java.util.logging.Logger;
  */
 public class RemoveInjuction_Controller implements Controller {
     Database_Controller dbController;
-    Main_Controller main;
+    InjuctionsQueue_Controller controller;
     Delete view;
     Injuction injuction;
-    RemoveInjuction_Controller(Main_Controller main,Injuction injuction){
-        this.main = main;
+    RemoveInjuction_Controller(InjuctionsQueue_Controller controller,Injuction injuction){
+        this.controller = controller;
         this.injuction = injuction;
         view = new Delete(injuction);
         view.setVisible(true);
@@ -51,6 +51,6 @@ public class RemoveInjuction_Controller implements Controller {
             view.dispose();
         }
         view.dispose();
-        main.back();
+        controller.back();
     }
 }

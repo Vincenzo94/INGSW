@@ -20,16 +20,14 @@ import javax.swing.table.DefaultTableModel;
  * @author ansan
  */
 public class SearchContract_Controller implements Controller{
-    private final Main_Controller main;
     private  Database_Controller dbManager;
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
     Contract bag;
     
     
-    SearchContract_Controller(Main_Controller instance, DefaultTableModel table, Contract c) {
+    SearchContract_Controller(DefaultTableModel table, Contract c) {
         this.bag=c;
-        this.main = instance;
         this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
         initRegistryManagement();
