@@ -5,12 +5,19 @@
  */
 package Controller;
 
+import DAO.Contract_MYSQL;
+import DAO.DAO_Contract;
 import Model.Bill;
+import Model.Contract;
+import Model.PDFMaker;
 import View.BuildPDF;
 import View.BuildPDFMultiple;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +51,17 @@ public class ConfirmBill_Controller implements Controller{
         bill=b;
         bills=null;
         this.main = main;
-        view= new BuildPDF("Prova");
+        PDFMaker pdfMaker = new PDFMaker();
+        Database_Controller dbController = null;
+        try {
+            dbController = Database_Controller.getDbManager();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfirmBill_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DAO_Contract daoContract = new Contract_MYSQL(dbController);
+        Contract contract = daoContract.getContract(b.getContractID());
+        pdfMaker.createPDF(contract, b,null);
+        view= new BuildPDF(b);
         views=null;
         view.setVisible(true);
         
@@ -65,6 +82,6 @@ public class ConfirmBill_Controller implements Controller{
     }
 
     private void previewPressed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

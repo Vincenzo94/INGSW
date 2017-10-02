@@ -1,5 +1,6 @@
 package View;
 
+import Model.Document;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -16,8 +17,8 @@ public class BuildPDF extends JFrame{
     private JButton sendPDFButton;
     private JButton cancelButton;
     
-    public BuildPDF(String filePath){
-        this.filePath = filePath;
+    public BuildPDF(Document doc){
+        this.filePath = "././tmp/"+doc.getContractID()+".pdf";
         initComponents();
     }
     private void initComponents(){
@@ -72,15 +73,5 @@ public class BuildPDF extends JFrame{
         pack();
         
         controller.openDocument(filePath);
-    }
-    
-    public static void main(String[] args){
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String pathProva = "C:/Users/Andrea/Desktop/API Apache PDFBox/provaDocumenti/prova2.pdf";
-                new BuildPDF(pathProva).setVisible(true);
-            }
-        });
     }
 }

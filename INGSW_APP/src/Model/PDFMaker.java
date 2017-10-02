@@ -41,8 +41,9 @@ public class PDFMaker {
         post-conditions:
         - status is setted on "true".
         */
-        templateDirectory = System.getProperty("user.dir") + "\\images\\template.jpg";
-        tmpDirectory = System.getProperty("user.dir") + "\\tmp";
+        templateDirectory ="././images/template.jpg";
+        System.out.println(templateDirectory);
+        tmpDirectory = "././tmp";
         //creates the "tmp" directory if it doesn't exists
         new File(tmpDirectory).mkdir();
         if(!new File(templateDirectory).exists()){
@@ -60,7 +61,7 @@ public class PDFMaker {
         post-conditions:
         - returns true if it creates a PDF
         */
-        String filepath = tmpDirectory + "\\" + contract.getId() + ".pdf";
+        String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
         boolean isCreated = false;
 
         if(!status)

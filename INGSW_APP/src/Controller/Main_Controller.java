@@ -249,7 +249,7 @@ public class Main_Controller{
                 Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
             }
             Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
-            Object[] row = {temp.getContractId(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
+            Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
             tableModelBillsQueue.addRow(row);
         }
     }

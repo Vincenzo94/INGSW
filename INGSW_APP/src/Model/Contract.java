@@ -31,7 +31,7 @@ public class Contract {
 
    
 
-    
+
     
     private class Address{
         private String city;

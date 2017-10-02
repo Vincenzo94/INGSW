@@ -27,5 +27,6 @@ public interface DAO_Contract {
     public List<Contract> getAllContracts(Contract c);
     public void addBillingAddress(Contract contract);
     public void setBillingAddress(Contract contract);
+    public Contract getContract(Integer id);
 
 }

@@ -28,7 +28,7 @@ public class Injuction extends Document{
         return referredBill;
     }
     public Integer getContractID(){
-        return referredBill.getContractId();
+        return referredBill.getContractID();
     }
 
     public Integer getBillID() {
@@ -43,6 +43,5 @@ public class Injuction extends Document{
     public String getArrears() {//SERVIREBBE FLOAT O DOUBLE MA DA UN ERRORE STRANO
         return new DecimalFormat("#0.00").format(getExpiredFrom() * 0.5 + 100 + referredBill.getTotal());
     }
-
-    
+   
 }
