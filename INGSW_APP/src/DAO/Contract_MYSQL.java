@@ -59,6 +59,8 @@ public class Contract_MYSQL implements DAO_Contract{
                                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String QUERY_REMOVE_CONTRACT = " DELETE FROM "+Database_Controller.schema+"."+TABELLA
                                                + " WHERE ID = ?";
+    private final String QUERY_GET_SINGLE_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX
+                                                   + " WHERE ID = ?";
     public Contract_MYSQL(Database_Controller dbManager){
         this.dbManager = dbManager;
     }
@@ -189,7 +191,21 @@ public class Contract_MYSQL implements DAO_Contract{
         }
         return contracts;         
     }
-
+    @Override
+    public Contract getContract(Integer id) {
+        Contract contract = null;
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_SINGLE_CONTRACT);
+            statement.setInt(1,id);
+            ResultSet rs = dbManager.doQuery(statement);
+            while(rs.next()){
+                contract = new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getInt(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getInt(20));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contract;         
+    }
     @Override
     public List<Contract> getAllContracts(Contract c) {
         List<Contract> contracts = new ArrayList<>();

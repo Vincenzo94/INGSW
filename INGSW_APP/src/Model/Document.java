@@ -11,7 +11,7 @@ import java.util.Observable;
  *
  * @author Andrea
  */
-public class Document extends Observable{
+public abstract class Document extends Observable{
     final Integer id;
     String state;
     final Date generatedDate;
@@ -49,5 +49,6 @@ public class Document extends Observable{
     public void setConfirmedDate(Date confirmedDate){
             this.confirmedDate = confirmedDate;
     }
+    public abstract Integer getContractID();
 }
 

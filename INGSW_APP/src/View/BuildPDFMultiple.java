@@ -7,7 +7,12 @@ package View;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,13 +20,35 @@ import java.util.LinkedList;
  */
 public class BuildPDFMultiple extends javax.swing.JFrame {
     private final LinkedList<ActionListener> actionListener;
+    private DefaultTableModel tableModelMultipleBill;
+    private LinkedList<MouseListener> mouseListener;
+
 
     /**
      * Creates new form BuildPDFMultiple
      */
     public BuildPDFMultiple() {
         actionListener= new LinkedList<>();
+        mouseListener = new LinkedList<>();
+        tableModelMultipleBill = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Integer.class;
+                    case 2:
+                        return Date.class;
+                    case 3:
+                        return Float.class;
+                    default:
+                        return Boolean.class;
+                }
+            }
+        };
         initComponents();
+        
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,23 +67,12 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Contract ID", "Reference detection", "Generated on", "Total"
+        jTable1.setModel(tableModelMultipleBill);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setHeaderValue("Contract ID");
@@ -80,6 +96,7 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
         previewPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         previewPDFButton.setText("Preview PDF");
+        previewPDFButton.setEnabled(false);
         previewPDFButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 previewPDFButtonActionPerformed(evt);
@@ -126,6 +143,10 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     public void addActionListener(ActionListener a){
         actionListener.add(a);
     }
+    @Override
+    public void addMouseListener(MouseListener m){
+        mouseListener.add(m);
+    }
     private void previewPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewPDFButtonActionPerformed
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);            
@@ -140,6 +161,11 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);            
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        for(MouseListener m: mouseListener)
+            m.mouseClicked(evt);
+    }//GEN-LAST:event_jTable1MouseClicked
     public Integer checkButton(Component j) {
         if(j == backButton) return 1;
         if(j == previewPDFButton) return 2;
@@ -154,6 +180,21 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     private javax.swing.JButton previewPDFButton;
     private javax.swing.JButton sendPDFsButton;
     // End of variables declaration//GEN-END:variables
+
+    public DefaultTableModel getTableModelMultipleBill() {
+        return tableModelMultipleBill;
+    }
+    public JTable getBillTable() {
+        return jTable1;
+    }
+
+    public Integer getSelectedBill() {
+        return (Integer)tableModelMultipleBill.getValueAt(jTable1.getSelectedRow(), 0);
+    }
+
+    public void activePreviewButton(boolean b) {
+        previewPDFButton.setEnabled(b);
+    }
 
     
 }

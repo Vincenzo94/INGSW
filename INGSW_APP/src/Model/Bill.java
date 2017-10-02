@@ -62,7 +62,7 @@ public class Bill extends Document{
     public Date getDeadline(){
         return deadline;
     }
-    public Integer getContractId() {
+    public Integer getContractID() {
         return contractID;
     }
     public Float getTotal() {

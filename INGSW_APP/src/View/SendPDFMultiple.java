@@ -5,15 +5,38 @@
  */
 package View;
 
+import Controller.Listener;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andrea
  */
 public class SendPDFMultiple extends javax.swing.JFrame {
+    String error;
+    private final List<ActionListener> actionListener;
 
-    
-    public SendPDFMultiple() {
+    public SendPDFMultiple(Map<Integer,String> contracts) {
+        for(Integer c: contracts.keySet()){
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Boolean res = contracts.get(c)==null;
+            if(res)
+                error=error+contracts.get(c)+"\n";
+            model.addRow(new Object[]{c, true, res});
+        }
+        if(error==null){
+            jPanel1.setVisible(false);
+        }
+        else{
+            jPanel1.setVisible(true);
+            jLabel2.setText(error);
+        }
         initComponents();
+        actionListener = new LinkedList<>();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -124,6 +147,11 @@ public class SendPDFMultiple extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -135,6 +163,11 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        for(ActionListener listener: actionListener)
+            listener.actionPerformed(evt);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -144,4 +177,8 @@ public class SendPDFMultiple extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public void addActionListener(Listener listener) {
+        actionListener.add(listener);
+    }
 }

@@ -1,5 +1,10 @@
 package View;
 
+import Model.Document;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -15,11 +20,25 @@ public class BuildPDF extends JFrame{
     private JPanel viewerComponentPanel;
     private JButton sendPDFButton;
     private JButton cancelButton;
+    private final List<ActionListener> actionListener;
     
-    public BuildPDF(String filePath){
-        this.filePath = filePath;
+    public BuildPDF(Document doc){
+        this.filePath = "././tmp/"+doc.getContractID()+".pdf";
         initComponents();
+        actionListener = new LinkedList<>();
+
     }
+    private void sendPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
+    }    
     private void initComponents(){
         sendPDFButton = new JButton();
         cancelButton = new JButton();
@@ -29,7 +48,17 @@ public class BuildPDF extends JFrame{
         
         //button
         sendPDFButton.setText("Send PDF");
+        sendPDFButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendPDFButtonActionPerformed(evt);
+            }
+        });
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         
         //viewer
         viewerComponentPanel = factory.buildViewerPanel();
@@ -68,19 +97,16 @@ public class BuildPDF extends JFrame{
                     .addComponent(cancelButton))
                 .addContainerGap())
         );
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pack();
         
         controller.openDocument(filePath);
     }
-    
-    public static void main(String[] args){
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String pathProva = "C:/Users/Andrea/Desktop/API Apache PDFBox/provaDocumenti/prova2.pdf";
-                new BuildPDF(pathProva).setVisible(true);
-            }
-        });
+
+    public Integer checkButton(Component j) {
+        if(j == sendPDFButton)
+            return 3;
+        else
+            return 1;
     }
 }

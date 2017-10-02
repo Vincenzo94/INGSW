@@ -5,17 +5,37 @@
  */
 package View;
 
+import Controller.Listener;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author Andrea
  */
 public class SendPDF extends javax.swing.JFrame {
+    private final List<ActionListener> actionListener;
 
     /**
      * Creates new form Send
+     * @param result
      */
-    public SendPDF() {
+    public SendPDF(String result) {
+        actionListener = new LinkedList<>();
         initComponents();
+        if(result == null){
+            emailImageOK.setVisible(true);
+            emailImageNOK.setVisible(false);
+            logAddressErrorPanel.setVisible(false);
+        }
+        else{
+            emailImageOK.setVisible(false);
+            emailImageNOK.setVisible(true);
+            logAddressErrorPanel.setVisible(true);
+            messageErrorLabel.setText(result);
+        }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -26,10 +46,11 @@ public class SendPDF extends javax.swing.JFrame {
         addressLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         addressImage = new javax.swing.JLabel();
-        emailImage = new javax.swing.JLabel();
+        emailImageOK = new javax.swing.JLabel();
         logAddressErrorPanel = new javax.swing.JPanel();
         messageErrorLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
+        emailImageNOK = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Send PDF");
@@ -65,24 +86,29 @@ public class SendPDF extends javax.swing.JFrame {
         getContentPane().add(emailLabel, gridBagConstraints);
 
         addressImage.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        addressImage.setText("jLabel1");
+        addressImage.setIcon(new javax.swing.ImageIcon("/home/ansan/INGSW/INGSW_APP/images/ok.png")); // NOI18N
+        addressImage.setLabelFor(addressLabel);
+        addressImage.setText("        ");
+        addressImage.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.ipadx = -51;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE_LEADING;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 0);
         getContentPane().add(addressImage, gridBagConstraints);
 
-        emailImage.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        emailImage.setText("jLabel1");
+        emailImageOK.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailImageOK.setIcon(new javax.swing.ImageIcon("/home/ansan/INGSW/INGSW_APP/images/ok.png")); // NOI18N
+        emailImageOK.setText("        ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = -51;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 40, 0, 0);
-        getContentPane().add(emailImage, gridBagConstraints);
+        getContentPane().add(emailImageOK, gridBagConstraints);
 
         logAddressErrorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Log address' error"));
 
@@ -117,6 +143,11 @@ public class SendPDF extends javax.swing.JFrame {
 
         okButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         okButton.setText("Ok");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -125,18 +156,39 @@ public class SendPDF extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(8, 176, 0, 40);
         getContentPane().add(okButton, gridBagConstraints);
 
+        emailImageNOK.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailImageNOK.setIcon(new javax.swing.ImageIcon("/home/ansan/INGSW/INGSW_APP/images/nok.png")); // NOI18N
+        emailImageNOK.setText("        ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = -51;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(13, 40, 0, 0);
+        getContentPane().add(emailImageNOK, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressImage;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel emailImage;
+    private javax.swing.JLabel emailImageNOK;
+    private javax.swing.JLabel emailImageOK;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel logAddressErrorPanel;
     private javax.swing.JLabel messageErrorLabel;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel stateLabel;
     // End of variables declaration//GEN-END:variables
+
+    public void addActionListener(Listener listener) {
+        actionListener.add(listener);
+    }
 }
