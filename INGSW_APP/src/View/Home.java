@@ -8,21 +8,17 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
-import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ansan
  */
 public class Home extends javax.swing.JFrame {
-    private DefaultTableModel tableModelRegistryManagement;
-    private LinkedList<MouseListener> mouseListener;
-    private LinkedList<ActionListener> actionListener;
-    private LinkedList<ChangeListener> changeListener;
-    private LinkedList<Component> panel;
+    private final LinkedList<MouseListener> mouseListener;
+    private final LinkedList<ActionListener> actionListener;
+    private final LinkedList<ChangeListener> changeListener;
+    private final LinkedList<Component> panel;
     public Home() {
-        tableModelRegistryManagement = new DefaultTableModel();
         initComponents();
         
         mouseListener = new LinkedList<>();
@@ -56,11 +52,12 @@ public class Home extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         help = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12");
         setSize(new java.awt.Dimension(700, 700));
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        homePane.setPreferredSize(null);
         homePane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 homePaneStateChanged(evt);

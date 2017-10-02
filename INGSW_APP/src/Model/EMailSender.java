@@ -58,11 +58,12 @@ public class EMailSender {
             }
         );
     }
-    public static Map<Integer,String> sendEmail(List<Contract> contracts){
+    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills){
         if(instance == null)
             instance = new EMailSender();
         Map<Integer,String> results = new HashMap<>();
-        for(Contract c: contracts){
+        for(Bill b: bills.keySet()){
+            Contract c = bills.get(b);
             String result = sendEmail(c);
             results.put(c.getId(),result);
         }
