@@ -11,6 +11,7 @@ import View.RegistryPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -54,8 +55,8 @@ public class Registry_Controller implements Controller{
     
     private void tableClicked(){
         if(!(current instanceof SearchContract_Controller))
-          current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),null);  
-        contracts = ((SearchContract_Controller)current).getContracts();
+                current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),null);  
+                contracts = (ArrayList)((SearchContract_Controller)current).getContracts();
                 Contract contract = contracts.get(actual.getSelectedContract());
                 actual.activeContractButtons();
                 actual.setBillingAddress(contract.getBillingAddress());

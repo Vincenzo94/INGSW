@@ -9,6 +9,8 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,13 +20,65 @@ public class Injuctions extends javax.swing.JFrame {
 
     private final LinkedList<ActionListener> actionListener;
     private final LinkedList<MouseListener> mouseListener;
+    private final DefaultTableModel tableModelInjuctions;
     /**
      * Creates new form Injuctions
      */
     public Injuctions() {
+        tableModelInjuctions = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return Integer.class;
+                    case 2:
+                        return Integer.class;
+                    default:
+                        return Float.class;
+                }
+            }
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
+        };
         actionListener = new LinkedList<>();
         mouseListener = new LinkedList<>();
         initComponents();
+    }
+    
+    public void setBillsPeriod(String s){
+        billsPeriodValueLabel.setText(s);
+    }
+    
+    public void setBillsDue(String s){
+        billsDueValueLabel.setText(s);
+    }
+    
+    public void setDetectionValue(String s){
+        detectionValueLabel.setText(s);
+    }
+    
+    public void setPaymentDate(String s){
+        paymentValueLabel.setText(s);
+    }
+        
+    public int countSelectedRows(){
+        return injuctionsTable.getSelectedRowCount();
+    }
+    
+    public int getSelectedRow(){
+        return injuctionsTable.getSelectedRow();
+    }
+    
+    public DefaultTableModel getInjuctionsTableModel(){
+        return tableModelInjuctions;
+    }
+    
+    public JTable getInjuctionsTable(){
+        return injuctionsTable;
     }
 
     @Override
@@ -47,13 +101,15 @@ public class Injuctions extends javax.swing.JFrame {
     }
     
     
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        injuctionsTable = new javax.swing.JTable();
         summaryPanel = new javax.swing.JPanel();
         billsPeriodLabel = new javax.swing.JLabel();
         billsPeriodValueLabel = new javax.swing.JLabel();
@@ -73,36 +129,15 @@ public class Injuctions extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Injuction number", "Bill ID", "State"
-            }
-        ){
-            @Override
-            public boolean isCellEditable(int x,int y){
-                return false;
-            }
-        });
-        jTable1.setPreferredSize(new java.awt.Dimension(225, 500));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        injuctionsTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        injuctionsTable.setModel(tableModelInjuctions);
+        injuctionsTable.setPreferredSize(new java.awt.Dimension(225, 500));
+        injuctionsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                injuctionsTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(injuctionsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -236,10 +271,10 @@ public class Injuctions extends javax.swing.JFrame {
             a.actionPerformed(evt);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void injuctionsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_injuctionsTableMouseClicked
         for(MouseListener a: mouseListener)
             a.mouseClicked(evt);
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_injuctionsTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -251,9 +286,9 @@ public class Injuctions extends javax.swing.JFrame {
     private javax.swing.JButton buildPDFButton;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
+    private javax.swing.JTable injuctionsTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel paymentLabel;
     private javax.swing.JLabel paymentValueLabel;
     private javax.swing.JPanel summaryPanel;
