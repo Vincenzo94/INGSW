@@ -72,7 +72,7 @@ public class PDFMaker{
         return ret;
     }
 
-    public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
+    synchronized public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
