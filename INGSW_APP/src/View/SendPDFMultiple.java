@@ -32,6 +32,10 @@ public class SendPDFMultiple extends javax.swing.JFrame {
                         return Boolean.class;
                 }
             }
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
         };
         model.setRowCount(0);
         String[] columns = {"Contract ID", "Address", "eMail"};
