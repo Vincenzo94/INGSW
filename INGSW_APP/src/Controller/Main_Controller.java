@@ -107,7 +107,6 @@ public class Main_Controller{
         try {
             instance = new Main_Controller();
         } catch (SQLException ex) {
-            Logger.getLogger(Main_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
        
