@@ -29,7 +29,7 @@ public class BillsQueuePanel extends javax.swing.JPanel {
      * Creates new form NewJPanel
      */
     public BillsQueuePanel() {
-             tableModelBillsQueue = new DefaultTableModel(){
+            tableModelBillsQueue = new DefaultTableModel(){
             @Override
             public Class getColumnClass(int column) {
                 switch (column) {
