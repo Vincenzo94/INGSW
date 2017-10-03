@@ -71,6 +71,8 @@ public class Registry_Controller implements Controller{
             case 2: alterholderCliked(); break;
             case 3: addClicked(); break;
             case 4: removeContractClicked(); break;
+            case 5: billsClicked(); break;
+            case 6: injuctionsCliecked(); break;
         }
     }
     
@@ -111,5 +113,17 @@ public class Registry_Controller implements Controller{
         int row = actual.getSelectedContract();
         actual.setEnabled(false);
         current = new RemoveContract_Controller(this, contracts.get(row));
+    }
+
+    private void billsClicked() {
+        int row = actual.getSelectedContract();
+        actual.setEnabled(false);
+        current = new Bills_Controller(this, contracts.get(row));
+    }
+
+    private void injuctionsCliecked() {
+        int row = actual.getSelectedContract();
+        actual.setEnabled(false);
+        current = new Injuctions_Controller(this, contracts.get(row));
     }
 }

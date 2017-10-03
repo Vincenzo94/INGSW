@@ -5,16 +5,48 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.sql.Date;
+import java.util.LinkedList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author Andrea
  */
 public class Bills extends javax.swing.JFrame {
 
+    private final DefaultTableModel billModel;
+    private final LinkedList<MouseListener> mouseListener;
+    private final LinkedList<ActionListener> actionListener;
     /**
      * Creates new form Bills
      */
     public Bills() {
+        billModel  = new DefaultTableModel(){
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return String.class;
+                    case 2:
+                        return String.class;
+                    default:
+                        return Date.class;
+                }
+            }
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
+        };
+        mouseListener = new LinkedList<>();
+        actionListener = new LinkedList<>();
         initComponents();
     }
 
@@ -54,30 +86,14 @@ public class Bills extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Invoice N.", "Period", "State", "Due date"
-            }
-        ){
-            @Override
-            public boolean isCellEditable(int x,int y){
-                return false;
-            }
-        });
+        jTable1.setModel(billModel);
         jTable1.setMinimumSize(new java.awt.Dimension(160, 160));
         jTable1.setPreferredSize(new java.awt.Dimension(160, 500));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -218,6 +234,10 @@ public class Bills extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton buildPDFButton;
@@ -237,4 +257,19 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
+
+    public void addActionListener(ActionListener listener) {
+        actionListener.add(listener);
+    }
+    @Override
+    public void addMouseListener(MouseListener listener){
+        mouseListener.add(listener);
+    }
+
+    public JTable getBillTable() {
+        return jTable1;
+    }
+    public DefaultTableModel getTableModelBills(){
+        return billModel;
+    }
 }
