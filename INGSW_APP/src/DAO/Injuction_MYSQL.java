@@ -28,8 +28,10 @@ public class Injuction_MYSQL implements DAO_Document{
     private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
     private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + Database_Controller.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
     private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
-    private String QUERY_REMOVE = " DELETE FROM " + Database_Controller.schema + "." + TABLE 
-                                + " WHERE ID = ?";
+    private final String QUERY_REMOVE = " DELETE FROM " + Database_Controller.schema + "." + TABLE 
+                                      + " WHERE ID = ?";
+    private final String QUERY_GET_ALL_INJUCTIONS_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABLE
+                                                           + " WHERE Contract = ?";
 
     public Injuction_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
@@ -74,7 +76,18 @@ public class Injuction_MYSQL implements DAO_Document{
 
     @Override
     public List<?> getAllDocuments(Contract c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Injuction> injuctions = new ArrayList<>();
+        try {
+            
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_INJUCTIONS_CONTRACT);
+            statement.setInt(1, c.getId());
+            ResultSet rs = dbManager.doQuery(statement);
+            while(rs.next()){
+                injuctions.add(new Injuction(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), getReferredBill(rs.getInt(6)), rs.getInt(5)));
+            }
+        } catch (SQLException ex) {
+        }
+        return injuctions; 
     }
 
     @Override

@@ -24,9 +24,11 @@ public class Bill_MYSQL implements DAO_Document {
     private Database_Controller dbManager = null;
     private final String TABLE_VIEW = "Bill_AUX";
     private final String TABLE = "Bill";
-    private final String QUERY_GET_ALL_BILLS= "SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
+    private final String QUERY_GET_ALL_BILLS= " SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
     private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
-    private String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
+    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
+    private final String QUERY_GET_ALL_BILLS_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW
+                                                      + " WHERE Contract = ?";   
     public Bill_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
     }
@@ -47,7 +49,18 @@ public class Bill_MYSQL implements DAO_Document {
 
     @Override
     public List<?> getAllDocuments(Contract c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Bill> bills = new ArrayList<>();
+        try {
+            
+            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS_CONTRACT);
+            statement.setInt(1, c.getId());
+            ResultSet rs = dbManager.doQuery(statement);
+            while(rs.next()){
+                bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
+            }
+        } catch (SQLException ex) {
+        }
+        return bills; 
     }
 
     @Override

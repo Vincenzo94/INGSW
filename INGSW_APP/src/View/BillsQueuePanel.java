@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BillsQueuePanel extends javax.swing.JPanel {
 
-    private DefaultTableModel tableModelBillsQueue;
-    private LinkedList<MouseListener> mouseListener;
-    private LinkedList<ActionListener> actionListener;
+    private final DefaultTableModel tableModelBillsQueue;
+    private final LinkedList<MouseListener> mouseListener;
+    private final LinkedList<ActionListener> actionListener;
     
     
     /**
@@ -381,8 +381,7 @@ public class BillsQueuePanel extends javax.swing.JPanel {
     public JTable getBillTable() {
         return billsTable;
     }
-    
-        public DefaultTableModel getTableModelBillsQueue(){
+    public DefaultTableModel getTableModelBillsQueue(){
         return tableModelBillsQueue;
     }
 

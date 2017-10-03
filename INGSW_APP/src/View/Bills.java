@@ -5,9 +5,13 @@
  */
 package View;
 
-import Controller.Listener;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.sql.Date;
+import java.util.LinkedList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -15,8 +19,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Bills extends javax.swing.JFrame {
 
-    private DefaultTableModel billModel;
-
+    private final DefaultTableModel billModel;
+    private final LinkedList<MouseListener> mouseListener;
+    private final LinkedList<ActionListener> actionListener;
     /**
      * Creates new form Bills
      */
@@ -40,6 +45,8 @@ public class Bills extends javax.swing.JFrame {
                 return false;
             }
         };
+        mouseListener = new LinkedList<>();
+        actionListener = new LinkedList<>();
         initComponents();
     }
 
@@ -251,7 +258,18 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JLabel totalValueLabel;
     // End of variables declaration//GEN-END:variables
 
-    public void addActionListener(Listener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addActionListener(ActionListener listener) {
+        actionListener.add(listener);
+    }
+    @Override
+    public void addMouseListener(MouseListener listener){
+        mouseListener.add(listener);
+    }
+
+    public JTable getBillTable() {
+        return jTable1;
+    }
+    public DefaultTableModel getTableModelBills(){
+        return billModel;
     }
 }
