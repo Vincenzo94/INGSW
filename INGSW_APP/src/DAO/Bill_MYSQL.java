@@ -51,7 +51,6 @@ public class Bill_MYSQL implements DAO_Document {
     public List<?> getAllDocuments(Contract c) {
         List<Bill> bills = new ArrayList<>();
         try {
-            
             PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS_CONTRACT);
             statement.setInt(1, c.getId());
             ResultSet rs = dbManager.doQuery(statement);
