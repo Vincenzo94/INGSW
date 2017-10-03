@@ -5,19 +5,48 @@
  */
 package View;
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.LinkedList;
+
 /**
  *
  * @author Andrea
  */
 public class Injuctions extends javax.swing.JFrame {
 
+    private final LinkedList<ActionListener> actionListener;
+    private final LinkedList<MouseListener> mouseListener;
     /**
      * Creates new form Injuctions
      */
     public Injuctions() {
+        actionListener = new LinkedList<>();
+        mouseListener = new LinkedList<>();
         initComponents();
     }
 
+    @Override
+    public void addMouseListener (MouseListener a){
+        mouseListener.add(a);
+    }
+    
+    public void addActionListener(ActionListener listener) {
+        actionListener.add(listener);
+    }
+    
+    public int checkButton(Component c){
+        if(c == buildPDFButton) return 1;
+        if(c == backButton) return 2;
+        return 0;
+    }
+    
+    public void enableBuildPDFButton(boolean state){
+        buildPDFButton.setEnabled(state);
+    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -68,6 +97,11 @@ public class Injuctions extends javax.swing.JFrame {
             }
         });
         jTable1.setPreferredSize(new java.awt.Dimension(225, 500));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -160,6 +194,12 @@ public class Injuctions extends javax.swing.JFrame {
 
         buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
+        buildPDFButton.setEnabled(false);
+        buildPDFButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildPDFButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -169,6 +209,11 @@ public class Injuctions extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -180,6 +225,21 @@ public class Injuctions extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buildPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildPDFButtonActionPerformed
+        for(ActionListener a : actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_buildPDFButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        for(ActionListener a : actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        for(MouseListener a: mouseListener)
+            a.mouseClicked(evt);
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

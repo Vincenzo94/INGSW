@@ -209,6 +209,11 @@ public class RegistryPanel extends javax.swing.JPanel {
         injuctionsButton.setText("Injuctions");
         injuctionsButton.setEnabled(false);
         injuctionsButton.setRolloverEnabled(false);
+        injuctionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                injuctionsButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
@@ -231,6 +236,11 @@ public class RegistryPanel extends javax.swing.JPanel {
         billsButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsButton.setText("Bills");
         billsButton.setEnabled(false);
+        billsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                billsButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
@@ -363,6 +373,16 @@ public class RegistryPanel extends javax.swing.JPanel {
             a.actionPerformed(evt);
     }//GEN-LAST:event_removeContractButtonActionPerformed
 
+    private void injuctionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_injuctionsButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_injuctionsButtonActionPerformed
+
+    private void billsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billsButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_billsButtonActionPerformed
+
     @Override
     public void addMouseListener(MouseListener m){
         mouseListener.add(m);
@@ -423,6 +443,8 @@ public class RegistryPanel extends javax.swing.JPanel {
            if(c == alterHolderButton) return 2;
            if(c == addButton) return 3;
            if(c == removeContractButton) return 4;
+           if(c == billsButton) return 5;
+           if(c == injuctionsButton) return 6;
            return 0;
    }
    
