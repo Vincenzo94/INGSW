@@ -25,7 +25,12 @@ public class RegistryPanel extends javax.swing.JPanel {
      * Creates new form RegistryPanel
      */
     public RegistryPanel() {
-        tableModelRegistryManagement = new DefaultTableModel();
+        tableModelRegistryManagement = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
+        };
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         initComponents();

@@ -45,10 +45,17 @@ public class BillsQueuePanel extends javax.swing.JPanel {
                         return Boolean.class;
                 }
             }
+            @Override
+            public boolean isCellEditable(int x,int y){
+                if(y==4) return true;
+                return false;
+            }
         };
             mouseListener = new LinkedList<>();
             actionListener = new LinkedList<>();
             initComponents();
+            
+            
     }
 
     /**

@@ -46,6 +46,10 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
                         return Boolean.class;
                 }
             }
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
         };
         initComponents();
         

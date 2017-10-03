@@ -61,7 +61,12 @@ public class Injuctions extends javax.swing.JFrame {
             new String [] {
                 "Injuction number", "Bill ID", "State"
             }
-        ));
+        ){
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
+        });
         jTable1.setPreferredSize(new java.awt.Dimension(225, 500));
         jScrollPane1.setViewportView(jTable1);
 
@@ -124,7 +129,7 @@ public class Injuctions extends javax.swing.JFrame {
                         .addComponent(billsPeriodLabel)
                         .addGap(29, 29, 29)
                         .addComponent(billsPeriodValueLabel)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         summaryPanelLayout.setVerticalGroup(
             summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

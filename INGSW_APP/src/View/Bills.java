@@ -70,7 +70,12 @@ public class Bills extends javax.swing.JFrame {
             new String [] {
                 "Invoice N.", "Period", "State", "Due date"
             }
-        ));
+        ){
+            @Override
+            public boolean isCellEditable(int x,int y){
+                return false;
+            }
+        });
         jTable1.setMinimumSize(new java.awt.Dimension(160, 160));
         jTable1.setPreferredSize(new java.awt.Dimension(160, 500));
         jScrollPane1.setViewportView(jTable1);
