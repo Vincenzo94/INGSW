@@ -6,13 +6,18 @@
 package View;
 
 import java.awt.Component;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.LinkedList;
-import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.icepdf.ri.common.ComponentKeyBinding;
+import org.icepdf.ri.common.SwingController;
+import org.icepdf.ri.common.SwingViewBuilder;
 
 /**
  *
@@ -20,8 +25,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BuildPDFMultiple extends javax.swing.JFrame {
     private final LinkedList<ActionListener> actionListener;
-    private DefaultTableModel tableModelMultipleBill;
+    private final DefaultTableModel tableModelMultipleBill;
     private LinkedList<MouseListener> mouseListener;
+    private SwingController controller;
+    private SwingViewBuilder factory;
+    private JButton cancelButton;
+    private JButton sendPDFButton;
+    private JPanel jPanel1;
 
 
     /**
@@ -52,23 +62,34 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
             }
         };
         initComponents();
+        init();
         
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         previewPDFButton = new javax.swing.JButton();
         sendPDFsButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        closePreviewButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Build PDF's");
         setAlwaysOnTop(true);
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(jPanel2, gridBagConstraints);
+        jPanel2.setVisible(false);
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(tableModelMultipleBill);
@@ -142,6 +163,21 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(36, 40, 20, 0);
         getContentPane().add(backButton, gridBagConstraints);
 
+        closePreviewButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        closePreviewButton.setText("Close");
+        closePreviewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closePreviewButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 290, 0, 40);
+        getContentPane().add(closePreviewButton, gridBagConstraints);
+        closePreviewButton.setVisible(false);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void addActionListener(ActionListener a){
@@ -170,15 +206,23 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         for(MouseListener m: mouseListener)
             m.mouseClicked(evt);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void closePreviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closePreviewButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_closePreviewButtonActionPerformed
     public Integer checkButton(Component j) {
         if(j == backButton) return 1;
         if(j == previewPDFButton) return 2;
+        if(j == closePreviewButton) return 4;
         return 3;
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton closePreviewButton;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton previewPDFButton;
@@ -198,6 +242,34 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
 
     public void activePreviewButton(boolean b) {
         previewPDFButton.setEnabled(b);
+    }
+
+    public void init() {
+        controller = new SwingController();
+        factory = new SwingViewBuilder(controller);
+        jPanel2 = factory.buildViewerPanel();
+        jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        getContentPane().add(jPanel2, gridBagConstraints);
+        ComponentKeyBinding.install(controller, jPanel2);
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
+        controller.getDocumentViewController().setAnnotationCallback(
+            new org.icepdf.ri.common.MyAnnotationCallback(
+                controller.getDocumentViewController()));
+    }
+
+    public void preview(boolean b) {
+        if(b == true){
+            String pdfName = tableModelMultipleBill.getValueAt(jTable1.getSelectedRow(), 0)+".pdf";
+            controller.openDocument("././tmp/"+pdfName);
+        }
+        jScrollPane1.setVisible(!b);
+        jPanel2.setVisible(b);
+        previewPDFButton.setVisible(!b);
+        closePreviewButton.setVisible(b);
     }
 
     

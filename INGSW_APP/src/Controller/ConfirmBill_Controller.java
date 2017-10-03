@@ -140,6 +140,7 @@ public class ConfirmBill_Controller implements Controller{
             } 
             case 2: previewPressed(); break;
             case 3: sendClicked(); break;
+            case 4: closePreviewPressed(); break;
         }
     }
 
@@ -183,7 +184,7 @@ public class ConfirmBill_Controller implements Controller{
     }
 
     private void previewPressed() {
-        
+        views.preview(true);
     }
 
     private void okClicked(){
@@ -224,6 +225,10 @@ public class ConfirmBill_Controller implements Controller{
             views.activePreviewButton(true);
         else
             views.activePreviewButton(false);
+    }
+
+    private void closePreviewPressed() {
+        views.preview(false);
     }
 
 
