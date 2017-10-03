@@ -5,6 +5,7 @@
  */
 
 package Controller;
+import Model.Operator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 /**
@@ -12,6 +13,11 @@ import org.apache.log4j.PropertyConfigurator;
  * @author ansan
  */
 public class Log_Controller implements Controller{
+
+    private static Integer operator;
+    static void setOperator(Operator o) {
+        operator = o.getId();
+    }
     
     private Log_Controller() {
     }
