@@ -5,6 +5,8 @@
  */
 package View;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -73,7 +75,7 @@ public class Bills extends javax.swing.JFrame {
         operatorIDLabel = new javax.swing.JLabel();
         operatorIDValueLabel = new javax.swing.JLabel();
         detectionDateLabel = new javax.swing.JLabel();
-        datectionDateValueLabel = new javax.swing.JLabel();
+        detectionDateValueLabel = new javax.swing.JLabel();
         reportErrorButton = new javax.swing.JButton();
         buildPDFButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
@@ -113,31 +115,26 @@ public class Bills extends javax.swing.JFrame {
         taxLabel.setText("Tax (€ x m^3):");
 
         taxValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        taxValueLabel.setText("value");
 
         totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalLabel.setText("Total (€):");
 
         totalValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        totalValueLabel.setText("value");
 
         detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionLabel.setText("Detection (m^3):");
 
         detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionValueLabel.setText("value");
 
         operatorIDLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         operatorIDLabel.setText("Operator ID:");
 
         operatorIDValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        operatorIDValueLabel.setText("value");
 
         detectionDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionDateLabel.setText("Detection date:");
 
-        datectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        datectionDateValueLabel.setText("value");
+        detectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout consuptionDataPanelLayout = new javax.swing.GroupLayout(consuptionDataPanel);
         consuptionDataPanel.setLayout(consuptionDataPanelLayout);
@@ -157,7 +154,7 @@ public class Bills extends javax.swing.JFrame {
                     .addGroup(consuptionDataPanelLayout.createSequentialGroup()
                         .addComponent(detectionDateLabel)
                         .addGap(31, 31, 31)
-                        .addComponent(datectionDateValueLabel))
+                        .addComponent(detectionDateValueLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, consuptionDataPanelLayout.createSequentialGroup()
                         .addComponent(totalLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,7 +186,7 @@ public class Bills extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(consuptionDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detectionDateLabel)
-                    .addComponent(datectionDateValueLabel)))
+                    .addComponent(detectionDateValueLabel)))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -203,6 +200,12 @@ public class Bills extends javax.swing.JFrame {
 
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
+        reportErrorButton.setEnabled(false);
+        reportErrorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportErrorButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -212,6 +215,12 @@ public class Bills extends javax.swing.JFrame {
 
         buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
+        buildPDFButton.setEnabled(false);
+        buildPDFButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildPDFButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -222,6 +231,11 @@ public class Bills extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -235,15 +249,31 @@ public class Bills extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        for(MouseListener m: mouseListener)
+            m.mouseClicked(evt);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void buildPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildPDFButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_buildPDFButtonActionPerformed
+
+    private void reportErrorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportErrorButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_reportErrorButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton buildPDFButton;
     private javax.swing.JPanel consuptionDataPanel;
-    private javax.swing.JLabel datectionDateValueLabel;
     private javax.swing.JLabel detectionDateLabel;
+    private javax.swing.JLabel detectionDateValueLabel;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
     private javax.swing.JPanel jPanel1;
@@ -271,5 +301,38 @@ public class Bills extends javax.swing.JFrame {
     }
     public DefaultTableModel getTableModelBills(){
         return billModel;
+    }
+    public Integer getSelectedBill(){
+        return jTable1.getSelectedRow();
+    }
+    public void setTax(Float tax){
+        taxValueLabel.setText(tax.toString());
+    }
+    public void setTotal(Float total){
+        totalValueLabel.setText(total.toString());
+    }
+    public void setDetection(Float detection){
+        detectionValueLabel.setText(detection.toString());
+    }
+    public void setDetector(Integer detector){
+        operatorIDValueLabel.setText(detector.toString());
+    }
+    public void setDetectionDate(Date date){
+        detectionDateValueLabel.setText(date.toString());
+    }
+
+    public void activeBillReportError(Boolean state) {
+        reportErrorButton.setEnabled(state);
+    }
+
+    public void activeGenPDF(Boolean state) {
+        buildPDFButton.setEnabled(state);
+    }
+
+    public Integer checkButton(Component j) {
+        if(j == backButton) return 1;
+        if(j == buildPDFButton) return 2;
+        if(j == reportErrorButton) return 3;
+        return 0;
     }
 }

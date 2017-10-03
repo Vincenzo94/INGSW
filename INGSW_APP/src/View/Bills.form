@@ -128,7 +128,7 @@
                           <Group type="102" attributes="0">
                               <Component id="detectionDateLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="datectionDateValueLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="detectionDateValueLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="totalLabel" min="-2" max="-2" attributes="0"/>
@@ -170,7 +170,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="detectionDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="datectionDateValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="detectionDateValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -190,7 +190,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="value"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="totalLabel">
@@ -206,7 +205,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="value"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="detectionLabel">
@@ -222,7 +220,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="value"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="operatorIDLabel">
@@ -238,7 +235,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="value"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="detectionDateLabel">
@@ -249,12 +245,11 @@
                 <Property name="text" type="java.lang.String" value="Detection date:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="datectionDateValueLabel">
+            <Component class="javax.swing.JLabel" name="detectionDateValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="value"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -265,7 +260,11 @@
               <Font name="Dialog" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Report error"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportErrorButtonActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="0" insetsBottom="12" insetsRight="40" anchor="12" weightX="0.0" weightY="0.0"/>
@@ -278,7 +277,11 @@
               <Font name="Dialog" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Build PDF"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buildPDFButtonActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="28" ipadY="0" insetsTop="12" insetsLeft="0" insetsBottom="0" insetsRight="40" anchor="12" weightX="0.0" weightY="0.0"/>
@@ -292,6 +295,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="40" insetsBottom="12" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>

@@ -55,14 +55,14 @@ public class Registry_Controller implements Controller{
     
     private void tableClicked(){
         if(!(current instanceof SearchContract_Controller))
-                current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),null);  
-                contracts = (ArrayList)((SearchContract_Controller)current).getContracts();
-                Contract contract = contracts.get(actual.getSelectedContract());
-                actual.activeContractButtons();
-                actual.setBillingAddress(contract.getBillingAddress());
-                actual.setAddress(contract.getAddress());
-                actual.setTelephone(contract.getTelephone());
-                actual.setEmail(contract.getEmailAddress());
+            current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),null);  
+            contracts = ((SearchContract_Controller)current).getContracts();
+            Contract contract = contracts.get(actual.getSelectedContract());
+            actual.activeContractButtons();
+            actual.setBillingAddress(contract.getBillingAddress());
+            actual.setAddress(contract.getAddress());
+            actual.setTelephone(contract.getTelephone());
+            actual.setEmail(contract.getEmailAddress());
     }
     
     private void buttonClicked(Component c){

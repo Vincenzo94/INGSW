@@ -38,7 +38,8 @@ import javax.swing.table.TableColumnModel;
 public class ConfirmBill_Controller implements Controller{
     private final Map<Bill,Contract>  bills;
     private final Bill bill;
-    private final BillsQueue_Controller controller;
+    private  BillsQueue_Controller billsQueueController;
+    private  Bills_Controller billsController;
     private final BuildPDF view;
     private final BuildPDFMultiple views;
     private SendPDF sendPDFview;
@@ -55,7 +56,7 @@ public class ConfirmBill_Controller implements Controller{
         views=new BuildPDFMultiple();
         view=null;
         bill=null;
-        this.controller = main;
+        this.billsQueueController = main;
         views.setVisible(true);
         views.addActionListener(new Listener(this){
             @Override
@@ -97,7 +98,30 @@ public class ConfirmBill_Controller implements Controller{
     public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
         bill=b;
         bills=null;
-        this.controller = main;
+        this.billsQueueController = main;
+        try {
+            dbController = Database_Controller.getDbManager();
+        } catch (SQLException ex) {
+        }
+        DAO_Contract daoContract = new Contract_MYSQL(dbController);
+        contract = daoContract.getContract(b.getContractID());
+        PDFMaker.createPDF(contract, b,null);
+        view= new BuildPDF(b);
+        view.addActionListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
+                c.buttonCliked(e);            
+            }
+        });
+        views=null;
+        view.setVisible(true);
+        
+    }
+    public ConfirmBill_Controller(Bill b,Bills_Controller main){
+        bill=b;
+        bills=null;
+        this.billsController = main;
         try {
             dbController = Database_Controller.getDbManager();
         } catch (SQLException ex) {
@@ -131,7 +155,10 @@ public class ConfirmBill_Controller implements Controller{
                     view.dispose();
                 else
                     views.dispose();
-                controller.back(); 
+                if(billsQueueController!=null)
+                    billsQueueController.back(); 
+                else
+                    billsController.back();
                 break;
             } 
             case 2: previewPressed(); break;
@@ -191,7 +218,10 @@ public class ConfirmBill_Controller implements Controller{
             sendPDFview.dispose();
             view.dispose();
         }
-        controller.back(); 
+        if(billsQueueController!=null)
+            billsQueueController.back(); 
+        else
+            billsController.back();
     }
 
     private void setDefaultRender(JTable billTable) {

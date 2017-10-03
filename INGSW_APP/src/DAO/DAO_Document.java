@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package DAO;
-import Model.Bill;
 import Model.Contract;
 import Model.Document;
 import Model.Operator;

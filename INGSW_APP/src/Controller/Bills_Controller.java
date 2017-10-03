@@ -13,6 +13,7 @@ import View.Bills;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -34,6 +35,8 @@ public class Bills_Controller implements Controller {
     private final DefaultTableCellRenderer defaultRender;
     private DefaultTableModel billsModel;
     private List<Bill> bills;
+    private Database_Controller dbController;
+    private ConfirmBill_Controller current;
 
     
     public Bills_Controller(Registry_Controller reg, Contract contract) {
@@ -70,11 +73,27 @@ public class Bills_Controller implements Controller {
     }
 
     private void buttonCliked(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Component j = (Component)e.getSource();
+        Integer i = view.checkButton(j);
+        switch (i){
+            case 1: backClicked(); break;
+            case 2: buildPDFClicked(); break;
+            case 3: reportErrorClicked(); break;
+        }
     }
 
     private void tableCliked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer bill = view.getSelectedBill();
+        if(bill != null){
+            Bill temp = bills.get(bill);
+            view.setTax(temp.getTax());
+            view.setTotal(temp.getTotal());
+            view.setDetection(temp.getDetectionValue());
+            view.setDetector(temp.getDetector());
+            view.setDetectionDate(temp.getDetectionDate());
+            view.activeGenPDF(true);
+            view.activeBillReportError(true);
+        }   
     }
     private void setDefaultRender(JTable table) {
         TableColumnModel tableModel = table.getColumnModel();
@@ -89,20 +108,40 @@ public class Bills_Controller implements Controller {
     }
 
     private void init() {
+        try {
+            dbController = Database_Controller.getDbManager();
+        } catch (SQLException ex) {
+        }
         billsModel = view.getTableModelBills();
         billsModel.setRowCount(0);
         String[] columns = {"Invoice N.", "Period", "State", "Due date"};
         billsModel.setColumnIdentifiers(columns);
         setDefaultRender(view.getBillTable());
-        DAO_Document daoBill = new Bill_MYSQL(dbManager);
+        DAO_Document daoBill = new Bill_MYSQL(dbController);
         bills.clear();
         bills = daoBill.getAllDocuments(contract);
         for(Bill temp : bills){
+            System.out.println(temp.getState());
             Object[] row = {temp.getId(), temp.getPeriod(), temp.getState(), temp.getDeadline()};
             billsModel.addRow(row);
         }
     }
-    public void back(){
-        view.setEnabled(true);
+    public void backClicked(){
+        view.dispose();
+        reg.back();
+    }
+
+    private void buildPDFClicked() {
+        Bill b = bills.get(view.getSelectedBill());
+        view.dispose();
+        current = new ConfirmBill_Controller(b,this);
+    }
+
+    private void reportErrorClicked() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void back() {
+        view.setVisible(true);
     }
 }
