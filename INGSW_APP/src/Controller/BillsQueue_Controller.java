@@ -112,7 +112,7 @@ public class BillsQueue_Controller implements Controller{
             case 1: selectAllClicked(); break;
             case 2: deselectAllClicked(); break;
             case 3: confirmClicked(); break;
-            //case 4: bisogna fare il perform del report error
+            case 4: reportClicked(); break;
         }
     }
     
@@ -194,6 +194,10 @@ public class BillsQueue_Controller implements Controller{
         actual.setSelectAllButton(true);
         actual.activeBillConfirm(false);
         actual.activeBillReportError(false);
+    }
+
+    private void reportClicked() {
+        
     }
 
 }

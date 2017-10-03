@@ -117,6 +117,11 @@ public class BillsQueuePanel extends javax.swing.JPanel {
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
         reportErrorButton.setVisible(false);
+        reportErrorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportErrorButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -325,6 +330,10 @@ public class BillsQueuePanel extends javax.swing.JPanel {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_deselectAllButtonActionPerformed
+
+    private void reportErrorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportErrorButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportErrorButtonActionPerformed
 
     public void addActionListener(ActionListener a){
         actionListener.add(a);

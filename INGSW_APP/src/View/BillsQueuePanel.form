@@ -53,6 +53,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Report error"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportErrorButtonActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="reportErrorButton.setVisible(false);"/>
       </AuxValues>

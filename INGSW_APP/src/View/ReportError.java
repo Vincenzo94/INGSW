@@ -5,19 +5,60 @@
  */
 package View;
 
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
 /**
  *
  * @author Andrea
  */
 public class ReportError extends javax.swing.JFrame {
 
+    private final LinkedList<ActionListener> actionListener;
     /**
      * Creates new form ReportError
      */
     public ReportError() {
+        actionListener=new LinkedList<>();
         initComponents();
     }
+    
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
+    }
 
+    public void setDetectionDateValue(String s) {
+        detectionDateValueLabel.setText(s);
+    }
+
+    public void setDetectionValue(String s) {
+        detectionValueLabel.setText(s);
+    }
+
+    public void setDueDateValue(String s) {
+        dueDateValueLabel.setText(s);
+    }
+
+    public void setOperatorIDValueLabel(String s) {
+        operatorIDValueLabel.setText(s);
+    }
+
+    public void setRateValue(String s) {
+        rateValueLabel.setText(s);
+    }
+
+    public void setTotalValue(String s) {
+        totalValueLabel.setText(s);
+    }
+    
+    public int checkButton(Component c){
+        if( c== sendButton) return 1;
+        if(c== cancelButton) return 2;
+        return 0;
+    }
+
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
