@@ -11,7 +11,6 @@ import Model.Operator;
 import View.Login;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-
 import java.awt.Component;
 import View.Popup;
 import static ingsw_app.INGSW_APP.device;

@@ -11,8 +11,6 @@ import Model.Contract;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +35,6 @@ public class SearchContract_Controller implements Controller{
         try {
             dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(SearchContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         tableModelRegistryManagement.setRowCount(0);

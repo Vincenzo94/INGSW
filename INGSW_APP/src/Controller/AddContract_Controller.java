@@ -11,8 +11,6 @@ import View.AddHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -55,7 +53,6 @@ public AddContract_Controller(Registry_Controller controller){
         try {
             dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(AddContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);

@@ -11,8 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -26,7 +25,6 @@ public class Database_Controller {
         try{
             connection = connect();
         } catch (SQLException ex){
-            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -43,7 +41,6 @@ public class Database_Controller {
         try {
             rs = statement.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
     }
@@ -58,7 +55,6 @@ public class Database_Controller {
         try {
             statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException ex) {
-            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return statement;
     }
@@ -76,7 +72,6 @@ public class Database_Controller {
                 connection.setAutoCommit(true);
                 statement.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Database_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }

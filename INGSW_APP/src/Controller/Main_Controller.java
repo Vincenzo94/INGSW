@@ -11,8 +11,6 @@ import ingsw_app.INGSW_APP;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.event.ChangeEvent;
 
 /**

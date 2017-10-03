@@ -12,8 +12,6 @@ import View.AlterHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +42,6 @@ public class AlterContract_Controller implements Controller{
         try {
             dbManager = Database_Controller.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(AlterContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         view.setPersonName(contract.getName());
         view.setSurname(contract.getSurname());

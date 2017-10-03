@@ -10,9 +10,6 @@ import Model.Operator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author ansan
@@ -37,7 +34,6 @@ public class Operator_MYSQL implements DAO_Operator{
                 loggedOperator = new Operator(rs.getInt("ID"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getBoolean("isDetector"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return loggedOperator;         
    }

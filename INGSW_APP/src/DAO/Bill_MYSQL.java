@@ -15,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +42,6 @@ public class Bill_MYSQL implements DAO_Document {
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set State to " +d.getId());
             } catch (SQLException ex) {
-                Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -65,7 +62,6 @@ public class Bill_MYSQL implements DAO_Document {
                 bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return bills;         
     }    
@@ -84,7 +80,6 @@ public class Bill_MYSQL implements DAO_Document {
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
             } catch (SQLException ex) {
-                Logger.getLogger(Operator_MYSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

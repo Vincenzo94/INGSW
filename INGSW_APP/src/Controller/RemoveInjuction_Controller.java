@@ -11,8 +11,7 @@ import View.Delete;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -44,7 +43,6 @@ public class RemoveInjuction_Controller implements Controller {
             try {
                 dbController = Database_Controller.getDbManager();
             } catch (SQLException ex) {
-                Logger.getLogger(RemoveContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
             daoDocument.remove(injuction);

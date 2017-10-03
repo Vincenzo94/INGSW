@@ -12,15 +12,11 @@ import org.apache.log4j.PropertyConfigurator;
  * @author ansan
  */
 public class Log_Controller implements Controller{
-    private static Log_Controller instance;
     
     private Log_Controller() {
     }
     
     public static void writeLog(String s, Class c){
-        if(instance==null){
-            instance = new Log_Controller();
-        }
         Logger log = Logger.getLogger(c.getName());
         PropertyConfigurator.configure("././src/ingsw_app/log4j.properties");
         log.info(s);

@@ -12,8 +12,6 @@ import View.Delete;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -45,7 +43,6 @@ public class RemoveContract_Controller implements Controller {
             try {
                 dbManager = Database_Controller.getDbManager();
             } catch (SQLException ex) {
-                Logger.getLogger(RemoveContract_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
             daoContract.remove(contract);

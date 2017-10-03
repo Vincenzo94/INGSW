@@ -24,8 +24,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -86,7 +84,6 @@ public class ConfirmBill_Controller implements Controller{
         try {
             dbController = Database_Controller.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(ConfirmBill_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbController);
         for(Bill b: l){
@@ -104,7 +101,6 @@ public class ConfirmBill_Controller implements Controller{
         try {
             dbController = Database_Controller.getDbManager();
         } catch (SQLException ex) {
-            Logger.getLogger(ConfirmBill_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         DAO_Contract daoContract = new Contract_MYSQL(dbController);
         contract = daoContract.getContract(b.getContractID());
