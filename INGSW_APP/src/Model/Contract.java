@@ -185,7 +185,7 @@ public class Contract {
             zip = billingAddress.getZip();
             if((street.equals("")&&district.equals("")&&city.equals("")&&zip.equals("")))
                 return null;
-            return street+" "+billingAddress.getNumber()+", "+city+", "+district+", "+zip;
+            return street+" "+billingAddress.getNumber()+", "+zip+", "+city+", "+district;
         }
         return null;
     }
@@ -206,7 +206,7 @@ public class Contract {
         return address.getZip();
     }
     public String getAddress(){
-        return address.getStreet()+address.getNumber()+", "+address.getZip()+", "+address.getDistrict()+", "+address.getCity();
+        return address.getStreet()+" "+address.getNumber()+", "+address.getZip()+", "+address.getDistrict()+", "+address.getCity();
     }
     public String getPhone(){
         return phone;

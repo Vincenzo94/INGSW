@@ -86,11 +86,13 @@ public class InjuctionsQueue_Controller implements Controller{
         switch(i){
             case 1: confirmInjuctionClicked(); break;
             case 2: removeInjuctionClicked(); break;
-            }
+        }
     }
     
     private void confirmInjuctionClicked(){
-        
+        Injuction b = injuctions.get(actual.getSelectedInjuction());
+        actual.setEnabled(false);
+        current = new ConfirmInjuction_Controller(b,this);
     }
     
     

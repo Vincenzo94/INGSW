@@ -43,10 +43,6 @@ public class Main_Controller{
         return instance;
     }
     
-    public Operator getOperator() {
-        return operator;
-    }
-    
     public void loginDone(Operator o){
         operator=o;
         Log_Controller.setOperator(o);
@@ -77,7 +73,7 @@ public class Main_Controller{
         switch(i){
             case 1: inj.updateInjuctionsQueue(); break;
             case 2: bill.updateBillsQueue(); break;
-            case 0: regy.searchClicked(); break; 
+            case 0: regy.updateView(); break; 
         }
     }
     

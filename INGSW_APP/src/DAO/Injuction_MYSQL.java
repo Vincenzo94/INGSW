@@ -33,6 +33,9 @@ public class Injuction_MYSQL implements DAO_Document{
                                       + " WHERE ID = ?";
     private final String QUERY_GET_ALL_INJUCTIONS_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + VIEW
                                                            + " WHERE CONTRACT = ?";
+    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
+
+    
 
     public Injuction_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;
@@ -116,7 +119,13 @@ public class Injuction_MYSQL implements DAO_Document{
 
     @Override
     public void setState(Document d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_STATE);
+            statement.setString(1, d.getState());
+            statement.setInt(2, d.getId());
+            if(!dbManager.doUpdate(statement))
+                throw new SQLException("Unable to set State to " +d.getId());
+            } catch (SQLException ex) {
+        }
     }
-    
 }

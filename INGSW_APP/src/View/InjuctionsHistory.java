@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class Injuctions extends javax.swing.JFrame {
+public class InjuctionsHistory extends javax.swing.JFrame {
 
     private final LinkedList<ActionListener> actionListener;
     private final LinkedList<MouseListener> mouseListener;
@@ -24,7 +24,7 @@ public class Injuctions extends javax.swing.JFrame {
     /**
      * Creates new form Injuctions
      */
-    public Injuctions() {
+    public InjuctionsHistory() {
         tableModelInjuctions = new DefaultTableModel(){
             @Override
             public Class getColumnClass(int column) {
@@ -65,11 +65,11 @@ public class Injuctions extends javax.swing.JFrame {
         paymentValueLabel.setText(s);
     }
         
-    public int countSelectedRows(){
+    public int getInjuctionCount(){
         return injuctionsTable.getSelectedRowCount();
     }
     
-    public int getSelectedRow(){
+    public int getSelectedInjuction(){
         return injuctionsTable.getSelectedRow();
     }
     
@@ -127,6 +127,7 @@ public class Injuctions extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 800));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         injuctionsTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -143,6 +144,7 @@ public class Injuctions extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 150;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -155,10 +157,10 @@ public class Injuctions extends javax.swing.JFrame {
         billsPeriodLabel.setText("Bill's period of reference:");
 
         billsPeriodValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billsPeriodValueLabel.setText("value");
+        billsPeriodValueLabel.setText(" ");
 
         billsDueValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        billsDueValueLabel.setText("value");
+        billsDueValueLabel.setText(" ");
 
         billsDueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billsDueLabel.setText("Bill's due date:");
@@ -167,55 +169,55 @@ public class Injuctions extends javax.swing.JFrame {
         detectionLabel.setText("Detection date:");
 
         detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionValueLabel.setText("value");
+        detectionValueLabel.setText(" ");
 
         paymentLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         paymentLabel.setText("Payment date:");
 
         paymentValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        paymentValueLabel.setText("value");
+        paymentValueLabel.setText(" ");
 
         javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
         summaryPanel.setLayout(summaryPanelLayout);
         summaryPanelLayout.setHorizontalGroup(
             summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(summaryPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(summaryPanelLayout.createSequentialGroup()
-                        .addComponent(paymentLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paymentValueLabel))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, summaryPanelLayout.createSequentialGroup()
-                        .addComponent(detectionLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(detectionValueLabel))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, summaryPanelLayout.createSequentialGroup()
-                        .addComponent(billsDueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(billsDueValueLabel))
+                .addGap(17, 17, 17)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(summaryPanelLayout.createSequentialGroup()
                         .addComponent(billsPeriodLabel)
                         .addGap(29, 29, 29)
-                        .addComponent(billsPeriodValueLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(billsPeriodValueLabel))
+                    .addGroup(summaryPanelLayout.createSequentialGroup()
+                        .addComponent(billsDueLabel)
+                        .addGap(134, 134, 134)
+                        .addComponent(billsDueValueLabel))
+                    .addGroup(summaryPanelLayout.createSequentialGroup()
+                        .addComponent(detectionLabel)
+                        .addGap(128, 128, 128)
+                        .addComponent(detectionValueLabel))
+                    .addGroup(summaryPanelLayout.createSequentialGroup()
+                        .addComponent(paymentLabel)
+                        .addGap(138, 138, 138)
+                        .addComponent(paymentValueLabel))))
         );
         summaryPanelLayout.setVerticalGroup(
             summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(summaryPanelLayout.createSequentialGroup()
-                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(17, 17, 17)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(billsPeriodLabel)
                     .addComponent(billsPeriodValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(billsDueLabel)
                     .addComponent(billsDueValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(detectionLabel)
                     .addComponent(detectionValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(paymentLabel)
                     .addComponent(paymentValueLabel)))
         );
@@ -223,6 +225,7 @@ public class Injuctions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 40);
         jPanel1.add(summaryPanel, gridBagConstraints);

@@ -6,7 +6,6 @@
 package View;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -19,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class Bills extends javax.swing.JFrame {
+public class BillsHistory extends javax.swing.JFrame {
 
     private final DefaultTableModel billModel;
     private final LinkedList<MouseListener> mouseListener;
@@ -27,7 +26,7 @@ public class Bills extends javax.swing.JFrame {
     /**
      * Creates new form Bills
      */
-    public Bills() {
+    public BillsHistory() {
         billModel  = new DefaultTableModel(){
             @Override
             public Class getColumnClass(int column) {
@@ -64,7 +63,7 @@ public class Bills extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        billTable = new javax.swing.JTable();
         consuptionDataPanel = new javax.swing.JPanel();
         taxLabel = new javax.swing.JLabel();
         taxValueLabel = new javax.swing.JLabel();
@@ -85,24 +84,25 @@ public class Bills extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 800));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(billModel);
-        jTable1.setMinimumSize(new java.awt.Dimension(160, 160));
-        jTable1.setPreferredSize(new java.awt.Dimension(160, 500));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        billTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        billTable.setModel(billModel);
+        billTable.setMinimumSize(new java.awt.Dimension(160, 160));
+        billTable.setPreferredSize(new java.awt.Dimension(160, 500));
+        billTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                billTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(billTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipadx = 200;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -248,10 +248,10 @@ public class Bills extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void billTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billTableMouseClicked
         for(MouseListener m: mouseListener)
             m.mouseClicked(evt);
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_billTableMouseClicked
 
     private void buildPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildPDFButtonActionPerformed
         for(ActionListener a: actionListener)
@@ -270,6 +270,7 @@ public class Bills extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JTable billTable;
     private javax.swing.JButton buildPDFButton;
     private javax.swing.JPanel consuptionDataPanel;
     private javax.swing.JLabel detectionDateLabel;
@@ -278,7 +279,6 @@ public class Bills extends javax.swing.JFrame {
     private javax.swing.JLabel detectionValueLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel operatorIDLabel;
     private javax.swing.JLabel operatorIDValueLabel;
     private javax.swing.JButton reportErrorButton;
@@ -297,13 +297,13 @@ public class Bills extends javax.swing.JFrame {
     }
 
     public JTable getBillTable() {
-        return jTable1;
+        return billTable;
     }
     public DefaultTableModel getTableModelBills(){
         return billModel;
     }
     public Integer getSelectedBill(){
-        return jTable1.getSelectedRow();
+        return billTable.getSelectedRow();
     }
     public void setTax(Float tax){
         taxValueLabel.setText(tax.toString());
@@ -334,5 +334,9 @@ public class Bills extends javax.swing.JFrame {
         if(j == buildPDFButton) return 2;
         if(j == reportErrorButton) return 3;
         return 0;
+    }
+
+    public Integer getBillCount() {
+        return billTable.getRowCount();
     }
 }

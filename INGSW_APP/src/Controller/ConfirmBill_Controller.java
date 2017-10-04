@@ -40,7 +40,7 @@ public class ConfirmBill_Controller implements Controller{
     private final Map<Bill,Contract>  bills;
     private final Bill bill;
     private  BillsQueue_Controller billsQueueController;
-    private  Bills_Controller billsController;
+    private  BillsHistory_Controller billsController;
     private final BuildPDF view;
     private final BuildPDFMultiple views;
     private SendPDF sendPDFview;
@@ -119,7 +119,7 @@ public class ConfirmBill_Controller implements Controller{
         view.setVisible(true);
         
     }
-    public ConfirmBill_Controller(Bill b,Bills_Controller main){
+    public ConfirmBill_Controller(Bill b,BillsHistory_Controller main){
         bill=b;
         bills=null;
         this.billsController = main;

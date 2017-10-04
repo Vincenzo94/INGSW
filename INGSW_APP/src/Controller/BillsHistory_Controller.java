@@ -9,7 +9,7 @@ import DAO.Bill_MYSQL;
 import DAO.DAO_Document;
 import Model.Bill;
 import Model.Contract;
-import View.Bills;
+import View.BillsHistory;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -27,11 +27,11 @@ import javax.swing.table.TableColumnModel;
  *
  * @author ansan
  */
-public class Bills_Controller implements Controller {
+public class BillsHistory_Controller implements Controller {
     private final Contract contract;
     private final Registry_Controller reg;
     private Database_Controller dbManager;
-    private final Bills view;
+    private final BillsHistory view;
     private final DefaultTableCellRenderer defaultRender;
     private DefaultTableModel billsModel;
     private List<Bill> bills;
@@ -39,22 +39,22 @@ public class Bills_Controller implements Controller {
     private Controller current;
 
     
-    public Bills_Controller(Registry_Controller reg, Contract contract) {
+    public BillsHistory_Controller(Registry_Controller reg, Contract contract) {
         this.contract = contract;
         this.reg = reg;
-        view = new Bills();
+        view = new BillsHistory();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Bills_Controller bc = (Bills_Controller)controller;
+                BillsHistory_Controller bc = (BillsHistory_Controller)controller;
                 bc.buttonCliked(e);            
             }
         });
         view.addMouseListener(new Listener(this){
             @Override
             public void mouseClicked(MouseEvent e){
-                Bills_Controller bc = (Bills_Controller)controller;
+                BillsHistory_Controller bc = (BillsHistory_Controller)controller;
                 bc.tableCliked(e);   
             }
         });
@@ -83,17 +83,20 @@ public class Bills_Controller implements Controller {
     }
 
     private void tableCliked(MouseEvent e) {
-        Integer bill = view.getSelectedBill();
-        if(bill != null){
-            Bill temp = bills.get(bill);
-            view.setTax(temp.getTax());
-            view.setTotal(temp.getTotal());
-            view.setDetection(temp.getDetectionValue());
-            view.setDetector(temp.getDetector());
-            view.setDetectionDate(temp.getDetectionDate());
-            view.activeGenPDF(true);
-            view.activeBillReportError(true);
-        }   
+        Integer billCont = view.getBillCount();
+        if(billCont>0){
+            Integer bill = view.getSelectedBill();
+            if(bill != null){
+                Bill temp = bills.get(bill);
+                view.setTax(temp.getTax());
+                view.setTotal(temp.getTotal());
+                view.setDetection(temp.getDetectionValue());
+                view.setDetector(temp.getDetector());
+                view.setDetectionDate(temp.getDetectionDate());
+                view.activeGenPDF(true);
+                view.activeBillReportError(true);
+            } 
+        }
     }
     private void setDefaultRender(JTable table) {
         TableColumnModel tableModel = table.getColumnModel();

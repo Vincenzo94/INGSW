@@ -105,6 +105,11 @@ public class InjuctionsQueuePanel extends javax.swing.JPanel {
         injuctionConfirmButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionConfirmButton.setText("Confirm");
         injuctionConfirmButton.setEnabled(false);
+        injuctionConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                injuctionConfirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -130,7 +135,12 @@ public class InjuctionsQueuePanel extends javax.swing.JPanel {
             a.actionPerformed(evt);
     }//GEN-LAST:event_injuctionDeleteButtonActionPerformed
 
-public void activeInjuctionButtons(){
+    private void injuctionConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_injuctionConfirmButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_injuctionConfirmButtonActionPerformed
+
+    public void activeInjuctionButtons(){
         injuctionConfirmButton.setEnabled(true);
         injuctionDeleteButton.setEnabled(true);
     }
@@ -141,16 +151,15 @@ public void activeInjuctionButtons(){
         return injuctionsTable.getSelectedRow();
     }
     
-        public DefaultTableModel getTableModelInjuctionsQueue(){
+    public DefaultTableModel getTableModelInjuctionsQueue(){
         return tableModelInjuctionsQueue;
     }
-    
-                public int checkButton(Component c){
-            if(c == injuctionConfirmButton)  return 1;
-            if(c == injuctionDeleteButton) return 2;
-            return 0;
-        }
-        
+    public int checkButton(Component c){
+        if(c == injuctionConfirmButton)  return 1;
+        if(c == injuctionDeleteButton) return 2;
+        return 0;
+    }
+
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton injuctionConfirmButton;

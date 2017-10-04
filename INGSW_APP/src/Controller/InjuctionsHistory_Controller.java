@@ -6,12 +6,14 @@
 package Controller;
 
 import DAO.Injuction_MYSQL;
+import Model.Bill;
 import Model.Contract;
 import Model.Injuction;
-import View.Injuctions;
+import View.InjuctionsHistory;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JLabel;
@@ -25,15 +27,16 @@ import javax.swing.table.TableColumnModel;
  *
  * @author ansan
  */
-public class Injuctions_Controller implements Controller {
+public class InjuctionsHistory_Controller implements Controller {
     private final Contract contract;
     private final Registry_Controller reg;
     private Database_Controller dbManager;
-    private Injuctions view;
+    private InjuctionsHistory view;
     private List<Injuction> injuctions;
     private final DefaultTableCellRenderer defaultRender;
+    private Controller current;
     
-    public Injuctions_Controller(Registry_Controller reg, Contract contract) {
+    public InjuctionsHistory_Controller(Registry_Controller reg, Contract contract) {
         try {
             dbManager=Database_Controller.getDbManager();
         } catch (SQLException ex) {
@@ -42,7 +45,7 @@ public class Injuctions_Controller implements Controller {
         
         this.contract=contract;
         this.reg=reg;
-        view=new Injuctions();
+        view=new InjuctionsHistory();
         view.setVisible(true);
         defaultRender = new DefaultTableCellRenderer() {
             @Override
@@ -58,7 +61,7 @@ public class Injuctions_Controller implements Controller {
         view.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Injuctions_Controller bc = (Injuctions_Controller)controller;
+                InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
                 bc.buttonCliked((Component)e.getSource());            
             }
         });
@@ -66,7 +69,7 @@ public class Injuctions_Controller implements Controller {
         view.addMouseListener(new Listener(this){
             @Override
             public void mouseClicked(MouseEvent e){
-                Injuctions_Controller bc = (Injuctions_Controller)controller;
+                InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
                 bc.tableClicked();
             }
         });
@@ -76,24 +79,35 @@ public class Injuctions_Controller implements Controller {
     private void buttonCliked(Component component) {
         int i = view.checkButton(component);
         switch(i){
-            case 1: buildClicked();break;
-            case 2: view.dispose(); break;
+            case 1: buildPDFClicked();break;
+            case 2: view.dispose(); reg.back(); break;
         }
     }
 
     private void tableClicked() {
-        int i= view.countSelectedRows();
-        if(i>0){
-            i=view.getSelectedRow();
-            //Santangelo deve agggiungere delle cose!!! i settere nella view sono già creati
-            
-            
-            view.enableBuildPDFButton(true);
+        Integer injuctionCont = view.getInjuctionCount();
+        if(injuctionCont>0){
+            Integer injuction=view.getSelectedInjuction();
+            if(injuction != null){
+                Injuction temp = injuctions.get(injuction);
+                Bill ref = temp.getBill();
+                view.setBillsPeriod(ref.getPeriod());
+                Date dueDate = ref.getDeadline();
+                view.setBillsDue(dueDate.toString());
+                Float detectionValue = ref.getDetectionValue();
+                view.setDetectionValue(detectionValue.toString());
+                Date paymentDate = ref.getPaymentDate();
+                if(paymentDate != null)
+                    view.setPaymentDate(paymentDate.toString());
+                view.enableBuildPDFButton(true);
+            }
         }
     }
 
-    private void buildClicked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void buildPDFClicked() {
+        Injuction b = injuctions.get(view.getSelectedInjuction());
+        view.dispose();
+        current = new ConfirmInjuction_Controller(b,this);
     }
 
     private void initTable() {
@@ -120,6 +134,10 @@ public class Injuctions_Controller implements Controller {
             tableColumn = tableModel.getColumn(i);
             tableColumn.setCellRenderer(defaultRender);
         }
+    }
+
+    void back() {
+        view.setVisible(true);
     }
     
 }
