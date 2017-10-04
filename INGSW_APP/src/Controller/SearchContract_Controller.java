@@ -22,12 +22,13 @@ public class SearchContract_Controller implements Controller{
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
     Contract bag;
-    
+    Popup_Controller popupcontroller;
     
     SearchContract_Controller(DefaultTableModel table, Contract c) {
         this.bag=c;
         this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
+        
         initRegistryManagement();
     }
     
@@ -43,8 +44,15 @@ public class SearchContract_Controller implements Controller{
         contracts.clear();
         if(bag==null)
             contracts = daoContract.getAllContracts();
-        else
+        else{
             contracts = daoContract.getAllContracts(bag);
+            if(contracts.size()==0){
+                popupcontroller=Popup_Controller.getPopup_C();
+                popupcontroller.showPopup("No result found!");
+            }
+                
+        }
+            
         for(Contract temp : contracts){
                 Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
                 tableModelRegistryManagement.addRow(row);

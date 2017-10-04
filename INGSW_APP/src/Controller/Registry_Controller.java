@@ -25,6 +25,7 @@ public class Registry_Controller implements Controller{
     private final Database_Controller dbManager;
     private Controller current;
     private List<Contract> contracts = null;
+    Popup_Controller popupcontroller;
 
     public Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
         this.operator = operator;
