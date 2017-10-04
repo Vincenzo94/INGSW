@@ -36,7 +36,7 @@ public class Bills_Controller implements Controller {
     private DefaultTableModel billsModel;
     private List<Bill> bills;
     private Database_Controller dbController;
-    private ConfirmBill_Controller current;
+    private Controller current;
 
     
     public Bills_Controller(Registry_Controller reg, Contract contract) {
@@ -138,7 +138,9 @@ public class Bills_Controller implements Controller {
     }
 
     private void reportErrorClicked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Bill b = bills.get(view.getSelectedBill());
+        view.dispose();
+        current = new ReportError_Controller(b);
     }
 
     public void back() {

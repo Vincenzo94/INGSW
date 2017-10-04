@@ -332,7 +332,8 @@ public class BillsQueuePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_deselectAllButtonActionPerformed
 
     private void reportErrorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportErrorButtonActionPerformed
-        // TODO add your handling code here:
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
     }//GEN-LAST:event_reportErrorButtonActionPerformed
 
     public void addActionListener(ActionListener a){

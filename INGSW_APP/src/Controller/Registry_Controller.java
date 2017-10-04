@@ -11,7 +11,6 @@ import View.RegistryPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -97,12 +96,23 @@ public class Registry_Controller implements Controller{
         String name=actual.getNameSearch();
         String surname=actual.getSurnameSearch();
         String tax=actual.getTaxSearch();
-        Integer id=actual.getIdSearch();
-        if(name.length()!=0 || surname.length()!=0 || tax.length()!=0 || id!=null)
-            bag=new Contract(id,null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
-        current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),bag);
-        contracts =((SearchContract_Controller)current).getContracts();
-    }
+        String id_string=actual.getIdSearch();
+        boolean a = (!name.equals("") & !name.matches("[[a-z]|[A-Z]]*"));
+        boolean b = (!surname.equals("") & !surname.matches("[[a-z]|[A-Z]]*"));
+        boolean c = (!tax.equals("") & !tax.matches("[[a-z]|[0-9]]*"));
+        boolean d = (!id_string.equals("") & !id_string.matches("[0-9]*"));
+        
+        if(a || b || c || d)
+            Popup_Controller.getPopup_C().showPopup("Inserted invalid charachters");
+        else{
+                if(!id_string.equals(""))
+                    bag=new Contract(Integer.valueOf(id_string),null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
+                else
+                    bag=new Contract(null,null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),bag);
+            contracts =((SearchContract_Controller)current).getContracts();
+            }
+        }
     
     private void alterholderCliked(){
         int row = actual.getSelectedContract();

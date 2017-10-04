@@ -84,8 +84,8 @@ public class InjuctionsQueue_Controller implements Controller{
     private void buttonClicked(Component c){
         int i = actual.checkButton(c);
         switch(i){
-            case 1: removeInjuctionClicked(); break;
-            case 2: confirmInjuctionClicked(); break;
+            case 1: confirmInjuctionClicked(); break;
+            case 2: removeInjuctionClicked(); break;
             }
     }
     

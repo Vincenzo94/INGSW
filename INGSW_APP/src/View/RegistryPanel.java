@@ -425,12 +425,8 @@ public class RegistryPanel extends javax.swing.JPanel {
         return taxCField.getText();
     }
     
-    public Integer getIdSearch(){
-        String i = contractIdField.getText();
-        if(i.length()!=0)
-            return Integer.valueOf(contractIdField.getText());
-        else
-            return null;
+    public String getIdSearch(){
+        return contractIdField.getText();
     }
     
         public DefaultTableModel getTableModelRegistryManagement(){

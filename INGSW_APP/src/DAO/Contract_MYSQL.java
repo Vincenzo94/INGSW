@@ -217,7 +217,7 @@ public class Contract_MYSQL implements DAO_Contract{
             if(id == null)
                 statement.setString(3,"%");
             else
-                statement.setInt(3,id);
+                statement.setString(3,String.valueOf(id)+"%");
             statement.setString(4,tax+"%");
             ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
