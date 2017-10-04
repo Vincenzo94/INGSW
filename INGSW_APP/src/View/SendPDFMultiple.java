@@ -71,7 +71,11 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Send PDF's");
         setAlwaysOnTop(true);
+        setBounds(new java.awt.Rectangle(0, 23, 0, 0));
+        setMinimumSize(new java.awt.Dimension(616, 281));
+        setPreferredSize(new java.awt.Dimension(618, 234));
         setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -85,6 +89,9 @@ public class SendPDFMultiple extends javax.swing.JFrame {
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTable1.setModel(model);
+        jTable1.setBounds(new java.awt.Rectangle(0, 23, 0, 0));
+        jTable1.setMaximumSize(new java.awt.Dimension(200, 100));
+        jTable1.setPreferredSize(new java.awt.Dimension(340, 140));
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -101,6 +108,9 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Log address' error"));
+        jPanel1.setBounds(new java.awt.Rectangle(0, 23, 0, 0));
+        jPanel1.setMaximumSize(new java.awt.Dimension(300, 150));
+        jPanel1.setPreferredSize(new java.awt.Dimension(279, 139));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Message of error");

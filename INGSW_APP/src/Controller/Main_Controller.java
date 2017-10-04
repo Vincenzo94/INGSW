@@ -94,19 +94,26 @@ public class Main_Controller{
     private void help(){
         int i = actual.getSelectedPanel();
         switch (i){
-            case 0: Popup_Controller.getPopup_C().showPopup("Primo pannello"); break;
-            case 1: Popup_Controller.getPopup_C().showPopup("Secondo pannello"); break;
-            case 2: Popup_Controller.getPopup_C().showPopup("Terzo pannello");break;
+            case 0: Popup_Controller.getPopup_C().showPopup("<html>1) To make a new search it's enough to fill one or more field and click on SEARCH button <br><br>"
+                                                                   + "2) After have selected a single row from the table will be can to: <br> <br> "
+                                                                    + "&#09 2.1) add a new contract through the ADD button; <br> <br> "
+                                                                    + "&#09 2.2) alter the holder through ALTER HOLDER button; <br> <br> "
+                                                                    + "&#09 2.3) remove the contract through REMOVE button. <br> <br> "
+                                                                    + "&#09 2.4) view bills through BILLS button or injuctions through INJUCTIONS button  </html>"); break;
+            case 1: Popup_Controller.getPopup_C().showPopup("After have selected a single row from the table it will be possible to confirm or delete the injuction"); break;
+            case 2: Popup_Controller.getPopup_C().showPopup("After have selected a single or multiple rows from the table it will be possible confirm or deselect them");break;
         }
     }
     
     private void logOut(){
         actual.dispose();
+        Log_Controller.writeLog(" logout",Main_Controller.class);
         instance=null;
         try {
             instance = new Main_Controller();
         } catch (SQLException ex) {
         }
-    }    
+    }   
+    
        
 }

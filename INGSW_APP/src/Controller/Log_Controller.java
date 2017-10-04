@@ -15,8 +15,10 @@ import org.apache.log4j.PropertyConfigurator;
 public class Log_Controller implements Controller{
 
     private static Integer operator;
+    private static String string;
     static void setOperator(Operator o) {
         operator = o.getId();
+        string="User: "+operator;
     }
     
     private Log_Controller() {
@@ -25,6 +27,6 @@ public class Log_Controller implements Controller{
     public static void writeLog(String s, Class c){
         Logger log = Logger.getLogger(c.getName());
         PropertyConfigurator.configure("././src/ingsw_app/log4j.properties");
-        log.info(s);
+        log.info(string+s);
     }
 }

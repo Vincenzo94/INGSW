@@ -12,6 +12,7 @@ import DAO.DAO_Document;
 import Model.Bill;
 import Model.Contract;
 import Model.EMailSender;
+import Model.Operator;
 import Model.PDFMaker;
 import View.BuildPDF;
 import View.BuildPDFMultiple;
@@ -48,7 +49,7 @@ public class ConfirmBill_Controller implements Controller{
     private DefaultTableCellRenderer defaultRender = null;
     private Database_Controller dbController;
     private SendPDFMultiple sendPDFviewMultiple;
-
+    private Operator operator;
 
     
     public ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
@@ -183,6 +184,7 @@ public class ConfirmBill_Controller implements Controller{
                 c.okClicked();
                 }
             });
+            Log_Controller.writeLog(" send the bill "+bill.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmBill_Controller.class);
             bill.setState("Issued");
             daoDocument.setState(bill);
         }
@@ -199,10 +201,12 @@ public class ConfirmBill_Controller implements Controller{
                 }
             });
             for(Bill b:bills.keySet()){
+                Log_Controller.writeLog(" send the bill "+b.getId()+" to contract: "+bills.get(b).getName()+" "+bills.get(b).getSurname()+" with ID "+b.getContractID()+" at the address: "+bills.get(b).getEmailAddress(),ConfirmBill_Controller.class);
                 b.setState("Issued");
                 daoDocument.setState(b);
             }
         }
+        
         
     }
 

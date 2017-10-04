@@ -111,9 +111,9 @@ public class InjuctionsQueue_Controller implements Controller{
         for(Injuction temp : injuctions){
             if(temp.getOperatorID() == null){
                 daoInjuction.setManagedOperator(temp,operator);
-                Log_Controller.writeLog("User: "+ operator.getId()+" manages the injuction "+temp.getId(),this.getClass());
+                Log_Controller.writeLog(" manages the injuction "+temp.getId(),this.getClass());
             }
-            Log_Controller.writeLog("User: "+ operator.getId()+" manages the injuction "+temp.getId(), this.getClass());
+            Log_Controller.writeLog(" manages the injuction "+temp.getId(), this.getClass());
             Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
             tableModelInjuctionsQueue.addRow(row);
             setDefaultRender(actual.getInjuctionTable());

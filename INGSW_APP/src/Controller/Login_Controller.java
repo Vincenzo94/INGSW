@@ -58,7 +58,8 @@ public class Login_Controller implements Controller{
         operator=new Operator(user,passw);
         operator = DAO.check(operator);
         if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-            Log_Controller.writeLog("Logged user: "+ user,Login_Controller.class);
+            Log_Controller.setOperator(operator);
+            Log_Controller.writeLog(" logged",Login_Controller.class);
             login.dispose();
             main.loginDone(operator);
             }

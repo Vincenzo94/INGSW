@@ -154,9 +154,9 @@ public class BillsQueue_Controller implements Controller{
         for(Bill temp : bills){
             if(temp.getOperatorID() == null){
                 daoBill.setManagedOperator(temp,operator);
-                Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
+                Log_Controller.writeLog(" manages the bill "+temp.getId(), this.getClass());
             }
-            Log_Controller.writeLog("User: "+ operator.getId()+" manages the bill "+temp.getId(), this.getClass());
+            Log_Controller.writeLog(" manages the bill "+temp.getId(), this.getClass());
             Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
             tableModelBillsQueue.addRow(row);
         }
