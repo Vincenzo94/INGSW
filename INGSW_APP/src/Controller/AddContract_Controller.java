@@ -21,6 +21,7 @@ public class AddContract_Controller implements Controller{
     private AddHolder view;
     private final Registry_Controller controller;
     private Contract contract;
+    Popup_Controller popupcontroller;
 
 public AddContract_Controller(Registry_Controller controller){
         this.controller=controller;
@@ -61,8 +62,9 @@ public AddContract_Controller(Registry_Controller controller){
         String billingZip = view.getZip1();
         String billingStreet = view.getStreet1();
         
-        if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals(""))
+        if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals("")){
             contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
+        }
         else
             contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
         daoContract.create(contract,controller.getOperator());

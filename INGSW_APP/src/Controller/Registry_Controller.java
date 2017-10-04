@@ -26,6 +26,7 @@ public class Registry_Controller implements Controller{
     private final Database_Controller dbManager;
     private Controller current;
     private List<Contract> contracts = null;
+    Popup_Controller popupcontroller;
 
     public Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
         this.operator = operator;
@@ -97,7 +98,7 @@ public class Registry_Controller implements Controller{
         String name=actual.getNameSearch();
         String surname=actual.getSurnameSearch();
         String tax=actual.getTaxSearch();
-        Integer id=actual.getIdSearch();
+        Integer id=actual.getIdSearch();    
         if(name.length()!=0 || surname.length()!=0 || tax.length()!=0 || id!=null)
             bag=new Contract(id,null,null,null,name,surname,tax,null,null,null,null,null,null,null,null,null,null,null,null,null);
         current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),bag);

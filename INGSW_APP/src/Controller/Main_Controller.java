@@ -99,7 +99,7 @@ public class Main_Controller{
                                                                     + "&#09 2.1) add a new contract through the ADD button; <br> <br> "
                                                                     + "&#09 2.2) alter the holder through ALTER HOLDER button; <br> <br> "
                                                                     + "&#09 2.3) remove the contract through REMOVE button. <br> <br> "
-                                                                    + "&#09 2.4) view bills through BILLS button or injuctions through INJUCTIONS button  </html>"); break;
+                                                                    + "&#09 2.4) view bills through BILLS button or injuctions through INJUCTIONS button.  </html>"); break;
             case 1: Popup_Controller.getPopup_C().showPopup("After have selected a single row from the table it will be possible to confirm or delete the injuction"); break;
             case 2: Popup_Controller.getPopup_C().showPopup("After have selected a single or multiple rows from the table it will be possible confirm or deselect them");break;
         }
