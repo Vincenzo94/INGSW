@@ -46,6 +46,7 @@ private LinkedList<ActionListener> listener;
         setTitle("INGSW_GR12 - Information");
         setAlwaysOnTop(true);
         setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         messageLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

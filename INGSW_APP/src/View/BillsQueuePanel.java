@@ -53,9 +53,7 @@ public class BillsQueuePanel extends javax.swing.JPanel {
         };
             mouseListener = new LinkedList<>();
             actionListener = new LinkedList<>();
-            initComponents();
-            
-            
+            initComponents();            
     }
 
     /**
@@ -344,7 +342,7 @@ public class BillsQueuePanel extends javax.swing.JPanel {
     public void addMouseListener(MouseListener a){
         mouseListener.add(a);
     }
-    
+        
     
     public List<Integer> getSelectedBill(){
         List<Integer> l = new LinkedList<>();

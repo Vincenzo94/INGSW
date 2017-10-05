@@ -46,6 +46,8 @@ public class Delete extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Remove Contract");
         setAlwaysOnTop(true);
+        setExtendedState(6);
+        setUndecorated(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

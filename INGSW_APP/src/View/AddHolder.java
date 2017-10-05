@@ -79,6 +79,8 @@ public class AddHolder extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Add Holder");
         setAlwaysOnTop(true);
+        setExtendedState(6);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());

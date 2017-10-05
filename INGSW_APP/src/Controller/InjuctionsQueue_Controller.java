@@ -72,12 +72,7 @@ public class InjuctionsQueue_Controller implements Controller{
         updateInjuctionsQueue();
     }
     
-    JPanel getPanel(){
-        return actual;
-    }
-    
-    
-    public void activeInjuctionButtons(){
+    private void activeInjuctionButtons(){
         actual.activeInjuctionButtons();
     }
     
@@ -87,15 +82,7 @@ public class InjuctionsQueue_Controller implements Controller{
             case 1: confirmInjuctionClicked(); break;
             case 2: removeInjuctionClicked(); break;
         }
-    }
-    
-    private void confirmInjuctionClicked(){
-        Injuction b = injuctions.get(actual.getSelectedInjuction());
-        actual.setEnabled(false);
-        current = new ConfirmInjuction_Controller(b,this);
-    }
-    
-    
+    }    
         
     private void initInjuctionsQueue() {
         tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
@@ -139,6 +126,12 @@ public class InjuctionsQueue_Controller implements Controller{
         int row = actual.getSelectedInjuction();
         actual.setEnabled(false);
         current = new RemoveInjuction_Controller(this, injuctions.get(row));
+    }
+    
+    private void confirmInjuctionClicked(){
+        Injuction b = injuctions.get(actual.getSelectedInjuction());
+        actual.setEnabled(false);
+        current = new ConfirmInjuction_Controller(b,this);
     }
     
     public void back(){

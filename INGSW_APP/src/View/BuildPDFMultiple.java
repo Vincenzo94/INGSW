@@ -80,6 +80,8 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Build PDF's");
         setAlwaysOnTop(true);
+        setExtendedState(6);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 

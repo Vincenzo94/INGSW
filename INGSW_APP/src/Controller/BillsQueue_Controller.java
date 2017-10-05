@@ -11,13 +11,13 @@ import Model.Bill;
 import Model.Operator;
 import View.BillsQueuePanel;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +35,7 @@ public class BillsQueue_Controller implements Controller{
     private final DefaultTableCellRenderer defaultRender;
     private final Database_Controller dbManager;
     private List<Bill> bills;
-    private Operator operator;
+    private final Operator operator;
     private Controller current;
 
     public BillsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
@@ -71,13 +71,9 @@ public class BillsQueue_Controller implements Controller{
         });
         initBillsQueue();
         updateBillsQueue();
+        System.out.println(actual.getName());
     }
-    
-    JPanel getPanel(){
-        return actual;
-    }
-    
-    
+       
     private void tableClicked(){
         List<Integer> bill = actual.getSelectedBill();
             if(bill.size() ==  1){
@@ -117,25 +113,25 @@ public class BillsQueue_Controller implements Controller{
     }
     
     private void confirmClicked(){
+        
+        
         LinkedList<Bill> selected=new LinkedList<>();
         for(Integer i: actual.getSelectedBill()){
             selected.add(bills.get(i));
         }
-        actual.setEnabled(false);
+        
         if(selected.size()==1)
             current = new ConfirmBill_Controller(selected.getFirst(),this);
         else
             current = new ConfirmBill_Controller(selected,this);
     }
-    
-    
+     
     public void back(){
+        actual.getParent().setEnabled(true);
         actual.setEnabled(true);
         updateBillsQueue();
     }
-    
-    
-    
+        
     private void initBillsQueue() {
         tableModelBillsQueue = actual.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);

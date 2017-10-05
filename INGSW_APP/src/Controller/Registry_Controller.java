@@ -12,7 +12,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  *
@@ -53,11 +52,7 @@ public class Registry_Controller implements Controller{
         });
         actual.setVisible(true);
     }
-    
-    JPanel getPanel(){
-        return actual;
-    }
-    
+
     private void tableClicked(){
         if(!(current instanceof SearchContract_Controller))
             current = new SearchContract_Controller(actual.getTableModelRegistryManagement(),null);  

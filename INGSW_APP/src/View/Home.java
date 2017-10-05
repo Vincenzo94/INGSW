@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import javax.swing.JFrame;
 import javax.swing.event.ChangeListener;
 /**
  *
@@ -33,7 +34,7 @@ public class Home extends javax.swing.JFrame {
         homePane.addTab("Registry Management", panel.get(0));
         homePane.addTab("Injuctions Queue", panel.get(1));
         homePane.addTab("Bills Queue", panel.get(2));
-
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }
 
     /**
@@ -54,7 +55,16 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12");
+        setExtendedState(6);
+        setName(""); // NOI18N
+        setUndecorated(true);
+        setResizable(false);
         setSize(new java.awt.Dimension(700, 700));
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         homePane.setMinimumSize(new java.awt.Dimension(1121, 875));
@@ -109,6 +119,10 @@ public class Home extends javax.swing.JFrame {
         for(ChangeListener a: changeListener)
             a.stateChanged(evt);
     }//GEN-LAST:event_homePaneStateChanged
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+            //this.setEnabled(true);
+    }//GEN-LAST:event_formFocusGained
     
     @Override
     public void addMouseListener(MouseListener m){
@@ -122,40 +136,12 @@ public class Home extends javax.swing.JFrame {
         changeListener.add(a);
     }
     
-//    public DefaultTableModel getTableModelRegistryManagement(){
-//        return tableModelRegistryManagement;
-//    }
-//    
-//    public DefaultTableModel getTableModelBillsQueue(){
-//        return tableModelBillsQueue;
-//    }
-//    
-//    public DefaultTableModel getTableModelInjuctionsQueue(){
-//        return tableModelInjuctionsQueue;
-//    }
-//    
-    //REGISTRY MANAGEMENT
-    
-    
-    //BILL
-    
-    
-    //INJUCTION
-    
-    
    public int checkButton(Component c){
        if(c == jMenuItem1) return 1;
        if(c == help) return 2;
        return 0;
    }
-    
-//    public int checkTab(Component c){
-//        if(c == table) return 1;
-//        if(c == table1) return 2;
-//        if(c == jTable1) return 3;
-//        return 0;
-//    }
-//    
+   
     public int getSelectedPanel(){
         return homePane.getSelectedIndex();
     }

@@ -20,7 +20,8 @@ public class AlterHolder extends javax.swing.JFrame {
     public AlterHolder(){
         actionListener = new LinkedList<>();
         initComponents();
-        this.pack();
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //System.out.println(JFrame.MAXIMIZED_BOTH);
     }
 
     public void addActionListener(ActionListener a){
@@ -80,6 +81,7 @@ public class AlterHolder extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12 - Alter Holder");
         setAlwaysOnTop(true);
+        setExtendedState(6);
         setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
