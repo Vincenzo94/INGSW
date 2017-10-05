@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Contract;
 import Model.Operator;
 import java.sql.PreparedStatement;
@@ -76,7 +77,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to update UPDATE_BY in Contract " +c.getId());
         } catch (SQLException ex) {
-
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     @Override
@@ -94,6 +97,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to update Contract " +c.getId());
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     @Override
@@ -113,6 +119,9 @@ public class Contract_MYSQL implements DAO_Contract{
                 throw new SQLException("Unable to update BillingAddress in Contract " +c.getId());
             update_UpdatedBy(c,o);
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     @Override
@@ -129,6 +138,9 @@ public class Contract_MYSQL implements DAO_Contract{
                 throw new SQLException("Unable to update Addrress in Contract " +c.getId());
             update_UpdatedBy(c,o);
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     @Override
@@ -139,6 +151,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to remove Contract "+c.getId());
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 
@@ -167,6 +182,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to insert Contract");
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 
@@ -180,6 +198,9 @@ public class Contract_MYSQL implements DAO_Contract{
                 contracts.add(new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getInt(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getInt(20)));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return contracts;         
     }
@@ -194,6 +215,9 @@ public class Contract_MYSQL implements DAO_Contract{
                 contract = new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getInt(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getInt(20));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return contract;         
     }
@@ -224,6 +248,9 @@ public class Contract_MYSQL implements DAO_Contract{
                 contracts.add(new Contract(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getInt(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19), rs.getInt(20)));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return contracts;         
     }
@@ -253,6 +280,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to add Address " +c.getAddress());
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     @Override
@@ -270,6 +300,9 @@ public class Contract_MYSQL implements DAO_Contract{
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set BillingAddress "+c.getBillingAddress()+" to Contract " +c.getId());
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
     private Integer getAddress(String city, String district, String street, String zip, Integer number){
@@ -285,6 +318,9 @@ public class Contract_MYSQL implements DAO_Contract{
             rs.next();
             id = rs.getInt(1);
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return id;             
     }

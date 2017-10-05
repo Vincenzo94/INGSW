@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Bill;
 import Model.ErrorModel;
 import java.sql.PreparedStatement;
@@ -37,7 +38,9 @@ public class Error_MYSQL implements DAO_Error{
             if(!dbController.doUpdate(statement))
                 throw new SQLException("Unable to insert Error");
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 }

@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Bill;
 import Model.Injuction;
 import Model.Contract;
@@ -114,6 +115,9 @@ public class Injuction_MYSQL implements DAO_Document{
         if(!dbManager.doUpdate(statement))
             throw new SQLException("Unable to remove Injuction " +document.getId());
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 
@@ -125,7 +129,10 @@ public class Injuction_MYSQL implements DAO_Document{
             statement.setInt(2, d.getId());
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set State to " +d.getId());
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 }

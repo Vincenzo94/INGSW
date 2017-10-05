@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Bill;
 import Model.Contract;
 import Model.Document;
@@ -43,7 +44,10 @@ public class Bill_MYSQL implements DAO_Document {
             statement.setInt(2, d.getId());
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set State to " +d.getId());
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 
@@ -58,6 +62,9 @@ public class Bill_MYSQL implements DAO_Document {
                 bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return bills; 
     }
@@ -74,6 +81,9 @@ public class Bill_MYSQL implements DAO_Document {
                 bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return bills;         
     }    
@@ -91,7 +101,10 @@ public class Bill_MYSQL implements DAO_Document {
             statement.setInt(2, document.getId());
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
     }
 

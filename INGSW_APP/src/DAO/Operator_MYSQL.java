@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Operator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,9 @@ public class Operator_MYSQL implements DAO_Operator{
                 loggedOperator = new Operator(rs.getInt("ID"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getBoolean("isDetector"));
             }
         } catch (SQLException ex) {
+            String msg = ex.getMessage();
+            Popup_Controller popupController = Popup_Controller.getPopup_C();
+            popupController.showPopup(msg);
         }
         return loggedOperator;         
    }
