@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.DAO_Operator;
 import DAO.Operator_MYSQL;
+import Model.ErrorModel;
 import Model.Operator;
 import View.Login;
 import java.awt.event.ActionEvent;
@@ -59,6 +60,7 @@ public class Login_Controller implements Controller{
         operator = DAO.check(operator);
         if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
             Log_Controller.setOperator(operator);
+            ErrorModel.setOperatorID(operator.getId());
             Log_Controller.writeLog(" logged",Login_Controller.class);
             login.dispose();
             main.loginDone(operator);

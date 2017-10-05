@@ -20,6 +20,10 @@ public class Home extends javax.swing.JFrame {
     private final LinkedList<ChangeListener> changeListener;
     private final LinkedList<Component> panel;
     public Home() {
+                this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                this.setResizable(false);
+                this.setUndecorated(true);
+
         initComponents();
         
         mouseListener = new LinkedList<>();

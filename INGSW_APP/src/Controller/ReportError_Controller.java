@@ -5,10 +5,16 @@
  */
 package Controller;
 
+import DAO.DAO_Error;
+import DAO.Error_MYSQL;
 import Model.Bill;
+import Model.ErrorModel;
 import View.ReportError;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.sql.SQLException;
+
 
 /**
  *
@@ -18,6 +24,8 @@ public class ReportError_Controller implements Controller{
     
     private final ReportError view;
     private final Bill bill;
+    private String text;
+    private Database_Controller dbController;
 
     public ReportError_Controller(Bill bill) {
         this.bill=bill;
@@ -30,6 +38,11 @@ public class ReportError_Controller implements Controller{
                 co.buttonClicked((Component)e.getSource());
             }
         });
+        try {
+            dbController = Database_Controller.getDbManager();
+        } catch (SQLException ex) {
+        }
+        init();
     }
 
     private void buttonClicked(Component component) {
@@ -41,11 +54,30 @@ public class ReportError_Controller implements Controller{
     }
 
     private void sendClicked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        text = view.getTextMessage();
+        DAO_Error daoError = new Error_MYSQL(dbController);
+        ErrorModel error = new ErrorModel(bill, text);
+        daoError.create(error);
+        view.dispose();
     }
 
     private void cancelClicked() {
         view.dispose();
+    }
+
+    private void init() {
+        Date detectionDate = bill.getDetectionDate();
+        view.setDetectionDateValue(detectionDate.toString());
+        Float detectionValue = bill.getDetectionValue();
+        view.setDetectionValue(detectionValue.toString());
+        Date dueDate = bill.getDeadline();
+        view.setDueDateValue(dueDate.toString());
+        Integer detectorID = bill.getDetector();
+        view.setOperatorIDValueLabel(detectorID.toString());
+        Float total = bill.getTotal();
+        view.setTotalValue(total.toString());
+        Float rate = bill.getTax();
+        view.setRateValue(rate.toString());
     }
     
     

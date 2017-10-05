@@ -53,9 +53,13 @@ public class ReportError extends javax.swing.JFrame {
     }
     
     public int checkButton(Component c){
-        if( c== sendButton) return 1;
+        if(c== sendButton) return 1;
         if(c== cancelButton) return 2;
         return 0;
+    }
+    
+    public String getTextMessage(){
+        return reportTextArea.getText();
     }
 
     
@@ -99,28 +103,23 @@ public class ReportError extends javax.swing.JFrame {
         rateLabel.setText("Rate (€ x m^3):");
 
         rateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        rateValueLabel.setText("value");
 
         totalLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         totalLabel.setText("Total (€):");
 
         totalValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        totalValueLabel.setText("value");
 
         detectionLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionLabel.setText("Detection (m^3):");
 
         detectionValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionValueLabel.setText("value");
 
         operatorIDValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        operatorIDValueLabel.setText("value");
 
         operatorIDLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         operatorIDLabel.setText("Operator ID:");
 
         detectionDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        detectionDateValueLabel.setText("value");
 
         detectionDateLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         detectionDateLabel.setText("Detection date:");
@@ -129,7 +128,6 @@ public class ReportError extends javax.swing.JFrame {
         dueDateLabel.setText("Due date:");
 
         dueDateValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        dueDateValueLabel.setText("value");
 
         javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
         summaryPanel.setLayout(summaryPanelLayout);
@@ -162,7 +160,7 @@ public class ReportError extends javax.swing.JFrame {
                         .addComponent(rateLabel)
                         .addGap(48, 48, 48)
                         .addComponent(rateValueLabel)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         summaryPanelLayout.setVerticalGroup(
             summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,6 +226,11 @@ public class ReportError extends javax.swing.JFrame {
 
         sendButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -259,6 +262,11 @@ public class ReportError extends javax.swing.JFrame {
             a.actionPerformed(evt);
         
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        for(ActionListener a: actionListener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_sendButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
