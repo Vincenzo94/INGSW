@@ -6,14 +6,15 @@
 package DAO;
 
 import Model.Operator;
+import java.sql.SQLException;
 
 /**
  *
  * @author ansan
  */
 public interface DAO_Operator {
-    public Operator check(Operator o);
-    public void update(Operator o);
-    public void delete(Operator o);
-    public void create (Operator o);
+    public Operator check(Operator o)throws SQLException;
+    public void update(Operator o)throws SQLException;
+    public void delete(Operator o)throws SQLException;
+    public void create (Operator o)throws SQLException;
 }

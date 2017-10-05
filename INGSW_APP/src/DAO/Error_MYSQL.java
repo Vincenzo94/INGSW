@@ -6,6 +6,7 @@
 package DAO;
 
 import Controller.Database_Controller;
+import Controller.Popup_Controller;
 import Model.Bill;
 import Model.ErrorModel;
 import java.sql.PreparedStatement;
@@ -26,19 +27,15 @@ public class Error_MYSQL implements DAO_Error{
     }
     
     @Override
-    public void create(ErrorModel error){
+    public void create(ErrorModel error)throws SQLException{
         Bill b = error.getBill();
-        try {
-            PreparedStatement statement = dbController.getStatement(QUERY_INSERT_ERROR);
-            statement.setString(1, error.getDescription());
-            statement.setInt(2, error.getOperatorID());
-            statement.setInt(3, b.getId());
-            System.out.println(statement);
-            if(!dbController.doUpdate(statement))
-                throw new SQLException("Unable to insert Error");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+        PreparedStatement statement = dbController.getStatement(QUERY_INSERT_ERROR);
+        statement.setString(1, error.getDescription());
+        statement.setInt(2, error.getOperatorID());
+        statement.setInt(3, b.getId());
+        System.out.println(statement);
+        if(!dbController.doUpdate(statement))
+            throw new SQLException("Unable to insert Error");
     }
 }
 

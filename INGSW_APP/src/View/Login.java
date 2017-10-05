@@ -8,19 +8,26 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
  * @author Andrea
  */
 public class Login extends javax.swing.JFrame {
-    private LinkedList<ActionListener> listener;
+    private final LinkedList<ActionListener> listener;
     /**
      * Creates new form Login
      */
     public Login() {
         listener = new LinkedList<>();
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     /**

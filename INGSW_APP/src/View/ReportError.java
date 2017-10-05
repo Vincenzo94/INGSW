@@ -6,6 +6,8 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
@@ -22,6 +24,11 @@ public class ReportError extends javax.swing.JFrame {
     public ReportError() {
         actionListener=new LinkedList<>();
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
     
     public void addActionListener(ActionListener a){
