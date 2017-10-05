@@ -6,6 +6,8 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
@@ -18,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InjuctionsQueuePanel extends javax.swing.JPanel {
 
-    private LinkedList<MouseListener> mouseListener;
-    private LinkedList<ActionListener> actionListener;
-    private DefaultTableModel tableModelInjuctionsQueue;
+    private final LinkedList<MouseListener> mouseListener;
+    private final LinkedList<ActionListener> actionListener;
+    private final DefaultTableModel tableModelInjuctionsQueue;
     /**
      * Creates new form InjuctionsQueuePanel
      */
@@ -47,6 +49,11 @@ public class InjuctionsQueuePanel extends javax.swing.JPanel {
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     /**

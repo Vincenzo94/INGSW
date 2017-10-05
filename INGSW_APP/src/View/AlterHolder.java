@@ -6,6 +6,8 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,8 +22,11 @@ public class AlterHolder extends javax.swing.JFrame {
     public AlterHolder(){
         actionListener = new LinkedList<>();
         initComponents();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //System.out.println(JFrame.MAXIMIZED_BOTH);
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     public void addActionListener(ActionListener a){
@@ -82,6 +87,7 @@ public class AlterHolder extends javax.swing.JFrame {
         setTitle("INGSW_GR12 - Alter Holder");
         setAlwaysOnTop(true);
         setExtendedState(6);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());

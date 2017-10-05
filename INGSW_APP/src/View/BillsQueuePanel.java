@@ -6,6 +6,8 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -51,9 +53,14 @@ public class BillsQueuePanel extends javax.swing.JPanel {
                 return false;
             }
         };
-            mouseListener = new LinkedList<>();
-            actionListener = new LinkedList<>();
-            initComponents();            
+        mouseListener = new LinkedList<>();
+        actionListener = new LinkedList<>();
+        initComponents();  
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     /**

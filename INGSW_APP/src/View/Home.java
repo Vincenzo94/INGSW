@@ -5,6 +5,8 @@
  */
 package View;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
@@ -20,17 +22,12 @@ public class Home extends javax.swing.JFrame {
     private final LinkedList<ChangeListener> changeListener;
     private final LinkedList<Component> panel;
     public Home() {
-                this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                this.setResizable(false);
-                this.setUndecorated(true);
-
         initComponents();
         
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         changeListener = new LinkedList<>();
         panel = new LinkedList<>();
-        //getContentPane().setLayout(new BorderLayout());
         panel.add(new RegistryPanel());
         panel.add(new InjuctionsQueuePanel());
         panel.add(new BillsQueuePanel());
@@ -38,7 +35,11 @@ public class Home extends javax.swing.JFrame {
         homePane.addTab("Registry Management", panel.get(0));
         homePane.addTab("Injuctions Queue", panel.get(1));
         homePane.addTab("Bills Queue", panel.get(2));
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     /**
@@ -59,11 +60,12 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INGSW_GR12");
+        setAlwaysOnTop(true);
         setExtendedState(6);
         setName(""); // NOI18N
         setUndecorated(true);
         setResizable(false);
-        setSize(new java.awt.Dimension(700, 700));
+        setSize(new java.awt.Dimension(0, 0));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);

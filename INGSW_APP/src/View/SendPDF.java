@@ -6,6 +6,8 @@
 package View;
 
 import Controller.Listener;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +37,11 @@ public class SendPDF extends javax.swing.JFrame {
             logAddressErrorPanel.setVisible(true);
             messageErrorLabel.setText(result);
         }
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
             
     }
 

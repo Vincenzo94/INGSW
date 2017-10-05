@@ -6,6 +6,8 @@
 package View;
 
 import Controller.Listener;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,6 +57,11 @@ public class SendPDFMultiple extends javax.swing.JFrame {
             jLabel2.setText(error);
         }
         actionListener = new LinkedList<>();
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,7 +96,6 @@ public class SendPDFMultiple extends javax.swing.JFrame {
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTable1.setModel(model);
-        jTable1.setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         jTable1.setMaximumSize(new java.awt.Dimension(200, 100));
         jTable1.setPreferredSize(new java.awt.Dimension(340, 140));
         jScrollPane1.setViewportView(jTable1);
@@ -108,7 +114,6 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Log address' error"));
-        jPanel1.setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         jPanel1.setMaximumSize(new java.awt.Dimension(300, 150));
         jPanel1.setPreferredSize(new java.awt.Dimension(279, 139));
 
