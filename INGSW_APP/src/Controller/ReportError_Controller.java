@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -40,9 +41,11 @@ public class ReportError_Controller implements Controller{
         });
         try {
             dbController = Database_Controller.getDbManager();
+            init();
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        init();
+        
     }
 
     private void buttonClicked(Component component) {
@@ -54,11 +57,15 @@ public class ReportError_Controller implements Controller{
     }
 
     private void sendClicked() {
-        text = view.getTextMessage();
-        DAO_Error daoError = new Error_MYSQL(dbController);
-        ErrorModel error = new ErrorModel(bill, text);
-        daoError.create(error);
-        view.dispose();
+        try {
+            text = view.getTextMessage();
+            DAO_Error daoError = new Error_MYSQL(dbController);
+            ErrorModel error = new ErrorModel(bill, text);
+            daoError.create(error);
+            view.dispose();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void cancelClicked() {

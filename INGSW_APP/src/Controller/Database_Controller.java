@@ -21,11 +21,9 @@ public class Database_Controller {
     private static Database_Controller instance;
     static private Connection connection;
     public static final String schema = "ingwsw_andread";
-    private Database_Controller(){
-        try{
+    
+    private Database_Controller() throws SQLException{
             connection = connect();
-        } catch (SQLException ex){
-        }
     }
     
     public static Database_Controller getDbManager() throws SQLException{
@@ -36,12 +34,9 @@ public class Database_Controller {
     }
     
     
-    public ResultSet doQuery(PreparedStatement statement){
+    public ResultSet doQuery(PreparedStatement statement) throws SQLException{
         ResultSet rs = null;
-        try {
             rs = statement.executeQuery();
-        } catch (SQLException ex) {
-        }
         return rs;
     }
 
@@ -50,18 +45,14 @@ public class Database_Controller {
     }
  
 
-    public PreparedStatement getStatement(String QUERY) {
+    public PreparedStatement getStatement(String QUERY) throws SQLException{
         PreparedStatement statement = null;
-        try {
             statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        } catch (SQLException ex) {
-        }
         return statement;
     }
 
-    public Boolean doUpdate(PreparedStatement statement) {
+    public Boolean doUpdate(PreparedStatement statement) throws SQLException{
         Boolean ret = false;
-        try {
             connection.setAutoCommit(false);
             if (statement.executeUpdate() >=0) {
                     ret = true;
@@ -71,8 +62,6 @@ public class Database_Controller {
                 }
                 connection.setAutoCommit(true);
                 statement.close();
-        } catch (SQLException ex) {
-        }
         return ret;
     }
 }

@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -37,43 +38,41 @@ public class InjuctionsHistory_Controller implements Controller {
     private Controller current;
     
     public InjuctionsHistory_Controller(Registry_Controller reg, Contract contract) {
-        try {
-            dbManager=Database_Controller.getDbManager();
-        } catch (SQLException ex) {
-            
-        }
-        
-        this.contract=contract;
-        this.reg=reg;
         view=new InjuctionsHistory();
         view.setVisible(true);
+        this.contract=contract;
+        this.reg=reg;
         defaultRender = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object
-                value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
-                setHorizontalAlignment(JLabel.CENTER);
-                return this;
-            }
-        };
-        
-        view.addActionListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
-                bc.buttonCliked((Component)e.getSource());            
-            }
-        });
-        
-        view.addMouseListener(new Listener(this){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
-                bc.tableClicked();
-            }
-        });
-        initTable();        
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object
+                    value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                    setHorizontalAlignment(JLabel.CENTER);
+                    return this;
+                }
+            };
+        try {
+                dbManager=Database_Controller.getDbManager();
+                view.addActionListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
+                    bc.buttonCliked((Component)e.getSource());            
+                }
+            });
+
+            view.addMouseListener(new Listener(this){
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
+                    bc.tableClicked();
+                }
+            });
+            initTable();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }    
     }
 
     private void buttonCliked(Component component) {
@@ -115,11 +114,16 @@ public class InjuctionsHistory_Controller implements Controller {
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         model.setColumnIdentifiers(columns);
         Injuction_MYSQL dao = new Injuction_MYSQL(dbManager);
-        injuctions=dao.getAllDocuments(contract);
-        for(Injuction temp : injuctions){
-            Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
-            model.addRow(row);
-            setDefaultRender(view.getInjuctionsTable());
+        try {
+                injuctions=dao.getAllDocuments(contract);
+
+            for(Injuction temp : injuctions){
+                Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
+                model.addRow(row);
+                setDefaultRender(view.getInjuctionsTable());
+            }
+            } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     

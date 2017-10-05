@@ -11,6 +11,7 @@ import View.Delete;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -42,14 +43,16 @@ public class RemoveInjuction_Controller implements Controller {
         if(button == 2){
             try {
                 dbController = Database_Controller.getDbManager();
+                DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
+                daoDocument.remove(injuction);
+                view.dispose();
+                Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
+                view.dispose();
+                controller.back();
             } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
-            DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
-            daoDocument.remove(injuction);
-            view.dispose();
-            Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
         }
-        view.dispose();
-        controller.back();
+        
     }
 }

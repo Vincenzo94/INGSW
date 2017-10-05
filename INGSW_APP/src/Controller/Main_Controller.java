@@ -7,10 +7,10 @@ package Controller;
 
 import Model.Operator;
 import View.Home;
-import ingsw_app.INGSW_APP;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 
 /**
@@ -20,7 +20,18 @@ import javax.swing.event.ChangeEvent;
 
 //Classe implementata come singleton
 public class Main_Controller{
-    Controller current;
+    
+    private final String first = ("1) To make a new search it's enough to fill one or more field and click on SEARCH button"
+                                                                   + "\n2) After have selected a single row from the table will be can to: \n "
+                                                                    + "\t\t 2.1) add a new contract through the ADD button; \n "
+                                                                    + "\t\t 2.2) alter the holder through ALTER HOLDER button; \n "
+                                                                    + "\t\t 2.3) remove the contract through REMOVE button. \n "
+                                                                    + "\t\t 2.4) view bills through BILLS button or injuctions through INJUCTIONS button. ");
+    
+    
+    private final String second = ("After have selected a single row from the table it will be possible to confirm or delete the injuction");
+    private final String third = ("After have selected a single or multiple rows from the table it will be possible confirm or deselect them");
+    private Controller current;
     private Operator operator;
     private static Main_Controller instance;
     private final Database_Controller dbManager;
@@ -90,14 +101,9 @@ public class Main_Controller{
     private void help(){
         int i = actual.getSelectedPanel();
         switch (i){
-            case 0: Popup_Controller.getPopup_C().showPopup("<html>1) To make a new search it's enough to fill one or more field and click on SEARCH button <br><br>"
-                                                                   + "2) After have selected a single row from the table will be can to: <br> <br> "
-                                                                    + "&#09 2.1) add a new contract through the ADD button; <br> <br> "
-                                                                    + "&#09 2.2) alter the holder through ALTER HOLDER button; <br> <br> "
-                                                                    + "&#09 2.3) remove the contract through REMOVE button. <br> <br> "
-                                                                    + "&#09 2.4) view bills through BILLS button or injuctions through INJUCTIONS button.  </html>"); break;
-            case 1: Popup_Controller.getPopup_C().showPopup("After have selected a single row from the table it will be possible to confirm or delete the injuction"); break;
-            case 2: Popup_Controller.getPopup_C().showPopup("After have selected a single or multiple rows from the table it will be possible confirm or deselect them");break;
+            case 0: JOptionPane.showConfirmDialog(actual, first,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
+            case 1: JOptionPane.showConfirmDialog(actual, second,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
+            case 2: JOptionPane.showConfirmDialog(actual, third,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
         }
     }
     
@@ -108,6 +114,7 @@ public class Main_Controller{
         try {
             instance = new Main_Controller();
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(actual, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }   
     

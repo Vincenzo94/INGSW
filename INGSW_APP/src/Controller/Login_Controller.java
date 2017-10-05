@@ -13,14 +13,12 @@ import View.Login;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.awt.Component;
-import View.Popup;
-import static ingsw_app.INGSW_APP.device;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ansan
  */
 public class Login_Controller implements Controller{
-    Controller current;
     private Login login = null;
     private Operator operator;
     private DAO_Operator DAO;
@@ -28,28 +26,27 @@ public class Login_Controller implements Controller{
     private Database_Controller dbManager;
 
     
-    private Popup_Controller Popup_Control;
     private Login_Controller l;
-    private Popup popup=null;
-    Popup_Controller popupController ;
 
 
-    Login_Controller(Main_Controller m) throws SQLException{
+    Login_Controller(Main_Controller m){
         main=m;
-        dbManager = Database_Controller.getDbManager();
-        popupController = Popup_Controller.getPopup_C();
-        this.DAO = new Operator_MYSQL(dbManager);
         login = new Login();
-        //device.setFullScreenWindow(login);
-        login.pack();
         login.setVisible(true);
-        login.addListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    l = (Login_Controller) controller;
-                    l.buttonCliked(e);
-            }
-        });
+        
+        try {
+                dbManager = Database_Controller.getDbManager();
+                this.DAO = new Operator_MYSQL(dbManager);
+            login.addListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        l = (Login_Controller) controller;
+                        l.buttonCliked(e);
+                }
+            });
+            } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     
@@ -57,17 +54,22 @@ public class Login_Controller implements Controller{
         Integer user = login.getUser();
         String passw = login.getPassword();
         operator=new Operator(user,passw);
-        operator = DAO.check(operator);
-        if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-            Log_Controller.setOperator(operator);
-            ErrorModel.setOperatorID(operator.getId());
-            Log_Controller.writeLog(" logged",Login_Controller.class);
-            login.dispose();
-            main.loginDone(operator);
-            }
-        else{
-            popupController.showPopup("Invalid ID and/or Password!");
-        } 
+        try {
+                operator = DAO.check(operator);
+
+            if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
+                Log_Controller.setOperator(operator);
+                ErrorModel.setOperatorID(operator.getId());
+                Log_Controller.writeLog(" logged",Login_Controller.class);
+                login.dispose();
+                main.loginDone(operator);
+                }
+            else{
+                JOptionPane.showConfirmDialog(login, "Invalid ID and/or Password!","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            } 
+            } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void buttonCliked(ActionEvent e){
@@ -86,6 +88,6 @@ public class Login_Controller implements Controller{
     }
     
     public void helpCliked(){
-        popupController.showPopup("To log in you have to insert your ID and Password and then click on \"Login\" button");
+        JOptionPane.showConfirmDialog(login,"To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -11,6 +11,7 @@ import View.AddHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -21,9 +22,9 @@ public class AddContract_Controller implements Controller{
     private AddHolder view;
     private final Registry_Controller controller;
     private Contract contract;
-    Popup_Controller popupcontroller;
+    
 
-public AddContract_Controller(Registry_Controller controller){
+    public AddContract_Controller(Registry_Controller controller){
         this.controller=controller;
         view= new AddHolder();
         view.setVisible(true);
@@ -52,22 +53,23 @@ public AddContract_Controller(Registry_Controller controller){
         Database_Controller dbManager = null;
         
         try {
-            dbManager = Database_Controller.getDbManager();
-        } catch (SQLException ex) {
+            dbManager = Database_Controller.getDbManager();        
+            DAO_Contract daoContract = new Contract_MYSQL(dbManager);
+            String billingCity = view.getCity1();
+            String billingDistrict = view.getDistrict1();
+            String billingZip = view.getZip1();
+            String billingStreet = view.getStreet1();
+
+            if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals("")){
+                contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
+            }
+            else
+                contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
+            daoContract.create(contract,controller.getOperator());
+            Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
+        }catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
         
-        DAO_Contract daoContract = new Contract_MYSQL(dbManager);
-        String billingCity = view.getCity1();
-        String billingDistrict = view.getDistrict1();
-        String billingZip = view.getZip1();
-        String billingStreet = view.getStreet1();
-        
-        if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals("")){
-            contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
-        }
-        else
-            contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
-        daoContract.create(contract,controller.getOperator());
-        Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
     }
 }

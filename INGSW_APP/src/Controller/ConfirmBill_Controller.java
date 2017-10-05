@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -84,63 +85,70 @@ public class ConfirmBill_Controller implements Controller{
             }
         };
         try {
-            dbController = Database_Controller.getDbManager();
+                dbController = Database_Controller.getDbManager();
+            DAO_Contract daoContract = new Contract_MYSQL(dbController);
+            for(Bill b: l){
+                Contract tmp;
+                    tmp = daoContract.getContract(b.getContractID());
+                    bills.put(b, tmp);
+
+            }
+            PDFMaker.createPDF(bills);
+            initMultiSelect();
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        for(Bill b: l){
-            Contract tmp = daoContract.getContract(b.getContractID());
-            bills.put(b, tmp);
-        }
-        PDFMaker.createPDF(bills);
-        initMultiSelect();
     }
     
     public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
         bill=b;
         bills=null;
+        view= new BuildPDF(b);
+        view.setVisible(true);
+        views=null;
         this.billsQueueController = main;
         try {
-            dbController = Database_Controller.getDbManager();
+                dbController = Database_Controller.getDbManager();
+            DAO_Contract daoContract = new Contract_MYSQL(dbController);
+                contract = daoContract.getContract(b.getContractID());
+            PDFMaker.createPDF(contract, b,null);
+            view.addActionListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
+                    c.buttonCliked(e);            
+                }
+            });
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        contract = daoContract.getContract(b.getContractID());
-        PDFMaker.createPDF(contract, b,null);
-        view= new BuildPDF(b);
-        view.addActionListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.buttonCliked(e);            
-            }
-        });
-        views=null;
-        view.setVisible(true);
-        
+
     }
+    
     public ConfirmBill_Controller(Bill b,BillsHistory_Controller main){
+        view= new BuildPDF(b);
+        view.setVisible(true);
         bill=b;
         bills=null;
+        views=null;
         this.billsController = main;
         try {
-            dbController = Database_Controller.getDbManager();
+                dbController = Database_Controller.getDbManager();
+                DAO_Contract daoContract = new Contract_MYSQL(dbController);
+                contract = daoContract.getContract(b.getContractID());
+            PDFMaker.createPDF(contract, b,null);
+            view.addActionListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
+                    c.buttonCliked(e);            
+                }
+            });
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        contract = daoContract.getContract(b.getContractID());
-        PDFMaker.createPDF(contract, b,null);
-        view= new BuildPDF(b);
-        view.addActionListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.buttonCliked(e);            
-            }
-        });
-        views=null;
-        view.setVisible(true);
         
+                
     }
 
     private void buttonCliked(ActionEvent e) {
@@ -174,7 +182,7 @@ public class ConfirmBill_Controller implements Controller{
         Map<Integer,String> results;
         if(view!=null){
             result = EMailSender.sendEmail(contract, Bill.class);
-            view.dispose();
+            
             sendPDFview = new SendPDF(result);
             sendPDFview.setVisible(true);
             sendPDFview.addActionListener(new Listener(this){
@@ -186,11 +194,15 @@ public class ConfirmBill_Controller implements Controller{
             });
             Log_Controller.writeLog(" send the bill "+bill.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmBill_Controller.class);
             bill.setState("Issued");
-            daoDocument.setState(bill);
+            try {
+                daoDocument.setState(bill);
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            }
+            view.dispose();
         }
         else{
             results = EMailSender.sendEmail(bills, Bill.class);
-            views.dispose();
             sendPDFviewMultiple = new SendPDFMultiple(results);
             sendPDFviewMultiple.setVisible(true);
             sendPDFviewMultiple.addActionListener(new Listener(this){
@@ -203,8 +215,13 @@ public class ConfirmBill_Controller implements Controller{
             for(Bill b:bills.keySet()){
                 Log_Controller.writeLog(" send the bill "+b.getId()+" to contract: "+bills.get(b).getName()+" "+bills.get(b).getSurname()+" with ID "+b.getContractID()+" at the address: "+bills.get(b).getEmailAddress(),ConfirmBill_Controller.class);
                 b.setState("Issued");
-                daoDocument.setState(b);
+                try {
+                    daoDocument.setState(b);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(views, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                }
             }
+            views.dispose();
         }
         
         

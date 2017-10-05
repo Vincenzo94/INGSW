@@ -18,35 +18,35 @@ import javax.swing.table.DefaultTableModel;
  * @author ansan
  */
 public class SearchContract_Controller implements Controller{
-    private  Database_Controller dbManager;
+    private Contract contract;
+    
+    
+    private Database_Controller dbManager;
+    
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
-    Contract bag;
-    Popup_Controller popupcontroller;
+    private Popup_Controller popupcontroller;
     
-    SearchContract_Controller(DefaultTableModel table, Contract c) {
-        this.bag=c;
+    SearchContract_Controller(DefaultTableModel table, Contract c) throws SQLException {
+        this.contract=c;
         this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
         
         initRegistryManagement();
     }
     
-    private void initRegistryManagement() {
-        try {
+    private void initRegistryManagement() throws SQLException {
             dbManager = Database_Controller.getDbManager();
-        } catch (SQLException ex) {
-        }
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
         tableModelRegistryManagement.setColumnIdentifiers(columns);
         contracts.clear();
-        if(bag==null)
+        if(contract==null)
             contracts = daoContract.getAllContracts();
         else{
-            contracts = daoContract.getAllContracts(bag);
-            if(contracts.size()==0){
+            contracts = daoContract.getAllContracts(contract);
+            if(contracts.isEmpty()){
                 popupcontroller=Popup_Controller.getPopup_C();
                 popupcontroller.showPopup("No result found!");
             }

@@ -13,10 +13,11 @@ import View.InjuctionsQueuePanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class InjuctionsQueue_Controller implements Controller{
     
-    private final InjuctionsQueuePanel actual;
+    private final InjuctionsQueuePanel view;
     private DefaultTableModel tableModelInjuctionsQueue = null;
     private final DefaultTableCellRenderer defaultRender;
     private List<Injuction> injuctions;
@@ -40,7 +41,7 @@ public class InjuctionsQueue_Controller implements Controller{
     public InjuctionsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
         this.operator=o;
         this.dbManager=dbManager;
-        actual=(InjuctionsQueuePanel)panel;
+        view=(InjuctionsQueuePanel)panel;
         injuctions = new ArrayList<>();
         defaultRender = new DefaultTableCellRenderer() {
             @Override
@@ -53,7 +54,7 @@ public class InjuctionsQueue_Controller implements Controller{
             }
         };
         
-        actual.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(this){
             @Override
             public void mouseClicked(MouseEvent e){
                 InjuctionsQueue_Controller c = (InjuctionsQueue_Controller)controller;
@@ -61,7 +62,7 @@ public class InjuctionsQueue_Controller implements Controller{
             }
         });
         
-        actual.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e){
                 InjuctionsQueue_Controller c = (InjuctionsQueue_Controller)controller;
@@ -73,11 +74,11 @@ public class InjuctionsQueue_Controller implements Controller{
     }
     
     private void activeInjuctionButtons(){
-        actual.activeInjuctionButtons();
+        view.activeInjuctionButtons();
     }
     
     private void buttonClicked(Component c){
-        int i = actual.checkButton(c);
+        int i = view.checkButton(c);
         switch(i){
             case 1: confirmInjuctionClicked(); break;
             case 2: removeInjuctionClicked(); break;
@@ -85,7 +86,7 @@ public class InjuctionsQueue_Controller implements Controller{
     }    
         
     private void initInjuctionsQueue() {
-        tableModelInjuctionsQueue = actual.getTableModelInjuctionsQueue();
+        tableModelInjuctionsQueue = view.getTableModelInjuctionsQueue();
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
@@ -96,17 +97,21 @@ public class InjuctionsQueue_Controller implements Controller{
         DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
         tableModelInjuctionsQueue.setRowCount(0);
         injuctions.clear();
-        injuctions = daoInjuction.getAllDocuments(operator);
-        for(Injuction temp : injuctions){
-            if(temp.getOperatorID() == null){
-                daoInjuction.setManagedOperator(temp,operator);
-                Log_Controller.writeLog(" manages the injuction "+temp.getId(),this.getClass());
-            }
-            Log_Controller.writeLog(" manages the injuction "+temp.getId(), this.getClass());
-            Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
-            tableModelInjuctionsQueue.addRow(row);
-            setDefaultRender(actual.getInjuctionTable());
+        try {
+            injuctions = daoInjuction.getAllDocuments(operator);
+            for(Injuction temp : injuctions){
+                if(temp.getOperatorID() == null){
+                        daoInjuction.setManagedOperator(temp,operator);
+                    Log_Controller.writeLog(" manages the injuction "+temp.getId(),this.getClass());
+                }
+                Log_Controller.writeLog(" manages the injuction "+temp.getId(), this.getClass());
+                Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
+                tableModelInjuctionsQueue.addRow(row);
+                setDefaultRender(view.getInjuctionTable());
 
+            }
+            } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -123,19 +128,19 @@ public class InjuctionsQueue_Controller implements Controller{
     }
     
     private void removeInjuctionClicked() {
-        int row = actual.getSelectedInjuction();
-        actual.setEnabled(false);
+        int row = view.getSelectedInjuction();
+        view.setEnabled(false);
         current = new RemoveInjuction_Controller(this, injuctions.get(row));
     }
     
     private void confirmInjuctionClicked(){
-        Injuction b = injuctions.get(actual.getSelectedInjuction());
-        actual.setEnabled(false);
+        Injuction b = injuctions.get(view.getSelectedInjuction());
+        view.setEnabled(false);
         current = new ConfirmInjuction_Controller(b,this);
     }
     
     public void back(){
-        actual.setEnabled(true);
+        view.setEnabled(true);
         updateInjuctionsQueue();
     }
     

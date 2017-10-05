@@ -12,6 +12,7 @@ import View.AlterHolder;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,8 +21,9 @@ import java.sql.SQLException;
 public class AlterContract_Controller implements Controller{
     private final Contract contract;
     private final Registry_Controller controller;
+    private AlterHolder view;
+    
     private Database_Controller dbManager;
-    AlterHolder view;
     
     public AlterContract_Controller(Registry_Controller main, Contract contract) {
         this.controller=main;
@@ -41,75 +43,82 @@ public class AlterContract_Controller implements Controller{
     private void init() {
         try {
             dbManager = Database_Controller.getDbManager();
+            view.setPersonName(contract.getName());
+            view.setSurname(contract.getSurname());
+            view.setTaxC(contract.getTaxCode());
+            view.setEmail(contract.getEmailAddress());
+            view.setPhone(contract.getPhone());
+            view.setMobile(contract.getMobile());
+            if(contract.getBillingAddress() != null){
+                view.setCity1(contract.getBillingCity());
+                view.setDistrict1(contract.getBillingDistrict());
+                view.setZip1(contract.getBillingZip());
+                view.setStreet1(contract.getBillingStreet());
+                view.setNumber1(contract.getBillingNumber());
+            }
+            view.setCity2(contract.getCity());
+            view.setDistrict2(contract.getDistrict());
+            view.setZip2(contract.getZip());
+            view.setStreet2(contract.getStreet());
+            view.setNumber2(contract.getNumber());
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        view.setPersonName(contract.getName());
-        view.setSurname(contract.getSurname());
-        view.setTaxC(contract.getTaxCode());
-        view.setEmail(contract.getEmailAddress());
-        view.setPhone(contract.getPhone());
-        view.setMobile(contract.getMobile());
-        if(contract.getBillingAddress() != null){
-            view.setCity1(contract.getBillingCity());
-            view.setDistrict1(contract.getBillingDistrict());
-            view.setZip1(contract.getBillingZip());
-            view.setStreet1(contract.getBillingStreet());
-            view.setNumber1(contract.getBillingNumber());
-        }
-        view.setCity2(contract.getCity());
-        view.setDistrict2(contract.getDistrict());
-        view.setZip2(contract.getZip());
-        view.setStreet2(contract.getStreet());
-        view.setNumber2(contract.getNumber());    
     }
 
     private void buttonCliked(ActionEvent e) {
         Component c = (Component)e.getSource();
         Integer button = view.checkButton(c);
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
-        switch(button){
-            case 0: view.dispose(); controller.back(); break;
-            case 1:{
-                contract.setName(view.getPersonName());
-                contract.setSurname(view.getSurname());
-                contract.setTaxCode(view.getTaxC());
-                contract.setPhone(view.getPhone());
-                contract.setMobile(view.getMobile());
-                contract.seteMail(view.getEmail());
-                daoContract.update_Registry(contract,controller.getOperator());
-            } break;
-            case 2:{
-                String street = view.getStreet1();
-                String city = view.getCity1();
-                String district = view.getDistrict1();
-                String zip = view.getZip1();
-                if(contract.getBillingAddress() != null && !street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
-                    contract.setBillingCity(city);
-                    contract.setBillingDistrict(district);
-                    contract.setBillingStreet(street);
-                    contract.setBillingZipCode(zip);
-                    contract.setBillingNumber(view.getNumber1());
-                    daoContract.update_BillingAddress(contract,controller.getOperator());
+        try{
+            switch(button){
+                case 0: view.dispose(); controller.back(); break;
+                case 1:{
+                    contract.setName(view.getPersonName());
+                    contract.setSurname(view.getSurname());
+                    contract.setTaxCode(view.getTaxC());
+                    contract.setPhone(view.getPhone());
+                    contract.setMobile(view.getMobile());
+                    contract.seteMail(view.getEmail());
+                    daoContract.update_Registry(contract,controller.getOperator());
+                } break;
+                case 2:{
+                    String street = view.getStreet1();
+                    String city = view.getCity1();
+                    String district = view.getDistrict1();
+                    String zip = view.getZip1();
+                    if(contract.getBillingAddress() != null && !street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
+                        contract.setBillingCity(city);
+                        contract.setBillingDistrict(district);
+                        contract.setBillingStreet(street);
+                        contract.setBillingZipCode(zip);
+                        contract.setBillingNumber(view.getNumber1());
+                        daoContract.update_BillingAddress(contract,controller.getOperator());
+                    }
+                    else if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
+                        contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
+                        daoContract.addBillingAddress(contract);
+                        
+                    }
+                    else if(contract.getBillingAddress() != null)
+                        contract.setBillingAddress(null);
+                    daoContract.setBillingAddress(contract);
+                    daoContract.update_UpdatedBy(contract, controller.getOperator());    
+                    break;
                 }
-                else if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
-                    contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
-                    daoContract.addBillingAddress(contract);
+                case 3:{
+                    contract.setCity(view.getCity2());
+                    contract.setDistrict(view.getDistrict2());
+                    contract.setStreet(view.getStreet2());
+                    contract.setZipCode(view.getZip2());
+                    contract.setNumber(view.getNumber2());
+                    daoContract.update_Address(contract,controller.getOperator());
+                    break;
                 }
-                else if(contract.getBillingAddress() != null)
-                    contract.setBillingAddress(null);
-                daoContract.setBillingAddress(contract);
-                daoContract.update_UpdatedBy(contract, controller.getOperator());
-                break;
             }
-            case 3:{
-                contract.setCity(view.getCity2());
-                contract.setDistrict(view.getDistrict2());
-                contract.setStreet(view.getStreet2());
-                contract.setZipCode(view.getZip2());
-                contract.setNumber(view.getNumber2());
-                daoContract.update_Address(contract,controller.getOperator());
-                break;
-            }
+        }
+        catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     

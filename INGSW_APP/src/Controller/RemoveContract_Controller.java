@@ -8,49 +8,36 @@ package Controller;
 import DAO.Contract_MYSQL;
 import DAO.DAO_Contract;
 import Model.Contract;
-import View.Delete;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ansan
  */
 public class RemoveContract_Controller implements Controller {
-    private final Contract contract;
     private final Registry_Controller controller;
-    private Database_Controller dbManager;
-    private Delete view;
-    public RemoveContract_Controller(Registry_Controller main, Contract contract) {
-        this.contract = contract;
-        this.controller = main;
-        view = new Delete(contract);
-        view.setVisible(true);
-        view.addActionListener(new Listener(this){
-           @Override
-           public void actionPerformed(ActionEvent e){
-               RemoveContract_Controller rc = (RemoveContract_Controller)controller;
-               rc.buttonClicked(e);
-           }
-        });
-    }
-
-    private void buttonClicked(ActionEvent e) {
-        Component c = (Component)e.getSource();
-        Integer button = view.checkButton(c);
-        if(button == 2){
-            try {
-                dbManager = Database_Controller.getDbManager();
-            } catch (SQLException ex) {
-            }
-            DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
-            daoContract.remove(contract);
-            view.dispose();
-            Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
-        }
-        view.dispose();
-        controller.back();
-    }
     
+    private Database_Controller dbManager;
+    
+    public RemoveContract_Controller(Registry_Controller main, Contract contract) {
+        this.controller = main;
+        int n = JOptionPane.showConfirmDialog(main.getPanel(),"Are you sure to delete the contract" + contract.getId()+"?",
+                "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        try {
+            if(n == 0){
+            
+                dbManager = Database_Controller.getDbManager();
+                DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
+                daoContract.remove(contract);            
+                Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
+                JOptionPane.showConfirmDialog(main.getPanel(),"Contract deleted" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            } 
+            else
+                JOptionPane.showConfirmDialog(main.getPanel(),"Operation Cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            controller.back();
+        } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(main.getPanel(), ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            }
+    }    
 }

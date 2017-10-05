@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -113,21 +114,23 @@ public class BillsHistory_Controller implements Controller {
     private void init() {
         try {
             dbController = Database_Controller.getDbManager();
+            billsModel = view.getTableModelBills();
+            billsModel.setRowCount(0);
+            String[] columns = {"Invoice N.", "Period", "State", "Due date"};
+            billsModel.setColumnIdentifiers(columns);
+            setDefaultRender(view.getBillTable());
+            DAO_Document daoBill = new Bill_MYSQL(dbController);
+            bills.clear();
+            bills = daoBill.getAllDocuments(contract);
+            for(Bill temp : bills){
+                System.out.println(temp.getState());
+                Object[] row = {temp.getId(), temp.getPeriod(), temp.getState(), temp.getDeadline()};
+                billsModel.addRow(row);
+            }
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        billsModel = view.getTableModelBills();
-        billsModel.setRowCount(0);
-        String[] columns = {"Invoice N.", "Period", "State", "Due date"};
-        billsModel.setColumnIdentifiers(columns);
-        setDefaultRender(view.getBillTable());
-        DAO_Document daoBill = new Bill_MYSQL(dbController);
-        bills.clear();
-        bills = daoBill.getAllDocuments(contract);
-        for(Bill temp : bills){
-            System.out.println(temp.getState());
-            Object[] row = {temp.getId(), temp.getPeriod(), temp.getState(), temp.getDeadline()};
-            billsModel.addRow(row);
-        }
+
     }
     public void backClicked(){
         view.dispose();

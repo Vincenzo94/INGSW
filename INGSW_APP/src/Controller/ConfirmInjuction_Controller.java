@@ -19,6 +19,7 @@ import View.SendPDF;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,52 +31,55 @@ public class ConfirmInjuction_Controller implements Controller{
     private final Injuction injuction;
     private Database_Controller dbController;
     private final Bill bill;
-    private final Contract contract;
+    private Contract contract;
     private final BuildPDF view;
     private SendPDF sendPDFview;
     private InjuctionsHistory_Controller injuctionsController;
 
     public ConfirmInjuction_Controller(Injuction i, InjuctionsQueue_Controller main){
         injuction=i;
+        view= new BuildPDF(injuction);
         this.injuctionsQueueController = main;
+        view.setVisible(true);
+        bill = injuction.getBill();
         try {
             dbController = Database_Controller.getDbManager();
+            DAO_Contract daoContract = new Contract_MYSQL(dbController);
+            contract = daoContract.getContract(bill.getContractID());
+            PDFMaker.createPDF(contract, bill, injuction);        
+            view.addActionListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
+                    c.buttonCliked(e);            
+                }
+            });
         } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        bill = injuction.getBill();
-        contract = daoContract.getContract(bill.getContractID());
-        PDFMaker.createPDF(contract, bill, injuction);
-        view= new BuildPDF(injuction);
-        view.addActionListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                c.buttonCliked(e);            
-            }
-        });
-        view.setVisible(true);
     }
+    
     public ConfirmInjuction_Controller(Injuction i,InjuctionsHistory_Controller main){
         injuction=i;
         this.injuctionsController = main;
-        try {
-            dbController = Database_Controller.getDbManager();
-        } catch (SQLException ex) {
-        }
-        DAO_Contract daoContract = new Contract_MYSQL(dbController);
-        bill = injuction.getBill();
-        contract = daoContract.getContract(bill.getContractID());
-        PDFMaker.createPDF(contract, bill, injuction);
         view= new BuildPDF(injuction);
-        view.addActionListener(new Listener(this){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                c.buttonCliked(e);            
-            }
-        });
         view.setVisible(true);
+        bill = injuction.getBill();
+        try {
+                dbController = Database_Controller.getDbManager();
+            DAO_Contract daoContract = new Contract_MYSQL(dbController);
+                contract = daoContract.getContract(bill.getContractID());
+            PDFMaker.createPDF(contract, bill, injuction);
+            view.addActionListener(new Listener(this){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
+                    c.buttonCliked(e);            
+                }
+            });
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void buttonCliked(ActionEvent e) {
@@ -107,10 +111,14 @@ public class ConfirmInjuction_Controller implements Controller{
             ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
             c.okClicked();
             }
-        });
-        Log_Controller.writeLog(" send the injuction "+injuction.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmInjuction_Controller.class);
-        injuction.setState("Issued");
-        daoDocument.setState(injuction);
+        });        
+        try {
+            injuction.setState("Issued");
+            daoDocument.setState(injuction);
+            Log_Controller.writeLog(" send the injuction "+injuction.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmInjuction_Controller.class);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(sendPDFview, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void okClicked() {

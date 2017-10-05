@@ -11,13 +11,14 @@ import Model.Bill;
 import Model.Operator;
 import View.BillsQueuePanel;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +31,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class BillsQueue_Controller implements Controller{
     
-    private final BillsQueuePanel actual;
+    private final BillsQueuePanel view;
     private DefaultTableModel tableModelBillsQueue = null;
     private final DefaultTableCellRenderer defaultRender;
     private final Database_Controller dbManager;
@@ -41,7 +42,7 @@ public class BillsQueue_Controller implements Controller{
     public BillsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
         this.dbManager=dbManager;
         this.operator=o;
-        actual = (BillsQueuePanel)panel;
+        view = (BillsQueuePanel)panel;
         bills = new ArrayList<>();
         defaultRender = new DefaultTableCellRenderer() {
             @Override
@@ -54,7 +55,7 @@ public class BillsQueue_Controller implements Controller{
             }
         };
         
-        actual.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e){
                 BillsQueue_Controller c = (BillsQueue_Controller)controller;
@@ -62,7 +63,7 @@ public class BillsQueue_Controller implements Controller{
             }
         });
         
-        actual.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(this){
             @Override
             public void mouseClicked(MouseEvent e){
                 BillsQueue_Controller co = (BillsQueue_Controller)controller;
@@ -71,39 +72,38 @@ public class BillsQueue_Controller implements Controller{
         });
         initBillsQueue();
         updateBillsQueue();
-        System.out.println(actual.getName());
     }
        
     private void tableClicked(){
-        List<Integer> bill = actual.getSelectedBill();
+        List<Integer> bill = view.getSelectedBill();
             if(bill.size() ==  1){
-                actual.setMultipleSelection(false);
+                view.setMultipleSelection(false);
                 Bill temp = bills.get(bill.get(0));
-                actual.setTax(temp.getTax());
-                actual.setTotal(temp.getTotal());
-                actual.setDetection(temp.getDetectionValue());
-                actual.setDetector(temp.getDetector());
-                actual.setDetectionDate(temp.getDetectionDate());
-                actual.setDeadline(temp.getDeadline()); 
-                actual.activeBillConfirm(true);
-                actual.activeBillReportError(true);
+                view.setTax(temp.getTax());
+                view.setTotal(temp.getTotal());
+                view.setDetection(temp.getDetectionValue());
+                view.setDetector(temp.getDetector());
+                view.setDetectionDate(temp.getDetectionDate());
+                view.setDeadline(temp.getDeadline()); 
+                view.activeBillConfirm(true);
+                view.activeBillReportError(true);
             }
             else if(bill.size() > 1){
-                actual.activeBillReportError(false);
-                actual.activeBillConfirm(true);
-                actual.setMultipleSelection(true);
-                actual.setSelectedBills(bill.size());
+                view.activeBillReportError(false);
+                view.activeBillConfirm(true);
+                view.setMultipleSelection(true);
+                view.setSelectedBills(bill.size());
             }
             else{
-                actual.activeBillConfirm(false);
-                actual.activeBillReportError(false);
-                actual.setMultipleSelection(true);
-                actual.setSelectedBills(bill.size());
+                view.activeBillConfirm(false);
+                view.activeBillReportError(false);
+                view.setMultipleSelection(true);
+                view.setSelectedBills(bill.size());
             }
     }
     
     private void buttonClicked(Component c){
-        int i = actual.checkButton(c);
+        int i = view.checkButton(c);
         switch(i){
             case 1: selectAllClicked(); break;
             case 2: deselectAllClicked(); break;
@@ -116,7 +116,7 @@ public class BillsQueue_Controller implements Controller{
         
         
         LinkedList<Bill> selected=new LinkedList<>();
-        for(Integer i: actual.getSelectedBill()){
+        for(Integer i: view.getSelectedBill()){
             selected.add(bills.get(i));
         }
         
@@ -127,34 +127,36 @@ public class BillsQueue_Controller implements Controller{
     }
      
     public void back(){
-        actual.getParent().setEnabled(true);
-        actual.setEnabled(true);
+        view.getParent().setEnabled(true);
+        view.setEnabled(true);
         updateBillsQueue();
     }
         
     private void initBillsQueue() {
-        tableModelBillsQueue = actual.getTableModelBillsQueue();
+        tableModelBillsQueue = view.getTableModelBillsQueue();
         tableModelBillsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference detection", "Generated on", "Total", "Selected"};
         tableModelBillsQueue.setColumnIdentifiers(columns);
-        setDefaultRender(actual.getBillTable());
-        actual.setMultipleSelection(true);
+        setDefaultRender(view.getBillTable());
+        view.setMultipleSelection(true);
     }
 
     void updateBillsQueue(){
         DAO_Document daoBill = new Bill_MYSQL(dbManager);
         bills.clear();
         tableModelBillsQueue.setRowCount(0);
-        bills = daoBill.getAllDocuments(operator);
-        
-        for(Bill temp : bills){
-            if(temp.getOperatorID() == null){
-                daoBill.setManagedOperator(temp,operator);
+        try {
+                bills = daoBill.getAllDocuments(operator);        
+            for(Bill temp : bills){
+                if(temp.getOperatorID() == null){
+                        daoBill.setManagedOperator(temp,operator);
+                }
                 Log_Controller.writeLog(" manages the bill "+temp.getId(), this.getClass());
+                Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
+                tableModelBillsQueue.addRow(row);
             }
-            Log_Controller.writeLog(" manages the bill "+temp.getId(), this.getClass());
-            Object[] row = {temp.getContractID(), temp.getDetectionDate(), temp.getGeneratedDate(), temp.getTotal(), false};
-            tableModelBillsQueue.addRow(row);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -171,29 +173,29 @@ public class BillsQueue_Controller implements Controller{
     }
     
     private void selectAllClicked(){
-        DefaultTableModel table = actual.getTableModelBillsQueue();
+        DefaultTableModel table = view.getTableModelBillsQueue();
         for(Integer i = 0; i < table.getRowCount(); i++)
             table.setValueAt(true, i, 4);
-        actual.setMultipleSelection(true);
-        actual.setSelectedBills(table.getRowCount());
-        actual.setSelectAllButton(false);
-        actual.activeBillConfirm(true);
-        actual.activeBillReportError(false);
+        view.setMultipleSelection(true);
+        view.setSelectedBills(table.getRowCount());
+        view.setSelectAllButton(false);
+        view.activeBillConfirm(true);
+        view.activeBillReportError(false);
     }
     
     private void deselectAllClicked(){
-        DefaultTableModel table = actual.getTableModelBillsQueue();
+        DefaultTableModel table = view.getTableModelBillsQueue();
         for(Integer i = 0; i < table.getRowCount(); i++)
             table.setValueAt(false, i, 4);
-        actual.setMultipleSelection(true);
-        actual.setSelectedBills(0);
-        actual.setSelectAllButton(true);
-        actual.activeBillConfirm(false);
-        actual.activeBillReportError(false);
+        view.setMultipleSelection(true);
+        view.setSelectedBills(0);
+        view.setSelectAllButton(true);
+        view.activeBillConfirm(false);
+        view.activeBillReportError(false);
     }
 
     private void reportClicked() {
-        List<Integer> select = actual.getSelectedBill();
+        List<Integer> select = view.getSelectedBill();
         if(select.size()==1)
             current = new ReportError_Controller(bills.get(select.get(0)));
     }
