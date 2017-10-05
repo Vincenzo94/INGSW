@@ -97,7 +97,7 @@ public class ConfirmInjuction_Controller implements Controller{
     private void sendClicked() {
         DAO_Document daoDocument = new Injuction_MYSQL(dbController);
         String result;
-        result = EMailSender.sendEmail(contract);
+        result = EMailSender.sendEmail(contract, Injuction.class);
         view.dispose();
         sendPDFview = new SendPDF(result);
         sendPDFview.setVisible(true);

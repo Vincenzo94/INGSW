@@ -173,12 +173,20 @@ public class PDFMaker{
         printStream.showText(contract.getStreet() + ", " + contract.getDistrict());
         printStream.newLine();
         printStream.showText(contract.getCity() + ", " + contract.getZip());
+        if(contract.getEmailAddress() != null){
+            printStream.newLine();
+            printStream.showText(contract.getEmailAddress());
+        }
         printStream.newLine();
-        printStream.showText(contract.getEmailAddress());
-        printStream.newLine();
-        printStream.showText(contract.getPhone() + " - " + contract.getMobile());
-        printStream.newLine();
-        printStream.showText(contract.getTaxCode());
+        if(contract.getPhone() != null){
+            printStream.showText(contract.getPhone());
+            if(contract.getMobile() != null)
+                printStream.showText(" - " + contract.getMobile());
+        };
+        if(contract.getTaxCode() != null){
+            printStream.newLine();
+            printStream.showText(contract.getTaxCode());
+        }
         printStream.newLine();
         printStream.newLine();
         if(contract.getBillingAddress() != null){
