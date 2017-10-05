@@ -37,84 +37,60 @@ public class Bill_MYSQL implements DAO_Document {
     
 
     @Override
-    public void setState(Document d) {
-        try {
-            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_STATE);
-            statement.setString(1, d.getState());
-            statement.setInt(2, d.getId());
-            if(!dbManager.doUpdate(statement))
-                throw new SQLException("Unable to set State to " +d.getId());
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            Popup_Controller popupController = Popup_Controller.getPopup_C();
-            popupController.showPopup(msg);
-        }
+    public void setState(Document d) throws SQLException{
+        PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_STATE);
+        statement.setString(1, d.getState());
+        statement.setInt(2, d.getId());
+        if(!dbManager.doUpdate(statement))
+            throw new SQLException("Unable to set State to " +d.getId());
     }
 
     @Override
-    public List<?> getAllDocuments(Contract c) {
+    public List<?> getAllDocuments(Contract c) throws SQLException{
         List<Bill> bills = new ArrayList<>();
-        try {
+        
             PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS_CONTRACT);
             statement.setInt(1, c.getId());
             ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
                 bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
-            }
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            Popup_Controller popupController = Popup_Controller.getPopup_C();
-            popupController.showPopup(msg);
         }
         return bills; 
     }
 
     @Override
-    public List<Bill> getAllDocuments(Operator o) {
+    public List<Bill> getAllDocuments(Operator o) throws SQLException{
     List<Bill> bills = new ArrayList<>();
-        try {
-            
-            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS);
-            statement.setInt(1, o.getId());
-            ResultSet rs = dbManager.doQuery(statement);
-            while(rs.next()){
-                bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
-            }
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            Popup_Controller popupController = Popup_Controller.getPopup_C();
-            popupController.showPopup(msg);
+    PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS);
+        statement.setInt(1, o.getId());
+        ResultSet rs = dbManager.doQuery(statement);
+        while(rs.next()){
+            bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(9)));
         }
         return bills;         
     }    
 
     @Override
-    public Document search(Document d) {
+    public Document search(Document d) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public <T extends Document> void setManagedOperator(T document, Operator o) {
-        try {
+    public <T extends Document> void setManagedOperator(T document, Operator o) throws SQLException{
             PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
             statement.setInt(1, o.getId());
             statement.setInt(2, document.getId());
             if(!dbManager.doUpdate(statement))
                 throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            Popup_Controller popupController = Popup_Controller.getPopup_C();
-            popupController.showPopup(msg);
-        }
     }
 
     @Override
-    public void remove(Document d) {
+    public void remove(Document d) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Document d) {
+    public boolean update(Document d) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

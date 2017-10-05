@@ -27,21 +27,15 @@ public class Error_MYSQL implements DAO_Error{
     }
     
     @Override
-    public void create(ErrorModel error){
+    public void create(ErrorModel error)throws SQLException{
         Bill b = error.getBill();
-        try {
-            PreparedStatement statement = dbController.getStatement(QUERY_INSERT_ERROR);
-            statement.setString(1, error.getDescription());
-            statement.setInt(2, error.getOperatorID());
-            statement.setInt(3, b.getId());
-            System.out.println(statement);
-            if(!dbController.doUpdate(statement))
-                throw new SQLException("Unable to insert Error");
-        } catch (SQLException ex) {
-            String msg = ex.getMessage();
-            Popup_Controller popupController = Popup_Controller.getPopup_C();
-            popupController.showPopup(msg);
-        }
+        PreparedStatement statement = dbController.getStatement(QUERY_INSERT_ERROR);
+        statement.setString(1, error.getDescription());
+        statement.setInt(2, error.getOperatorID());
+        statement.setInt(3, b.getId());
+        System.out.println(statement);
+        if(!dbController.doUpdate(statement))
+            throw new SQLException("Unable to insert Error");
     }
 }
 

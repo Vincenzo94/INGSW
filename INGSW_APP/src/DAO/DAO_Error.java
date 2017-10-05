@@ -6,12 +6,13 @@
 package DAO;
 
 import Model.ErrorModel;
+import java.sql.SQLException;
 
 /**
  *
  * @author ansan
  */
 public interface DAO_Error {
-        public void create(ErrorModel error);
+    public void create(ErrorModel error)throws SQLException;
 
 }
