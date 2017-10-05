@@ -68,5 +68,6 @@ public AddContract_Controller(Registry_Controller controller){
         else
             contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
         daoContract.create(contract,controller.getOperator());
+        Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
     }
 }

@@ -47,6 +47,7 @@ public class RemoveInjuction_Controller implements Controller {
             DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
             daoDocument.remove(injuction);
             view.dispose();
+            Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
         }
         view.dispose();
         controller.back();

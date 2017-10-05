@@ -47,6 +47,7 @@ public class RemoveContract_Controller implements Controller {
             DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
             daoContract.remove(contract);
             view.dispose();
+            Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
         }
         view.dispose();
         controller.back();
