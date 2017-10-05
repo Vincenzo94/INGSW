@@ -58,14 +58,17 @@ public class EMailSender {
     private EMailSender(){
     }
     
-    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills) {
+    public static Map<Integer,String> sendEmail(Map<Bill,Contract> bills, Class<?> obj) {
+        if(!(obj.equals(Bill.class) || (obj.equals(Injuction.class))))
+            throw new RuntimeException("Object.class not valid");
+        
         final Map<Integer,String> results = new HashMap<>();
         for(Bill b: bills.keySet()){
             Contract c = bills.get(b);
             new Thread(){
                 @Override
                 public void run(){
-                    String result = sendEmail(c);
+                    String result = sendEmail(c, obj);
                     synchronized(results){
                         results.put(c.getId(),result);
                     }
@@ -88,10 +91,11 @@ public class EMailSender {
         return results;
     }
 
-    public static String sendEmail(Contract contract){
+    public static String sendEmail(Contract contract, Class<?> obj){
         /*
         pre-conditions:
         - receiver's email must be valid
+        - obj must be "Bill.class" or "Injuction.class"
         
         post-conditions:
         - it sends the email to receiver
@@ -102,9 +106,12 @@ public class EMailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(sender));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contract.getEmailAddress()));
-            message.setSubject("Bill");
+            if(obj.equals(Bill.class))
+                message.setSubject("Bill");
+            else
+                message.setSubject("Injunction");
             
-            message.setContent(createMultipartMessage(documentName));
+            message.setContent(createMultipartMessage(documentName, obj));
             
             Transport.send(message);
             result = null;
@@ -114,10 +121,11 @@ public class EMailSender {
         }
         return result;
     }
-    static private Multipart createMultipartMessage(String documentName){
+    static private Multipart createMultipartMessage(String documentName, Class<?> obj){
         /*
         pre-conditions:
         - Document must exists
+        - obj must be "Bill.class" or "Injuction.class"
         
         post-conditions:
         - this methods creates a message ready to be sent
@@ -126,12 +134,18 @@ public class EMailSender {
         if(!new File(absolutePath).exists())
             throw new RuntimeException("Document doesn't exists.");
         
+        String mailDescription = "Dear costumer,\n in this mail you can found your ";
+        if(obj.equals(Bill.class))
+            mailDescription += "bill ";
+        else
+            mailDescription += "injunction ";
+        mailDescription += " as attachment.\n\nThis is an automatically generated email, please do not reply.";
         Multipart multipart = null;
         try{
             multipart = new MimeMultipart();
             File file = new File(absolutePath);
             BodyPart text = new MimeBodyPart();
-            ((MimeBodyPart) text).setText("TESTO");
+            ((MimeBodyPart) text).setText(mailDescription);
             BodyPart attached = new MimeBodyPart();
             ((MimeBodyPart) attached).attachFile(file);
             attached.setFileName(documentName);
@@ -148,4 +162,3 @@ public class EMailSender {
         return multipart;
     }
 }
-

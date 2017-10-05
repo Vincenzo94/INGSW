@@ -173,7 +173,7 @@ public class ConfirmBill_Controller implements Controller{
         String result;
         Map<Integer,String> results;
         if(view!=null){
-            result = EMailSender.sendEmail(contract);
+            result = EMailSender.sendEmail(contract, Bill.class);
             view.dispose();
             sendPDFview = new SendPDF(result);
             sendPDFview.setVisible(true);
@@ -189,7 +189,7 @@ public class ConfirmBill_Controller implements Controller{
             daoDocument.setState(bill);
         }
         else{
-            results = EMailSender.sendEmail(bills);
+            results = EMailSender.sendEmail(bills, Bill.class);
             views.dispose();
             sendPDFviewMultiple = new SendPDFMultiple(results);
             sendPDFviewMultiple.setVisible(true);
