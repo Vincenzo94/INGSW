@@ -2,8 +2,12 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -37,7 +41,7 @@ public class PDFMaker{
     volatile private static Boolean ret = true;
     private final static String TMP_DIR = System.getProperty("java.io.tmpdir");
 
-    private PDFMaker(){
+    private PDFMaker() throws IOException{
         /*
         pre-conditions: 
         - the "images" directory must exists and it must contains the "template.jpg" file.
@@ -46,14 +50,22 @@ public class PDFMaker{
         - status is setted on "true".
         */
         ret = true;
-        templateDirectory = this.getClass().getResource("/Image/template.jpg").getPath();
         tmpDirectory =  TMP_DIR+"/INGSW_GR12";
-        //creates the "tmp" directory if it doesn't exists
+        templateDirectory = tmpDirectory+"/template.jpg";
+
         new File(tmpDirectory).mkdir();
+        File file = new File(tmpDirectory, "template.jpg");
+        if (!file.exists()) {
+            InputStream is = (getClass().getResourceAsStream("/Image/template.jpg"));
+            Files.copy(is, file.getAbsoluteFile().toPath());
+        }
         if(!new File(templateDirectory).exists()){
             status = false;
             throw new RuntimeException("\"template.jpg\" path is not valid");
         }
+        
+        //creates the "tmp" directory if it doesn't exists
+       
         status = true;
     }
     public static boolean createPDF(Map<Bill,Contract> bills){
@@ -70,7 +82,7 @@ public class PDFMaker{
         return ret;
     }
 
-    synchronized public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction){
+    synchronized public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction) {
         /*
         pre-conditions:
         - PDFMaker state must be valid (directoriesValidity = true)
@@ -81,7 +93,11 @@ public class PDFMaker{
         */
         
         if(instance == null)
-            instance = new PDFMaker();
+            try {
+                instance = new PDFMaker();
+        } catch (IOException ex) {
+            Logger.getLogger(PDFMaker.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
         boolean isCreated = false;
 
