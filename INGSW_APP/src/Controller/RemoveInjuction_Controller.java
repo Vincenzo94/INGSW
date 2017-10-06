@@ -7,7 +7,6 @@ package Controller;
 import DAO.DAO_Document;
 import DAO.Injuction_MYSQL;
 import Model.Injuction;
-import View.Delete;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -21,7 +20,6 @@ import javax.swing.JOptionPane;
 public class RemoveInjuction_Controller implements Controller {
     private Database_Controller dbController;
     private InjuctionsQueue_Controller controller;
-    private Delete view;
     private Injuction injuction;
     private final String success= "Injuction removed";
     private final String error = "Injuction not removed";
@@ -29,33 +27,22 @@ public class RemoveInjuction_Controller implements Controller {
     RemoveInjuction_Controller(InjuctionsQueue_Controller controller,Injuction injuction){
         this.controller = controller;
         this.injuction = injuction;
-        view = new Delete(injuction);
-        view.setVisible(true);
-        view.addActionListener(new Listener(this){
-           @Override
-           public void actionPerformed(ActionEvent e){
-               RemoveInjuction_Controller ri = (RemoveInjuction_Controller)controller;
-               ri.buttonClicked(e);
-           }
-        });
-    }
-
-    private void buttonClicked(ActionEvent e) {
-        Component c = (Component)e.getSource();
-        Integer button = view.checkButton(c);
-        if(button == 2){
+        int n = JOptionPane.showConfirmDialog(controller.getPanel(),"Are you sure to delete the injuction" + injuction.getId()+"?",
+                "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(n == 0){
             try {
                 dbController = Database_Controller.getDbManager();
                 DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
                 daoDocument.remove(injuction);
                 Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
-                JOptionPane.showConfirmDialog(view, success,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-                view.dispose();
+                JOptionPane.showConfirmDialog(controller.getPanel(), success,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
                 controller.back();
             } catch (SQLException ex) {
-                JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showConfirmDialog(controller.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+         
+            else
+                JOptionPane.showConfirmDialog(controller.getPanel(),"Operation cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
     }
 }

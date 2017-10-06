@@ -77,6 +77,10 @@ public class InjuctionsQueue_Controller implements Controller{
         view.activeInjuctionButtons();
     }
     
+    public Component getPanel(){
+        return view;
+    }
+    
     private void buttonClicked(Component c){
         int i = view.checkButton(c);
         switch(i){
