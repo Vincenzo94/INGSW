@@ -31,23 +31,24 @@ le bollette saranno del tipo bill_clientID.pdf
 
 public class EMailSender {
 
-    private final static String sender = "ingsw.gr12@gmail.com";;
-    private final static String psw = "hxegtqrhgueywops";
-    private final static String host = "smtp.gmail.com";;
-    private final static String basicPath = "././tmp";;
-    private final static Properties props = new Properties(){
+    private final static String SENDER = "ingsw.gr12@gmail.com";
+    private final static String PSW = "hxegtqrhgueywops";
+    private final static String HOST = "smtp.gmail.com";
+    private final static String TMP_DIR = System.getProperty("java.io.tmpdir");
+    private final static String PATH = TMP_DIR+"/INGSW_GR12";
+    private final static Properties PROPS = new Properties(){
         {
             this.put("mail.smtp.auth", "true");
             this.put("mail.smtp.starttls.enable", "true");
-            this.put("mail.smtp.host", host);
+            this.put("mail.smtp.host", HOST);
             this.put("mail.smtp.port", "25");
-            }
+        }
     };
-    private final static Session session=Session.getInstance(props,
+    private final static Session session=Session.getInstance(PROPS,
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(sender, psw);
+                    return new PasswordAuthentication(SENDER, PSW);
                 }
             }
         );
@@ -104,7 +105,7 @@ public class EMailSender {
         String documentName = contract.getId() + ".pdf";
         try{
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(sender));
+            message.setFrom(new InternetAddress(SENDER));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contract.getEmailAddress()));
             if(obj.equals(Bill.class))
                 message.setSubject("Bill");
@@ -130,7 +131,7 @@ public class EMailSender {
         post-conditions:
         - this methods creates a message ready to be sent
         */
-        String absolutePath = basicPath + "/" + documentName;
+        String absolutePath = PATH + "/" + documentName;
         if(!new File(absolutePath).exists())
             throw new RuntimeException("Document doesn't exists.");
         
@@ -153,11 +154,7 @@ public class EMailSender {
             multipart.addBodyPart(attached);
             multipart.addBodyPart(text);
         }
-        catch(MessagingException m){
-            m.printStackTrace();
-        }
-        catch(IOException i){
-            i.printStackTrace();
+        catch(MessagingException | IOException m){
         }
         return multipart;
     }

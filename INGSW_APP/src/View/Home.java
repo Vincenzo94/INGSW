@@ -10,7 +10,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
-import javax.swing.JFrame;
 import javax.swing.event.ChangeListener;
 /**
  *

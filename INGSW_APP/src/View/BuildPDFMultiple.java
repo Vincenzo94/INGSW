@@ -34,6 +34,8 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     private JButton cancelButton;
     private JButton sendPDFButton;
     private JPanel jPanel1;
+    private final String TMP_DIR = System.getProperty("java.io.tmpdir");
+    private final String PATH = TMP_DIR+"/INGSW_GR12";
 
 
     /**
@@ -273,7 +275,7 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     public void preview(boolean b) {
         if(b == true){
             String pdfName = tableModelMultipleBill.getValueAt(jTable1.getSelectedRow(), 0)+".pdf";
-            controller.openDocument("././tmp/"+pdfName);
+            controller.openDocument(PATH+"/"+pdfName);
         }
         jScrollPane1.setVisible(!b);
         jPanel2.setVisible(b);

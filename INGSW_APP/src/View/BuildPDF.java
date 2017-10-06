@@ -23,9 +23,12 @@ public class BuildPDF extends JFrame{
     private JButton sendPDFButton;
     private JButton cancelButton;
     private final List<ActionListener> actionListener;
+    private final String TMP_DIR = System.getProperty("java.io.tmpdir");
+    private final String PATH = TMP_DIR+"/INGSW_GR12";
     
     public BuildPDF(Document doc){
-        this.filePath = "././tmp/"+doc.getContractID()+".pdf";
+        
+        this.filePath = PATH+"/"+doc.getContractID()+".pdf";
         initComponents();
         actionListener = new LinkedList<>();
         Toolkit tk = Toolkit.getDefaultToolkit();  
@@ -46,6 +49,14 @@ public class BuildPDF extends JFrame{
         actionListener.add(a);
     }    
     private void initComponents(){
+        this.setUndecorated(true);
+        this.setExtendedState(6);
+        Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension screenSize = tk.getScreenSize();
+        int xSize = ((int) screenSize.getWidth());  
+        int ySize = ((int) screenSize.getHeight());  
+        this.setSize(xSize,ySize);
+        this.setAlwaysOnTop(true);
         sendPDFButton = new JButton();
         cancelButton = new JButton();
         controller = new SwingController();
@@ -73,7 +84,7 @@ public class BuildPDF extends JFrame{
         controller.getDocumentViewController().setAnnotationCallback(
             new org.icepdf.ri.common.MyAnnotationCallback(
                 controller.getDocumentViewController()));
-        viewerComponentPanel.setSize(600, 400);        
+        //viewerComponentPanel.setSize(600, 400);        
         
         //frame
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -105,7 +116,6 @@ public class BuildPDF extends JFrame{
         );
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pack();
-        
         controller.openDocument(filePath);
     }
 

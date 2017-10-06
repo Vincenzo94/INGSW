@@ -95,6 +95,7 @@ public class SendPDF extends javax.swing.JFrame {
         getContentPane().add(emailLabel, gridBagConstraints);
 
         addressImage.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        addressImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ok.png"))); // NOI18N
         addressImage.setLabelFor(addressLabel);
         addressImage.setText("        ");
         addressImage.setToolTipText("");
@@ -108,6 +109,7 @@ public class SendPDF extends javax.swing.JFrame {
         getContentPane().add(addressImage, gridBagConstraints);
 
         emailImageOK.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailImageOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ok.png"))); // NOI18N
         emailImageOK.setText("        ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -164,6 +166,7 @@ public class SendPDF extends javax.swing.JFrame {
         getContentPane().add(okButton, gridBagConstraints);
 
         emailImageNOK.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        emailImageNOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/nok.png"))); // NOI18N
         emailImageNOK.setText("        ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

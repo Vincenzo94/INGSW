@@ -90,7 +90,8 @@ public class Registry_Controller implements Controller{
     }
     
     public void back(){
-        searchClicked();
+    updateView();
+//searchClicked();
     } 
     
     public Operator getOperator() {
@@ -153,7 +154,6 @@ public class Registry_Controller implements Controller{
     private void removeContractClicked() {
         int row = view.getSelectedContract();
         if(row >= 0 && row<contracts.size()){
-            view.setEnabled(false);
             current = new RemoveContract_Controller(this, contracts.get(row));
         }
         else
