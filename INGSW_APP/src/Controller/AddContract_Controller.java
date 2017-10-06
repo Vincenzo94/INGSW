@@ -57,19 +57,33 @@ public class AddContract_Controller implements Controller{
         try {
             dbManager = Database_Controller.getDbManager();        
             DAO_Contract daoContract = new Contract_MYSQL(dbManager);
-            String billingCity = view.getCity1();
-            String billingDistrict = view.getDistrict1();
-            String billingZip = view.getZip1();
-            String billingStreet = view.getStreet1();
-
-            if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals("")){
-                contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2());
-            }
+            String billingCity = view.getCity1(),
+                   billingDistrict = view.getDistrict1(),
+                   billingZip = view.getZip1(),
+                   billingStreet = view.getStreet1(),
+                   name=view.getPersonName(),
+                   surname=view.getSurname(),
+                   taxc=view.getTaxC(),
+                   phone=view.getPhone(),
+                   email=view.getEmail(),
+                   mobile=view.getMobile(),
+                   city=view.getCity2(),
+                   district=view.getDistrict2(),
+                   zip=view.getZip2(),
+                   street=view.getStreet2(),
+                   number=view.getNumber1(),
+                   number2=view.getNumber2();
+            if(!name.matches("[[a-z]|[A-Z]]*") || !surname.matches("[[a-z]|[A-Z]]*") || !taxc.matches("[[a-z]|[0-9]]*") || !city.matches("[[a-z]|[A-Z]]*") || !district.matches("[[a-z]|[A-Z]]*") || !street.matches("[[a-z]|[A-Z]]*") || !phone.matches("[0-9]*") || !mobile.matches("[0-9]*") || !zip.matches("[0-9]*") || !number.matches("[0-9]*") || !number2.matches("[0-9]*") || !email.matches("[[0-9]|[a-z]|[A-Z]|[_|\\-|.]]*"))
+                throw new SQLException("Invalid characters");
+            if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals(""))
+                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number2));
             else
-                contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
+                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number2), billingCity, billingDistrict, billingZip, billingStreet, Integer.valueOf(number));
             daoContract.create(contract,controller.getOperator());
             Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
             JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            view.dispose();
+            controller.back();
         }catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }

@@ -29,8 +29,8 @@ public class Main_Controller{
                                                                     + "\t\t 2.4) view bills through BILLS button or injuctions through INJUCTIONS button. ");
     
     
-    private final String second = ("After have selected a single row from the table it will be possible to confirm or delete the injuction");
-    private final String third = ("After have selected a single or multiple rows from the table it will be possible confirm or deselect them");
+    private final String second = ("After have selected a single row from the table \nit will be possible to confirm or delete the injuction");
+    private final String third = ("After have selected a single or multiple rows from the table \nit will be possible confirm or deselect the bill/s");
     private Controller current;
     private Operator operator;
     private static Main_Controller instance;

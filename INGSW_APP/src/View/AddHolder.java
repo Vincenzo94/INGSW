@@ -500,11 +500,11 @@ public class AddHolder extends javax.swing.JFrame {
     public String getMobile(){
         return mobileField.getText();
     }
-    public Integer getNumber1(){
-        return Integer.valueOf(numberField.getText());
+    public String getNumber1(){
+        return numberField.getText();
     }
-    public Integer getNumber2(){
-        return Integer.valueOf(number2Field.getText());
+    public String getNumber2(){
+        return number2Field.getText();
     }
     public String getZip1(){
         return postalCodeField.getText();
