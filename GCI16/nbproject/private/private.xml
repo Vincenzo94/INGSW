@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/View/InjuctionsQueuePanel.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/View/SendPDFMultiple.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/SearchContract_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/Main_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/DAO/Injuction_MYSQL.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/Login_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/InjuctionsQueue_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/DAO/Bill_MYSQL.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/BillsHistory_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Model/PDFMaker.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/InjuctionsHistory_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/View/SendPDF.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/Registry_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/ConfirmBill_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/ConfirmInjuction_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/Controller/BillsQueue_Controller.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/View/BuildPDFMultiple.java</file>
+            <file>file:/home/ansan/INGSW/INGSW_APP/src/View/BuildPDF.java</file>
+        </group>
+    </open-files>
+</project-private>
