@@ -117,9 +117,9 @@ public class BillsQueue_Controller implements Controller{
         
         LinkedList<Bill> selected=new LinkedList<>();
         for(Integer i: view.getSelectedBill()){
-            selected.add(bills.get(i));
+            if(i<bills.size() && i>=0)
+                selected.add(bills.get(i));
         }
-        
         if(selected.size()==1)
             current = new ConfirmBill_Controller(selected.getFirst(),this);
         else
@@ -127,8 +127,6 @@ public class BillsQueue_Controller implements Controller{
     }
      
     public void back(){
-        view.getParent().setEnabled(true);
-        view.setEnabled(true);
         updateBillsQueue();
     }
         

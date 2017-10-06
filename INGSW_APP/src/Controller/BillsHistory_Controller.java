@@ -87,7 +87,7 @@ public class BillsHistory_Controller implements Controller {
         Integer billCont = view.getBillCount();
         if(billCont>0){
             Integer bill = view.getSelectedBill();
-            if(bill != null){
+            if(bill != null && bill>=0 && bill<bills.size()){
                 Bill temp = bills.get(bill);
                 view.setTax(temp.getTax());
                 view.setTotal(temp.getTotal());
@@ -96,9 +96,12 @@ public class BillsHistory_Controller implements Controller {
                 view.setDetectionDate(temp.getDetectionDate());
                 view.activeGenPDF(true);
                 view.activeBillReportError(true);
-            } 
+            }
+            else
+                JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     private void setDefaultRender(JTable table) {
         TableColumnModel tableModel = table.getColumnModel();
         TableColumn tableColumn;
@@ -123,7 +126,6 @@ public class BillsHistory_Controller implements Controller {
             bills.clear();
             bills = daoBill.getAllDocuments(contract);
             for(Bill temp : bills){
-                System.out.println(temp.getState());
                 Object[] row = {temp.getId(), temp.getPeriod(), temp.getState(), temp.getDeadline()};
                 billsModel.addRow(row);
             }
@@ -132,21 +134,34 @@ public class BillsHistory_Controller implements Controller {
         }
 
     }
+    
     public void backClicked(){
         view.dispose();
         reg.back();
     }
 
     private void buildPDFClicked() {
-        Bill b = bills.get(view.getSelectedBill());
-        view.dispose();
-        current = new ConfirmBill_Controller(b,this);
+        int i= view.getSelectedBill();
+        Bill b;
+        if(i>=0 && i<bills.size()){
+            b= bills.get(i);
+            view.dispose();
+            current = new ConfirmBill_Controller(b,this);
+        }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void reportErrorClicked() {
-        Bill b = bills.get(view.getSelectedBill());
-        view.dispose();
-        current = new ReportError_Controller(b);
+        int i =view.getSelectedBill();
+        Bill b;
+        if(i>=0 && i<bills.size()){
+            b= bills.get(i);
+            view.dispose();
+            current = new ReportError_Controller(b);
+        }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     public void back() {

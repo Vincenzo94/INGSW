@@ -129,18 +129,24 @@ public class InjuctionsQueue_Controller implements Controller{
     
     private void removeInjuctionClicked() {
         int row = view.getSelectedInjuction();
-        view.setEnabled(false);
-        current = new RemoveInjuction_Controller(this, injuctions.get(row));
+        if(row>=0 && row<injuctions.size())
+            current = new RemoveInjuction_Controller(this, injuctions.get(row));
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
     private void confirmInjuctionClicked(){
-        Injuction b = injuctions.get(view.getSelectedInjuction());
-        view.setEnabled(false);
-        current = new ConfirmInjuction_Controller(b,this);
+        int i = view.getSelectedInjuction();
+        Injuction b;
+        if(i>=0 && i<injuctions.size()){
+            b = injuctions.get(i);
+            current = new ConfirmInjuction_Controller(b,this);
+        }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
     public void back(){
-        view.setEnabled(true);
         updateInjuctionsQueue();
     }
     

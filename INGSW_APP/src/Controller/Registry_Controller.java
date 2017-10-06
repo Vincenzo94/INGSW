@@ -31,7 +31,6 @@ public class Registry_Controller implements Controller{
     private String tax;
     private String id_string;
     private Boolean searchedContracts = false;
-    Popup_Controller popupcontroller;
 
     public Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
         this.operator = operator;
@@ -59,9 +58,10 @@ public class Registry_Controller implements Controller{
         try {
             if(!(current instanceof SearchContract_Controller))
                 current = new SearchContract_Controller(view.getTableModelRegistryManagement(),null);
-            Integer selectedContract = view.getSelectedContract();
-            
+            Integer selectedContract = view.getSelectedContract();           
             contracts = ((SearchContract_Controller)current).getContracts();
+            if(selectedContract>=contracts.size() || selectedContract<0)
+                throw new SQLException("Invalid selection from the table");
             Contract contract = contracts.get(selectedContract);
             view.activeContractButtons();
             view.setBillingAddress(contract.getBillingAddress());
@@ -90,17 +90,14 @@ public class Registry_Controller implements Controller{
     }
     
     public void back(){
-        view.setEnabled(true);
         searchClicked();
     } 
     
     public Operator getOperator() {
         return operator;
     }
-        
-    
+          
     private void addClicked(){
-        view.setEnabled(false);
         current= new AddContract_Controller(this);
     }
     
@@ -116,11 +113,12 @@ public class Registry_Controller implements Controller{
         boolean d = (!id_string.equals("") & !id_string.matches("[0-9]*"));
 
         if(a || b || c || d)
-            Popup_Controller.getPopup_C().showPopup("Inserted invalid charachters");
+            JOptionPane.showConfirmDialog(view, "Invalid parameters for search's forms","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         else{
             updateView();
         }
     }
+    
     public void updateView(){
         if(searchedContracts){
             try {
@@ -139,33 +137,41 @@ public class Registry_Controller implements Controller{
     
     private void alterholderCliked(){
         int row = view.getSelectedContract();
-        if(row >= 0){
+        if(row >=0 && row<contracts.size()){
             view.setEnabled(false);
             current = new AlterContract_Controller(this, contracts.get(row));
         }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
     private void removeContractClicked() {
         int row = view.getSelectedContract();
-        if(row >= 0){
+        if(row >= 0 && row<contracts.size()){
             view.setEnabled(false);
             current = new RemoveContract_Controller(this, contracts.get(row));
         }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void billsClicked() {
         int row = view.getSelectedContract();
-        if(row >= 0){
+        if(row >= 0 && row<contracts.size()){
             view.setEnabled(false);
             current = new BillsHistory_Controller(this, contracts.get(row));
         }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void injuctionsCliecked() {
         int row = view.getSelectedContract();
-        if(row >= 0){
+        if(row >= 0 && row<contracts.size()){
             view.setEnabled(false);
             current = new InjuctionsHistory_Controller(this, contracts.get(row));
         }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 }

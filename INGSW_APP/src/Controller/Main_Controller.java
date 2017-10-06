@@ -101,9 +101,9 @@ public class Main_Controller{
     private void help(){
         int i = actual.getSelectedPanel();
         switch (i){
-            case 0: JOptionPane.showConfirmDialog(actual, first,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
-            case 1: JOptionPane.showConfirmDialog(actual, second,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
-            case 2: JOptionPane.showConfirmDialog(actual, third,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
+            case 0: JOptionPane.showConfirmDialog(actual, first,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
+            case 1: JOptionPane.showConfirmDialog(actual, second,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
+            case 2: JOptionPane.showConfirmDialog(actual, third,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE); break;
         }
     }
     
