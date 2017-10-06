@@ -379,11 +379,6 @@ public class AddHolder extends javax.swing.JFrame {
 
         emailField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         emailField.setToolTipText("");
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -467,10 +462,6 @@ public class AddHolder extends javax.swing.JFrame {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         for(ActionListener a: actionListener)

@@ -5,18 +5,18 @@
  */
 package Model;
 import java.sql.Date;
-import java.util.Observable;
 
 /**
  *
  * @author Andrea
  */
-public abstract class Document extends Observable{
-    final Integer id;
-    String state;
-    final Date generatedDate;
-    Date confirmedDate;
-    Integer operatorID;
+public abstract class Document {
+    private final Integer id;
+    private String state;
+    private final Date generatedDate;
+    private Date confirmedDate;
+    private Integer operatorID;
+    
     public Document(Integer id, String state, Date generatedDate, Date confirmedDate, Integer operatorID){
         this.id = id;
         this.state = state;

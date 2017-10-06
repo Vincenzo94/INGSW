@@ -60,6 +60,7 @@ public class Bill extends Document{
     public Date getDeadline(){
         return deadline;
     }
+    @Override
     public Integer getContractID() {
         return contractID;
     }

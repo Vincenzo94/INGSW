@@ -70,11 +70,6 @@ public class Login extends javax.swing.JFrame {
         usernameField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         usernameField.setText("2");
         usernameField.setToolTipText("id");
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -87,11 +82,6 @@ public class Login extends javax.swing.JFrame {
         passwordField.setText("ingsw");
         passwordField.setToolTipText("password");
         passwordField.setAutoscrolls(false);
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -158,36 +148,22 @@ public class Login extends javax.swing.JFrame {
         return helpButton;
     }
     
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameFieldActionPerformed
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        for(ActionListener a: listener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
-
-    private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        // TODO add your handling code here:
-        for(ActionListener a: listener)
-            a.actionPerformed(evt);
-    }//GEN-LAST:event_helpButtonActionPerformed
-
-    
-    
-  public int checkButton(Component c){
+      public int checkButton(Component c){
        if(c == loginButton) return 1;
        if(c == helpButton) return 2;
        return 0;
    }
     
-    
-    
-  
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        for(ActionListener a: listener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
+        for(ActionListener a: listener)
+            a.actionPerformed(evt);
+    }//GEN-LAST:event_helpButtonActionPerformed
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton helpButton;
     private javax.swing.JButton loginButton;

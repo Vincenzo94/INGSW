@@ -65,11 +65,6 @@ public class Home extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
-        });
 
         homePane.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         homePane.setMinimumSize(new java.awt.Dimension(1121, 875));
@@ -124,10 +119,6 @@ public class Home extends javax.swing.JFrame {
         for(ChangeListener a: changeListener)
             a.stateChanged(evt);
     }//GEN-LAST:event_homePaneStateChanged
-
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-            //this.setEnabled(true);
-    }//GEN-LAST:event_formFocusGained
     
     @Override
     public void addMouseListener(MouseListener m){

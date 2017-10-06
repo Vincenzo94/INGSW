@@ -42,6 +42,68 @@ public class RegistryPanel extends javax.swing.JPanel {
         int ySize = ((int) screenSize.getHeight());  
         this.setSize(xSize,ySize);
     }
+    
+    
+    @Override
+    public void addMouseListener(MouseListener m){
+        mouseListener.add(m);
+    }
+    public void addActionListener(ActionListener a){
+        actionListener.add(a);
+    }
+    
+    public void activeContractButtons(boolean state){
+        alterHolderButton.setEnabled(state);
+        removeContractButton.setEnabled(state);
+        billsButton.setEnabled(state);
+        injuctionsButton.setEnabled(state);
+    }
+    public void setBillingAddress(String s){
+        billingAddressValueLabel.setText(s);
+    }
+    public void setAddress(String s){
+        addressValueLabel.setText(s);
+    }
+    public void setTelephone(String s){
+        telephoneValueLabel.setText(s);
+    }
+    public void setEmail(String s){
+        emailValueLabel.setText(s);
+    }
+    public Integer getSelectedContract(){
+        return table.getSelectedRow();
+    }
+    
+    public String getNameSearch(){
+        return nameField.getText();
+    }
+    
+    public String getSurnameSearch(){
+        return surnameField.getText();
+    }
+    
+    public String getTaxSearch(){
+        return taxCField.getText();
+    }
+    
+    public String getIdSearch(){
+        return contractIdField.getText();
+    }
+    
+        public DefaultTableModel getTableModelRegistryManagement(){
+        return tableModelRegistryManagement;
+    }
+        
+        
+        public int checkButton(Component c){
+           if(c == searchButton) return 1;
+           if(c == alterHolderButton) return 2;
+           if(c == addButton) return 3;
+           if(c == removeContractButton) return 4;
+           if(c == billsButton) return 5;
+           if(c == injuctionsButton) return 6;
+           return 0;
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -389,69 +451,7 @@ public class RegistryPanel extends javax.swing.JPanel {
         for(ActionListener a: actionListener)
             a.actionPerformed(evt);
     }//GEN-LAST:event_billsButtonActionPerformed
-
-    @Override
-    public void addMouseListener(MouseListener m){
-        mouseListener.add(m);
-    }
-    public void addActionListener(ActionListener a){
-        actionListener.add(a);
-    }
-    
-    public void activeContractButtons(boolean state){
-        alterHolderButton.setEnabled(state);
-        removeContractButton.setEnabled(state);
-        billsButton.setEnabled(state);
-        injuctionsButton.setEnabled(state);
-    }
-    public void setBillingAddress(String s){
-        billingAddressValueLabel.setText(s);
-    }
-    public void setAddress(String s){
-        addressValueLabel.setText(s);
-    }
-    public void setTelephone(String s){
-        telephoneValueLabel.setText(s);
-    }
-    public void setEmail(String s){
-        emailValueLabel.setText(s);
-    }
-    public Integer getSelectedContract(){
-        return table.getSelectedRow();
-    }
-    
-    public String getNameSearch(){
-        return nameField.getText();
-    }
-    
-    public String getSurnameSearch(){
-        return surnameField.getText();
-    }
-    
-    public String getTaxSearch(){
-        return taxCField.getText();
-    }
-    
-    public String getIdSearch(){
-        return contractIdField.getText();
-    }
-    
-        public DefaultTableModel getTableModelRegistryManagement(){
-        return tableModelRegistryManagement;
-    }
-        
-        
-        public int checkButton(Component c){
-           if(c == searchButton) return 1;
-           if(c == alterHolderButton) return 2;
-           if(c == addButton) return 3;
-           if(c == removeContractButton) return 4;
-           if(c == billsButton) return 5;
-           if(c == injuctionsButton) return 6;
-           return 0;
-   }
-   
-    
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JLabel addressLabel;

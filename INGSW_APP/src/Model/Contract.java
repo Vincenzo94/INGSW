@@ -24,14 +24,6 @@ public class Contract {
     private String mobile;
     private Address billingAddress;
     private final Address address;
-
-    
-
-    
-
-   
-
-
     
     private class Address{
         private String city;
@@ -116,6 +108,7 @@ public class Contract {
             billingAddress = new Address(billingCity, billingDistrict, billingStreet,billingNumber, billingZip);
         address = new Address(city,district,street,number,zip);
     }
+    
     public Contract(String name, String surname, String taxCode, String phone, String eMail, String mobile,String city,String district,String zip,String street,Integer number,String billingCity,String billingDistrict,String billingZip, String billingStreet, Integer billingNumber) {
         this.name = name;
         this.surname = surname;
@@ -126,6 +119,7 @@ public class Contract {
         billingAddress = new Address(billingCity, billingDistrict, billingStreet,billingNumber, billingZip);
         address = new Address(city,district,street,number,zip);
     }
+    
     public Contract(String name, String surname, String taxCode, String phone, String eMail, String mobile,String city,String district,String zip,String street,Integer number) {
         this.name = name;
         this.surname = surname;
@@ -139,6 +133,7 @@ public class Contract {
     public void addBillingAddress(String city, String district, String street, String zip, Integer number) {
         billingAddress = new Address(city,district,street,number,zip);
     }
+    
     public Integer getId() {
         return id;
     }
@@ -158,21 +153,27 @@ public class Contract {
     public String getTaxCode() {
         return taxCode;
     }
+    
     public String getBillingCity() {
         return billingAddress.getCity();
     }
+    
     public String getBillingDistrict() {
         return billingAddress.getDistrict();
     }
+    
     public Integer getBillingNumber() {
         return billingAddress.getNumber();
     }
+    
     public String getBillingStreet() {
         return billingAddress.getStreet();
     }
+    
     public String getBillingZip(){
         return billingAddress.getZip();
     }
+    
     public String getBillingAddress(){
         String city=null;
         String street=null;
@@ -193,27 +194,35 @@ public class Contract {
     public String getCity() {
         return address.getCity();
     }
+    
     public String getDistrict() {
         return address.getDistrict();
     }
+    
     public Integer getNumber() {
         return address.getNumber();
     }
+    
     public String getStreet() {
         return address.getStreet();
     }
+    
     public String getZip(){
         return address.getZip();
     }
+    
     public String getAddress(){
         return address.getStreet()+" "+address.getNumber()+", "+address.getZip()+", "+address.getDistrict()+", "+address.getCity();
     }
+    
     public String getPhone(){
         return phone;
     }
+    
     public String getMobile(){
         return mobile;
     }
+    
     public String getTelephone() {
         if(phone == null)
             return mobile;
@@ -297,6 +306,4 @@ public class Contract {
     public void setBillingAddress(Address ba) {
         billingAddress = null;
     }
-    
-    
 }
