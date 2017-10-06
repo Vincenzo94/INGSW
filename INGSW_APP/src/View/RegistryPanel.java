@@ -398,11 +398,11 @@ public class RegistryPanel extends javax.swing.JPanel {
         actionListener.add(a);
     }
     
-    public void activeContractButtons(){
-        alterHolderButton.setEnabled(true);
-        removeContractButton.setEnabled(true);
-        billsButton.setEnabled(true);
-        injuctionsButton.setEnabled(true);
+    public void activeContractButtons(boolean state){
+        alterHolderButton.setEnabled(state);
+        removeContractButton.setEnabled(state);
+        billsButton.setEnabled(state);
+        injuctionsButton.setEnabled(state);
     }
     public void setBillingAddress(String s){
         billingAddressValueLabel.setText(s);

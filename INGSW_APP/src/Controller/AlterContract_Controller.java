@@ -122,6 +122,4 @@ public class AlterContract_Controller implements Controller{
         }
     }
     
-    
-    
 }

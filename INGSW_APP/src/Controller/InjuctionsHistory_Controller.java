@@ -87,7 +87,7 @@ public class InjuctionsHistory_Controller implements Controller {
         Integer injuctionCont = view.getInjuctionCount();
         if(injuctionCont>0){
             Integer injuction=view.getSelectedInjuction();
-            if(injuction != null){
+            if(injuction != null && injuction>=0 && injuction<injuctions.size()){
                 Injuction temp = injuctions.get(injuction);
                 Bill ref = temp.getBill();
                 view.setBillsPeriod(ref.getPeriod());
@@ -100,13 +100,21 @@ public class InjuctionsHistory_Controller implements Controller {
                     view.setPaymentDate(paymentDate.toString());
                 view.enableBuildPDFButton(true);
             }
+            else
+                JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void buildPDFClicked() {
-        Injuction b = injuctions.get(view.getSelectedInjuction());
-        view.dispose();
-        current = new ConfirmInjuction_Controller(b,this);
+        int i=view.getSelectedInjuction();
+        Injuction b;
+        if(i>=0 && i<injuctions.size()){
+            b= injuctions.get(i);
+            view.dispose();
+            current = new ConfirmInjuction_Controller(b,this);
+        }
+        else
+            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void initTable() {

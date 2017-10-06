@@ -25,7 +25,6 @@ public class SearchContract_Controller implements Controller{
     
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
-    private Popup_Controller popupcontroller;
     
     SearchContract_Controller(DefaultTableModel table, Contract c) throws SQLException {
         this.contract=c;
@@ -36,7 +35,7 @@ public class SearchContract_Controller implements Controller{
     }
     
     private void initRegistryManagement() throws SQLException {
-            dbManager = Database_Controller.getDbManager();
+        dbManager = Database_Controller.getDbManager();
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
@@ -47,8 +46,7 @@ public class SearchContract_Controller implements Controller{
         else{
             contracts = daoContract.getAllContracts(contract);
             if(contracts.isEmpty()){
-                popupcontroller=Popup_Controller.getPopup_C();
-                popupcontroller.showPopup("No result found!");
+                throw new SQLException ("No Result Found");
             }
                 
         }
