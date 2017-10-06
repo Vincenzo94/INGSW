@@ -10,3 +10,16 @@ INGSW_APP/Mylog_1\.log\.2017-09-29
 INGSW_APP/LOG/
 
 INGSW_APP/tmp/
+/GCI16/build/
+/GCI16/dist/
+GCI16/tmp/
+
+GCI16/LOG/
+
+GCI16/nbproject/build-impl\.xml
+
+GCI16/nbproject/genfiles\.properties
+
+GCI16/build\.xml
+
+GCI16/nbproject/private/private\.xml

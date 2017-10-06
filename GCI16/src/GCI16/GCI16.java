@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ingsw_app;
+package GCI16;
 
 import Controller.Main_Controller;
 import java.awt.GraphicsDevice;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author ansan
  */
-public class INGSW_APP {
+public class GCI16 {
     public static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -25,8 +25,9 @@ public class INGSW_APP {
                 try {
                     main = Main_Controller.getMain();
                 } catch (SQLException ex) {
-                    Logger.getLogger(INGSW_APP.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GCI16.class.getName()).log(Level.SEVERE, null, ex);
                 }
+               // new Login_Controller();
                // new Login_Controller();
             }
         });
