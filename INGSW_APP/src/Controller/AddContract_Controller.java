@@ -22,6 +22,8 @@ public class AddContract_Controller implements Controller{
     private AddHolder view;
     private final Registry_Controller controller;
     private Contract contract;
+    private final String success = "New contract added";
+    private final String error = "No contract added";
     
 
     public AddContract_Controller(Registry_Controller controller){
@@ -67,8 +69,9 @@ public class AddContract_Controller implements Controller{
                 contract = new Contract(view.getPersonName(), view.getSurname(), view.getTaxC(), view.getPhone(), view.getEmail(), view.getMobile(), view.getCity2(), view.getDistrict2(), view.getZip2(), view.getStreet2(), view.getNumber2(), billingCity, billingDistrict, billingZip, billingStreet, view.getNumber1());
             daoContract.create(contract,controller.getOperator());
             Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
+            JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
         
     }

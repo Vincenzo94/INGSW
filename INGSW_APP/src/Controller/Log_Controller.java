@@ -14,14 +14,13 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class Log_Controller implements Controller{
 
-    private static Integer operator;
     private static String string;
     static void setOperator(Operator o) {
-        operator = o.getId();
-        string="User: "+operator;
+        string="User: "+o.getId();
     }
     
     private Log_Controller() {
+        
     }
     
     public static void writeLog(String s, Class c){

@@ -21,7 +21,9 @@ import javax.swing.JOptionPane;
 public class AlterContract_Controller implements Controller{
     private final Contract contract;
     private final Registry_Controller controller;
-    private AlterHolder view;
+    private final AlterHolder view;
+    private final String success = "Contract altered";
+    private final String error = "Contract not altered";
     
     private Database_Controller dbManager;
     
@@ -72,7 +74,11 @@ public class AlterContract_Controller implements Controller{
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         try{
             switch(button){
-                case 0: view.dispose(); controller.back(); break;
+                case 0: {
+                    view.dispose();
+                    controller.back();
+                    break; 
+                }                         
                 case 1:{
                     contract.setName(view.getPersonName());
                     contract.setSurname(view.getSurname());
@@ -81,7 +87,8 @@ public class AlterContract_Controller implements Controller{
                     contract.setMobile(view.getMobile());
                     contract.seteMail(view.getEmail());
                     daoContract.update_Registry(contract,controller.getOperator());
-                } break;
+                    break;
+                } 
                 case 2:{
                     String street = view.getStreet1();
                     String city = view.getCity1();
@@ -116,9 +123,10 @@ public class AlterContract_Controller implements Controller{
                     break;
                 }
             }
+            JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     

@@ -57,7 +57,6 @@ public class Main_Controller{
     
     public void loginDone(Operator o){
         operator=o;
-        Log_Controller.setOperator(o);
         actual = new Home();
         //INGSW_APP.device.setFullScreenWindow(actual);
         actual.setVisible(true);

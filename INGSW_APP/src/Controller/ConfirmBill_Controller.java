@@ -45,12 +45,13 @@ public class ConfirmBill_Controller implements Controller{
     private final BuildPDF view;
     private final BuildPDFMultiple views;
     private SendPDF sendPDFview;
-    Contract contract;
+    private Contract contract;
     private DefaultTableModel tableModelMultipleBill = null;
     private DefaultTableCellRenderer defaultRender = null;
     private Database_Controller dbController;
     private SendPDFMultiple sendPDFviewMultiple;
     private Operator operator;
+    private final String success = "";
 
     
     public ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
@@ -182,7 +183,6 @@ public class ConfirmBill_Controller implements Controller{
         Map<Integer,String> results;
         if(view!=null){
             result = EMailSender.sendEmail(contract, Bill.class);
-            
             sendPDFview = new SendPDF(result);
             sendPDFview.setVisible(true);
             sendPDFview.addActionListener(new Listener(this){
@@ -192,10 +192,10 @@ public class ConfirmBill_Controller implements Controller{
                 c.okClicked();
                 }
             });
-            Log_Controller.writeLog(" send the bill "+bill.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmBill_Controller.class);
             bill.setState("Issued");
             try {
                 daoDocument.setState(bill);
+                Log_Controller.writeLog(" send the bill "+bill.getId()+" to "+contract.getName()+" "+contract.getSurname()+" with ID "+contract.getId()+" at the address: "+contract.getEmailAddress(),ConfirmBill_Controller.class);
             } catch (SQLException ex) {
                 JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
@@ -212,15 +212,15 @@ public class ConfirmBill_Controller implements Controller{
                 c.okClicked();
                 }
             });
-            for(Bill b:bills.keySet()){
-                Log_Controller.writeLog(" send the bill "+b.getId()+" to contract: "+bills.get(b).getName()+" "+bills.get(b).getSurname()+" with ID "+b.getContractID()+" at the address: "+bills.get(b).getEmailAddress(),ConfirmBill_Controller.class);
-                b.setState("Issued");
-                try {
+            try {
+                for(Bill b:bills.keySet()){
+                    b.setState("Issued");
                     daoDocument.setState(b);
-                } catch (SQLException ex) {
+                    Log_Controller.writeLog(" send the bill "+b.getId()+" to contract: "+bills.get(b).getName()+" "+bills.get(b).getSurname()+" with ID "+b.getContractID()+" at the address: "+bills.get(b).getEmailAddress(),ConfirmBill_Controller.class);
+                }
+            } catch (SQLException ex) {
                     JOptionPane.showConfirmDialog(views, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
                 }
-            }
             views.dispose();
         }
         

@@ -56,18 +56,17 @@ public class Login_Controller implements Controller{
         operator=new Operator(user,passw);
         try {
                 operator = DAO.check(operator);
-
             if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
                 Log_Controller.setOperator(operator);
                 ErrorModel.setOperatorID(operator.getId());
                 Log_Controller.writeLog(" logged",Login_Controller.class);
                 login.dispose();
                 main.loginDone(operator);
-                }
+            }
             else{
                 JOptionPane.showConfirmDialog(login, "Invalid ID and/or Password!","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             } 
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }

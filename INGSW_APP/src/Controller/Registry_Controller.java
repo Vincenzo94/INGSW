@@ -143,10 +143,8 @@ public class Registry_Controller implements Controller{
     
     private void alterholderCliked(){
         int row = view.getSelectedContract();
-        if(row >=0 && row<contracts.size()){
-            view.setEnabled(false);
+        if(row >=0 && row<contracts.size())
             current = new AlterContract_Controller(this, contracts.get(row));
-        }
         else
             JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
@@ -162,20 +160,16 @@ public class Registry_Controller implements Controller{
 
     private void billsClicked() {
         int row = view.getSelectedContract();
-        if(row >= 0 && row<contracts.size()){
-            view.setEnabled(false);
+        if(row >= 0 && row<contracts.size())
             current = new BillsHistory_Controller(this, contracts.get(row));
-        }
         else
             JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void injuctionsCliecked() {
         int row = view.getSelectedContract();
-        if(row >= 0 && row<contracts.size()){
-            view.setEnabled(false);
+        if(row >= 0 && row<contracts.size())
             current = new InjuctionsHistory_Controller(this, contracts.get(row));
-        }
         else
             JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }

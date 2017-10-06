@@ -104,7 +104,6 @@ public class InjuctionsQueue_Controller implements Controller{
                         daoInjuction.setManagedOperator(temp,operator);
                     Log_Controller.writeLog(" manages the injuction "+temp.getId(),this.getClass());
                 }
-                Log_Controller.writeLog(" manages the injuction "+temp.getId(), this.getClass());
                 Object[] row = {temp.getContractID(), temp.getBillID(), temp.getExpiredFrom(), Float.valueOf(temp.getArrears().replace(',', '.'))};
                 tableModelInjuctionsQueue.addRow(row);
                 setDefaultRender(view.getInjuctionTable());
@@ -143,7 +142,7 @@ public class InjuctionsQueue_Controller implements Controller{
             current = new ConfirmInjuction_Controller(b,this);
         }
         else
-            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
     public void back(){

@@ -19,10 +19,13 @@ import javax.swing.JOptionPane;
  * @author ansan
  */
 public class RemoveInjuction_Controller implements Controller {
-    Database_Controller dbController;
-    InjuctionsQueue_Controller controller;
-    Delete view;
-    Injuction injuction;
+    private Database_Controller dbController;
+    private InjuctionsQueue_Controller controller;
+    private Delete view;
+    private Injuction injuction;
+    private final String success= "Injuction removed";
+    private final String error = "Injuction not removed";
+    
     RemoveInjuction_Controller(InjuctionsQueue_Controller controller,Injuction injuction){
         this.controller = controller;
         this.injuction = injuction;
@@ -45,12 +48,12 @@ public class RemoveInjuction_Controller implements Controller {
                 dbController = Database_Controller.getDbManager();
                 DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
                 daoDocument.remove(injuction);
-                view.dispose();
                 Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
+                JOptionPane.showConfirmDialog(view, success,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
                 view.dispose();
                 controller.back();
             } catch (SQLException ex) {
-                JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
         }
         
