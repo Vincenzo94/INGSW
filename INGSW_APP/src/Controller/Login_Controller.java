@@ -28,7 +28,6 @@ public class Login_Controller implements Controller{
     
     private Login_Controller l;
 
-
     Login_Controller(Main_Controller m){
         main=m;
         login = new Login();

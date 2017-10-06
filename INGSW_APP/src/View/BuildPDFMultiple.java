@@ -95,10 +95,12 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 3;
         getContentPane().add(jPanel2, gridBagConstraints);
         jPanel2.setVisible(false);
 
@@ -261,9 +263,17 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         jPanel2 = factory.buildViewerPanel();
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 511;
+        gridBagConstraints.ipady = 112;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
         getContentPane().add(jPanel2, gridBagConstraints);
         ComponentKeyBinding.install(controller, jPanel2);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
