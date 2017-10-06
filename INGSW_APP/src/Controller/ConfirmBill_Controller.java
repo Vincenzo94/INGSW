@@ -104,15 +104,16 @@ public class ConfirmBill_Controller implements Controller{
     public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
         bill=b;
         bills=null;
-        view= new BuildPDF(b);
-        view.setVisible(true);
         views=null;
+        view= new BuildPDF();
         this.billsQueueController = main;
         try {
-                dbController = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDbManager();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
-                contract = daoContract.getContract(b.getContractID());
+            contract = daoContract.getContract(b.getContractID());
             PDFMaker.createPDF(contract, b,null);
+            view.setPDF(b);
+            view.setVisible(true);
             view.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -127,17 +128,18 @@ public class ConfirmBill_Controller implements Controller{
     }
     
     public ConfirmBill_Controller(Bill b,BillsHistory_Controller main){
-        view= new BuildPDF(b);
-        view.setVisible(true);
         bill=b;
         bills=null;
         views=null;
+        view= new BuildPDF();
         this.billsController = main;
         try {
                 dbController = Database_Controller.getDbManager();
                 DAO_Contract daoContract = new Contract_MYSQL(dbController);
                 contract = daoContract.getContract(b.getContractID());
             PDFMaker.createPDF(contract, b,null);
+            view.setPDF(b);
+            view.setVisible(true);
             view.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {

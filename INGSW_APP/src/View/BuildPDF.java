@@ -16,7 +16,7 @@ import org.icepdf.ri.common.SwingController;
 import org.icepdf.ri.common.SwingViewBuilder;
 
 public class BuildPDF extends JFrame{
-    private final String filePath;
+    private String filePath;
     private SwingController controller;
     private SwingViewBuilder factory;
     private JPanel viewerComponentPanel;
@@ -26,9 +26,8 @@ public class BuildPDF extends JFrame{
     private final String TMP_DIR = System.getProperty("java.io.tmpdir");
     private final String PATH = TMP_DIR+"/INGSW_GR12";
     
-    public BuildPDF(Document doc){
+    public BuildPDF(){
         
-        this.filePath = PATH+"/"+doc.getContractID()+".pdf";
         initComponents();
         actionListener = new LinkedList<>();
         Toolkit tk = Toolkit.getDefaultToolkit();  
@@ -36,6 +35,10 @@ public class BuildPDF extends JFrame{
         int xSize = ((int) screenSize.getWidth());  
         int ySize = ((int) screenSize.getHeight());  
         this.setSize(xSize,ySize);
+    }
+    public void setPDF(Document doc){
+        this.filePath = PATH+"/"+doc.getContractID()+".pdf";
+        controller.openDocument(filePath);
     }
     private void sendPDFButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
         for(ActionListener a: actionListener)
@@ -116,7 +119,6 @@ public class BuildPDF extends JFrame{
         );
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         pack();
-        controller.openDocument(filePath);
     }
 
     public Integer checkButton(Component j) {

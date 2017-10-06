@@ -38,15 +38,16 @@ public class ConfirmInjuction_Controller implements Controller{
 
     public ConfirmInjuction_Controller(Injuction i, InjuctionsQueue_Controller main){
         injuction=i;
-        view= new BuildPDF(injuction);
+        view= new BuildPDF();
         this.injuctionsQueueController = main;
-        view.setVisible(true);
         bill = injuction.getBill();
         try {
             dbController = Database_Controller.getDbManager();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
             contract = daoContract.getContract(bill.getContractID());
-            PDFMaker.createPDF(contract, bill, injuction);        
+            PDFMaker.createPDF(contract, bill, injuction);
+            view.setPDF(i);
+            view.setVisible(true);
             view.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -62,14 +63,15 @@ public class ConfirmInjuction_Controller implements Controller{
     public ConfirmInjuction_Controller(Injuction i,InjuctionsHistory_Controller main){
         injuction=i;
         this.injuctionsController = main;
-        view= new BuildPDF(injuction);
-        view.setVisible(true);
+        view= new BuildPDF();
         bill = injuction.getBill();
         try {
                 dbController = Database_Controller.getDbManager();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
                 contract = daoContract.getContract(bill.getContractID());
             PDFMaker.createPDF(contract, bill, injuction);
+            view.setPDF(i);
+            view.setVisible(true);
             view.addActionListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
