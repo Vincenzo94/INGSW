@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ansan/INGSW/GCI16/src/Controller/Log_Controller.java</file>
-            <file>file:/home/ansan/INGSW/GCI16/src/Model/PDFMaker.java</file>
+            <file>file:/home/ansan/INGSW/GCI16/src/Controller/ConfirmBill_Controller.java</file>
+            <file>file:/home/ansan/INGSW/GCI16/src/View/BuildPDFMultiple.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/View/BuildPDF.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/Model/EMailSender.java</file>
-            <file>file:/home/ansan/INGSW/GCI16/src/Controller/Login_Controller.java</file>
+            <file>file:/home/ansan/INGSW/GCI16/src/View/SendPDF.java</file>
         </group>
     </open-files>
 </project-private>
