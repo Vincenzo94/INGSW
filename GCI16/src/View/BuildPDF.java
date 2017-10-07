@@ -24,7 +24,7 @@ public class BuildPDF extends JFrame{
     private JButton cancelButton;
     private final List<ActionListener> actionListener;
     private final String TMP_DIR = System.getProperty("java.io.tmpdir");
-    private final String PATH = TMP_DIR+"/INGSW_GR12";
+    private final String PATH = TMP_DIR+"/GCI16";
     
     public BuildPDF(){
         
@@ -52,6 +52,12 @@ public class BuildPDF extends JFrame{
         actionListener.add(a);
     }    
     private void initComponents(){
+        
+        sendPDFButton = new JButton();
+        cancelButton = new JButton();
+        controller = new SwingController();
+        //factory
+        factory = new SwingViewBuilder(controller);
         this.setUndecorated(true);
         this.setExtendedState(6);
         Toolkit tk = Toolkit.getDefaultToolkit();  
@@ -60,12 +66,7 @@ public class BuildPDF extends JFrame{
         int ySize = ((int) screenSize.getHeight());  
         this.setSize(xSize,ySize);
         this.setAlwaysOnTop(true);
-        sendPDFButton = new JButton();
-        cancelButton = new JButton();
-        controller = new SwingController();
-        //factory
-        factory = new SwingViewBuilder(controller);
-        
+        this.setTitle("GCI16 - PDF");
         //button
         sendPDFButton.setText("Send PDF");
         sendPDFButton.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +83,7 @@ public class BuildPDF extends JFrame{
         
         //viewer
         viewerComponentPanel = factory.buildViewerPanel();
+        viewerComponentPanel.setSize(xSize,ySize);
         ComponentKeyBinding.install(controller, viewerComponentPanel);
         viewerComponentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
         controller.getDocumentViewController().setAnnotationCallback(

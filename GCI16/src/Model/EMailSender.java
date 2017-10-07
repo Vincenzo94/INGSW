@@ -35,7 +35,7 @@ public class EMailSender {
     private final static String PSW = "hxegtqrhgueywops";
     private final static String HOST = "smtp.gmail.com";
     private final static String TMP_DIR = System.getProperty("java.io.tmpdir");
-    private final static String PATH = TMP_DIR+"/INGSW_GR12";
+    private final static String PATH = TMP_DIR+"/GCI16";
     private final static Properties PROPS = new Properties(){
         {
             this.put("mail.smtp.auth", "true");

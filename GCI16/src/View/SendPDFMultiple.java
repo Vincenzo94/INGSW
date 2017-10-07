@@ -76,7 +76,7 @@ public class SendPDFMultiple extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Send PDF's");
+        setTitle("GCI16 - Send PDF's");
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         setMinimumSize(new java.awt.Dimension(616, 281));

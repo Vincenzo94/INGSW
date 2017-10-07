@@ -58,7 +58,7 @@ public class Home extends javax.swing.JFrame {
         help = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12");
+        setTitle("GCI16");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setName(""); // NOI18N

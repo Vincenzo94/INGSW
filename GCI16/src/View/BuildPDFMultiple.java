@@ -35,7 +35,7 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     private JButton sendPDFButton;
     private JPanel jPanel1;
     private final String TMP_DIR = System.getProperty("java.io.tmpdir");
-    private final String PATH = TMP_DIR+"/INGSW_GR12";
+    private final String PATH = TMP_DIR+"/GCI16";
 
 
     /**
@@ -87,13 +87,14 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         closePreviewButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Build PDF's");
+        setTitle("GCI16 - Build PDF's");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        jPanel2.setVisible(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
         jPanel2.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -102,7 +103,6 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 3;
         getContentPane().add(jPanel2, gridBagConstraints);
-        jPanel2.setVisible(false);
 
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(tableModelMultipleBill);
@@ -261,6 +261,7 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         controller = new SwingController();
         factory = new SwingViewBuilder(controller);
         jPanel2 = factory.buildViewerPanel();
+        jPanel2.setVisible(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints = new java.awt.GridBagConstraints();

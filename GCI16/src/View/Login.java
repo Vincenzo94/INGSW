@@ -48,7 +48,7 @@ public class Login extends javax.swing.JFrame {
         helpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("INGSW_GR12 - Login");
+        setTitle("GCI16 - Login");
         setAlwaysOnTop(true);
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());

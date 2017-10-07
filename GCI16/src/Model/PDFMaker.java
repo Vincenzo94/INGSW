@@ -50,7 +50,7 @@ public class PDFMaker{
         - status is setted on "true".
         */
         ret = true;
-        tmpDirectory =  TMP_DIR+"/INGSW_GR12";
+        tmpDirectory =  TMP_DIR+"/GCI16";
         templateDirectory = tmpDirectory+"/template.jpg";
 
         new File(tmpDirectory).mkdir();

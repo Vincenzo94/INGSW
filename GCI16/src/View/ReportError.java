@@ -96,7 +96,7 @@ public class ReportError extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Report Error");
+        setTitle("GCI16 - Report Error");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setUndecorated(true);

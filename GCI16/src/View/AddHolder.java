@@ -85,7 +85,7 @@ public class AddHolder extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Add Holder");
+        setTitle("GCI16 - Add Holder");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setUndecorated(true);

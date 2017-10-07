@@ -60,7 +60,7 @@ public class SendPDF extends javax.swing.JFrame {
         emailImageNOK = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Send PDF");
+        setTitle("GCI16 - Send PDF");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setUndecorated(true);

@@ -33,8 +33,8 @@ public class Log_Controller implements Controller{
     
     public static void writeLog(String s, Class c){
         Logger log = Logger.getLogger(c.getName());
-        new File(TMP_DIR+"/INGSW_GR12").mkdir();
-        File file = new File(TMP_DIR+"/INGSW_GR12", "log4j.properties");
+        new File(TMP_DIR+"/GCI16").mkdir();
+        File file = new File(TMP_DIR+"/GCI16", "log4j.properties");
         if (!file.exists()) {
            
             try {
@@ -44,7 +44,7 @@ public class Log_Controller implements Controller{
             }
             
         }
-        PropertyConfigurator.configure(TMP_DIR+"/INGSW_GR12/log4j.properties");
+        PropertyConfigurator.configure(TMP_DIR+"/GCI16/log4j.properties");
         log.info(string+s);
     }
 }

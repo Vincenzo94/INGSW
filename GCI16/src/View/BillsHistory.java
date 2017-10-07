@@ -87,7 +87,7 @@ public class BillsHistory extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("INGSW_GR12 - Bills");
+        setTitle("GCI16 - Bills");
         setAlwaysOnTop(true);
         setExtendedState(6);
         setUndecorated(true);
