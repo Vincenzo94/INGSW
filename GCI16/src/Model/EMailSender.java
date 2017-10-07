@@ -42,6 +42,8 @@ public class EMailSender {
             this.put("mail.smtp.starttls.enable", "true");
             this.put("mail.smtp.host", HOST);
             this.put("mail.smtp.port", "25");
+            this.put("mail.smtp.starttls.enable", "true"); 
+
         }
     };
     private final static Session session=Session.getInstance(PROPS,
@@ -111,13 +113,15 @@ public class EMailSender {
                 message.setSubject("Bill");
             else
                 message.setSubject("Injunction");
-            
+
             message.setContent(createMultipartMessage(documentName, obj));
-            
+
             Transport.send(message);
+
             result = null;
         }
         catch(MessagingException e){
+            System.out.println(e.getMessage());
             System.out.println("Receiver's email is not valid");
         }
         return result;

@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.LinkedList;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.icepdf.ri.common.ComponentKeyBinding;
@@ -31,9 +29,6 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
     private LinkedList<MouseListener> mouseListener;
     private SwingController controller;
     private SwingViewBuilder factory;
-    private JButton cancelButton;
-    private JButton sendPDFButton;
-    private JPanel jPanel1;
     private final String TMP_DIR = System.getProperty("java.io.tmpdir");
     private final String PATH = TMP_DIR+"/GCI16";
 
