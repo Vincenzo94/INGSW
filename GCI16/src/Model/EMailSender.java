@@ -32,7 +32,7 @@ le bollette saranno del tipo bill_clientID.pdf
 public class EMailSender {
 
     private final static String SENDER = "ingsw.gr12@gmail.com";
-    private final static String PSW = "hxegtqrhgueywops";
+    private final static String PSW = "ingsw12a3v";
     private final static String HOST = "smtp.gmail.com";
     private final static String TMP_DIR = System.getProperty("java.io.tmpdir");
     private final static String PATH = TMP_DIR+"/GCI16";
@@ -46,7 +46,7 @@ public class EMailSender {
 
         }
     };
-    private final static Session session=Session.getInstance(PROPS,
+    private final static Session SESSION=Session.getInstance(PROPS,
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -55,7 +55,7 @@ public class EMailSender {
             }
         );
     private static Integer cont=0;
-    private final static Object sync=new Object();
+    private final static Object SYNC=new Object();
 
     
     private EMailSender(){
@@ -75,17 +75,17 @@ public class EMailSender {
                     synchronized(results){
                         results.put(c.getId(),result);
                     }
-                    synchronized(sync){
+                    synchronized(SYNC){
                         cont++;
-                        sync.notifyAll();
+                        SYNC.notifyAll();
                     }
                 }
             }.start();
         }
         while(cont<bills.size()){
-            synchronized(sync){
+            synchronized(SYNC){
                 try {
-                    sync.wait();
+                    SYNC.wait();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(EMailSender.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -103,10 +103,10 @@ public class EMailSender {
         post-conditions:
         - it sends the email to receiver
         */
-        String result = "Error sending eMail to "+contract.getEmailAddress()+" ("+contract.getId()+")";
+        String result = "Error sending eMail to "+contract.getEmailAddress()+" (Contract ID: "+contract.getId()+")";
         String documentName = contract.getId() + ".pdf";
         try{
-            Message message = new MimeMessage(session);
+            Message message = new MimeMessage(SESSION);
             message.setFrom(new InternetAddress(SENDER));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contract.getEmailAddress()));
             if(obj.equals(Bill.class))
