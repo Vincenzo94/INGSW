@@ -5,6 +5,7 @@
         <group>
             <file>file:/home/ansan/INGSW/GCI16/src/Controller/ConfirmBill_Controller.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/View/BuildPDFMultiple.java</file>
+            <file>file:/home/ansan/INGSW/GCI16/src/Model/PDFMaker.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/View/BuildPDF.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/Model/EMailSender.java</file>
             <file>file:/home/ansan/INGSW/GCI16/src/View/SendPDF.java</file>

@@ -98,7 +98,12 @@ public class PDFMaker{
         } catch (IOException ex) {
             Logger.getLogger(PDFMaker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String filepath = tmpDirectory + "/" + contract.getId() + ".pdf";
+        String filepath = null;
+        if(injunction!=null)
+            filepath = tmpDirectory + "/injuction_" + contract.getId() + ".pdf";
+        else
+            filepath = tmpDirectory + "/bill_" + contract.getId() + ".pdf";
+
         boolean isCreated = false;
 
         if(!status)

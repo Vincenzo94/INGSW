@@ -105,16 +105,20 @@ public class EMailSender {
         - it sends the email to receiver
         */
         String result = "Error sending eMail to "+contract.getEmailAddress()+" (Contract ID: "+contract.getId()+")";
-        String documentName = contract.getId() + ".pdf";
+        String documentName;
         try{
             Message message = new MimeMessage(SESSION);
             message.setFrom(new InternetAddress(SENDER));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contract.getEmailAddress()));
-            if(obj.equals(Bill.class))
+            if(obj.equals(Bill.class)){
+                documentName = "bill_"+contract.getId() + ".pdf";
                 message.setSubject("Bill");
-            else
+            }
+            else{
+                documentName = "injuction_"+contract.getId() + ".pdf";
                 message.setSubject("Injunction");
-
+            }
+            System.out.println(documentName);
             message.setContent(createMultipartMessage(documentName, obj));
 
             Transport.send(message);
@@ -137,6 +141,7 @@ public class EMailSender {
         - this methods creates a message ready to be sent
         */
         String absolutePath = PATH + "/" + documentName;
+        System.out.println(absolutePath);
         if(!new File(absolutePath).exists())
             throw new RuntimeException("Document doesn't exists.");
         

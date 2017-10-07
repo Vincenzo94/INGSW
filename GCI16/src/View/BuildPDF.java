@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Bill;
 import Model.Document;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -39,7 +40,10 @@ public class BuildPDF extends javax.swing.JFrame {
         init();
     }
     public void setPDF(Document doc){
-        this.filePath = PATH+"/"+doc.getContractID()+".pdf";
+        if(doc instanceof Bill)
+            this.filePath = PATH+"/bill_"+doc.getContractID()+".pdf";
+        else
+            this.filePath = PATH+"/injuction_"+doc.getContractID()+".pdf";
         controller.openDocument(filePath);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
