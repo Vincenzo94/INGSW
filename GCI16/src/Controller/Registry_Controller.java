@@ -90,8 +90,7 @@ public class Registry_Controller implements Controller{
     }
     
     public void back(){
-    updateView();
-//searchClicked();
+        updateView();
     } 
     
     public Operator getOperator() {
@@ -112,7 +111,6 @@ public class Registry_Controller implements Controller{
         boolean b = (!surname.equals("") & !surname.matches("[[a-z]|[A-Z]]*"));
         boolean c = (!tax.equals("") & !tax.matches("[[a-z]|[0-9]]*"));
         boolean d = (!id_string.equals("") & !id_string.matches("[0-9]*"));
-
         if(a || b || c || d)
             JOptionPane.showConfirmDialog(view, "Invalid parameters for search's forms","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         else{
@@ -132,11 +130,12 @@ public class Registry_Controller implements Controller{
                 contracts =((SearchContract_Controller)current).getContracts();
                 view.activeContractButtons(false);
                 view.setBillingAddress("");
-            view.setAddress("");
-            view.setTelephone("");
-            view.setEmail("");
+                view.setAddress("");
+                view.setTelephone("");
+                view.setEmail("");
             } catch (SQLException ex) {
                 JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                searchedContracts=false;
             }
         }
     }
