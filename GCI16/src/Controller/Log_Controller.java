@@ -54,7 +54,7 @@ public class Log_Controller implements Controller{
                 FTP_CLIENT.changeWorkingDirectory(""+o.getId());
             }
             synchronized(SYNC){
-                File file = new File("./LOG/log");
+                File file = new File(TMP_DIR+"/GCI16/LOG/log");
                 String remoteFile = file.getName()+"."+DATE_FORMATE.format(DATE);
                 InputStream inputStream = new FileInputStream(file);
                 boolean done = FTP_CLIENT.storeFile(remoteFile, inputStream);
