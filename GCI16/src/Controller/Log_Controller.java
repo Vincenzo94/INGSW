@@ -48,6 +48,7 @@ public class Log_Controller implements Controller{
             FTP_CLIENT.login(USER, PASS);
             FTP_CLIENT.enterLocalPassiveMode();
             FTP_CLIENT.setFileType(FTP.BINARY_FILE_TYPE);
+            FTP_CLIENT.changeWorkingDirectory("LOG");
             FTP_CLIENT.changeWorkingDirectory(""+o.getId());
             if (FTP_CLIENT.getReplyCode() == 550) {
                 FTP_CLIENT.makeDirectory(""+o.getId());
