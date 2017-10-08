@@ -7,12 +7,18 @@
 package Controller;
 import Model.Operator;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 /**
  *
  * @author ansan
@@ -20,13 +26,55 @@ import org.apache.log4j.PropertyConfigurator;
 public class Log_Controller implements Controller{
 
     private static String string;
-    private static final InputStream config = Log_Controller.class.getResourceAsStream("/GCI16/log4j.properties");
-        private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
-
+    private static Operator o;
+    private static final InputStream CONFIG = Log_Controller.class.getResourceAsStream("/GCI16/log4j.properties");
+    private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
+    private static final String SERVER = "loggci16.altervista.org";
+    private static final int PORT = 21;
+    private static final String USER = "loggci16";
+    private static final String PASS = "ingsw12a3v";
+    private static final FTPClient FTP_CLIENT = new FTPClient();
+    private static final DateFormat DATE_FORMATE = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Date DATE = new Date();
+    private static final Object SYNC = new Object();
     static void setOperator(Operator o) {
+        Log_Controller.o = o;
         string="User: "+o.getId();
     }
-    
+
+    private static void copyLog(File[] files) {
+        try {
+            FTP_CLIENT.connect(SERVER, PORT);
+            FTP_CLIENT.login(USER, PASS);
+            FTP_CLIENT.enterLocalPassiveMode();
+            FTP_CLIENT.setFileType(FTP.BINARY_FILE_TYPE);
+            FTP_CLIENT.changeWorkingDirectory(""+o.getId());
+            if (FTP_CLIENT.getReplyCode() == 550) {
+                FTP_CLIENT.makeDirectory(""+o.getId());
+                FTP_CLIENT.changeWorkingDirectory(""+o.getId());
+            }
+            synchronized(SYNC){
+                File file = new File("./LOG/log");
+                String remoteFile = file.getName()+"."+DATE_FORMATE.format(DATE);
+                InputStream inputStream = new FileInputStream(file);
+                boolean done = FTP_CLIENT.storeFile(remoteFile, inputStream);
+                inputStream.close();
+            }
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (FTP_CLIENT.isConnected()) {
+                    FTP_CLIENT.logout();
+                    FTP_CLIENT.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+        
     private Log_Controller() {
         
     }
@@ -38,13 +86,22 @@ public class Log_Controller implements Controller{
         if (!file.exists()) {
            
             try {
-                Files.copy(config, file.getAbsoluteFile().toPath());
+                Files.copy(CONFIG, file.getAbsoluteFile().toPath());
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(Log_Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
         PropertyConfigurator.configure(TMP_DIR+"/GCI16/log4j.properties");
-        log.info(string+s);
+        synchronized(SYNC){
+            log.info(string+s);
+        }
+        
+        new Thread(){
+            public void run(){
+                copyLog(new File("./LOG").listFiles());
+            }
+        }.start();
+        
     }
 }
