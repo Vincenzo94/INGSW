@@ -18,17 +18,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.swing.JOptionPane;
 
-/*
-Per testare questa classe ho creato una classe stub "Cliente" che contiene i dati
-che poi recupereremo dalle classi del nostro progetto
-
--modifiche da fare: distinzione tra invio ingiunzione e bolletta
-tra ingiunzione e bolletta cambierà il soggetto e la ricerca del file.
-le ingiunzioni saranno del tipo: injuncion_clientID.pdf
-le bollette saranno del tipo bill_clientID.pdf
-*/
 
 public class EMailSender {
 
@@ -41,9 +31,9 @@ public class EMailSender {
         {
             this.put("mail.smtp.auth", "true");
             this.put("mail.smtp.starttls.enable", "true");
+            this.put("mail.smtp.ssl.trust", "smtp.gmail.com");
             this.put("mail.smtp.host", HOST);
             this.put("mail.smtp.port", "25");
-            this.put("mail.smtp.starttls.enable", "true"); 
 
         }
     };
@@ -118,7 +108,6 @@ public class EMailSender {
                 documentName = "injuction_"+contract.getId() + ".pdf";
                 message.setSubject("Injunction");
             }
-            System.out.println(documentName);
             message.setContent(createMultipartMessage(documentName, obj));
 
             Transport.send(message);
@@ -127,7 +116,6 @@ public class EMailSender {
         }
         catch(MessagingException e){
             System.out.println(e.getMessage());
-            System.out.println("Receiver's email is not valid");
         }
         return result;
     }
@@ -141,7 +129,6 @@ public class EMailSender {
         - this methods creates a message ready to be sent
         */
         String absolutePath = PATH + "/" + documentName;
-        System.out.println(absolutePath);
         if(!new File(absolutePath).exists())
             throw new RuntimeException("Document doesn't exists.");
         
