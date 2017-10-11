@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author ansan
  */
 public class RemoveInjuction_Controller implements Controller {
-    private Database_Controller dbController;
     private final String success= "Injuction removed";
     private final String error = "Injuction not removed";
     
@@ -25,7 +24,7 @@ public class RemoveInjuction_Controller implements Controller {
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(n == 0){
             try {
-                dbController = Database_Controller.getDbManager();
+                Database_Controller dbController = Database_Controller.getDbManager();
                 DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
                 daoDocument.remove(injuction);
                 Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);

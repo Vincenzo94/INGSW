@@ -39,7 +39,7 @@ public class BillsHistory_Controller implements Controller {
     private Database_Controller dbController;
     private Controller current;
     
-    public BillsHistory_Controller(Registry_Controller reg, Contract contract) {
+    BillsHistory_Controller(Registry_Controller reg, Contract contract) {
         this.contract = contract;
         this.reg = reg;
         view = new BillsHistory();
@@ -133,7 +133,7 @@ public class BillsHistory_Controller implements Controller {
 
     }
     
-    public void backClicked(){
+    private void backClicked(){
         view.dispose();
         reg.back();
     }

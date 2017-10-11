@@ -25,7 +25,6 @@ public class Login_Controller implements Controller{
     private Database_Controller dbManager;
     private final String helpMessage = "To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button";
 
-
     Login_Controller(Main_Controller m){
         main=m;
         login = new Login();

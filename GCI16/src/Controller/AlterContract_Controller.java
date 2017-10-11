@@ -27,7 +27,7 @@ public class AlterContract_Controller implements Controller{
     
     private Database_Controller dbManager;
     
-    public AlterContract_Controller(Registry_Controller main, Contract contract) {
+    AlterContract_Controller(Registry_Controller main, Contract contract) {
         this.controller=main;
         this.contract=contract;
         view=new AlterHolder();

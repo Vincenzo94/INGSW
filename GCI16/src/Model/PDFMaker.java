@@ -68,9 +68,11 @@ public class PDFMaker{
        
         status = true;
     }
+    
     public static boolean createPDF(Map<Bill,Contract> bills){
         for(Bill b: bills.keySet())
             new Thread(){
+                @Override
                 public void run(){
                     if(!createPDF(bills.get(b),b,null)){
                         synchronized(ret){
@@ -135,6 +137,7 @@ public class PDFMaker{
         }
         return isCreated;
     }
+    
     private static void drawPDF(PDPageContentStream printStream, PDImageXObject template, Contract contract, Bill bill, Injuction injunction) throws IOException{
         /*
         pre-conditions:

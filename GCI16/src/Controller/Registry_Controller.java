@@ -32,7 +32,7 @@ public class Registry_Controller implements Controller{
     private String id_string;
     private Boolean searchedContracts = false;
 
-    public Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
+    Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
         this.operator = operator;
         this.dbManager = dbManager;
         this.view= (RegistryPanel)panel;
@@ -85,15 +85,15 @@ public class Registry_Controller implements Controller{
         }
     }
     
-    public Component getPanel(){
+    Component getPanel(){
         return view;
     }
     
-    public void back(){
+    void back(){
         updateView();
     } 
     
-    public Operator getOperator() {
+    Operator getOperator() {
         return operator;
     }
           
@@ -101,7 +101,7 @@ public class Registry_Controller implements Controller{
         current= new AddContract_Controller(this);
     }
     
-    public void searchClicked(){
+    private void searchClicked(){
         searchedContracts = true;
         name=view.getNameSearch();
         surname=view.getSurnameSearch();
@@ -118,7 +118,7 @@ public class Registry_Controller implements Controller{
         }
     }
     
-    public void updateView(){
+    private void updateView(){
         if(searchedContracts){
             try {
                 Contract bag;

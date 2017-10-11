@@ -40,12 +40,13 @@ public class Main_Controller{
     private BillsQueue_Controller bill;
     private Registry_Controller regy;
     
-    private Home actual = null; 
+    private final Home actual; 
     
     private Main_Controller() throws SQLException{
 
         current = new Login_Controller(this);
         dbManager = Database_Controller.getDbManager();
+        actual = new Home();
     }
     
     public static Main_Controller getMain() throws SQLException{
@@ -55,9 +56,8 @@ public class Main_Controller{
         return instance;
     }
     
-    public void loginDone(Operator o){
+    void loginDone(Operator o){
         operator=o;
-        actual = new Home();
         actual.setVisible(true);
         actual.addActionListener(new Listener(this){
             @Override
@@ -81,9 +81,9 @@ public class Main_Controller{
     private void changePane(){
         int i = actual.getSelectedPanel();
         switch(i){
-            case 1: inj.updateInjuctionsQueue(); break;
-            case 2: bill.updateBillsQueue(); break;
-            case 0: regy.updateView(); break; 
+            case 1: inj.back(); break;
+            case 2: bill.back(); break;
+            case 0: regy.back(); break; 
         }
     }
     

@@ -37,7 +37,7 @@ public class InjuctionsHistory_Controller implements Controller {
     private final DefaultTableCellRenderer defaultRender;
     private Controller current;
     
-    public InjuctionsHistory_Controller(Registry_Controller reg, Contract contract) {
+    InjuctionsHistory_Controller(Registry_Controller reg, Contract contract) {
         view=new InjuctionsHistory();
         view.setVisible(true);
         this.contract=contract;
@@ -134,7 +134,6 @@ public class InjuctionsHistory_Controller implements Controller {
             JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
-    
     
     private void setDefaultRender(JTable table) {
         TableColumnModel tableModel = table.getColumnModel();

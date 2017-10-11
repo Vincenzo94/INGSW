@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.commons.net.ftp.FTP;
@@ -81,7 +80,7 @@ public class Log_Controller implements Controller{
         
     }
     
-    public static void writeLog(String s, Class c){
+    static void writeLog(String s, Class c){
         Logger log = Logger.getLogger(c.getName());
         new File(TMP_DIR+"/GCI16").mkdir();
         File file = new File(TMP_DIR+"/GCI16", "log4j.properties");

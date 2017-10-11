@@ -35,8 +35,7 @@ public class Database_Controller {
     
     
     public ResultSet doQuery(PreparedStatement statement) throws SQLException{
-        ResultSet rs = null;
-            rs = statement.executeQuery();
+        ResultSet rs = statement.executeQuery();
         return rs;
     }
 
@@ -46,8 +45,7 @@ public class Database_Controller {
  
 
     public PreparedStatement getStatement(String QUERY) throws SQLException{
-        PreparedStatement statement = null;
-            statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement statement = connection.prepareStatement(QUERY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return statement;
     }
 

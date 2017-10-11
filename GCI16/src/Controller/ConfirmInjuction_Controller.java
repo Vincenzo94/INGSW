@@ -36,10 +36,13 @@ public class ConfirmInjuction_Controller implements Controller{
     private SendPDF sendPDFview;
     private InjuctionsHistory_Controller injuctionsController;
 
-    public ConfirmInjuction_Controller(Injuction i, InjuctionsQueue_Controller main){
+    ConfirmInjuction_Controller(Injuction i, Controller main){
         injuction=i;
         view= new BuildPDF();
-        this.injuctionsQueueController = main;
+        if(main instanceof InjuctionsQueue_Controller)
+            this.injuctionsQueueController = (InjuctionsQueue_Controller)main;
+        else
+            this.injuctionsController = (InjuctionsHistory_Controller)main;
         bill = injuction.getBill();
         try {
             dbController = Database_Controller.getDbManager();
@@ -60,30 +63,6 @@ public class ConfirmInjuction_Controller implements Controller{
         }
     }
     
-    public ConfirmInjuction_Controller(Injuction i,InjuctionsHistory_Controller main){
-        injuction=i;
-        this.injuctionsController = main;
-        view= new BuildPDF();
-        bill = injuction.getBill();
-        try {
-                dbController = Database_Controller.getDbManager();
-            DAO_Contract daoContract = new Contract_MYSQL(dbController);
-                contract = daoContract.getContract(bill.getContractID());
-            PDFMaker.createPDF(contract, bill, injuction);
-            view.setPDF(i);
-            view.setVisible(true);
-            view.addActionListener(new Listener(this){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                    c.buttonCliked((Component)e.getSource());            
-                }
-            });
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     private void buttonCliked(Component j) {
         Integer i = view.checkButton(j);
         switch(i){

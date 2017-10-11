@@ -38,7 +38,7 @@ public class InjuctionsQueue_Controller implements Controller{
     private final Operator operator;
     private Controller current;
 
-    public InjuctionsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
+    InjuctionsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
         this.operator=o;
         this.dbManager=dbManager;
         view=(InjuctionsQueuePanel)panel;
@@ -77,7 +77,7 @@ public class InjuctionsQueue_Controller implements Controller{
         view.activeInjuctionButtons();
     }
     
-    public Component getPanel(){
+    Component getPanel(){
         return view;
     }
     
@@ -97,7 +97,7 @@ public class InjuctionsQueue_Controller implements Controller{
         
     } 
     
-    void updateInjuctionsQueue(){
+    private void updateInjuctionsQueue(){
         DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
         tableModelInjuctionsQueue.setRowCount(0);
         injuctions.clear();
@@ -149,7 +149,7 @@ public class InjuctionsQueue_Controller implements Controller{
             JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
-    public void back(){
+    void back(){
         updateInjuctionsQueue();
     }
     

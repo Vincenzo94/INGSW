@@ -50,11 +50,8 @@ public class ConfirmBill_Controller implements Controller{
     private DefaultTableCellRenderer defaultRender = null;
     private Database_Controller dbController;
     private SendPDFMultiple sendPDFviewMultiple;
-    private Operator operator;
-    private final String success = "";
 
-    
-    public ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
+    ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
         bills= new HashMap<>();
         views=new BuildPDFMultiple();
         view=null;
@@ -101,12 +98,15 @@ public class ConfirmBill_Controller implements Controller{
         }
     }
     
-    public ConfirmBill_Controller(Bill b,BillsQueue_Controller main){
+    ConfirmBill_Controller(Bill b,Controller main){
         bill=b;
         bills=null;
         views=null;
         view= new BuildPDF();
-        this.billsQueueController = main;
+        if(main instanceof BillsQueue_Controller)
+            this.billsQueueController = (BillsQueue_Controller)main;
+        else
+            this.billsController = (BillsHistory_Controller)main;
         try {
             dbController = Database_Controller.getDbManager();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
@@ -125,33 +125,6 @@ public class ConfirmBill_Controller implements Controller{
             JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
 
-    }
-    
-    public ConfirmBill_Controller(Bill b,BillsHistory_Controller main){
-        bill=b;
-        bills=null;
-        views=null;
-        view= new BuildPDF();
-        this.billsController = main;
-        try {
-                dbController = Database_Controller.getDbManager();
-                DAO_Contract daoContract = new Contract_MYSQL(dbController);
-                contract = daoContract.getContract(b.getContractID());
-            PDFMaker.createPDF(contract, b,null);
-            view.setPDF(b);
-            view.setVisible(true);
-            view.addActionListener(new Listener(this){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                    c.buttonCliked((Component)e.getSource());            
-                }
-            });
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        }
-        
-                
     }
 
     private void buttonCliked(Component j) {

@@ -46,8 +46,8 @@ public class EMailSender {
             }
         );
     private static Integer cont=0;
+    
     private final static Object SYNC=new Object();
-
     
     private EMailSender(){
     }
@@ -78,7 +78,7 @@ public class EMailSender {
                 try {
                     SYNC.wait();
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(EMailSender.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
             }
         }
@@ -119,6 +119,7 @@ public class EMailSender {
         }
         return result;
     }
+    
     static private Multipart createMultipartMessage(String documentName, Class<?> obj){
         /*
         pre-conditions:

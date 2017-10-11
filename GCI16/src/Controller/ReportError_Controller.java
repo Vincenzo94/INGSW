@@ -28,7 +28,7 @@ public class ReportError_Controller implements Controller{
     private String text;
     private Database_Controller dbController;
 
-    public ReportError_Controller(Bill bill) {
+    ReportError_Controller(Bill bill) {
         this.bill=bill;
         view=new ReportError();
         view.setVisible(true);

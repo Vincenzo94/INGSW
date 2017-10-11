@@ -39,7 +39,7 @@ public class BillsQueue_Controller implements Controller{
     private final Operator operator;
     private Controller current;
 
-    public BillsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
+    BillsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
         this.dbManager=dbManager;
         this.operator=o;
         view = (BillsQueuePanel)panel;
@@ -113,8 +113,6 @@ public class BillsQueue_Controller implements Controller{
     }
     
     private void confirmClicked(){
-        
-        
         LinkedList<Bill> selected=new LinkedList<>();
         for(Integer i: view.getSelectedBill()){
             if(i<bills.size() && i>=0)
@@ -139,7 +137,7 @@ public class BillsQueue_Controller implements Controller{
         view.setMultipleSelection(true);
     }
 
-    void updateBillsQueue(){
+    private void updateBillsQueue(){
         DAO_Document daoBill = new Bill_MYSQL(dbManager);
         bills.clear();
         tableModelBillsQueue.setRowCount(0);

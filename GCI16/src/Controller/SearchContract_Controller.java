@@ -18,11 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ansan
  */
 public class SearchContract_Controller implements Controller{
-    private Contract contract;
-    
-    
-    private Database_Controller dbManager;
-    
+    private Contract contract;     
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
     
@@ -34,7 +30,7 @@ public class SearchContract_Controller implements Controller{
     }
     
     private void initRegistryManagement() throws SQLException {
-        dbManager = Database_Controller.getDbManager();
+        Database_Controller dbManager = Database_Controller.getDbManager();
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};

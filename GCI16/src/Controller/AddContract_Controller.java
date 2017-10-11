@@ -26,7 +26,7 @@ public class AddContract_Controller implements Controller{
     private final String error = "No contract added";
     
 
-    public AddContract_Controller(Registry_Controller controller){
+    AddContract_Controller(Registry_Controller controller){
         this.controller=controller;
         view= new AddHolder();
         view.setVisible(true);
@@ -51,8 +51,7 @@ public class AddContract_Controller implements Controller{
     }
     
     private void createClicked(){
-        Database_Controller dbManager = null;
-        
+        Database_Controller dbManager;
         try {
             dbManager = Database_Controller.getDbManager();        
             DAO_Contract daoContract = new Contract_MYSQL(dbManager);
@@ -86,6 +85,5 @@ public class AddContract_Controller implements Controller{
         }catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
-        
     }
 }
