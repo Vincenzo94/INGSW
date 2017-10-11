@@ -400,13 +400,13 @@ public class BillsQueuePanel extends javax.swing.JPanel {
         return tableModelBillsQueue;
     }
 
-        public int checkButton(Component c){
-            if(c == selectAllButton)  return 1;
-            if(c == deselectAllButton) return 2;
-            if(c == billConfirmButton) return 3;
-            if(c == reportErrorButton) return 4;
-            return 0;
-        }
+    public int checkButton(Component c){
+        if(c == selectAllButton)  return 1;
+        if(c == deselectAllButton) return 2;
+        if(c == billConfirmButton) return 3;
+        if(c == reportErrorButton) return 4;
+        return 0;
+    }
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

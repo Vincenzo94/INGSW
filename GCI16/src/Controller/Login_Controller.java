@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 public class Login_Controller implements Controller{
     private Login login = null;
     private Operator operator;
-    private DAO_Operator DAO;
     private Main_Controller main;
     private Database_Controller dbManager;
     private final String helpMessage = "To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button";
@@ -33,25 +32,27 @@ public class Login_Controller implements Controller{
         login.setVisible(true);
         try {
                 dbManager = Database_Controller.getDbManager();
-                this.DAO = new Operator_MYSQL(dbManager);
-            login.addListener(new Listener(this){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                        Login_Controller l = (Login_Controller) controller;
-                        l.buttonCliked((Component)e.getSource());
-                }
-            });
+                login.addListener(new Listener(this){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            Login_Controller l = (Login_Controller) controller;
+                            l.buttonCliked((Component)e.getSource());
+                    }
+                });
             } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    
-    public void doLogin(Integer user, String passw){
+    private void doLogin(){
+        Integer user = login.getUser();
+        String passw = login.getPassword();
+        DAO_Operator DAO;
         try {
             if(user==null)
                 throw new SQLException("Invalid characthers for user's form");
             operator=new Operator(user,passw);
+            DAO = new Operator_MYSQL(dbManager);
             operator = DAO.check(operator);
             if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
                 Log_Controller.setOperator(operator);
@@ -68,15 +69,15 @@ public class Login_Controller implements Controller{
         }
     }
     
-    public void buttonCliked(Component j){
+    private void buttonCliked(Component j){
             int i=login.checkButton(j);
             switch(i){
-                case 1: doLogin(login.getUser(),login.getPassword()); break;
+                case 1: doLogin(); break;
                 case 2: helpCliked(); break;
             }
                 }
     
-    public void helpCliked(){
+    private void helpCliked(){
         JOptionPane.showConfirmDialog(login,helpMessage ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
     }
 }

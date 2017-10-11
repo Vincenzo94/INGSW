@@ -145,7 +145,7 @@ public class Registry_Controller implements Controller{
         if(row >=0 && row<contracts.size())
             current = new AlterContract_Controller(this, contracts.get(row));
         else
-            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
     
     private void removeContractClicked() {
@@ -154,7 +154,7 @@ public class Registry_Controller implements Controller{
             current = new RemoveContract_Controller(this, contracts.get(row));
         }
         else
-            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void billsClicked() {
@@ -162,7 +162,7 @@ public class Registry_Controller implements Controller{
         if(row >= 0 && row<contracts.size())
             current = new BillsHistory_Controller(this, contracts.get(row));
         else
-            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 
     private void injuctionsCliecked() {
@@ -170,6 +170,6 @@ public class Registry_Controller implements Controller{
         if(row >= 0 && row<contracts.size())
             current = new InjuctionsHistory_Controller(this, contracts.get(row));
         else
-            JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
 }

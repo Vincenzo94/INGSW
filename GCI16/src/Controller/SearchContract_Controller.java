@@ -30,7 +30,6 @@ public class SearchContract_Controller implements Controller{
         this.contract=c;
         this.tableModelRegistryManagement = table;
         contracts = new ArrayList<>();
-        
         initRegistryManagement();
     }
     
@@ -47,10 +46,8 @@ public class SearchContract_Controller implements Controller{
             contracts = daoContract.getAllContracts(contract);
             if(contracts.isEmpty()){
                 throw new SQLException ("No Result Found");
-            }
-                
+            }     
         }
-            
         for(Contract temp : contracts){
                 Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
                 tableModelRegistryManagement.addRow(row);
