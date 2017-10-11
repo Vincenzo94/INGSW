@@ -65,14 +65,14 @@ public class ConfirmBill_Controller implements Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.buttonCliked(e);            
+                c.buttonCliked((Component)e.getSource());            
             }
         });
         views.addMouseListener(new Listener(this){
             @Override
             public void mouseClicked(MouseEvent e){
                 ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.tableClicked(e);
+                c.tableClicked();
             }
         });
         defaultRender = new DefaultTableCellRenderer() {
@@ -118,7 +118,7 @@ public class ConfirmBill_Controller implements Controller{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                    c.buttonCliked(e);            
+                    c.buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -144,7 +144,7 @@ public class ConfirmBill_Controller implements Controller{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                    c.buttonCliked(e);            
+                    c.buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -154,8 +154,7 @@ public class ConfirmBill_Controller implements Controller{
                 
     }
 
-    private void buttonCliked(ActionEvent e) {
-        Component j = (Component)e.getSource();
+    private void buttonCliked(Component j) {
         Integer i;
         if(view != null)
             i = view.checkButton(j);
@@ -269,7 +268,7 @@ public class ConfirmBill_Controller implements Controller{
         }
     }
 
-    private void tableClicked(MouseEvent e) {
+    private void tableClicked() {
         if(views.getSelectedBill()!=null)
             views.activePreviewButton(true);
         else

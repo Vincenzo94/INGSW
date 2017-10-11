@@ -38,7 +38,6 @@ public class BillsHistory_Controller implements Controller {
     private List<Bill> bills;
     private Database_Controller dbController;
     private Controller current;
-
     
     public BillsHistory_Controller(Registry_Controller reg, Contract contract) {
         this.contract = contract;
@@ -49,7 +48,7 @@ public class BillsHistory_Controller implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BillsHistory_Controller bc = (BillsHistory_Controller)controller;
-                bc.buttonCliked(e);            
+                bc.buttonCliked((Component)e.getSource());            
             }
         });
         view.addMouseListener(new Listener(this){
@@ -73,8 +72,7 @@ public class BillsHistory_Controller implements Controller {
         init();
     }
 
-    private void buttonCliked(ActionEvent e) {
-        Component j = (Component)e.getSource();
+    private void buttonCliked(Component j) {
         Integer i = view.checkButton(j);
         switch (i){
             case 1: backClicked(); break;

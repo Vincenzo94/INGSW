@@ -136,8 +136,9 @@ public class Login extends javax.swing.JFrame {
     
     public Integer getUser(){
         String user = usernameField.getText();
-        Integer id = Integer.valueOf(user);
-        return id;
+        if(user.matches("[0-9]*"))
+            return Integer.valueOf(user);
+        return null;
     }
     
     public JButton getLoginButton(){

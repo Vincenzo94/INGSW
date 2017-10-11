@@ -37,6 +37,7 @@ public class Log_Controller implements Controller{
     private static final DateFormat DATE_FORMATE = new SimpleDateFormat("yyyy-MM-dd");
     private static final Date DATE = new Date();
     private static final Object SYNC = new Object();
+    
     static void setOperator(Operator o) {
         Log_Controller.o = o;
         string="User: "+o.getId();
@@ -85,11 +86,10 @@ public class Log_Controller implements Controller{
         new File(TMP_DIR+"/GCI16").mkdir();
         File file = new File(TMP_DIR+"/GCI16", "log4j.properties");
         if (!file.exists()) {
-           
             try {
                 Files.copy(CONFIG, file.getAbsoluteFile().toPath());
             } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(Log_Controller.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
             
         }

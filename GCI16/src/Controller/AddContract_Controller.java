@@ -34,13 +34,12 @@ public class AddContract_Controller implements Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddContract_Controller m = (AddContract_Controller)controller;
-                m.buttonClicked(e);
+                m.buttonClicked((Component)e.getSource());
             }
         });
     }
 
-    private void buttonClicked(ActionEvent e){
-        Component j = (Component)e.getSource();
+    private void buttonClicked(Component j){
         int i=view.checkButton(j);
         if(i==1){
             view.dispose();
