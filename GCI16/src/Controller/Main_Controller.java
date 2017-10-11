@@ -58,13 +58,12 @@ public class Main_Controller{
     public void loginDone(Operator o){
         operator=o;
         actual = new Home();
-        //INGSW_APP.device.setFullScreenWindow(actual);
         actual.setVisible(true);
         actual.addActionListener(new Listener(this){
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main_Controller m = (Main_Controller)controller;
-                m.buttonCliked(e);            
+                m.buttonCliked((Component)e.getSource());            
             }
         });
         actual.addChangeListener(new Listener(this){
@@ -88,8 +87,7 @@ public class Main_Controller{
         }
     }
     
-    private void buttonCliked(ActionEvent e){
-        Component j = (Component)e.getSource();
+    private void buttonCliked(Component j){
         int i=actual.checkButton(j);
         switch(i){
             case 1: logOut(); break;

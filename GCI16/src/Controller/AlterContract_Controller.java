@@ -36,7 +36,7 @@ public class AlterContract_Controller implements Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 AlterContract_Controller ac = (AlterContract_Controller)controller;
-                ac.buttonCliked(e);            
+                ac.buttonCliked((Component)e.getSource());            
             }
         });
         init();
@@ -68,8 +68,7 @@ public class AlterContract_Controller implements Controller{
         }
     }
 
-    private void buttonCliked(ActionEvent e) {
-        Component c = (Component)e.getSource();
+    private void buttonCliked(Component c) {
         Integer button = view.checkButton(c);
         DAO_Contract daoContract = new Contract_MYSQL(dbManager);
         try{

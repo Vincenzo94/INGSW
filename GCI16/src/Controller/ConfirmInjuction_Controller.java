@@ -52,7 +52,7 @@ public class ConfirmInjuction_Controller implements Controller{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                    c.buttonCliked(e);            
+                    c.buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -76,7 +76,7 @@ public class ConfirmInjuction_Controller implements Controller{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                    c.buttonCliked(e);            
+                    c.buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -84,8 +84,7 @@ public class ConfirmInjuction_Controller implements Controller{
         }
     }
 
-    private void buttonCliked(ActionEvent e) {
-        Component j = (Component)e.getSource();
+    private void buttonCliked(Component j) {
         Integer i = view.checkButton(j);
         switch(i){
             case 1:{

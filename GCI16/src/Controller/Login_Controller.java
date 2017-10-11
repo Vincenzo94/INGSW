@@ -24,23 +24,21 @@ public class Login_Controller implements Controller{
     private DAO_Operator DAO;
     private Main_Controller main;
     private Database_Controller dbManager;
+    private final String helpMessage = "To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button";
 
-    
-    private Login_Controller l;
 
     Login_Controller(Main_Controller m){
         main=m;
         login = new Login();
         login.setVisible(true);
-        
         try {
                 dbManager = Database_Controller.getDbManager();
                 this.DAO = new Operator_MYSQL(dbManager);
             login.addListener(new Listener(this){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                        l = (Login_Controller) controller;
-                        l.buttonCliked(e);
+                        Login_Controller l = (Login_Controller) controller;
+                        l.buttonCliked((Component)e.getSource());
                 }
             });
             } catch (SQLException ex) {
@@ -49,12 +47,12 @@ public class Login_Controller implements Controller{
     }
     
     
-    public void doLogin(){
-        Integer user = login.getUser();
-        String passw = login.getPassword();
-        operator=new Operator(user,passw);
+    public void doLogin(Integer user, String passw){
         try {
-                operator = DAO.check(operator);
+            if(user==null)
+                throw new SQLException("Invalid characthers for user's form");
+            operator=new Operator(user,passw);
+            operator = DAO.check(operator);
             if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
                 Log_Controller.setOperator(operator);
                 ErrorModel.setOperatorID(operator.getId());
@@ -70,22 +68,15 @@ public class Login_Controller implements Controller{
         }
     }
     
-    public void buttonCliked(ActionEvent e){
-            Component j = (Component)e.getSource();
+    public void buttonCliked(Component j){
             int i=login.checkButton(j);
             switch(i){
-                case 1: loginClicked(); break;
+                case 1: doLogin(login.getUser(),login.getPassword()); break;
                 case 2: helpCliked(); break;
             }
                 }
-
-    
-    public void loginClicked(){
-        l.doLogin();
-        
-    }
     
     public void helpCliked(){
-        JOptionPane.showConfirmDialog(login,"To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showConfirmDialog(login,helpMessage ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
     }
 }
