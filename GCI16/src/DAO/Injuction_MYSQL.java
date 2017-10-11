@@ -67,7 +67,10 @@ public class Injuction_MYSQL implements DAO_Document{
         statement.setInt(1, o.getId());
         ResultSet rs = dbManager.doQuery(statement);
         while(rs.next()){
-            injuctions.add(new Injuction(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), getReferredBill(rs.getInt(6)), rs.getInt(5)));
+            if(rs.getObject(5)==null)
+                injuctions.add(new Injuction(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), getReferredBill(rs.getInt(6)), null));
+            else
+                injuctions.add(new Injuction(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getString(4), getReferredBill(rs.getInt(6)), rs.getInt(5)));
         }
         return injuctions;    
     }

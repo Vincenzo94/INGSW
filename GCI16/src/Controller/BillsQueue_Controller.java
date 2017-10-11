@@ -145,6 +145,7 @@ public class BillsQueue_Controller implements Controller{
                 bills = daoBill.getAllDocuments(operator);        
             for(Bill temp : bills){
                 if(temp.getOperatorID() == null){
+                    System.out.println("ok");
                     daoBill.setManagedOperator(temp,operator);
                     Log_Controller.writeLog(" manages the bill "+temp.getId(), this.getClass());
                 }
