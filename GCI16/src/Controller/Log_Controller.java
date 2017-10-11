@@ -57,13 +57,12 @@ public class Log_Controller implements Controller{
             synchronized(SYNC){
                 File file = new File(TMP_DIR+"/GCI16/LOG/log");
                 String remoteFile = file.getName()+"."+DATE_FORMATE.format(DATE);
-                InputStream inputStream = new FileInputStream(file);
-                boolean done = FTP_CLIENT.storeFile(remoteFile, inputStream);
-                inputStream.close();
+                try (InputStream inputStream = new FileInputStream(file)) {
+                    FTP_CLIENT.storeFile(remoteFile, inputStream);
+                }
             }
         } catch (IOException ex) {
             System.out.println("Error: " + ex.getMessage());
-            ex.printStackTrace();
         } finally {
             try {
                 if (FTP_CLIENT.isConnected()) {
@@ -71,7 +70,7 @@ public class Log_Controller implements Controller{
                     FTP_CLIENT.disconnect();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                System.out.println("Error: " + ex.getMessage());
             }
         }
     }
@@ -98,6 +97,7 @@ public class Log_Controller implements Controller{
         }
         
         new Thread(){
+            @Override
             public void run(){
                 copyLog(new File("./LOG").listFiles());
             }

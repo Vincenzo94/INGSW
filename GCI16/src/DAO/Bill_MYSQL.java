@@ -24,10 +24,10 @@ public class Bill_MYSQL implements DAO_Document {
     private Database_Controller dbManager = null;
     private final String TABLE_VIEW = "Bill_AUX";
     private final String TABLE = "Bill";
-    private final String QUERY_GET_ALL_BILLS= " SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
-    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
-    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
-    private final String QUERY_GET_ALL_BILLS_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABLE_VIEW
+    private final String QUERY_GET_ALL_BILLS= " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
+    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.SCHEMA + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.SCHEMA + "." + TABLE + " SET state = ? WHERE ID = ?";;
+    private final String QUERY_GET_ALL_BILLS_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE_VIEW
                                                       + " WHERE Contract = ?";   
     public Bill_MYSQL(Database_Controller dbManager) {
         this.dbManager = dbManager;

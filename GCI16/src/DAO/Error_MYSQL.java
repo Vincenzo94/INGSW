@@ -19,7 +19,7 @@ public class Error_MYSQL implements DAO_Error{
 
     private final Database_Controller dbController;
     private final String TABELLA = "Error";
-    private final String QUERY_INSERT_ERROR = "INSERT INTO "+ Database_Controller.schema + "." + TABELLA
+    private final String QUERY_INSERT_ERROR = "INSERT INTO "+ Database_Controller.SCHEMA + "." + TABELLA
                                             + " (description, REPORTED_BY_OPERATOR, REFERRED_BILL) VALUES (?, ?, ?)";
     public Error_MYSQL(Database_Controller dbController){
         this.dbController = dbController;

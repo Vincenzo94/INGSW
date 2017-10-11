@@ -20,7 +20,7 @@ public class Operator_MYSQL implements DAO_Operator{
     public Operator_MYSQL(Database_Controller dbManager) throws SQLException{
         this.dbManager = dbManager;
     }
-    private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE ID = ? AND `password` = ?";
+    private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE + " WHERE ID = ? AND `password` = ?";
 
     @Override
     public Operator check(Operator o)  throws SQLException{

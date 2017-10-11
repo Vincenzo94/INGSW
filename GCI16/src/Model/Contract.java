@@ -175,10 +175,10 @@ public class Contract {
     }
     
     public String getBillingAddress(){
-        String city=null;
-        String street=null;
-        String zip=null;
-        String district=null;
+        String city;
+        String street;
+        String zip;
+        String district;
         if(billingAddress != null){
             street = billingAddress.getStreet();
             city = billingAddress.getCity();
@@ -304,6 +304,6 @@ public class Contract {
     }
     
     public void setBillingAddress(Address ba) {
-        billingAddress = null;
+        billingAddress = ba;
     }
 }

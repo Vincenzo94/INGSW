@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,40 +26,40 @@ public class Contract_MYSQL implements DAO_Contract{
     private final String TABELLA = "Contract";
     private final String TABELLA_AUX = "Contract_Address";
     private final String TABELLA_ADDRESS = "Address";
-    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX;
-    private final String QUERY_SEARCH_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX
+    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX;
+    private final String QUERY_SEARCH_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX
                                                + " WHERE name LIKE ? AND surname LIKE ? AND ID LIKE ? AND taxCode LIKE ?";
     
-    private final String QUERY_UPDATE_CONTRACT = " UPDATE "+Database_Controller.schema+"."+TABELLA
+    private final String QUERY_UPDATE_CONTRACT = " UPDATE "+Database_Controller.SCHEMA+"."+TABELLA
                                                + " SET name = ?, surname = ?, taxCode = ?, phone = ?,"
                                                + " mobile = ?, eMail = ?, UPDATED_BY = ?"
                                                + " WHERE id = ?";
-    private final String QUERY_UPDATE_BILLING_ADDRESS = "UPDATE "+Database_Controller.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_UPDATE_BILLING_ADDRESS = "UPDATE "+Database_Controller.SCHEMA+"."+TABELLA_ADDRESS
                                                       + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
-                                                      + " WHERE ID = (SELECT BILLING_ADDRESS FROM " + Database_Controller.schema +"."+TABELLA
+                                                      + " WHERE ID = (SELECT BILLING_ADDRESS FROM " + Database_Controller.SCHEMA +"."+TABELLA
                                                       + " WHERE ID = ?)";
-    private final String QUERY_UPDATE_ADDRESS = "UPDATE "+Database_Controller.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_UPDATE_ADDRESS = "UPDATE "+Database_Controller.SCHEMA+"."+TABELLA_ADDRESS
                                                       + " SET city = ?, district = ?, zipCode = ?, street = ?, number = ?"
-                                                      + " WHERE ID = (SELECT ADDRESS FROM " + Database_Controller.schema +"."+TABELLA
+                                                      + " WHERE ID = (SELECT ADDRESS FROM " + Database_Controller.SCHEMA +"."+TABELLA
                                                       + " WHERE ID = ?)";
-    private final String QUERY_UPDATE_OPERATOR = " UPDATE "+Database_Controller.schema+"."+TABELLA
+    private final String QUERY_UPDATE_OPERATOR = " UPDATE "+Database_Controller.SCHEMA+"."+TABELLA
                                                + " SET UPDATED_BY = ? WHERE ID = ?";
-    private final String QUERY_INSERT_ADDRESS = " INSERT INTO "+Database_Controller.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_INSERT_ADDRESS = " INSERT INTO "+Database_Controller.SCHEMA+"."+TABELLA_ADDRESS
                                                       + " (city,district,zipCode,street,number) VALUES (?, ?, ?, ?, ?)";
-    private final String QUERY_SET_BILLING_ADDRESS = " UPDATE "+Database_Controller.schema+"."+TABELLA
+    private final String QUERY_SET_BILLING_ADDRESS = " UPDATE "+Database_Controller.SCHEMA+"."+TABELLA
                                                    + " SET BILLING_ADDRESS = ? WHERE ID = ?";   
     
-    private final String QUERY_GET_ADDRESS = " SELECT ID FROM "+Database_Controller.schema+"."+TABELLA_ADDRESS
+    private final String QUERY_GET_ADDRESS = " SELECT ID FROM "+Database_Controller.SCHEMA+"."+TABELLA_ADDRESS
                                            + " WHERE city = ? AND district = ? AND street = ? AND zipCode = ? AND number = ? ORDER BY ID DESC LIMIT 1";
-    private final String QUERY_INSERT_CONTRACT = " INSERT INTO "+Database_Controller.schema+"."+TABELLA
+    private final String QUERY_INSERT_CONTRACT = " INSERT INTO "+Database_Controller.SCHEMA+"."+TABELLA
                                                + " (name, surname, taxCode, phone, eMail, mobile, ADDRESS, INSERTED_BY)"
                                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String QUERY_INSERT_CONTRACT_BILLING_ADDRESS = " INSERT INTO "+Database_Controller.schema+"."+TABELLA
+    private final String QUERY_INSERT_CONTRACT_BILLING_ADDRESS = " INSERT INTO "+Database_Controller.SCHEMA+"."+TABELLA
                                                + " (name, surname, taxCode, phone, eMail, mobile, ADDRESS, INSERTED_BY, BILLING_ADDRESS)"
                                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String QUERY_REMOVE_CONTRACT = " DELETE FROM "+Database_Controller.schema+"."+TABELLA
-                                               + " WHERE ID = ?";
-    private final String QUERY_GET_SINGLE_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + TABELLA_AUX
+    private final String QUERY_REMOVE_CONTRACT = " UPDATE "+Database_Controller.SCHEMA+"."+TABELLA
+                                               + " SET end = ? WHERE ID = ?";
+    private final String QUERY_GET_SINGLE_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX
                                                    + " WHERE ID = ?";
     public Contract_MYSQL(Database_Controller dbManager){
         this.dbManager = dbManager;
@@ -122,16 +124,20 @@ public class Contract_MYSQL implements DAO_Contract{
     @Override
     public void remove(Contract c) throws SQLException{
         PreparedStatement statement = dbManager.getStatement(QUERY_REMOVE_CONTRACT);
-        statement.setInt(1, c.getId());
+        Calendar cal = Calendar.getInstance();
+        java.util.Date time = cal.getTime();
+        Date date = new Date(time.getTime());
+        statement.setDate(1, date);
+        statement.setInt(2, c.getId());
         if(!dbManager.doUpdate(statement))
-            throw new SQLException("Unable to remove Contract "+c.getId());
+            throw new SQLException("Unable to close Contract "+c.getId());
     }
 
     @Override
     public void create(Contract c, Operator o) throws SQLException{
         addAddress(c);
         Integer addressID = getAddress(c.getCity(),c.getDistrict(),c.getStreet(),c.getZip(),c.getNumber());
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         if(c.getBillingAddress() != null){
             statement = dbManager.getStatement(QUERY_INSERT_CONTRACT_BILLING_ADDRESS);
             addBillingAddress(c);
@@ -238,7 +244,7 @@ public class Contract_MYSQL implements DAO_Contract{
             throw new SQLException("Unable to set BillingAddress "+c.getBillingAddress()+" to Contract " +c.getId());
     }
     private Integer getAddress(String city, String district, String street, String zip, Integer number) throws SQLException{
-        Integer id = null;
+        Integer id;
         PreparedStatement statement = dbManager.getStatement(QUERY_GET_ADDRESS);
         statement.setString(1,city);
         statement.setString(2,district);

@@ -12,7 +12,6 @@ import DAO.DAO_Document;
 import Model.Bill;
 import Model.Contract;
 import Model.EMailSender;
-import Model.Operator;
 import Model.PDFMaker;
 import View.BuildPDF;
 import View.BuildPDFMultiple;

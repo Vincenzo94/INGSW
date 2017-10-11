@@ -26,14 +26,14 @@ public class Injuction_MYSQL implements DAO_Document{
     private final String TABLE = "Injuction";
     private final String VIEW = "Injuction_AUX";
     private final String TABLE_BILL = "Bill_AUX";
-    private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + Database_Controller.schema + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
-    private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + Database_Controller.schema + ". " + TABLE_BILL + " WHERE ID = ?;";
-    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.schema + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
-    private final String QUERY_REMOVE = " DELETE FROM " + Database_Controller.schema + "." + TABLE 
+    private final String QUERY_GET_ALL_INJUCTIONS = "SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE + " WHERE (MANAGED_BY_OPERATOR IS NULL OR MANAGED_BY_OPERATOR = ?) AND State = 'Inserted' LIMIT 5";
+    private final String QUERY_SEARCH_BILL_ID = "SELECT * FROM " + Database_Controller.SCHEMA + ". " + TABLE_BILL + " WHERE ID = ?;";
+    private final String QUERY_UPDATE_MANAGED_BY_OPERATOR = "UPDATE " + Database_Controller.SCHEMA + "." + TABLE + " SET MANAGED_BY_OPERATOR = ? WHERE ID = ?";
+    private final String QUERY_REMOVE = " DELETE FROM " + Database_Controller.SCHEMA + "." + TABLE 
                                       + " WHERE ID = ?";
-    private final String QUERY_GET_ALL_INJUCTIONS_CONTRACT = " SELECT * FROM " + Database_Controller.schema + "." + VIEW
+    private final String QUERY_GET_ALL_INJUCTIONS_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + VIEW
                                                            + " WHERE CONTRACT = ?";
-    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.schema + "." + TABLE + " SET state = ? WHERE ID = ?";;
+    private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.SCHEMA + "." + TABLE + " SET state = ? WHERE ID = ?";;
 
     
 
@@ -42,7 +42,7 @@ public class Injuction_MYSQL implements DAO_Document{
     }
 
     private Bill getReferredBill(Integer billID) throws SQLException{
-        Bill bill = null;
+        Bill bill;
         PreparedStatement statement = dbManager.getStatement(QUERY_SEARCH_BILL_ID);
         statement.setInt(1, billID);
         ResultSet rs = dbManager.doQuery(statement);

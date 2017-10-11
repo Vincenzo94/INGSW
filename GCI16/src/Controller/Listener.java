@@ -15,6 +15,7 @@ import javax.swing.event.ChangeListener;
 /**
  *
  * @author ansan
+ * @param <T>
  */
 public class Listener <T> implements ActionListener,MouseListener,ChangeListener{
     T controller;
