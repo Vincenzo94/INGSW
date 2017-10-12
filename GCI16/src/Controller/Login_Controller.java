@@ -28,19 +28,14 @@ public class Login_Controller implements Controller{
     Login_Controller(Main_Controller m){
         main=m;
         login = new Login();
-        login.setVisible(true);
-        try {
-                dbManager = Database_Controller.getDbManager();
-                login.addListener(new Listener(this){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                            Login_Controller l = (Login_Controller) controller;
-                            l.buttonCliked((Component)e.getSource());
-                    }
-                });
-            } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        }
+        login.setVisible(true);      
+        login.addListener(new Listener(this){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    Login_Controller l = (Login_Controller) controller;
+                    l.buttonCliked((Component)e.getSource());
+            }
+        });
     }
     
     private void doLogin(){
@@ -48,6 +43,7 @@ public class Login_Controller implements Controller{
         String passw = login.getPassword();
         DAO_Operator DAO;
         try {
+            dbManager = Database_Controller.getDbManager();
             if(user==null)
                 throw new SQLException("Invalid characthers for user's form");
             operator=new Operator(user,passw);
