@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class RegistryPanel extends View {
+public class RegistryPanel extends ViewPanel {
 
     private final DefaultTableModel tableModelRegistryManagement;
     private final LinkedList<MouseListener> mouseListener;

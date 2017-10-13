@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class InjuctionsQueuePanel extends View {
+public class InjuctionsQueuePanel extends ViewPanel {
 
     private final LinkedList<MouseListener> mouseListener;
     private final LinkedList<ActionListener> actionListener;

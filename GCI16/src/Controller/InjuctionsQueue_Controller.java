@@ -42,6 +42,7 @@ public class InjuctionsQueue_Controller implements Controller {
         this.operator=o;
         this.dbManager=dbManager;
         view=(InjuctionsQueuePanel)panel;
+        view.setSize();
         injuctions = new ArrayList<>();
         defaultRender = new DefaultTableCellRenderer() {
             @Override

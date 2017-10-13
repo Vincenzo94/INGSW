@@ -21,7 +21,7 @@ import org.icepdf.ri.common.SwingViewBuilder;
  *
  * @author Andrea
  */
-public class BuildPDFMultiple extends View {
+public class BuildPDFMultiple extends ViewFrame {
     private final LinkedList<ActionListener> actionListener;
     private final DefaultTableModel tableModelMultipleBill;
     private LinkedList<MouseListener> mouseListener;

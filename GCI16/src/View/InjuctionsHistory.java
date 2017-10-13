@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class InjuctionsHistory extends javax.swing.JFrame {
+public class InjuctionsHistory extends ViewFrame {
 
     private final LinkedList<ActionListener> actionListener;
     private final LinkedList<MouseListener> mouseListener;

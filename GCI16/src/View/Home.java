@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author ansan
  */
-public class Home extends View {
+public class Home extends ViewFrame {
     private final LinkedList<MouseListener> mouseListener;
     private final LinkedList<ActionListener> actionListener;
     private final LinkedList<ChangeListener> changeListener;

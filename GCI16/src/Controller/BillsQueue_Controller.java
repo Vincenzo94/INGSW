@@ -43,6 +43,7 @@ public class BillsQueue_Controller implements Controller{
         this.dbManager=dbManager;
         this.operator=o;
         view = (BillsQueuePanel)panel;
+        view.setSize();
         bills = new ArrayList<>();
         defaultRender = new DefaultTableCellRenderer() {
             @Override

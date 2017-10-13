@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class BillsQueuePanel extends View {
+public class BillsQueuePanel extends ViewPanel {
 
     private final DefaultTableModel tableModelBillsQueue;
     private final LinkedList<MouseListener> mouseListener;

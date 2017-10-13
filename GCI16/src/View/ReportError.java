@@ -15,7 +15,7 @@ import java.util.LinkedList;
  *
  * @author Andrea
  */
-public class ReportError extends View {
+public class ReportError extends ViewFrame {
 
     private final LinkedList<ActionListener> actionListener;
     /**
