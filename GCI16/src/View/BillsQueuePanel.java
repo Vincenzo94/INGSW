@@ -65,7 +65,7 @@ public class BillsQueuePanel extends ViewPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane3 = new javax.swing.JScrollPane();
+        scrollPane = new javax.swing.JScrollPane();
         billsTable = new javax.swing.JTable();
         reportErrorButton = new javax.swing.JButton();
         summaryBillsPanel = new javax.swing.JPanel();
@@ -97,7 +97,7 @@ public class BillsQueuePanel extends ViewPanel {
                 billsTableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(billsTable);
+        scrollPane.setViewportView(billsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -109,7 +109,7 @@ public class BillsQueuePanel extends ViewPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
-        add(jScrollPane3, gridBagConstraints);
+        add(scrollPane, gridBagConstraints);
 
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
@@ -411,12 +411,12 @@ public class BillsQueuePanel extends ViewPanel {
     private javax.swing.JLabel detectionValueLabel;
     private javax.swing.JLabel dueDateLabel;
     private javax.swing.JLabel dueDateValueLabel;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel operatorIdLabel;
     private javax.swing.JLabel operatorIdValueLabel;
     private javax.swing.JLabel rateLabel;
     private javax.swing.JLabel rateValueLabel;
     private javax.swing.JButton reportErrorButton;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton selectAllButton;
     private javax.swing.JLabel selectedBillsLabel;
     private javax.swing.JLabel selectedBillsValueLabel;

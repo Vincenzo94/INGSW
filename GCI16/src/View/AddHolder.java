@@ -38,7 +38,7 @@ public class AddHolder extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        GeneralPanel = new javax.swing.JPanel();
         billAddress = new javax.swing.JPanel();
         streetField = new javax.swing.JTextField();
         streetLabel = new javax.swing.JLabel();
@@ -84,7 +84,7 @@ public class AddHolder extends ViewFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        GeneralPanel.setLayout(new java.awt.GridBagLayout());
 
         billAddress.setBorder(javax.swing.BorderFactory.createTitledBorder("Bill address"));
         billAddress.setLayout(new java.awt.GridBagLayout());
@@ -187,7 +187,7 @@ public class AddHolder extends ViewFrame {
         gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 40);
-        jPanel1.add(billAddress, gridBagConstraints);
+        GeneralPanel.add(billAddress, gridBagConstraints);
 
         address.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
         address.setLayout(new java.awt.GridBagLayout());
@@ -290,7 +290,7 @@ public class AddHolder extends ViewFrame {
         gridBagConstraints.ipady = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 40);
-        jPanel1.add(address, gridBagConstraints);
+        GeneralPanel.add(address, gridBagConstraints);
 
         registryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Registry"));
         registryPanel.setLayout(new java.awt.GridBagLayout());
@@ -416,7 +416,7 @@ public class AddHolder extends ViewFrame {
         gridBagConstraints.ipady = 16;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 0);
-        jPanel1.add(registryPanel, gridBagConstraints);
+        GeneralPanel.add(registryPanel, gridBagConstraints);
 
         createButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         createButton.setText("Create");
@@ -430,7 +430,7 @@ public class AddHolder extends ViewFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
-        jPanel1.add(createButton, gridBagConstraints);
+        GeneralPanel.add(createButton, gridBagConstraints);
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
@@ -444,9 +444,9 @@ public class AddHolder extends ViewFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
-        jPanel1.add(backButton, gridBagConstraints);
+        GeneralPanel.add(backButton, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(GeneralPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -517,6 +517,7 @@ public class AddHolder extends ViewFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel GeneralPanel;
     private javax.swing.JPanel address;
     private javax.swing.JButton backButton;
     private javax.swing.JPanel billAddress;
@@ -531,7 +532,6 @@ public class AddHolder extends ViewFrame {
     private javax.swing.JLabel districtLabel;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField mobileField;
     private javax.swing.JLabel mobileLabel;
     private javax.swing.JTextField nameField;

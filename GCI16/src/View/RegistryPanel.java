@@ -64,7 +64,7 @@ public class RegistryPanel extends ViewPanel {
         emailValueLabel.setText(s);
     }
     public Integer getSelectedContract(){
-        return table.getSelectedRow();
+        return registryTable.getSelectedRow();
     }
     
     public String getNameSearch(){
@@ -111,8 +111,8 @@ public class RegistryPanel extends ViewPanel {
         taxCLabel = new javax.swing.JLabel();
         taxCField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        scrollPane = new javax.swing.JScrollPane();
+        registryTable = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         alterHolderButton = new javax.swing.JButton();
@@ -124,7 +124,7 @@ public class RegistryPanel extends ViewPanel {
         billsButton = new javax.swing.JButton();
         contractIdLabel = new javax.swing.JLabel();
         contractIdField = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        summaryPanel = new javax.swing.JPanel();
         billingAddressLabel = new javax.swing.JLabel();
         addressLabel = new javax.swing.JLabel();
         telephoneLabel = new javax.swing.JLabel();
@@ -168,20 +168,20 @@ public class RegistryPanel extends ViewPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 40);
         add(searchButton, gridBagConstraints);
 
-        table.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        table.setModel(tableModelRegistryManagement
+        registryTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        registryTable.setModel(tableModelRegistryManagement
         );
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
+        registryTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
+                registryTableMouseClicked(evt);
             }
         });
-        table.addKeyListener(new java.awt.event.KeyAdapter() {
+        registryTable.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tableKeyPressed(evt);
+                registryTableKeyPressed(evt);
             }
         });
-        jScrollPane1.setViewportView(table);
+        scrollPane.setViewportView(registryTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -194,7 +194,7 @@ public class RegistryPanel extends ViewPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        add(jScrollPane1, gridBagConstraints);
+        add(scrollPane, gridBagConstraints);
 
         addButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addButton.setText("Add");
@@ -331,7 +331,7 @@ public class RegistryPanel extends ViewPanel {
         gridBagConstraints.insets = new java.awt.Insets(9, 40, 0, 80);
         add(contractIdField, gridBagConstraints);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary contract"));
+        summaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary contract"));
 
         billingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         billingAddressLabel.setText("Billing address:");
@@ -357,41 +357,41 @@ public class RegistryPanel extends ViewPanel {
         emailValueLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         emailValueLabel.setText("       ");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout summaryPanelLayout = new javax.swing.GroupLayout(summaryPanel);
+        summaryPanel.setLayout(summaryPanelLayout);
+        summaryPanelLayout.setHorizontalGroup(
+            summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(summaryPanelLayout.createSequentialGroup()
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(billingAddressLabel)
                     .addComponent(addressLabel)
                     .addComponent(telephoneLabel)
                     .addComponent(emailLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(telephoneValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                     .addComponent(addressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(billingAddressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(emailValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        summaryPanelLayout.setVerticalGroup(
+            summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, summaryPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(billingAddressLabel)
                     .addComponent(billingAddressValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLabel)
                     .addComponent(addressValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telephoneLabel)
                     .addComponent(telephoneValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(summaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLabel)
                     .addComponent(emailValueLabel))
                 .addGap(6, 6, 6))
@@ -403,7 +403,7 @@ public class RegistryPanel extends ViewPanel {
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        add(jPanel1, gridBagConstraints);
+        add(summaryPanel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -411,14 +411,14 @@ public class RegistryPanel extends ViewPanel {
             a.actionPerformed(evt);
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+    private void registryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registryTableMouseClicked
         for(MouseListener m: mouseListener)
             m.mouseClicked(evt);
-    }//GEN-LAST:event_tableMouseClicked
+    }//GEN-LAST:event_registryTableMouseClicked
 
-    private void tableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyPressed
+    private void registryTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registryTableKeyPressed
 
-    }//GEN-LAST:event_tableKeyPressed
+    }//GEN-LAST:event_registryTableKeyPressed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         for(ActionListener a: actionListener)
@@ -458,15 +458,15 @@ public class RegistryPanel extends ViewPanel {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel emailValueLabel;
     private javax.swing.JButton injuctionsButton;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTable registryTable;
     private javax.swing.JButton removeContractButton;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton searchButton;
+    private javax.swing.JPanel summaryPanel;
     private javax.swing.JTextField surnameField;
     private javax.swing.JLabel surnameLabel;
-    private javax.swing.JTable table;
     private javax.swing.JTextField taxCField;
     private javax.swing.JLabel taxCLabel;
     private javax.swing.JLabel telephoneLabel;

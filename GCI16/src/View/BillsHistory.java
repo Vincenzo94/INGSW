@@ -62,8 +62,8 @@ public class BillsHistory extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        generalPanel = new javax.swing.JPanel();
+        scrollPane = new javax.swing.JScrollPane();
         billTable = new javax.swing.JTable();
         consuptionDataPanel = new javax.swing.JPanel();
         taxLabel = new javax.swing.JLabel();
@@ -87,8 +87,8 @@ public class BillsHistory extends ViewFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 800));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        generalPanel.setPreferredSize(new java.awt.Dimension(900, 800));
+        generalPanel.setLayout(new java.awt.GridBagLayout());
 
         billTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         billTable.setModel(billModel);
@@ -99,7 +99,7 @@ public class BillsHistory extends ViewFrame {
                 billTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(billTable);
+        scrollPane.setViewportView(billTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -110,7 +110,7 @@ public class BillsHistory extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        jPanel1.add(jScrollPane1, gridBagConstraints);
+        generalPanel.add(scrollPane, gridBagConstraints);
 
         consuptionDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Consuption data"));
 
@@ -199,7 +199,7 @@ public class BillsHistory extends ViewFrame {
         gridBagConstraints.ipadx = 161;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        jPanel1.add(consuptionDataPanel, gridBagConstraints);
+        generalPanel.add(consuptionDataPanel, gridBagConstraints);
 
         reportErrorButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportErrorButton.setText("Report error");
@@ -214,7 +214,7 @@ public class BillsHistory extends ViewFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
-        jPanel1.add(reportErrorButton, gridBagConstraints);
+        generalPanel.add(reportErrorButton, gridBagConstraints);
 
         buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
@@ -230,7 +230,7 @@ public class BillsHistory extends ViewFrame {
         gridBagConstraints.ipadx = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 40);
-        jPanel1.add(buildPDFButton, gridBagConstraints);
+        generalPanel.add(buildPDFButton, gridBagConstraints);
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
@@ -244,9 +244,9 @@ public class BillsHistory extends ViewFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
-        jPanel1.add(backButton, gridBagConstraints);
+        generalPanel.add(backButton, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(generalPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,11 +280,11 @@ public class BillsHistory extends ViewFrame {
     private javax.swing.JLabel detectionDateValueLabel;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel generalPanel;
     private javax.swing.JLabel operatorIDLabel;
     private javax.swing.JLabel operatorIDValueLabel;
     private javax.swing.JButton reportErrorButton;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JLabel taxLabel;
     private javax.swing.JLabel taxValueLabel;
     private javax.swing.JLabel totalLabel;

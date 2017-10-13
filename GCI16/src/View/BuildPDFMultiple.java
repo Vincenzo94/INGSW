@@ -65,9 +65,9 @@ public class BuildPDFMultiple extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        previewPanel = new javax.swing.JPanel();
+        scrollPane = new javax.swing.JScrollPane();
+        pdfTable = new javax.swing.JTable();
         previewPDFButton = new javax.swing.JButton();
         sendPDFsButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
@@ -81,29 +81,29 @@ public class BuildPDFMultiple extends ViewFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel2.setVisible(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        previewPanel.setVisible(false);
+        previewPanel.setPreferredSize(new java.awt.Dimension(700, 700));
+        previewPanel.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 3;
-        getContentPane().add(jPanel2, gridBagConstraints);
+        getContentPane().add(previewPanel, gridBagConstraints);
 
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setModel(tableModelMultipleBill);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        pdfTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        pdfTable.setModel(tableModelMultipleBill);
+        pdfTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                pdfTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Contract ID");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Reference detection");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Generated on");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Total");
+        scrollPane.setViewportView(pdfTable);
+        if (pdfTable.getColumnModel().getColumnCount() > 0) {
+            pdfTable.getColumnModel().getColumn(0).setHeaderValue("Contract ID");
+            pdfTable.getColumnModel().getColumn(1).setHeaderValue("Reference detection");
+            pdfTable.getColumnModel().getColumn(2).setHeaderValue("Generated on");
+            pdfTable.getColumnModel().getColumn(3).setHeaderValue("Total");
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -117,7 +117,7 @@ public class BuildPDFMultiple extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        getContentPane().add(jScrollPane1, gridBagConstraints);
+        getContentPane().add(scrollPane, gridBagConstraints);
 
         previewPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         previewPDFButton.setText("Preview PDF");
@@ -202,10 +202,10 @@ public class BuildPDFMultiple extends ViewFrame {
             a.actionPerformed(evt);            
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void pdfTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pdfTableMouseClicked
         for(MouseListener m: mouseListener)
             m.mouseClicked(evt);
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_pdfTableMouseClicked
 
     private void closePreviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closePreviewButtonActionPerformed
         for(ActionListener a: actionListener)
@@ -222,10 +222,10 @@ public class BuildPDFMultiple extends ViewFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton closePreviewButton;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable pdfTable;
     private javax.swing.JButton previewPDFButton;
+    private javax.swing.JPanel previewPanel;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton sendPDFsButton;
     // End of variables declaration//GEN-END:variables
 
@@ -233,11 +233,11 @@ public class BuildPDFMultiple extends ViewFrame {
         return tableModelMultipleBill;
     }
     public JTable getBillTable() {
-        return jTable1;
+        return pdfTable;
     }
 
     public Integer getSelectedBill() {
-        return (Integer)tableModelMultipleBill.getValueAt(jTable1.getSelectedRow(), 0);
+        return (Integer)tableModelMultipleBill.getValueAt(pdfTable.getSelectedRow(), 0);
     }
 
     public void activePreviewButton(boolean b) {
@@ -247,9 +247,9 @@ public class BuildPDFMultiple extends ViewFrame {
     public void init() {
         controller = new SwingController();
         factory = new SwingViewBuilder(controller);
-        jPanel2 = factory.buildViewerPanel();
-        jPanel2.setVisible(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
+        previewPanel = factory.buildViewerPanel();
+        previewPanel.setVisible(false);
+        previewPanel.setPreferredSize(new java.awt.Dimension(700, 700));
         GridBagConstraints gridBagConstraints;
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -262,9 +262,9 @@ public class BuildPDFMultiple extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        getContentPane().add(jPanel2, gridBagConstraints);
-        ComponentKeyBinding.install(controller, jPanel2);
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
+        getContentPane().add(previewPanel, gridBagConstraints);
+        ComponentKeyBinding.install(controller, previewPanel);
+        previewPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
         controller.getDocumentViewController().setAnnotationCallback(
             new org.icepdf.ri.common.MyAnnotationCallback(
                 controller.getDocumentViewController()));
@@ -272,11 +272,11 @@ public class BuildPDFMultiple extends ViewFrame {
 
     public void preview(boolean b) {
         if(b == true){
-            String pdfName = tableModelMultipleBill.getValueAt(jTable1.getSelectedRow(), 0)+".pdf";
+            String pdfName = tableModelMultipleBill.getValueAt(pdfTable.getSelectedRow(), 0)+".pdf";
             controller.openDocument(PATH+"/"+pdfName);
         }
-        jScrollPane1.setVisible(!b);
-        jPanel2.setVisible(b);
+        scrollPane.setVisible(!b);
+        previewPanel.setVisible(b);
         previewPDFButton.setVisible(!b);
         closePreviewButton.setVisible(b);
     }

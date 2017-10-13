@@ -44,7 +44,7 @@ public class Home extends ViewFrame {
     private void initComponents() {
 
         homePane = new javax.swing.JTabbedPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -79,7 +79,7 @@ public class Home extends ViewFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(jMenu1);
 
         jMenu2.setText("?");
 
@@ -91,9 +91,9 @@ public class Home extends ViewFrame {
         });
         jMenu2.add(help);
 
-        jMenuBar1.add(jMenu2);
+        menuBar.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,8 +144,8 @@ public class Home extends ViewFrame {
     private javax.swing.JTabbedPane homePane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
     

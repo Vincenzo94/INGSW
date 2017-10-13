@@ -27,7 +27,6 @@ public class Contract {
     
     private class Address{
         private String city;
-
         private Integer id;
         private String district;
         private String street;

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ansan
  */
 public class SearchContract_Controller implements Controller{
-    private Contract contract;     
+    private final Contract contract;     
     private final DefaultTableModel tableModelRegistryManagement;
     private List<Contract> contracts;
     
@@ -44,10 +44,10 @@ public class SearchContract_Controller implements Controller{
                 throw new SQLException ("No Result Found");
             }     
         }
-        for(Contract temp : contracts){
-                Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
-                tableModelRegistryManagement.addRow(row);
-            }
+        for (Contract temp : contracts) {
+            Object[] row = {temp.getName(), (Object)temp.getSurname(), temp.getId(), temp.getTaxCode()};
+            tableModelRegistryManagement.addRow(row);
+        }
     }
 
     public List<Contract> getContracts() {

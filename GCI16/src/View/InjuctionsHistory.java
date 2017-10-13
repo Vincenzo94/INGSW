@@ -104,8 +104,8 @@ public class InjuctionsHistory extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        injuctionsPanel = new javax.swing.JPanel();
+        scrollPane = new javax.swing.JScrollPane();
         injuctionsTable = new javax.swing.JTable();
         summaryPanel = new javax.swing.JPanel();
         billsPeriodLabel = new javax.swing.JLabel();
@@ -126,8 +126,8 @@ public class InjuctionsHistory extends ViewFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 800));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        injuctionsPanel.setPreferredSize(new java.awt.Dimension(900, 800));
+        injuctionsPanel.setLayout(new java.awt.GridBagLayout());
 
         injuctionsTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         injuctionsTable.setModel(tableModelInjuctions);
@@ -137,7 +137,7 @@ public class InjuctionsHistory extends ViewFrame {
                 injuctionsTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(injuctionsTable);
+        scrollPane.setViewportView(injuctionsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -148,7 +148,7 @@ public class InjuctionsHistory extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        jPanel1.add(jScrollPane1, gridBagConstraints);
+        injuctionsPanel.add(scrollPane, gridBagConstraints);
 
         summaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary"));
 
@@ -227,7 +227,7 @@ public class InjuctionsHistory extends ViewFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 40);
-        jPanel1.add(summaryPanel, gridBagConstraints);
+        injuctionsPanel.add(summaryPanel, gridBagConstraints);
 
         buildPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         buildPDFButton.setText("Build PDF");
@@ -242,7 +242,7 @@ public class InjuctionsHistory extends ViewFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
-        jPanel1.add(buildPDFButton, gridBagConstraints);
+        injuctionsPanel.add(buildPDFButton, gridBagConstraints);
 
         backButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         backButton.setText("Back");
@@ -256,9 +256,9 @@ public class InjuctionsHistory extends ViewFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
-        jPanel1.add(backButton, gridBagConstraints);
+        injuctionsPanel.add(backButton, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(injuctionsPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -288,11 +288,11 @@ public class InjuctionsHistory extends ViewFrame {
     private javax.swing.JButton buildPDFButton;
     private javax.swing.JLabel detectionLabel;
     private javax.swing.JLabel detectionValueLabel;
+    private javax.swing.JPanel injuctionsPanel;
     private javax.swing.JTable injuctionsTable;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel paymentLabel;
     private javax.swing.JLabel paymentValueLabel;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel summaryPanel;
     // End of variables declaration//GEN-END:variables
 }

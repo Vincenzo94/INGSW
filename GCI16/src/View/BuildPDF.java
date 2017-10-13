@@ -42,7 +42,7 @@ public class BuildPDF extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        billPanel = new javax.swing.JPanel();
         sendPDFButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -54,8 +54,8 @@ public class BuildPDF extends ViewFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-        getContentPane().add(jPanel1, new java.awt.GridBagConstraints());
+        billPanel.setLayout(new java.awt.GridBagLayout());
+        getContentPane().add(billPanel, new java.awt.GridBagConstraints());
 
         sendPDFButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sendPDFButton.setText("Send PDF");
@@ -110,16 +110,16 @@ public class BuildPDF extends ViewFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel billPanel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton sendPDFButton;
     // End of variables declaration//GEN-END:variables
 
     public void init() {
         controller = new SwingController();
         factory = new SwingViewBuilder(controller);
-        jPanel1 = factory.buildViewerPanel();
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 700));
+        billPanel = factory.buildViewerPanel();
+        billPanel.setPreferredSize(new java.awt.Dimension(700, 700));
         GridBagConstraints gridBagConstraints;
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -132,9 +132,9 @@ public class BuildPDF extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        getContentPane().add(jPanel1, gridBagConstraints);
-        ComponentKeyBinding.install(controller, jPanel1);
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
+        getContentPane().add(billPanel, gridBagConstraints);
+        ComponentKeyBinding.install(controller, billPanel);
+        billPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PDF preview"));
         controller.getDocumentViewController().setAnnotationCallback(
             new org.icepdf.ri.common.MyAnnotationCallback(
                 controller.getDocumentViewController()));

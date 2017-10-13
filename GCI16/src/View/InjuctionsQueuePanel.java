@@ -6,8 +6,6 @@
 package View;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
@@ -61,7 +59,7 @@ public class InjuctionsQueuePanel extends ViewPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scrollPane = new javax.swing.JScrollPane();
         injuctionsTable = new javax.swing.JTable();
         injuctionDeleteButton = new javax.swing.JButton();
         injuctionConfirmButton = new javax.swing.JButton();
@@ -75,7 +73,7 @@ public class InjuctionsQueuePanel extends ViewPanel {
                 injuctionsTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(injuctionsTable);
+        scrollPane.setViewportView(injuctionsTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -87,7 +85,7 @@ public class InjuctionsQueuePanel extends ViewPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 40, 0, 40);
-        add(jScrollPane2, gridBagConstraints);
+        add(scrollPane, gridBagConstraints);
 
         injuctionDeleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         injuctionDeleteButton.setText("Delete");
@@ -167,6 +165,6 @@ public class InjuctionsQueuePanel extends ViewPanel {
     private javax.swing.JButton injuctionConfirmButton;
     private javax.swing.JButton injuctionDeleteButton;
     private javax.swing.JTable injuctionsTable;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

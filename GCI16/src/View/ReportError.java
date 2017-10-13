@@ -6,8 +6,6 @@
 package View;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
@@ -70,7 +68,7 @@ public class ReportError extends ViewFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        generalPanel = new javax.swing.JPanel();
         summaryPanel = new javax.swing.JPanel();
         rateLabel = new javax.swing.JLabel();
         rateValueLabel = new javax.swing.JLabel();
@@ -85,7 +83,7 @@ public class ReportError extends ViewFrame {
         dueDateLabel = new javax.swing.JLabel();
         dueDateValueLabel = new javax.swing.JLabel();
         reportLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPane = new javax.swing.JScrollPane();
         reportTextArea = new javax.swing.JTextArea();
         sendButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -97,7 +95,7 @@ public class ReportError extends ViewFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        generalPanel.setLayout(new java.awt.GridBagLayout());
 
         summaryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary"));
 
@@ -199,7 +197,7 @@ public class ReportError extends ViewFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        jPanel1.add(summaryPanel, gridBagConstraints);
+        generalPanel.add(summaryPanel, gridBagConstraints);
 
         reportLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         reportLabel.setText("Report's specifications:");
@@ -208,11 +206,11 @@ public class ReportError extends ViewFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 40);
-        jPanel1.add(reportLabel, gridBagConstraints);
+        generalPanel.add(reportLabel, gridBagConstraints);
 
         reportTextArea.setColumns(20);
         reportTextArea.setRows(5);
-        jScrollPane1.setViewportView(reportTextArea);
+        scrollPane.setViewportView(reportTextArea);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -224,7 +222,7 @@ public class ReportError extends ViewFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 40);
-        jPanel1.add(jScrollPane1, gridBagConstraints);
+        generalPanel.add(scrollPane, gridBagConstraints);
 
         sendButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         sendButton.setText("Send");
@@ -238,7 +236,7 @@ public class ReportError extends ViewFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 12, 40);
-        jPanel1.add(sendButton, gridBagConstraints);
+        generalPanel.add(sendButton, gridBagConstraints);
 
         cancelButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         cancelButton.setText("Cancel");
@@ -252,9 +250,9 @@ public class ReportError extends ViewFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 40, 12, 0);
-        jPanel1.add(cancelButton, gridBagConstraints);
+        generalPanel.add(cancelButton, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(generalPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,14 +277,14 @@ public class ReportError extends ViewFrame {
     private javax.swing.JLabel detectionValueLabel;
     private javax.swing.JLabel dueDateLabel;
     private javax.swing.JLabel dueDateValueLabel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel generalPanel;
     private javax.swing.JLabel operatorIDLabel;
     private javax.swing.JLabel operatorIDValueLabel;
     private javax.swing.JLabel rateLabel;
     private javax.swing.JLabel rateValueLabel;
     private javax.swing.JLabel reportLabel;
     private javax.swing.JTextArea reportTextArea;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JButton sendButton;
     private javax.swing.JPanel summaryPanel;
     private javax.swing.JLabel totalLabel;
