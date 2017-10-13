@@ -18,23 +18,34 @@ import javax.swing.JOptionPane;
 public class RemoveContract_Controller implements Controller {
     private final String success= "Contract removed";
     private final String error = "Contract not removed";
+    private final Registry_Controller registryController;
     
-    RemoveContract_Controller(Registry_Controller controller, Contract contract) {
-        int n = JOptionPane.showConfirmDialog(controller.getPanel(),"Are you sure to delete the contract" + contract.getId()+"?",
+    RemoveContract_Controller(Registry_Controller controller) {
+        registryController = controller;
+    }
+    
+    protected void removeContract(Contract contract){
+        int n = JOptionPane.showConfirmDialog(registryController.getPanel(),"Are you sure to delete the contract" + contract.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        try {
+        
             if(n == 0){
-                Database_Controller dbManager = Database_Controller.getDbManager();
-                DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
-                daoContract.remove(contract);            
-                Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
-                JOptionPane.showConfirmDialog(controller.getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                try {
+                    remove(contract);
+                    Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
+                    JOptionPane.showConfirmDialog(registryController.getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(registryController.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                }
             } 
             else
-                JOptionPane.showConfirmDialog(controller.getPanel(),"Operation Cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
-            controller.back();
-        } catch (SQLException ex) {
-                JOptionPane.showConfirmDialog(controller.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-            }
-    }    
+                JOptionPane.showConfirmDialog(registryController.getPanel(),"Operation Cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            registryController.back();
+        
+    }
+
+    private void remove(Contract contract) throws SQLException{
+        Database_Controller dbManager = Database_Controller.getDbManager();
+        DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
+        daoContract.remove(contract);
+    }
 }

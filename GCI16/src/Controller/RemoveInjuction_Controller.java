@@ -18,23 +18,30 @@ import javax.swing.JOptionPane;
 public class RemoveInjuction_Controller implements Controller {
     private final String success= "Injuction removed";
     private final String error = "Injuction not removed";
-    
-    RemoveInjuction_Controller(InjuctionsQueue_Controller controller,Injuction injuction){
-        int n = JOptionPane.showConfirmDialog(controller.getPanel(),"Are you sure to delete the injuction" + injuction.getId()+"?",
+    private final InjuctionsQueue_Controller injuctionsQueueController;
+    RemoveInjuction_Controller(InjuctionsQueue_Controller controller){
+        injuctionsQueueController = controller;
+    }
+    protected void removeInjuction(Injuction injuction){
+        int n = JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(),"Are you sure to delete the injuction" + injuction.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(n == 0){
             try {
-                Database_Controller dbController = Database_Controller.getDbManager();
-                DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
-                daoDocument.remove(injuction);
+                remove(injuction);
                 Log_Controller.writeLog(" removed the injuction "+injuction.getId(),RemoveInjuction_Controller.class);
-                JOptionPane.showConfirmDialog(controller.getPanel(), success,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-                controller.back();
+                JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(), success,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                injuctionsQueueController.back();
             } catch (SQLException ex) {
-                JOptionPane.showConfirmDialog(controller.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
         } 
-            else
-                JOptionPane.showConfirmDialog(controller.getPanel(),"Operation cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(),"Operation cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void remove(Injuction injuction) throws SQLException {
+        Database_Controller dbController = Database_Controller.getDbManager();
+        DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
+        daoDocument.remove(injuction);
     }
 }

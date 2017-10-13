@@ -151,7 +151,8 @@ public class Registry_Controller implements Controller{
     private void removeContractClicked() {
         int row = view.getSelectedContract();
         if(row >= 0 && row<contracts.size()){
-            current = new RemoveContract_Controller(this, contracts.get(row));
+            current = new RemoveContract_Controller(this);
+            ((RemoveContract_Controller)current).removeContract(contracts.get(row));
         }
         else
             JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
