@@ -5,8 +5,6 @@
  */
 package View;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
@@ -15,7 +13,7 @@ import javax.swing.event.ChangeListener;
  *
  * @author ansan
  */
-public class Home extends javax.swing.JFrame {
+public class Home extends View {
     private final LinkedList<MouseListener> mouseListener;
     private final LinkedList<ActionListener> actionListener;
     private final LinkedList<ChangeListener> changeListener;
@@ -34,11 +32,6 @@ public class Home extends javax.swing.JFrame {
         homePane.addTab("Registry Management", panel.get(0));
         homePane.addTab("Injuctions Queue", panel.get(1));
         homePane.addTab("Bills Queue", panel.get(2));
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
     }
 
     /**

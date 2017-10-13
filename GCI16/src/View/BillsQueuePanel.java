@@ -6,8 +6,6 @@
 package View;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -20,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class BillsQueuePanel extends javax.swing.JPanel {
+public class BillsQueuePanel extends View {
 
     private final DefaultTableModel tableModelBillsQueue;
     private final LinkedList<MouseListener> mouseListener;
@@ -49,18 +47,12 @@ public class BillsQueuePanel extends javax.swing.JPanel {
             }
             @Override
             public boolean isCellEditable(int x,int y){
-                if(y==4) return true;
-                return false;
+                return y==4;
             }
         };
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
-        initComponents();  
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
+        initComponents();
     }
 
     /**

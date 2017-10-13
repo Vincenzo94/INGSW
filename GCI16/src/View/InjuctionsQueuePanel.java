@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class InjuctionsQueuePanel extends javax.swing.JPanel {
+public class InjuctionsQueuePanel extends View {
 
     private final LinkedList<MouseListener> mouseListener;
     private final LinkedList<ActionListener> actionListener;
@@ -49,11 +49,6 @@ public class InjuctionsQueuePanel extends javax.swing.JPanel {
         mouseListener = new LinkedList<>();
         actionListener = new LinkedList<>();
         initComponents();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
     }
 
     /**

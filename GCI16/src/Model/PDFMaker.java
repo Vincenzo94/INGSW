@@ -38,7 +38,7 @@ public class PDFMaker{
     private static String templateDirectory;
     private static String tmpDirectory;
     private static PDFMaker instance;
-    volatile private static Boolean ret = true;
+    private final static Boolean[] RET = {true};
     private final static String TMP_DIR = System.getProperty("java.io.tmpdir");
 
     private PDFMaker() throws IOException{
@@ -49,7 +49,7 @@ public class PDFMaker{
         post-conditions:
         - status is setted on "true".
         */
-        ret = true;
+        RET[0] = true;
         tmpDirectory =  TMP_DIR+"/GCI16";
         templateDirectory = tmpDirectory+"/template.jpg";
 
@@ -75,13 +75,13 @@ public class PDFMaker{
                 @Override
                 public void run(){
                     if(!createPDF(bills.get(b),b,null)){
-                        synchronized(ret){
-                            ret = false;
+                        synchronized(RET){
+                            RET[0] = false;
                         }
                     }
                 }
             }.start();
-        return ret;
+        return RET[0];
     }
 
     synchronized public static boolean createPDF(Contract contract, Bill billObject, Injuction injunction) {
@@ -100,7 +100,7 @@ public class PDFMaker{
         } catch (IOException ex) {
             Logger.getLogger(PDFMaker.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String filepath = null;
+        String filepath;
         if(injunction!=null)
             filepath = tmpDirectory + "/injuction_" + contract.getId() + ".pdf";
         else
@@ -208,7 +208,7 @@ public class PDFMaker{
             printStream.showText(contract.getPhone());
             if(contract.getMobile() != null)
                 printStream.showText(" - " + contract.getMobile());
-        };
+        }
         if(contract.getTaxCode() != null){
             printStream.newLine();
             printStream.showText(contract.getTaxCode());
