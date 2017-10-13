@@ -39,28 +39,41 @@ public class Login_Controller implements Controller{
     }
     
     private void doLogin(){
-        Integer user = login.getUser();
+        String user = login.getUser();
         String passw = login.getPassword();
-        DAO_Operator DAO;
-        try {
-            dbManager = Database_Controller.getDbManager();
-            if(user==null)
-                throw new SQLException("Invalid characthers for user's form");
-            operator=new Operator(user,passw);
-            DAO = new Operator_MYSQL(dbManager);
-            operator = DAO.check(operator);
-            if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
+        Boolean result = check(user,passw);
+        if(result==null)
+            JOptionPane.showConfirmDialog(login, "Problems with DataBase!","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        else{
+            if(result==false)
+                JOptionPane.showConfirmDialog(login, "Invalid ID and/or Password!","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            else{
                 Log_Controller.setOperator(operator);
                 ErrorModel.setOperatorID(operator.getId());
                 Log_Controller.writeLog(" logged",Login_Controller.class);
                 login.dispose();
                 main.loginDone(operator);
             }
+        }
+    }
+    
+    private Boolean check(String user, String passw){
+        DAO_Operator DAO;
+        try {
+            dbManager = Database_Controller.getDbManager();
+            if(user==null || !user.matches("[0-9]*"))
+                return false;
+            operator=new Operator(Integer.valueOf(user),passw);
+            DAO = new Operator_MYSQL(dbManager);
+            operator = DAO.check(operator);
+            if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
+                return true;
+            }
             else{
-                JOptionPane.showConfirmDialog(login, "Invalid ID and/or Password!","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                return false;
             } 
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(login, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            return null;
         }
     }
     
