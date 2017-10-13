@@ -134,11 +134,8 @@ public class Login extends javax.swing.JFrame {
         return String.valueOf(passwordField.getPassword());
     }
     
-    public Integer getUser(){
-        String user = usernameField.getText();
-        if(user.matches("[0-9]*"))
-            return Integer.valueOf(user);
-        return null;
+    public String getUser(){
+            return usernameField.getText();
     }
     
     public JButton getLoginButton(){
