@@ -8,9 +8,7 @@ package View;
 import Model.Bill;
 import Model.Document;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,11 +30,6 @@ public class BuildPDF extends javax.swing.JFrame {
     public BuildPDF() {
         initComponents();
         actionListener = new LinkedList<>();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
         init();
     }
     public void setPDF(Document doc){
@@ -128,7 +121,7 @@ public class BuildPDF extends javax.swing.JFrame {
         factory = new SwingViewBuilder(controller);
         jPanel1 = factory.buildViewerPanel();
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 700));
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        GridBagConstraints gridBagConstraints;
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

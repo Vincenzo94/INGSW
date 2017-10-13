@@ -15,7 +15,7 @@ import java.util.LinkedList;
  *
  * @author Andrea
  */
-public class ReportError extends javax.swing.JFrame {
+public class ReportError extends View {
 
     private final LinkedList<ActionListener> actionListener;
     /**
@@ -24,11 +24,6 @@ public class ReportError extends javax.swing.JFrame {
     public ReportError() {
         actionListener=new LinkedList<>();
         initComponents();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
     }
     
     public void addActionListener(ActionListener a){

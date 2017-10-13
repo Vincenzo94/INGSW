@@ -7,8 +7,6 @@
 package View;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
@@ -16,18 +14,13 @@ import java.util.LinkedList;
  *
  * @author Andrea
  */
-public class AddHolder extends javax.swing.JFrame {
-    private LinkedList<ActionListener> actionListener;
+public class AddHolder extends View {
+    private final LinkedList<ActionListener> actionListener;
     
     /** Creates new form AddHolder */
     public AddHolder() {
         actionListener= new LinkedList<>();
         initComponents();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
         
     }
     
