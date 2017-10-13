@@ -117,11 +117,13 @@ public class PDFMaker{
         }
         
         try{
-            PDDocument bill = new PDDocument();
+            PDDocument bill;
+            bill = new PDDocument();
             PDPage page = new PDPage();
             bill.addPage(page);
             PDImageXObject template = PDImageXObject.createFromFile(templateDirectory, bill);
-            PDPageContentStream printStream = new PDPageContentStream(bill, page);
+            PDPageContentStream printStream;
+            printStream = new PDPageContentStream(bill, page);
             
             //drawingPDF
             drawPDF(printStream, template, contract, billObject, injunction);
@@ -133,7 +135,7 @@ public class PDFMaker{
             isCreated = true;
         }
         catch (IOException e){
-            System.out.println("Error in the bill's creating. The operation will be interrupted.");
+            System.out.println("Error in the bill's creating. The operation will be interrupted.("+e.getMessage()+")");
         }
         return isCreated;
     }
