@@ -124,7 +124,7 @@ public class BillsQueue_Controller implements Controller{
             current = new ConfirmBill_Controller(selected,this);
     }
      
-    public void back(){
+    void back(){
         updateBillsQueue();
     }
         
