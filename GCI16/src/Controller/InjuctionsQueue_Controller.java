@@ -28,7 +28,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Andrea
  */
-public class InjuctionsQueue_Controller implements Controller{
+public class InjuctionsQueue_Controller implements Controller {
     
     private final InjuctionsQueuePanel view;
     private DefaultTableModel tableModelInjuctionsQueue = null;

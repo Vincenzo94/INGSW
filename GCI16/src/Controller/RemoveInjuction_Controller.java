@@ -19,6 +19,7 @@ public class RemoveInjuction_Controller implements Controller {
     private final String success= "Injuction removed";
     private final String error = "Injuction not removed";
     private final InjuctionsQueue_Controller injuctionsQueueController;
+    
     RemoveInjuction_Controller(InjuctionsQueue_Controller controller){
         injuctionsQueueController = controller;
     }
