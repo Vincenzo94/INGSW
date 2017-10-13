@@ -33,11 +33,10 @@ public class ReportError_Controller implements Controller{
         view=new ReportError();
         view.setSize();
         view.setVisible(true);
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                ReportError_Controller co = (ReportError_Controller)controller;
-                co.buttonClicked((Component)e.getSource());
+                buttonClicked((Component)e.getSource());
             }
         });
         try {

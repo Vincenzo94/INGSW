@@ -34,19 +34,17 @@ public class Registry_Controller implements Controller{
     Registry_Controller(Operator operator, Component panel) {
         this.operator = operator;
         this.view= (RegistryPanel)panel;
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                Registry_Controller co = (Registry_Controller)controller;
-                co.buttonClicked((Component)e.getSource());
+                buttonClicked((Component)e.getSource());
             }
         });
         
-        view.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                Registry_Controller co = (Registry_Controller)controller;
-                co.tableClicked();
+                tableClicked();
             }
         });
         view.setVisible(true);

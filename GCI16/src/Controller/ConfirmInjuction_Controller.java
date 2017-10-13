@@ -53,11 +53,10 @@ public class ConfirmInjuction_Controller implements Controller{
             PDFMaker.createPDF(contract, bill, injuction);
             view.setPDF(i);
             view.setVisible(true);
-            view.addActionListener(new Listener(this){
+            view.addActionListener(new Listener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-                    c.buttonCliked((Component)e.getSource());            
+                    buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -87,11 +86,10 @@ public class ConfirmInjuction_Controller implements Controller{
         view.dispose();
         sendPDFview = new SendPDF(result);
         sendPDFview.setVisible(true);
-        sendPDFview.addActionListener(new Listener(this){
+        sendPDFview.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-            ConfirmInjuction_Controller c = (ConfirmInjuction_Controller)controller;
-            c.okClicked();
+            okClicked();
             }
         });        
         try {

@@ -56,19 +56,17 @@ public class InjuctionsHistory_Controller implements Controller {
         try {
                 initTable();
                 dbManager=Database_Controller.getDbManager();
-                view.addActionListener(new Listener(this){
+                view.addActionListener(new Listener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
-                    bc.buttonCliked((Component)e.getSource());            
+                    buttonCliked((Component)e.getSource());            
                 }
             });
 
-            view.addMouseListener(new Listener(this){
+            view.addMouseListener(new Listener(){
                 @Override
                 public void mouseClicked(MouseEvent e){
-                    InjuctionsHistory_Controller bc = (InjuctionsHistory_Controller)controller;
-                    bc.tableClicked();
+                    tableClicked();
                 }
             });
         } catch (SQLException ex) {

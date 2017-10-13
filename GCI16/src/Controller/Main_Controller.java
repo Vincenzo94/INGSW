@@ -60,18 +60,16 @@ public class Main_Controller{
     void loginDone(Operator o){
         operator=o;
         actual.setVisible(true);
-        actual.addActionListener(new Listener(this){
+        actual.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main_Controller m = (Main_Controller)controller;
-                m.buttonCliked((Component)e.getSource());            
+                buttonCliked((Component)e.getSource());            
             }
         });
-        actual.addChangeListener(new Listener(this){
+        actual.addChangeListener(new Listener(){
             @Override
             public void stateChanged(ChangeEvent e){
-                Main_Controller m = (Main_Controller)controller;
-                m.changePane();
+                changePane();
             }
         });
         regy=new Registry_Controller(operator,actual.getPanel(0));

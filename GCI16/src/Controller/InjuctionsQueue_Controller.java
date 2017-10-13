@@ -55,19 +55,17 @@ public class InjuctionsQueue_Controller implements Controller {
             }
         };
         
-        view.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                InjuctionsQueue_Controller c = (InjuctionsQueue_Controller)controller;
-                c.activeInjuctionButtons();
+                activeInjuctionButtons();
             }
         });
         
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                InjuctionsQueue_Controller c = (InjuctionsQueue_Controller)controller;
-                c.buttonClicked((Component)e.getSource());
+                buttonClicked((Component)e.getSource());
             }
         });
         initInjuctionsQueue();

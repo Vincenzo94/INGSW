@@ -56,19 +56,17 @@ public class BillsQueue_Controller implements Controller{
             }
         };
         
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                BillsQueue_Controller c = (BillsQueue_Controller)controller;
-                c.buttonClicked((Component)e.getSource());
+                buttonClicked((Component)e.getSource());
             }
         });
         
-        view.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                BillsQueue_Controller co = (BillsQueue_Controller)controller;
-                co.tableClicked();
+                tableClicked();
             }
         });
         initBillsQueue();

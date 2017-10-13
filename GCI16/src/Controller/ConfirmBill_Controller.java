@@ -59,18 +59,16 @@ public class ConfirmBill_Controller implements Controller{
         bill=null;
         this.billsQueueController = main;
         views.setVisible(true);
-        views.addActionListener(new Listener(this){
+        views.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.buttonCliked((Component)e.getSource());            
+                buttonCliked((Component)e.getSource());            
             }
         });
-        views.addMouseListener(new Listener(this){
+        views.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.tableClicked();
+                tableClicked();
             }
         });
         defaultRender = new DefaultTableCellRenderer() {
@@ -117,11 +115,10 @@ public class ConfirmBill_Controller implements Controller{
             PDFMaker.createPDF(contract, b,null);
             view.setPDF(b);
             view.setVisible(true);
-            view.addActionListener(new Listener(this){
+            view.addActionListener(new Listener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                    c.buttonCliked((Component)e.getSource());            
+                    buttonCliked((Component)e.getSource());            
                 }
             });
         } catch (SQLException ex) {
@@ -162,11 +159,10 @@ public class ConfirmBill_Controller implements Controller{
             result = EMailSender.sendEmail(contract, Bill.class);
             sendPDFview = new SendPDF(result);
             sendPDFview.setVisible(true);
-            sendPDFview.addActionListener(new Listener(this){
+            sendPDFview.addActionListener(new Listener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.okClicked();
+                okClicked();
                 }
             });
             bill.setState("Issued");
@@ -182,11 +178,10 @@ public class ConfirmBill_Controller implements Controller{
             results = EMailSender.sendEmail(bills, Bill.class);
             sendPDFviewMultiple = new SendPDFMultiple(results);
             sendPDFviewMultiple.setVisible(true);
-            sendPDFviewMultiple.addActionListener(new Listener(this){
+            sendPDFviewMultiple.addActionListener(new Listener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                ConfirmBill_Controller c = (ConfirmBill_Controller)controller;
-                c.okClicked();
+                okClicked();
                 }
             });
             try {

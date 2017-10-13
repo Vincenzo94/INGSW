@@ -30,11 +30,10 @@ public class Login_Controller implements Controller{
         login = new Login();
         login.setSize();
         login.setVisible(true);      
-        login.addListener(new Listener(this){
+        login.addListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                    Login_Controller l = (Login_Controller) controller;
-                    l.buttonCliked((Component)e.getSource());
+                    buttonCliked((Component)e.getSource());
             }
         });
     }

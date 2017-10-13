@@ -15,13 +15,8 @@ import javax.swing.event.ChangeListener;
 /**
  *
  * @author ansan
- * @param <T>
  */
-public class Listener <T> implements ActionListener,MouseListener,ChangeListener{
-    T controller;
-    public Listener(T contr){
-        controller=contr;
-    }
+public class Listener implements ActionListener,MouseListener,ChangeListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

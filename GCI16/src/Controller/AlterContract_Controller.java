@@ -33,11 +33,10 @@ public class AlterContract_Controller implements Controller{
         view=new AlterHolder();
         view.setSize();
         view.setVisible(true);
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                AlterContract_Controller ac = (AlterContract_Controller)controller;
-                ac.buttonCliked((Component)e.getSource());            
+                buttonCliked((Component)e.getSource());            
             }
         });
         init();

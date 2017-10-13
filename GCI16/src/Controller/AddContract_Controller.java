@@ -31,11 +31,10 @@ public class AddContract_Controller implements Controller{
         view= new AddHolder();
         view.setSize();
         view.setVisible(true);
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddContract_Controller m = (AddContract_Controller)controller;
-                m.buttonClicked((Component)e.getSource());
+                buttonClicked((Component)e.getSource());
             }
         });
     }

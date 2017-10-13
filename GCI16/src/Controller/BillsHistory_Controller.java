@@ -44,18 +44,16 @@ public class BillsHistory_Controller implements Controller {
         view = new BillsHistory();
         view.setSize();
         view.setVisible(true);
-        view.addActionListener(new Listener(this){
+        view.addActionListener(new Listener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                BillsHistory_Controller bc = (BillsHistory_Controller)controller;
-                bc.buttonCliked((Component)e.getSource());            
+                buttonCliked((Component)e.getSource());            
             }
         });
-        view.addMouseListener(new Listener(this){
+        view.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                BillsHistory_Controller bc = (BillsHistory_Controller)controller;
-                bc.tableCliked(e);   
+                tableCliked(e);   
             }
         });
         defaultRender = new DefaultTableCellRenderer() {
