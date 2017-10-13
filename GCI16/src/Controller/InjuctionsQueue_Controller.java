@@ -70,7 +70,6 @@ public class InjuctionsQueue_Controller implements Controller {
             }
         });
         initInjuctionsQueue();
-        updateInjuctionsQueue();
     }
     
     private void activeInjuctionButtons(){
@@ -94,6 +93,7 @@ public class InjuctionsQueue_Controller implements Controller {
         tableModelInjuctionsQueue.setRowCount(0);
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         tableModelInjuctionsQueue.setColumnIdentifiers(columns);
+        updateInjuctionsQueue();
         
     } 
     
