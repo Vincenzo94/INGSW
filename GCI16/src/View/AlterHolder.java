@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Andrea
  */
-public class AlterHolder extends View{
+public class AlterHolder extends ViewFrame{
 
     private final List<ActionListener> actionListener;
     public AlterHolder(){

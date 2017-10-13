@@ -39,6 +39,7 @@ public class InjuctionsHistory_Controller implements Controller {
     
     InjuctionsHistory_Controller(Registry_Controller reg, Contract contract) {
         view=new InjuctionsHistory();
+        view.setSize();
         view.setVisible(true);
         this.contract=contract;
         this.reg=reg;

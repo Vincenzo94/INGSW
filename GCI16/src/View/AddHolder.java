@@ -14,7 +14,7 @@ import java.util.LinkedList;
  *
  * @author Andrea
  */
-public class AddHolder extends View {
+public class AddHolder extends ViewFrame {
     private final LinkedList<ActionListener> actionListener;
     
     /** Creates new form AddHolder */

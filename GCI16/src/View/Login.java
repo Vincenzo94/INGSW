@@ -13,7 +13,7 @@ import java.awt.Component;
  *
  * @author Andrea
  */
-public class Login extends View {
+public class Login extends ViewFrame {
     private final LinkedList<ActionListener> listener;
     /**
      * Creates new form Login

@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class SendPDFMultiple extends View {
+public class SendPDFMultiple extends ViewFrame {
     String error;
     private final List<ActionListener> actionListener;
     DefaultTableModel model;

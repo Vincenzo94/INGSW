@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class BillsHistory extends View {
+public class BillsHistory extends ViewFrame {
 
     private final DefaultTableModel billModel;
     private final LinkedList<MouseListener> mouseListener;

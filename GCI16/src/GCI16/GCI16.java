@@ -9,8 +9,7 @@ import Controller.Main_Controller;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,16 +18,12 @@ import java.util.logging.Logger;
 public class GCI16 {
     public static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Main_Controller main;
-                try {
-                    main = Main_Controller.getMain();
-                } catch (SQLException ex) {
-                    Logger.getLogger(GCI16.class.getName()).log(Level.SEVERE, null, ex);
-                }
-               // new Login_Controller();
-               // new Login_Controller();
+        java.awt.EventQueue.invokeLater(() -> {
+            Main_Controller main;
+            try {
+                main = Main_Controller.getMain();
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(null, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
             }
         });
     }

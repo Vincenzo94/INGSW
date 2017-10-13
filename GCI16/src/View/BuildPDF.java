@@ -20,7 +20,7 @@ import org.icepdf.ri.common.SwingViewBuilder;
  *
  * @author ansan
  */
-public class BuildPDF extends javax.swing.JFrame {
+public class BuildPDF extends ViewFrame {
     private String filePath;
     private SwingController controller;
     private SwingViewBuilder factory;
@@ -30,7 +30,6 @@ public class BuildPDF extends javax.swing.JFrame {
     public BuildPDF() {
         initComponents();
         actionListener = new LinkedList<>();
-        init();
     }
     public void setPDF(Document doc){
         if(doc instanceof Bill)
@@ -116,7 +115,7 @@ public class BuildPDF extends javax.swing.JFrame {
     private javax.swing.JButton sendPDFButton;
     // End of variables declaration//GEN-END:variables
 
-    private void init() {
+    public void init() {
         controller = new SwingController();
         factory = new SwingViewBuilder(controller);
         jPanel1 = factory.buildViewerPanel();

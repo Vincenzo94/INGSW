@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Andrea
  */
-public class SendPDF extends View {
+public class SendPDF extends ViewFrame {
     private final List<ActionListener> actionListener;
 
     /**

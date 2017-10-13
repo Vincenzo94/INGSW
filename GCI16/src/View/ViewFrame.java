@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  *
  * @author ansan
  */
-public abstract class View extends JFrame{
+public abstract class ViewFrame extends JFrame{
     public void setSize(){
         Toolkit tk = Toolkit.getDefaultToolkit();  
         Dimension screenSize = tk.getScreenSize();
