@@ -15,7 +15,7 @@ public abstract class Document {
     private String state;
     private final Date generatedDate;
     private Date confirmedDate;
-    private Integer operatorID;
+    private final Integer operatorID;
     
     public Document(Integer id, String state, Date generatedDate, Date confirmedDate, Integer operatorID){
         this.id = id;

@@ -21,13 +21,14 @@ import javax.swing.JOptionPane;
 public class Login_Controller implements Controller{
     private Login login = null;
     private Operator operator;
-    private Main_Controller main;
+    private final Main_Controller main;
     private Database_Controller dbManager;
     private final String helpMessage = "To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button";
 
     Login_Controller(Main_Controller m){
         main=m;
         login = new Login();
+        login.setSize();
         login.setVisible(true);      
         login.addListener(new Listener(this){
             @Override
@@ -66,12 +67,7 @@ public class Login_Controller implements Controller{
             operator=new Operator(Integer.valueOf(user),passw);
             DAO = new Operator_MYSQL(dbManager);
             operator = DAO.check(operator);
-            if(operator!=null && !operator.getIsAdmin() && !operator.getIsDetector()){
-                return true;
-            }
-            else{
-                return false;
-            } 
+            return operator!=null && !operator.getIsAdmin() && !operator.getIsDetector();
         } catch (SQLException ex) {
             return null;
         }

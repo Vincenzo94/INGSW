@@ -31,6 +31,7 @@ public class AlterContract_Controller implements Controller{
         this.controller=main;
         this.contract=contract;
         view=new AlterHolder();
+        view.setSize();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
             @Override

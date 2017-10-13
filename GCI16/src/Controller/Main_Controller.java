@@ -31,7 +31,7 @@ public class Main_Controller{
     
     private final String second = ("After have selected a single row from the table \nit will be possible to confirm or delete the injuction");
     private final String third = ("After have selected a single or multiple rows from the table \nit will be possible confirm or deselect the bill/s");
-    private Controller current;
+    private final Controller current;
     private Operator operator;
     private static Main_Controller instance;
     private final Database_Controller dbManager;
@@ -47,6 +47,7 @@ public class Main_Controller{
         current = new Login_Controller(this);
         dbManager = Database_Controller.getDbManager();
         actual = new Home();
+        actual.setSize();
     }
     
     public static Main_Controller getMain() throws SQLException{

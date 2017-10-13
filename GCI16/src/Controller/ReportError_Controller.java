@@ -31,6 +31,7 @@ public class ReportError_Controller implements Controller{
     ReportError_Controller(Bill bill) {
         this.bill=bill;
         view=new ReportError();
+        view.setSize();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
             @Override

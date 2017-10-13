@@ -6,9 +6,7 @@
 package View;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -23,7 +21,7 @@ import org.icepdf.ri.common.SwingViewBuilder;
  *
  * @author Andrea
  */
-public class BuildPDFMultiple extends javax.swing.JFrame {
+public class BuildPDFMultiple extends ViewFrame {
     private final LinkedList<ActionListener> actionListener;
     private final DefaultTableModel tableModelMultipleBill;
     private LinkedList<MouseListener> mouseListener;
@@ -61,12 +59,6 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
             }
         };
         initComponents();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
-        init();
         
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -258,7 +250,7 @@ public class BuildPDFMultiple extends javax.swing.JFrame {
         jPanel2 = factory.buildViewerPanel();
         jPanel2.setVisible(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        GridBagConstraints gridBagConstraints;
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

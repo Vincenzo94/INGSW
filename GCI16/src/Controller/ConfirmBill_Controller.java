@@ -53,6 +53,8 @@ public class ConfirmBill_Controller implements Controller{
     ConfirmBill_Controller(LinkedList<Bill> l,BillsQueue_Controller main){
         bills= new HashMap<>();
         views=new BuildPDFMultiple();
+        views.init();
+        views.setSize();
         view=null;
         bill=null;
         this.billsQueueController = main;
@@ -102,6 +104,8 @@ public class ConfirmBill_Controller implements Controller{
         bills=null;
         views=null;
         view= new BuildPDF();
+        view.init();
+        view.setSize();
         if(main instanceof BillsQueue_Controller)
             this.billsQueueController = (BillsQueue_Controller)main;
         else

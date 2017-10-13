@@ -29,6 +29,7 @@ public class AddContract_Controller implements Controller{
     AddContract_Controller(Registry_Controller controller){
         this.controller=controller;
         view= new AddHolder();
+        view.setSize();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
             @Override

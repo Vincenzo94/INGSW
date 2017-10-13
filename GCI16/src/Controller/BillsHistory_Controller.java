@@ -42,6 +42,7 @@ public class BillsHistory_Controller implements Controller {
         this.contract = contract;
         this.reg = reg;
         view = new BillsHistory();
+        view.setSize();
         view.setVisible(true);
         view.addActionListener(new Listener(this){
             @Override

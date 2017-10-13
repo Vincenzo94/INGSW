@@ -6,8 +6,6 @@
 package View;
 
 import Controller.Listener;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andrea
  */
-public class SendPDFMultiple extends javax.swing.JFrame {
+public class SendPDFMultiple extends ViewFrame {
     String error;
     private final List<ActionListener> actionListener;
     DefaultTableModel model;
@@ -57,11 +55,7 @@ public class SendPDFMultiple extends javax.swing.JFrame {
             jLabel2.setText(error);
         }
         actionListener = new LinkedList<>();
-        Toolkit tk = Toolkit.getDefaultToolkit();  
-        Dimension screenSize = tk.getScreenSize();
-        int xSize = ((int) screenSize.getWidth());  
-        int ySize = ((int) screenSize.getHeight());  
-        this.setSize(xSize,ySize);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

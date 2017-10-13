@@ -39,6 +39,8 @@ public class ConfirmInjuction_Controller implements Controller{
     ConfirmInjuction_Controller(Injuction i, Controller main){
         injuction=i;
         view= new BuildPDF();
+        view.init();
+        view.setSize();
         if(main instanceof InjuctionsQueue_Controller)
             this.injuctionsQueueController = (InjuctionsQueue_Controller)main;
         else
