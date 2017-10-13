@@ -19,7 +19,7 @@ import java.sql.SQLException;
  */
 public class Database_Controller {
     private static Database_Controller instance;
-    static private Connection connection;
+    private static Connection connection;
     public static final String SCHEMA = "ingwsw_andread";
     
     private Database_Controller() throws SQLException{

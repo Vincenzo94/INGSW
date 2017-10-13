@@ -53,6 +53,7 @@ public class InjuctionsHistory_Controller implements Controller {
                 }
             };
         try {
+                initTable();
                 dbManager=Database_Controller.getDbManager();
                 view.addActionListener(new Listener(this){
                 @Override
@@ -69,7 +70,6 @@ public class InjuctionsHistory_Controller implements Controller {
                     bc.tableClicked();
                 }
             });
-            initTable();
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }    

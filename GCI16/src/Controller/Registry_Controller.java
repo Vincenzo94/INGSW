@@ -23,7 +23,6 @@ public class Registry_Controller implements Controller{
     
     private final RegistryPanel view;
     private final Operator operator;
-    private final Database_Controller dbManager;
     private Controller current;
     private List<Contract> contracts = null;
     private String name;
@@ -32,9 +31,8 @@ public class Registry_Controller implements Controller{
     private String id_string;
     private Boolean searchedContracts = false;
 
-    Registry_Controller(Database_Controller dbManager, Operator operator, Component panel) {
+    Registry_Controller(Operator operator, Component panel) {
         this.operator = operator;
-        this.dbManager = dbManager;
         this.view= (RegistryPanel)panel;
         view.addActionListener(new Listener(this){
             @Override

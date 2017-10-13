@@ -73,7 +73,7 @@ public class Main_Controller{
                 m.changePane();
             }
         });
-        regy=new Registry_Controller(dbManager,operator,actual.getPanel(0));
+        regy=new Registry_Controller(operator,actual.getPanel(0));
         inj=new InjuctionsQueue_Controller(dbManager,operator,actual.getPanel(1));
         bill=new BillsQueue_Controller(dbManager,operator,actual.getPanel(2));
     }

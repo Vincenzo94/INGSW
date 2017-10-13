@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Andrea
  */
 public class AddContract_Controller implements Controller{
-    private AddHolder view;
+    private final AddHolder view;
     private final Registry_Controller controller;
     private Contract contract;
     private final String success = "New contract added";

@@ -80,23 +80,26 @@ public class AlterContract_Controller implements Controller{
                 }                         
                 case 1:{
                     updateRegistryClicked();
+                    JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                     break;
                 } 
                 case 2:{
                     updateBillingAddressClicked();
+                    JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                     break;
                 }
                 case 3:{
                     updateAddressClicked();
+                    JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                     break;
                 }
             }
-            JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }
         catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
+    
     private void updateAddressClicked() throws SQLException{
         contract.setCity(view.getCity2());
         contract.setDistrict(view.getDistrict2());
@@ -105,6 +108,7 @@ public class AlterContract_Controller implements Controller{
         contract.setNumber(view.getNumber2());
         daoContract.update_Address(contract,controller.getOperator());
     }
+    
     private void updateBillingAddressClicked() throws SQLException{
         String street = view.getStreet1();
             String city = view.getCity1();
@@ -128,6 +132,7 @@ public class AlterContract_Controller implements Controller{
             daoContract.setBillingAddress(contract);
             daoContract.update_UpdatedBy(contract, controller.getOperator());
     }
+    
     private void updateRegistryClicked() throws SQLException{
         contract.setName(view.getPersonName());
         contract.setSurname(view.getSurname());

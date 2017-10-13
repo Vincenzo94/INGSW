@@ -36,7 +36,6 @@ public class BillsHistory_Controller implements Controller {
     private final DefaultTableCellRenderer defaultRender;
     private DefaultTableModel billsModel;
     private List<Bill> bills;
-    private Database_Controller dbController;
     private Controller current;
     
     BillsHistory_Controller(Registry_Controller reg, Contract contract) {
@@ -114,13 +113,13 @@ public class BillsHistory_Controller implements Controller {
 
     private void init() {
         try {
-            dbController = Database_Controller.getDbManager();
+            dbManager = Database_Controller.getDbManager();
             billsModel = view.getTableModelBills();
             billsModel.setRowCount(0);
             String[] columns = {"Invoice N.", "Period", "State", "Due date"};
             billsModel.setColumnIdentifiers(columns);
             setDefaultRender(view.getBillTable());
-            DAO_Document daoBill = new Bill_MYSQL(dbController);
+            DAO_Document daoBill = new Bill_MYSQL(dbManager);
             bills.clear();
             bills = daoBill.getAllDocuments(contract);
             for(Bill temp : bills){
