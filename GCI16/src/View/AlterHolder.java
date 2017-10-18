@@ -538,17 +538,11 @@ public class AlterHolder extends ViewFrame{
     public String getMobile(){
         return mobileField.getText();
     }
-    public Integer getNumber1(){
-        String number = numberField.getText();
-        if(number.equals(""))
-            return null;
-        return Integer.valueOf(number);
+    public String getNumber1(){
+        return numberField.getText();
     }
-    public Integer getNumber2(){
-        String number = number2Field.getText();
-        if(number.equals(""))
-            return null;
-        return Integer.valueOf(number);
+    public String getNumber2(){
+        return number2Field.getText();
     }
     public String getZip1(){
         return postalCodeField.getText();

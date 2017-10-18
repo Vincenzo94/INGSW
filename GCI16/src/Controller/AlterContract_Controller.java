@@ -101,39 +101,94 @@ public class AlterContract_Controller implements Controller{
     }
     
     private void updateAddressClicked() throws SQLException{
-        contract.setCity(view.getCity2());
-        contract.setDistrict(view.getDistrict2());
-        contract.setStreet(view.getStreet2());
-        contract.setZipCode(view.getZip2());
-        contract.setNumber(view.getNumber2());
+        String street = view.getStreet2();
+        String city = view.getCity2();
+        String district = view.getDistrict2();
+        String zip = view.getZip2();
+        String number = view.getNumber2();
+        String errorMsg = null;
+        if(!city.matches("[[a-z]|[A-Z]]*"))
+            errorMsg = "Invalid characters in Billing City";
+        else if(!district.matches("[[a-z]|[A-Z]]*"))
+            errorMsg = "Invalid characters in Billing District";
+        else if(!street.matches("[[a-z]|[A-Z]]*"))
+            errorMsg = "Invalid characters in Billing Street";
+        else if(!zip.matches("[0-9]*"))
+            errorMsg = "Invalid characters in Billing Zip Code";
+        else if(!number.matches("[0-9]*"))
+            errorMsg = "Invalid characters in Billing Number";
+        if(errorMsg!=null)
+            throw new SQLException(errorMsg);
+        contract.setCity(city);
+        contract.setDistrict(district);
+        contract.setStreet(street);
+        contract.setZipCode(zip);
+        contract.setNumber(Integer.valueOf(number));
         daoContract.update_Address(contract,controller.getOperator());
     }
     
+    
     private void updateBillingAddressClicked() throws SQLException{
         String street = view.getStreet1();
-            String city = view.getCity1();
-            String district = view.getDistrict1();
-            String zip = view.getZip1();
-            if(contract.getBillingAddress() != null && !street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
+        String city = view.getCity1();
+        String district = view.getDistrict1();
+        String zip = view.getZip1();
+        String number = view.getNumber1();
+        String errorMsg = null;
+        if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
+            if(!city.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing City";
+            else if(!district.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing District";
+            else if(!street.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing Street";
+            else if(!zip.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Zip Code";
+            else if(!number.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Number";
+            if(errorMsg!=null)
+                throw new SQLException(errorMsg);
+            if(contract.getBillingAddress() != null){
                 contract.setBillingCity(city);
                 contract.setBillingDistrict(district);
                 contract.setBillingStreet(street);
                 contract.setBillingZipCode(zip);
-                contract.setBillingNumber(view.getNumber1());
+                contract.setBillingNumber(Integer.valueOf(number));
                 daoContract.update_BillingAddress(contract,controller.getOperator());
             }
-            else if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
-                contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),view.getNumber1());
+            else{
+                contract.addBillingAddress(view.getCity1(),view.getDistrict1(),view.getStreet1(),view.getZip1(),Integer.valueOf(number));
                 daoContract.addBillingAddress(contract);
-
             }
-            else if(contract.getBillingAddress() != null)
-                contract.setBillingAddress(null);
-            daoContract.setBillingAddress(contract);
-            daoContract.update_UpdatedBy(contract, controller.getOperator());
+        }
+        else if(contract.getBillingAddress() != null)
+            contract.setBillingAddress(null);
+        daoContract.setBillingAddress(contract);
+        daoContract.update_UpdatedBy(contract, controller.getOperator());
     }
     
     private void updateRegistryClicked() throws SQLException{
+        String name=view.getPersonName(),
+               surname=view.getSurname(),
+               taxc=view.getTaxC(),
+               phone=view.getPhone(),
+               email=view.getEmail(),
+               mobile = view.getMobile(),
+               errorMsg = null;
+        if(!name.matches("[[a-z]|[A-Z]]*"))
+            errorMsg = "Invalid characters in Name";
+        else if(!surname.matches("[[a-z]|[A-Z]]*"))
+            errorMsg = "Invalid characters in Surname";
+        else if(!taxc.matches("[[a-z]|[0-9]]*"))
+            errorMsg = "Invalid characters in Tax Code";
+        else if(!phone.matches("[0-9]*"))
+            errorMsg = "Invalid characters in Telephone";
+        else if(!mobile.matches("[0-9]*"))
+            errorMsg = "Invalid characters in Mobile";
+        else if(!email.matches("[[0-9]|[a-z]|[A-Z]|[_|\\-|.|@]]*"))
+            errorMsg = "Invalid characters in eMail";
+        if(errorMsg!=null)
+            throw new SQLException(errorMsg);
         contract.setName(view.getPersonName());
         contract.setSurname(view.getSurname());
         contract.setTaxCode(view.getTaxC());

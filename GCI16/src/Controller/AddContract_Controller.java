@@ -59,6 +59,7 @@ public class AddContract_Controller implements Controller{
                    billingDistrict = view.getDistrict1(),
                    billingZip = view.getZip1(),
                    billingStreet = view.getStreet1(),
+                   billingNumber=view.getNumber1(),
                    name=view.getPersonName(),
                    surname=view.getSurname(),
                    taxc=view.getTaxC(),
@@ -69,14 +70,46 @@ public class AddContract_Controller implements Controller{
                    district=view.getDistrict2(),
                    zip=view.getZip2(),
                    street=view.getStreet2(),
-                   number=view.getNumber1(),
-                   number2=view.getNumber2();
-            if(!name.matches("[[a-z]|[A-Z]]*") || !surname.matches("[[a-z]|[A-Z]]*") || !taxc.matches("[[a-z]|[0-9]]*") || !city.matches("[[a-z]|[A-Z]]*") || !district.matches("[[a-z]|[A-Z]]*") || !street.matches("[[a-z]|[A-Z]]*") || !phone.matches("[0-9]*") || !mobile.matches("[0-9]*") || !zip.matches("[0-9]*") || !number.matches("[0-9]*") || !number2.matches("[0-9]*") || !email.matches("[[0-9]|[a-z]|[A-Z]|[_|\\-|.]]*"))
-                throw new SQLException("Invalid characters");
+                   number=view.getNumber2(),
+                   errorMsg = null;
+            if(!name.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Name";
+            else if(!surname.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Surname";
+            else if(!taxc.matches("[[a-z]|[0-9]]*"))
+                errorMsg = "Invalid characters in Tax Code";
+            else if(!city.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in City";
+            else if(!district.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in District";
+            else if(!street.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Street";
+            else if(!phone.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Telephone";
+            else if(!mobile.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Mobile";
+            else if(!zip.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Zip Code";
+            else if(!number.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Number";
+            else if(!billingCity.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing City";
+            else if(!billingDistrict.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing District";
+            else if(!billingStreet.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing Street";
+            else if(!billingNumber.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Billing Number";
+            else if(!billingZip.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Zip Code";
+            else if(!email.matches("[[0-9]|[a-z]|[A-Z]|[_|\\-|.|@]]*"))
+                errorMsg = "Invalid characters in eMail";
+            if(errorMsg!=null)
+                throw new SQLException(errorMsg);
             if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals(""))
-                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number2));
+                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number));
             else
-                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number2), billingCity, billingDistrict, billingZip, billingStreet, Integer.valueOf(number));
+                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number), billingCity, billingDistrict, billingZip, billingStreet, Integer.valueOf(billingNumber));
             daoContract.create(contract,controller.getOperator());
             Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
             JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);

@@ -133,7 +133,8 @@ public class InjuctionsQueue_Controller implements Controller {
         int row = view.getSelectedInjuction();
         if(row>=0 && row<injuctions.size()){
             current = new RemoveInjuction_Controller(this);
-            ((RemoveInjuction_Controller)current).removeInjuction(injuctions.get(row));
+            if(!((RemoveInjuction_Controller)current).removeInjuction(injuctions.get(row)))
+                view.setSelection(row);
         }
         else
             JOptionPane.showConfirmDialog(view, "Invalid selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);

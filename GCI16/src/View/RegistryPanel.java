@@ -66,6 +66,9 @@ public class RegistryPanel extends ViewPanel {
     public Integer getSelectedContract(){
         return registryTable.getSelectedRow();
     }
+    public void setSelection(Integer row){
+        registryTable.changeSelection(row, 0, false, false);
+    }
     
     public String getNameSearch(){
         return nameField.getText();

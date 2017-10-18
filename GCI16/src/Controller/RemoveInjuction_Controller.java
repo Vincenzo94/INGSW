@@ -23,7 +23,7 @@ public class RemoveInjuction_Controller implements Controller {
     RemoveInjuction_Controller(InjuctionsQueue_Controller controller){
         injuctionsQueueController = controller;
     }
-    protected void removeInjuction(Injuction injuction){
+    protected Boolean removeInjuction(Injuction injuction){
         int n = JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(),"Are you sure to delete the injuction" + injuction.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(n == 0){
@@ -34,10 +34,14 @@ public class RemoveInjuction_Controller implements Controller {
                 injuctionsQueueController.back();
             } catch (SQLException ex) {
                 JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         } 
-        else
+        else{
             JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(),"Operation cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     private void remove(Injuction injuction) throws SQLException {

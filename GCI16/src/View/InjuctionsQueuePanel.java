@@ -167,4 +167,8 @@ public class InjuctionsQueuePanel extends ViewPanel {
     private javax.swing.JTable injuctionsTable;
     private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public void setSelection(int row) {
+        injuctionsTable.changeSelection(row, 0, false, false);
+    }
 }
