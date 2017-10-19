@@ -57,7 +57,7 @@ public class Login_Controller implements Controller{
         }
     }
     
-    Boolean check(String user, String passw){
+    private Boolean check(String user, String passw){
         DAO_Operator DAO;
         try {
             dbManager = Database_Controller.getDbManager();
