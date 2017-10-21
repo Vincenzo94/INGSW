@@ -26,9 +26,9 @@ public class Contract_MYSQL implements DAO_Contract{
     private final String TABELLA = "Contract";
     private final String TABELLA_AUX = "Contract_AUX";
     private final String TABELLA_ADDRESS = "Address";
-    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX;
+    private final String QUERY_GET_ALL_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX + " WHERE ISNULL(`end`)";
     private final String QUERY_SEARCH_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABELLA_AUX
-                                               + " WHERE name LIKE ? AND surname LIKE ? AND ID LIKE ? AND taxCode LIKE ?";
+                                               + " WHERE name LIKE ? AND surname LIKE ? AND ID LIKE ? AND taxCode LIKE ? AND ISNULL(`end`)";
     
     private final String QUERY_UPDATE_CONTRACT = " UPDATE "+Database_Controller.SCHEMA+"."+TABELLA
                                                + " SET name = ?, surname = ?, taxCode = ?, phone = ?,"
