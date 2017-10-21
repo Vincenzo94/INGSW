@@ -1,34 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Model.Contract;
 import Model.Operator;
 import View.RegistryPanel;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * 
  * @author Andrea
+ * In this class is tested the RemoveContract_Controller's method "removeContract".
+ * It takes an instance of contract as parameter.
+ * Four equivalence classes were found:
+ * - contracts setted on null (case A)
+ * - contracts that can be closed (case B)
+ * - contracts that can't be closed because there are pendants bills (case C)
+ * - contracts already closed (case D)
+ * 
+ * others:
+ * - choice "no" selected during the operation (case E)
  */
 public class RemoveContract_ControllerTest {
     private static ContractTestGetter_DBMS contractGetter;
     private static RemoveContract_Controller instance;
     private Contract contract;
-    
-    public RemoveContract_ControllerTest() {
-    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -45,17 +43,17 @@ public class RemoveContract_ControllerTest {
         contract = null;
     }
     
-    /*
-    contract is null
-    */
+    /**
+     * testing case A: contracts setted on null.
+     */
     @Test(expected = NullPointerException.class)
     public void testRemoveContract1() {
         Boolean result = instance.removeContract(contract);
     }
     
-    /*
-    contract is valid
-    */
+    /**
+     * testing case B: contracts that can be closed.
+     */
     @Test
     public void testRemoveContract2() {
         try {
@@ -68,9 +66,9 @@ public class RemoveContract_ControllerTest {
         assertEquals(expResult, result);
     }
     
-    /*
-    contract is pendant
-    */
+    /**
+     * testing case C: contracts that can't be closed because there are pendants bills (case C).
+     */
     @Test
     public void testRemoveContract3() {
         try {
@@ -83,9 +81,9 @@ public class RemoveContract_ControllerTest {
         assertEquals(expResult, result);
     }
     
-    /*
-    contact is closed yet
-    */
+    /**
+     * testing case D: contracts already closed (case D).
+     */
     @Test
     public void testRemoveContract4() {
         try {
@@ -98,9 +96,9 @@ public class RemoveContract_ControllerTest {
         assertEquals(expResult, result);
     }
     
-    /*
-    "no" selected from view
-    */
+    /**
+     * testing case E: choice "no" selected during the operation.
+     */
     @Test
     public void testRemoveContract5() {
         try {
