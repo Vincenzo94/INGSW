@@ -1,0 +1,406 @@
+\section{Testing document}{
+	\subsection{System Testing}{
+		\subsubsection{Performs login test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 1 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Performs login \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator log into the system inserting the right credentials \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm} In this case we consider these credentials: \itshape{"User1", "Psw1"}: right credentials (stored into the DBMS), \itshape{"User2", "Psw2"}: wrong 	credentials (non-stored into the DBMS) \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"User1", "Psw1"} \vspace{1mm} &
+				\vspace{1mm} System shows the "Registry Management" view \vspace{1mm} & 
+				\vspace{1mm} System shows the "Registry Management" view \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"User1", "Psw2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"User2", "Psw1"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"User2", "Psw2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "Invalid ID and/or Password!" \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Researches contract test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 2 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Researches contract\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator research contracts using forms\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm} In this case we consider these credentials: \itshape{"Name1", "Surname1", "ContractID1", "TaxC/VAT1"}: right credentials (stored into the DBMS), \itshape{"Name2", "Surname2", "ContractID2", "TaxC/VAT2"}: wrong credentials (non-stored into the DBMS) \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"Name1", "Surname1", "ContractID1", "TaxC/VAT1"} \vspace{1mm} &
+				\vspace{1mm} System shows the results into the table \vspace{1mm} & 
+				\vspace{1mm} System shows the results into the table \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"Name2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"Surname2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"ContractID2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills the form with credentials: \itshape{"TaxC/VAT2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with message "No result found" \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Alters contract test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 3 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Alters contract\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator alter a contract selected from the table\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator fills the form with new credentials \vspace{1mm} &
+				\vspace{1mm} System shows a popup with message "Contract altered" \vspace{1mm} & 
+				\vspace{1mm} System shows a popup with message "Contract altered" \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Deletes contract test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 4 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Deletes contract\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator delete contracts selected from the table\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm} We consider three cases: \itshape{"Contract1"}: this contract can be removed; \itshape{"Contract2"}: this contract can't be removed because it has some pendant bills; \itshape{"Contract3"}: this contract can't be removed because is already closed. \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator selected the \itshape{"Contract1"} \vspace{1mm} &
+				\vspace{1mm} System shows a popup with message "Contract removed" \vspace{1mm} & 
+				\vspace{1mm} System shows a popup with message "Contract removed" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator selected the \itshape{"Contract2"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't be closed \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't be closed \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator selected the \itshape{"Contract3"} \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't be closed \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't be closed \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Adds contract test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 5 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Adds contract\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator add new contracts\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator fills all forms interested for the contract's adding \vspace{1mm} &
+				\vspace{1mm} System shows a popup with message "New contract added" \vspace{1mm} & 
+				\vspace{1mm} System shows a popup with message "New contract added" \vspace{1mm} \\
+			\hline
+				\vspace{1mm} The operator fills a form with invalid characters \vspace{1mm} &
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't continue the operation \vspace{1mm} & 
+				\vspace{1mm} System shows the error's popup with a message that explains the reason why it can't continue the operation \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Reports errors in bills test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 6 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Reports errors in bills\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator reports errors in bills\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator fill the form with the errors \vspace{1mm} &
+				\vspace{1mm} System shows a popup with message "Operation succesfully completed" \vspace{1mm} & 
+				\vspace{1mm} System shows a popup with message "Operation succesfully completed" \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Deletes injunctions test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 7 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Deletes injunctions \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator delete injunctions\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm}  \vspace{1mm} &
+				\vspace{1mm}  \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Confirms bill test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 8 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Confirms bill \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator confirm a selected bill\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator selects a bill from the bill's table and presses "Confirm" button \vspace{1mm} &
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} & 
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Resends bill test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 9 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Resends bill \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator resend a selected bill\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator selects a bill from the bill's table and presses "Confirm" button \vspace{1mm} &
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} & 
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Confirms injunctions test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 10 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Confirms injunctions \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator confirm an injunction\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator selects an injunction from the injunction's table and presses "Confirm" button \vspace{1mm} &
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} & 
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+
+		\subsubsection{Resends injunctions test}{
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{10cm}|}
+			\hline
+				\centering \vspace{1mm} \bfseries{Test ID} \vspace{1mm} & 
+				\vspace{1mm} 11 \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test name} \vspace{1mm} & 
+				\vspace{1mm} Confirms injunctions \vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Test goal} \vspace{1mm} & 
+				\vspace{1mm} The goal is to let the operator resends an injunction\vspace{1mm}\\
+			\hline
+				\centering \vspace{1mm} \bfseries{Note} \vspace{1mm} & 
+				\vspace{1mm}  \vspace{1mm}\\
+			\hline
+			\end{tabular}
+			\end{table}
+
+			\begin{table}[h]
+			\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+			\hline
+			\centering \vspace{1mm} \bfseries{Input} \vspace{1mm} & \vspace{1mm} \bfseries{Desired Output} \vspace{1mm} & \vspace{1mm} \bfseries{Obtained Output} \vspace{1mm}\\
+			\hline
+				\vspace{1mm} The operator selects an injunction from the injunction's table and presses "Confirm" button \vspace{1mm} &
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} & 
+				\vspace{1mm} System shows the bill's preview (PDF) \vspace{1mm} \\
+			\hline
+			\end{tabular}
+			\end{table}
+		}
+		\clearpage
+	}
+}

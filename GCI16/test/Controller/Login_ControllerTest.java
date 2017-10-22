@@ -1,3 +1,4 @@
+
 package Controller;
 
 import java.sql.SQLException;
@@ -57,9 +58,7 @@ public class Login_ControllerTest {
         expResult = null;
     }
     
-    /**
-     * case T,T
-     */
+/*
     @Test
     public void checkTest1(){
         user = "2";
@@ -69,9 +68,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case T,F1
-     */
     @Test
     public void checkTest2(){
         user = "2";
@@ -81,9 +77,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case T,F2
-     */
     @Test
     public void checkTest3(){
         user = "2";
@@ -92,9 +85,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F2,T
-     */
     @Test
     public void checkTest4(){
         user = "101";
@@ -104,9 +94,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F2,F1
-     */
     @Test
     public void checkTest5(){
         user = "101";
@@ -116,9 +103,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F2,F2
-     */
     @Test
     public void checkTest6(){
         user = "101";
@@ -127,9 +111,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F4,T
-     */
     @Test
     public void checkTest7(){
         user = "2abc";
@@ -140,9 +121,6 @@ public class Login_ControllerTest {
     }
     
     
-    /**
-     * case F4,F1
-     */
     @Test
     public void checkTest8(){
         user = "2abc";
@@ -153,9 +131,6 @@ public class Login_ControllerTest {
     }
     
     
-    /**
-     * case F4,F2
-     */
     @Test
     public void checkTest9(){
         user = "2abc";
@@ -165,9 +140,6 @@ public class Login_ControllerTest {
     }
     
     
-    /**
-     * case F3,T
-     */
     @Test
     public void checkTest10(){
         psw = "ingsw";
@@ -177,9 +149,6 @@ public class Login_ControllerTest {
     }
     
     
-    /**
-     * case F3,F1
-     */
     @Test
     public void checkTest11(){
         psw = "ingw";
@@ -189,9 +158,6 @@ public class Login_ControllerTest {
     }
     
     
-    /**
-     * case F3,F2
-     */
     @Test
     public void checkTest12(){
         expResult = false;
@@ -199,9 +165,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F1,T
-     */
     @Test
     public void checkTest13(){
         user = "-1";
@@ -210,10 +173,7 @@ public class Login_ControllerTest {
         result = instance.check(user, psw);
         assertEquals(result, expResult);
     }
-    
-    /**
-     * case F1,F1
-     */
+
     @Test
     public void checkTest14(){
         user = "-1";
@@ -223,9 +183,6 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    /**
-     * case F1,F2
-     */
     @Test
     public void checkTest15(){
         user = "-1";
@@ -233,4 +190,5 @@ public class Login_ControllerTest {
         result = instance.check(user, psw);
         assertEquals(result, expResult);
     }
+    */
 }
