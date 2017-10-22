@@ -111,7 +111,7 @@ public class AlterContract_Controller implements Controller{
             errorMsg = "Invalid characters in Billing City";
         else if(!district.matches("[[a-z]|[A-Z]]*"))
             errorMsg = "Invalid characters in Billing District";
-        else if(!street.matches("[[a-z]|[A-Z]]*"))
+        else if(!street.matches("[[a-z]|[A-Z]| ]*"))
             errorMsg = "Invalid characters in Billing Street";
         else if(!zip.matches("[0-9]*"))
             errorMsg = "Invalid characters in Billing Zip Code";
@@ -140,7 +140,7 @@ public class AlterContract_Controller implements Controller{
                 errorMsg = "Invalid characters in Billing City";
             else if(!district.matches("[[a-z]|[A-Z]]*"))
                 errorMsg = "Invalid characters in Billing District";
-            else if(!street.matches("[[a-z]|[A-Z]]*"))
+            else if(!street.matches("[[a-z]|[A-Z]| ]*"))
                 errorMsg = "Invalid characters in Billing Street";
             else if(!zip.matches("[0-9]*"))
                 errorMsg = "Invalid characters in Billing Zip Code";

@@ -400,7 +400,7 @@ public class AddHolder extends ViewFrame {
         registryPanel.add(mobileField, gridBagConstraints);
 
         mobileLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        mobileLabel.setText("Telephone:");
+        mobileLabel.setText("Mobile");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;

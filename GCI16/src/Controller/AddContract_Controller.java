@@ -82,7 +82,7 @@ public class AddContract_Controller implements Controller{
                 errorMsg = "Invalid characters in City";
             else if(!district.matches("[[a-z]|[A-Z]]*"))
                 errorMsg = "Invalid characters in District";
-            else if(!street.matches("[[a-z]|[A-Z]]*"))
+            else if(!street.matches("[[a-z]|[A-Z]| ]*"))
                 errorMsg = "Invalid characters in Street";
             else if(!phone.matches("[0-9]*"))
                 errorMsg = "Invalid characters in Telephone";
@@ -96,7 +96,7 @@ public class AddContract_Controller implements Controller{
                 errorMsg = "Invalid characters in Billing City";
             else if(!billingDistrict.matches("[[a-z]|[A-Z]]*"))
                 errorMsg = "Invalid characters in Billing District";
-            else if(!billingStreet.matches("[[a-z]|[A-Z]]*"))
+            else if(!billingStreet.matches("[[a-z]|[A-Z]| ]*"))
                 errorMsg = "Invalid characters in Billing Street";
             else if(!billingNumber.matches("[0-9]*"))
                 errorMsg = "Invalid characters in Billing Billing Number";
