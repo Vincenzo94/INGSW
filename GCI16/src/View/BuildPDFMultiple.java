@@ -272,7 +272,7 @@ public class BuildPDFMultiple extends ViewFrame {
 
     public void preview(boolean b) {
         if(b == true){
-            String pdfName = tableModelMultipleBill.getValueAt(pdfTable.getSelectedRow(), 0)+".pdf";
+            String pdfName = "bill_"+tableModelMultipleBill.getValueAt(pdfTable.getSelectedRow(), 0)+".pdf";
             controller.openDocument(PATH+"/"+pdfName);
         }
         scrollPane.setVisible(!b);
