@@ -54,13 +54,15 @@ public class InjuctionsHistory_Controller implements Controller {
                 }
             };
         try {
-                initTable();
-                dbManager=Database_Controller.getDbManager();
-                view.addActionListener(new Listener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    buttonCliked((Component)e.getSource());            
-                }
+            dbManager=Database_Controller.getDbManager();
+            System.out.println(dbManager);
+            initTable();
+
+            view.addActionListener(new Listener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonCliked((Component)e.getSource());            
+            }
             });
 
             view.addMouseListener(new Listener(){
