@@ -1,5 +1,4 @@
 package Controller;
-
 import Model.Contract;
 import Model.Operator;
 import View.RegistryPanel;
@@ -22,7 +21,7 @@ import static org.junit.Assert.*;
  * 
  * others:
  * - choice "no" selected during the operation (case E)
- */
+*/ 
 public class RemoveContract_ControllerTest {
     private static ContractTestGetter_DBMS contractGetter;
     private static RemoveContract_Controller instance;
@@ -101,6 +100,7 @@ public class RemoveContract_ControllerTest {
      */
     @Test
     public void testRemoveContract5() {
+        instance = new RemoveContract_Controller(new Registry_Controller(new Operator(2, "ingsw"), new RegistryPanel()));
         try {
             contract = contractGetter.getClosedContract();
         } catch (SQLException ex) {

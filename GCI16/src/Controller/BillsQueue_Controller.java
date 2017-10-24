@@ -193,7 +193,10 @@ public class BillsQueue_Controller implements Controller{
     private void reportClicked() {
         List<Integer> select = view.getSelectedBill();
         if(select.size()==1)
-            current = new ReportError_Controller(bills.get(select.get(0)));
+            current = new ReportError_Controller(bills.get(select.get(0)),this);
+    }
+    Component getPanel(){
+        return view;
     }
 
 }
