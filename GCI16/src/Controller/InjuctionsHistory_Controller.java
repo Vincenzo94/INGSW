@@ -55,7 +55,6 @@ public class InjuctionsHistory_Controller implements Controller {
             };
         try {
             dbManager=Database_Controller.getDbManager();
-            System.out.println(dbManager);
             initTable();
 
             view.addActionListener(new Listener(){
