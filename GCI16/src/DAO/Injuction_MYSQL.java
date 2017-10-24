@@ -78,7 +78,6 @@ public class Injuction_MYSQL implements DAO_Document{
     @Override
     public List<Injuction> getAllDocuments(Contract c) throws SQLException{
     List<Injuction> injuctions = new ArrayList<>();
-        System.out.println(dbManager);
         PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_INJUCTIONS_CONTRACT);
         statement.setInt(1, c.getId());
         ResultSet rs = dbManager.doQuery(statement);

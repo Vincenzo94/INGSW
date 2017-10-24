@@ -58,7 +58,7 @@ public class Login_ControllerTest {
         expResult = null;
     }
     
-/*
+
     @Test
     public void checkTest1(){
         user = "2";
@@ -190,5 +190,4 @@ public class Login_ControllerTest {
         result = instance.check(user, psw);
         assertEquals(result, expResult);
     }
-    */
 }

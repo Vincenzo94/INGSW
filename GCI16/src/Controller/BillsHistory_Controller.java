@@ -154,7 +154,7 @@ public class BillsHistory_Controller implements Controller {
         if(i>=0 && i<bills.size()){
             b= bills.get(i);
             view.dispose();
-            current = new ReportError_Controller(b);
+            current = new ReportError_Controller(b, this);
         }
         else
             JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
@@ -162,5 +162,8 @@ public class BillsHistory_Controller implements Controller {
 
     public void back() {
         view.setVisible(true);
+    }
+    Component getPanel(){
+        return view;
     }
 }

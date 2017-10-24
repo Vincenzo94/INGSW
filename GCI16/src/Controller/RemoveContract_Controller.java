@@ -27,23 +27,22 @@ public class RemoveContract_Controller implements Controller {
     protected Boolean removeContract(Contract contract){
         int n = JOptionPane.showConfirmDialog(registryController.getPanel(),"Are you sure to delete the contract" + contract.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        
-            if(n == 0){
-                try {
-                    remove(contract);
-                    Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
-                    JOptionPane.showConfirmDialog(registryController.getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
-                } catch (SQLException ex) {
-                    JOptionPane.showConfirmDialog(registryController.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-                    return false;
-                }
-            } 
-            else{
-                JOptionPane.showConfirmDialog(registryController.getPanel(),"Operation Cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        if(n == 0){
+            try {
+                remove(contract);
+                Log_Controller.writeLog(" removed the contract "+contract.getId(),RemoveContract_Controller.class);
+                JOptionPane.showConfirmDialog(registryController.getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(registryController.getPanel(), ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            registryController.back();
-            return true;
+        } 
+        else{
+            JOptionPane.showConfirmDialog(registryController.getPanel(),"Operation Cancelled" ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        registryController.back();
+        return true;
     }
 
     private void remove(Contract contract) throws SQLException{
@@ -52,3 +51,4 @@ public class RemoveContract_Controller implements Controller {
         daoContract.remove(contract);
     }
 }
+

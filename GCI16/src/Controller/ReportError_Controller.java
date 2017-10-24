@@ -27,8 +27,13 @@ public class ReportError_Controller implements Controller{
     private final Bill bill;
     private String text;
     private Database_Controller dbController;
+    private final Controller controller;
+    private final String success = "Error reported successfully";
+    private final String errorMsg = "Error reporting error";
 
-    ReportError_Controller(Bill bill) {
+
+    ReportError_Controller(Bill bill, Controller controller) {
+        this.controller = controller;
         this.bill=bill;
         view=new ReportError();
         view.setSize();
@@ -44,8 +49,7 @@ public class ReportError_Controller implements Controller{
             init();
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        }
-        
+        }        
     }
 
     private void buttonClicked(Component component) {
@@ -62,9 +66,14 @@ public class ReportError_Controller implements Controller{
             DAO_Error daoError = new Error_MYSQL(dbController);
             ErrorModel error = new ErrorModel(bill, text);
             daoError.create(error);
+            if(controller instanceof BillsQueue_Controller)
+                JOptionPane.showConfirmDialog(((BillsQueue_Controller)controller).getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showConfirmDialog(((BillsHistory_Controller)controller).getPanel(),success ,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+
             view.dispose();
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(view, ex.getMessage(),errorMsg,JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
         }
     }
 
