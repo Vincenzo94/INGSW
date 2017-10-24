@@ -11,31 +11,39 @@
 		\clearpage
 		\subsubsection{Cockburn tables}{
 			\begin{center}
-			\begin{tabular}{|p{4cm}|p{10cm}|}
-			\hline
-				\centering \vspace{1mm} \bfseries{Use case} \vspace{1mm} & 
-				\vspace{1mm} Performs login \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Goal in context} \vspace{1mm} & 
-				\vspace{1mm} The operator wants to authenticate \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Preconditions} \vspace{1mm} & 
-				\vspace{1mm} The goal is to let the operator log into the system inserting the right credentials \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Success end condition} \vspace{1mm} & 
-				\vspace{1mm} The operator gets access to the system \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Failed end condition} \vspace{1mm} & 
-				\vspace{1mm} The operator can't access to the system \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Primary actor} \vspace{1mm} & 
-				\vspace{1mm} Operator \vspace{1mm}\\
-			\hline
-				\centering \vspace{1mm} \bfseries{Trigger} \vspace{1mm} & 
-				\vspace{1mm} The operator starts the program \vspace{1mm}\\
-			\hline
+			\begin{tabular}{*{7}{p{1cm}}}
+				& & & & & & \\
+				\hline
+					\multicolumn{3}{|p{3cm}|}{\bfseries{Use case}} & 
+					\multicolumn{4}{|p{4cm}|}{Performs login} \\
+				\hline
+					\multicolumn{3}{|p{3cm}|}{\bfseries{Goal in context}} & 
+					\multicolumn{4}{|p{4cm}|}{The operator wants to authenticate}  \\
+				\hline
+					\multicolumn{3}{|p{3cm}|}{\bfseries{Preconditions}} & 
+					\multicolumn{4}{|p{4cm}|}{The goal is to let the operator log into the system inserting the right credentials}\\
+				\hline
+					\multicolumn{3}{|l|}{\bfseries{Success end condition}} & 
+					\multicolumn{4}{|l|}{The operator gets access to the system}  \\
+				\hline
+					\multicolumn{3}{|l|}{\bfseries{Failed end condition}} & 
+					\multicolumn{4}{|l|}{The operator can't access to the system}  \\
+				\hline
+					\multicolumn{3}{|l|}{\bfseries{Operator}} & 
+					\multicolumn{4}{|l|}{Operator}  \\
+				\hline
+					\multicolumn{3}{|l|}{\bfseries{Trigger}} & 
+					\multicolumn{4}{|l|}{The operator can't access to the system}  \\
+				\hline
 			\end{tabular}
-			
+			\begin{tabular}{*{7}{p{15mm}}}
+				& & & & & & \\
+				& &\multicolumn{3}{c}{MAIN SCENARIO}& & \\
+				\hline
+					\multicolumn{1}{|l|}{Step n.} & \multicolumn{3}{|l|}{Operator} & \multicolumn{3}{|l|}{System} \\
+				\hline
+			\end{tabular}
+
 			\begin{tabular}{|p{2cm}|p{6cm}|p{6cm}|}
 			\hline
 				\multicolumn{3}{|c|}{MAIN SCENARIO} \\
@@ -140,11 +148,11 @@
 			\hline
 				\centering \vspace{1mm} \bfseries{Step n.} \vspace{1mm} & \vspace{1mm} \bfseries{Operator} \vspace{1mm} & \vspace{1mm} \bfseries{System} \vspace{1mm}\\
 			\hline
-				\vspace{1mm} 3.1 \vspace{1mm} &
+				\vspace{1mm} 2.1 \vspace{1mm} &
 				\vspace{1mm} \vspace{1mm} & 
 				\vspace{1mm} The system shows the “Registry management – Error” mockup \vspace{1mm} \\
 			\hline
-				\vspace{1mm} 4.1 \vspace{1mm} &
+				\vspace{1mm} 3.1 \vspace{1mm} &
 				\vspace{1mm} The operator clicks on the “Ok” button in the “Registry management – Error” mockup \vspace{1mm} & 
 				\vspace{1mm} \vspace{1mm} \\
 			\hline
