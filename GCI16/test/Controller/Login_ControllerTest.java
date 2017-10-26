@@ -47,6 +47,7 @@ public class Login_ControllerTest {
             instance = new Login_Controller(Main_Controller.getMain());
         } catch (SQLException ex) {
             Logger.getLogger(Login_ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail("Login_Controller instantiation failed");
         }
     } 
     
