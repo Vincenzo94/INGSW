@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * 
  * @author Andrea
  * 
- * This class tests the "check" method of Login_Controller.
+ * This class tests the "check" method of "Login_Controller" class.
  * This methods takes 2 parameters in input: USER(String) and PSW(String).
  * 
  * Equivalence classes:
@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  *  - Not stored values (F1) 
  *  - NULL  (F2)
  * 
- * Applied method: SECT
+ * Method applied: SECT
  * Number of tests: 15 (5x3)
  */
 public class Login_ControllerTest {
@@ -59,7 +59,11 @@ public class Login_ControllerTest {
         expResult = null;
     }
     
-
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   T   
+    *   Psw:    T
+    */
     @Test
     public void checkTest1(){
         user = "2";
@@ -69,6 +73,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   T
+    *   Psw:    F1
+    */
     @Test
     public void checkTest2(){
         user = "2";
@@ -78,6 +87,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   T   
+    *   Psw:    F2
+    */
     @Test
     public void checkTest3(){
         user = "2";
@@ -86,6 +100,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F2
+    *   Psw:    T
+    */
     @Test
     public void checkTest4(){
         user = "101";
@@ -95,6 +114,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F2   
+    *   Psw:    F1
+    */
     @Test
     public void checkTest5(){
         user = "101";
@@ -104,6 +128,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F2
+    *   Psw:    F2
+    */
     @Test
     public void checkTest6(){
         user = "101";
@@ -112,6 +141,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F3
+    *   Psw:    T
+    */
     @Test
     public void checkTest7(){
         user = "2abc";
@@ -121,7 +155,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F3   
+    *   Psw:    F1
+    */
     @Test
     public void checkTest8(){
         user = "2abc";
@@ -131,7 +169,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F3
+    *   Psw:    F2
+    */
     @Test
     public void checkTest9(){
         user = "2abc";
@@ -140,7 +182,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F4
+    *   Psw:    T
+    */
     @Test
     public void checkTest10(){
         psw = "ingsw";
@@ -149,7 +195,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F4
+    *   Psw:    F1
+    */
     @Test
     public void checkTest11(){
         psw = "ingw";
@@ -158,7 +208,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
-    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F4
+    *   Psw:    F2
+    */
     @Test
     public void checkTest12(){
         expResult = false;
@@ -166,6 +220,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F1   
+    *   Psw:    T
+    */
     @Test
     public void checkTest13(){
         user = "-1";
@@ -174,7 +233,12 @@ public class Login_ControllerTest {
         result = instance.check(user, psw);
         assertEquals(result, expResult);
     }
-
+    
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F1   
+    *   Psw:    F1
+    */
     @Test
     public void checkTest14(){
         user = "-1";
@@ -184,6 +248,11 @@ public class Login_ControllerTest {
         assertEquals(result, expResult);
     }
     
+    /*
+    *   EQUIVALENCE CLASSES TESTED:
+    *   User:   F1   
+    *   Psw:    F2
+    */
     @Test
     public void checkTest15(){
         user = "-1";
