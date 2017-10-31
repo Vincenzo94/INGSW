@@ -52,7 +52,7 @@ public class Bill_MYSQL implements DAO_Document {
             statement.setInt(1, c.getId());
             ResultSet rs = dbManager.doQuery(statement);
             while(rs.next()){
-                bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(13)));
+                bills.add(new Bill(rs.getInt(1), rs.getString(5), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(13)));
         }
         return bills; 
     }
