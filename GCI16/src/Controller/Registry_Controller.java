@@ -99,6 +99,15 @@ public class Registry_Controller implements Controller{
     
     private void searchClicked(){
         searchedContracts = true;
+        boolean result=verify();
+        if(result)
+            JOptionPane.showConfirmDialog(view, "Invalid parameters for search's forms","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        else{
+            updateView();
+        }
+    }
+    
+    private boolean verify(){
         name=view.getNameSearch();
         surname=view.getSurnameSearch();
         tax=view.getTaxSearch();
@@ -107,11 +116,7 @@ public class Registry_Controller implements Controller{
         boolean b = (!surname.equals("") & !surname.matches("[[a-z]|[A-Z]]*"));
         boolean c = (!tax.equals("") & !tax.matches("[[a-z]|[0-9]]*"));
         boolean d = (!id_string.equals("") & !id_string.matches("[0-9]*"));
-        if(a || b || c || d)
-            JOptionPane.showConfirmDialog(view, "Invalid parameters for search's forms","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        else{
-            updateView();
-        }
+        return (a || b || c || d);
     }
     
     private void updateView(){

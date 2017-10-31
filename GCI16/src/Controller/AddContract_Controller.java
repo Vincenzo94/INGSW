@@ -55,6 +55,19 @@ public class AddContract_Controller implements Controller{
         try {
             dbManager = Database_Controller.getDbManager();        
             DAO_Contract daoContract = new Contract_MYSQL(dbManager);
+            contract= verify();
+            daoContract.create(contract,controller.getOperator());
+            Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
+            JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            view.dispose();
+            controller.back();
+        }catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+private Contract verify() throws SQLException{
+            Contract con;
             String billingCity = view.getCity1(),
                    billingDistrict = view.getDistrict1(),
                    billingZip = view.getZip1(),
@@ -107,16 +120,10 @@ public class AddContract_Controller implements Controller{
             if(errorMsg!=null)
                 throw new SQLException(errorMsg);
             if(billingCity.equals("") && billingDistrict.equals("") && billingZip.equals("") && billingStreet.equals(""))
-                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number));
+                con = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number));
             else
-                contract = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number), billingCity, billingDistrict, billingZip, billingStreet, Integer.valueOf(billingNumber));
-            daoContract.create(contract,controller.getOperator());
-            Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);
-            JOptionPane.showConfirmDialog(view, success,"Info",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
-            view.dispose();
-            controller.back();
-        }catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(view, ex.getMessage()+"\n"+error,"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
-        }
+                con = new Contract(name,surname,taxc,phone,email,mobile,city,district,zip,street,Integer.valueOf(number), billingCity, billingDistrict, billingZip, billingStreet, Integer.valueOf(billingNumber));
+            return con;
     }
 }
+
