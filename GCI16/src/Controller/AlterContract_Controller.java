@@ -168,6 +168,17 @@ public class AlterContract_Controller implements Controller{
     }
     
     private void updateRegistryClicked() throws SQLException{
+        verify();
+        contract.setName(view.getPersonName());
+        contract.setSurname(view.getSurname());
+        contract.setTaxCode(view.getTaxC());
+        contract.setPhone(view.getPhone());
+        contract.setMobile(view.getMobile());
+        contract.seteMail(view.getEmail());
+        daoContract.update_Registry(contract,controller.getOperator());
+    }
+    
+    private void verify() throws SQLException{
         String name=view.getPersonName(),
                surname=view.getSurname(),
                taxc=view.getTaxC(),
@@ -189,13 +200,6 @@ public class AlterContract_Controller implements Controller{
             errorMsg = "Invalid characters in eMail";
         if(errorMsg!=null)
             throw new SQLException(errorMsg);
-        contract.setName(view.getPersonName());
-        contract.setSurname(view.getSurname());
-        contract.setTaxCode(view.getTaxC());
-        contract.setPhone(view.getPhone());
-        contract.setMobile(view.getMobile());
-        contract.seteMail(view.getEmail());
-        daoContract.update_Registry(contract,controller.getOperator());
     }
     
 }
