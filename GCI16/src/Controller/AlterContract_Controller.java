@@ -101,7 +101,17 @@ public class AlterContract_Controller implements Controller{
     }
     
     private void updateAddressClicked() throws SQLException{
-        String street = view.getStreet2();
+        verifyAddress();
+        contract.setCity(view.getCity2());
+        contract.setDistrict(view.getDistrict2());
+        contract.setStreet(view.getStreet2());
+        contract.setZipCode(view.getZip2());
+        contract.setNumber(Integer.valueOf(view.getNumber2()));
+        daoContract.update_Address(contract,controller.getOperator());
+    }
+    
+    private void verifyAddress() throws SQLException{
+                String street = view.getStreet2();
         String city = view.getCity2();
         String district = view.getDistrict2();
         String zip = view.getZip2();
@@ -119,14 +129,7 @@ public class AlterContract_Controller implements Controller{
             errorMsg = "Invalid characters in Billing Number";
         if(errorMsg!=null)
             throw new SQLException(errorMsg);
-        contract.setCity(city);
-        contract.setDistrict(district);
-        contract.setStreet(street);
-        contract.setZipCode(zip);
-        contract.setNumber(Integer.valueOf(number));
-        daoContract.update_Address(contract,controller.getOperator());
     }
-    
     
     private void updateBillingAddressClicked() throws SQLException{
         String street = view.getStreet1();
@@ -134,20 +137,8 @@ public class AlterContract_Controller implements Controller{
         String district = view.getDistrict1();
         String zip = view.getZip1();
         String number = view.getNumber1();
-        String errorMsg = null;
         if(!street.equals("")&&!district.equals("")&&!city.equals("")&&!zip.equals("")){
-            if(!city.matches("[[a-z]|[A-Z]]*"))
-                errorMsg = "Invalid characters in Billing City";
-            else if(!district.matches("[[a-z]|[A-Z]]*"))
-                errorMsg = "Invalid characters in Billing District";
-            else if(!street.matches("[[a-z]|[A-Z]| ]*"))
-                errorMsg = "Invalid characters in Billing Street";
-            else if(!zip.matches("[0-9]*"))
-                errorMsg = "Invalid characters in Billing Zip Code";
-            else if(!number.matches("[0-9]*"))
-                errorMsg = "Invalid characters in Billing Number";
-            if(errorMsg!=null)
-                throw new SQLException(errorMsg);
+            verifyBilling(street,district,city,zip,number);
             if(contract.getBillingAddress() != null){
                 contract.setBillingCity(city);
                 contract.setBillingDistrict(district);
@@ -167,7 +158,34 @@ public class AlterContract_Controller implements Controller{
         daoContract.update_UpdatedBy(contract, controller.getOperator());
     }
     
+    private void verifyBilling (String street, String district, String city, String zip, String number) throws SQLException{
+        String errorMsg=null;
+            if(!city.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing City";
+            else if(!district.matches("[[a-z]|[A-Z]]*"))
+                errorMsg = "Invalid characters in Billing District";
+            else if(!street.matches("[[a-z]|[A-Z]| ]*"))
+                errorMsg = "Invalid characters in Billing Street";
+            else if(!zip.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Zip Code";
+            else if(!number.matches("[0-9]*"))
+                errorMsg = "Invalid characters in Billing Number";
+            if(errorMsg!=null)
+                throw new SQLException(errorMsg);
+    }
+    
     private void updateRegistryClicked() throws SQLException{
+        verifyRegistry();
+        contract.setName(view.getPersonName());
+        contract.setSurname(view.getSurname());
+        contract.setTaxCode(view.getTaxC());
+        contract.setPhone(view.getPhone());
+        contract.setMobile(view.getMobile());
+        contract.seteMail(view.getEmail());
+        daoContract.update_Registry(contract,controller.getOperator());
+    }
+    
+    private void verifyRegistry() throws SQLException{
         String name=view.getPersonName(),
                surname=view.getSurname(),
                taxc=view.getTaxC(),
@@ -189,13 +207,6 @@ public class AlterContract_Controller implements Controller{
             errorMsg = "Invalid characters in eMail";
         if(errorMsg!=null)
             throw new SQLException(errorMsg);
-        contract.setName(view.getPersonName());
-        contract.setSurname(view.getSurname());
-        contract.setTaxCode(view.getTaxC());
-        contract.setPhone(view.getPhone());
-        contract.setMobile(view.getMobile());
-        contract.seteMail(view.getEmail());
-        daoContract.update_Registry(contract,controller.getOperator());
     }
     
 }
