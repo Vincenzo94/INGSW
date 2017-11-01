@@ -26,7 +26,7 @@ public class Database_Controller {
             connection = connect();
     }
     
-    public static Database_Controller getDbManager() throws SQLException{
+    public static Database_Controller getDBController() throws SQLException{
         if(instance==null || connection.isClosed()){
             instance = new Database_Controller();
         }

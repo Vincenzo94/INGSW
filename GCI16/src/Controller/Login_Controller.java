@@ -22,7 +22,7 @@ public class Login_Controller implements Controller{
     private Login login = null;
     private Operator operator;
     private final Main_Controller main;
-    private Database_Controller dbManager;
+    private Database_Controller dbController;
     private final String helpMessage = "To log in you have to insert \nyour ID and Password and \nthen click on \"Login\" button";
 
     Login_Controller(Main_Controller m){
@@ -60,11 +60,11 @@ public class Login_Controller implements Controller{
     Boolean check(String user, String passw){
         DAO_Operator DAO;
         try {
-            dbManager = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             if(user==null || !user.matches("[0-9]*"))
                 return false;
             operator=new Operator(Integer.valueOf(user),passw);
-            DAO = new Operator_MYSQL(dbManager);
+            DAO = new Operator_MYSQL(dbController);
             operator = DAO.check(operator);
             return operator!=null && !operator.getIsAdmin() && !operator.getIsDetector();
         } catch (SQLException ex) {

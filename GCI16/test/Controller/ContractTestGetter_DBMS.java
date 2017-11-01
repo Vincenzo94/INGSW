@@ -15,7 +15,7 @@ public class ContractTestGetter_DBMS implements DAO_Contract{
     private final String QUERY_CONTRACT_CLOSED = "SELECT * FROM Contract_Test_BAD_Closed";
     
     public ContractTestGetter_DBMS() throws SQLException{
-        dbManager = Database_Controller.getDbManager();
+        dbManager = Database_Controller.getDBController();
     }
     public Contract getValidContract() throws SQLException{
         PreparedStatement statement = dbManager.getStatement(QUERY_CONTRACT_GOOD);

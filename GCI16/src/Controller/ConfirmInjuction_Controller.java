@@ -47,7 +47,7 @@ public class ConfirmInjuction_Controller implements Controller{
             this.injuctionsController = (InjuctionsHistory_Controller)main;
         bill = injuction.getBill();
         try {
-            dbController = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
             contract = daoContract.getContract(bill.getContractID());
             PDFMaker.createPDF(contract, bill, injuction);

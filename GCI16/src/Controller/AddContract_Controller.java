@@ -51,10 +51,10 @@ public class AddContract_Controller implements Controller{
     }
     
     private void createClicked(){
-        Database_Controller dbManager;
+        Database_Controller dbController;
         try {
-            dbManager = Database_Controller.getDbManager();        
-            DAO_Contract daoContract = new Contract_MYSQL(dbManager);
+            dbController = Database_Controller.getDBController();        
+            DAO_Contract daoContract = new Contract_MYSQL(dbController);
             contract= verify();
             daoContract.create(contract,controller.getOperator());
             Log_Controller.writeLog(" creates a new contract with the Tax Code "+contract.getTaxCode(),AddContract_Controller.class);

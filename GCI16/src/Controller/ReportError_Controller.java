@@ -45,7 +45,7 @@ public class ReportError_Controller implements Controller{
             }
         });
         try {
-            dbController = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             init();
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(view, ex.getMessage(),"Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);

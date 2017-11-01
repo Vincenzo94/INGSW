@@ -30,8 +30,8 @@ public class SearchContract_Controller implements Controller{
     }
     
     private void initRegistryManagement() throws SQLException {
-        Database_Controller dbManager = Database_Controller.getDbManager();
-        DAO_Contract daoContract = new Contract_MYSQL(dbManager);
+        Database_Controller dbController = Database_Controller.getDBController();
+        DAO_Contract daoContract = new Contract_MYSQL(dbController);
         tableModelRegistryManagement.setRowCount(0);
         String[] columns = {"Name", "Surname", "Contract ID", "Tax C./VAT"};
         tableModelRegistryManagement.setColumnIdentifiers(columns);
@@ -50,7 +50,7 @@ public class SearchContract_Controller implements Controller{
         }
     }
 
-    public List<Contract> getContracts() {
+    List<Contract> getContracts() {
         return contracts;
     }
     

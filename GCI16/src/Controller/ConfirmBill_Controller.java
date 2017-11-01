@@ -82,7 +82,7 @@ public class ConfirmBill_Controller implements Controller{
             }
         };
         try {
-                dbController = Database_Controller.getDbManager();
+                dbController = Database_Controller.getDBController();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
             for(Bill b: l){
                 Contract tmp;
@@ -109,7 +109,7 @@ public class ConfirmBill_Controller implements Controller{
         else
             this.billsController = (BillsHistory_Controller)main;
         try {
-            dbController = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             DAO_Contract daoContract = new Contract_MYSQL(dbController);
             contract = daoContract.getContract(b.getContractID());
             PDFMaker.createPDF(contract, b,null);

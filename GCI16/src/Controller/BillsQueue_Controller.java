@@ -34,13 +34,13 @@ public class BillsQueue_Controller implements Controller{
     private final BillsQueuePanel view;
     private DefaultTableModel tableModelBillsQueue = null;
     private final DefaultTableCellRenderer defaultRender;
-    private final Database_Controller dbManager;
+    private final Database_Controller dbController;
     private List<Bill> bills;
     private final Operator operator;
     private Controller current;
 
-    BillsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
-        this.dbManager=dbManager;
+    BillsQueue_Controller(Database_Controller dbController, Operator o, Component panel) {
+        this.dbController=dbController;
         this.operator=o;
         view = (BillsQueuePanel)panel;
         view.setSize();
@@ -137,7 +137,7 @@ public class BillsQueue_Controller implements Controller{
     }
 
     private void updateBillsQueue(){
-        DAO_Document daoBill = new Bill_MYSQL(dbManager);
+        DAO_Document daoBill = new Bill_MYSQL(dbController);
         bills.clear();
         tableModelBillsQueue.setRowCount(0);
         try {

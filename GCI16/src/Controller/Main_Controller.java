@@ -34,7 +34,7 @@ public class Main_Controller{
     private final Controller current;
     private Operator operator;
     private static Main_Controller instance;
-    private final Database_Controller dbManager;
+    private final Database_Controller dbController;
     
     private InjuctionsQueue_Controller inj;
     private BillsQueue_Controller bill;
@@ -45,7 +45,7 @@ public class Main_Controller{
     private Main_Controller() throws SQLException{
 
         current = new Login_Controller(this);
-        dbManager = Database_Controller.getDbManager();
+        dbController = Database_Controller.getDBController();
         actual = new Home();
         actual.setSize();
     }
@@ -73,8 +73,8 @@ public class Main_Controller{
             }
         });
         regy=new Registry_Controller(operator,actual.getPanel(0));
-        inj=new InjuctionsQueue_Controller(dbManager,operator,actual.getPanel(1));
-        bill=new BillsQueue_Controller(dbManager,operator,actual.getPanel(2));
+        inj=new InjuctionsQueue_Controller(dbController,operator,actual.getPanel(1));
+        bill=new BillsQueue_Controller(dbController,operator,actual.getPanel(2));
     }
     
     private void changePane(){

@@ -31,7 +31,7 @@ import javax.swing.table.TableColumnModel;
 public class InjuctionsHistory_Controller implements Controller {
     private final Contract contract;
     private final Registry_Controller reg;
-    private Database_Controller dbManager;
+    private Database_Controller dbController;
     private InjuctionsHistory view;
     private List<Injuction> injuctions;
     private final DefaultTableCellRenderer defaultRender;
@@ -54,7 +54,7 @@ public class InjuctionsHistory_Controller implements Controller {
                 }
             };
         try {
-            dbManager=Database_Controller.getDbManager();
+            dbController=Database_Controller.getDBController();
             initTable();
 
             view.addActionListener(new Listener(){
@@ -121,7 +121,7 @@ public class InjuctionsHistory_Controller implements Controller {
         DefaultTableModel model = view.getInjuctionsTableModel();
         String[] columns = {"Contract ID", "Reference bill", "Expired from", "Arrears"};
         model.setColumnIdentifiers(columns);
-        Injuction_MYSQL dao = new Injuction_MYSQL(dbManager);
+        Injuction_MYSQL dao = new Injuction_MYSQL(dbController);
         try {
                 injuctions=dao.getAllDocuments(contract);
 

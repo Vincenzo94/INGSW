@@ -25,7 +25,7 @@ public class AlterContract_Controller implements Controller{
     private final String success = "Contract altered";
     private final String error = "Contract not altered";
     private DAO_Contract daoContract;
-    private Database_Controller dbManager;
+    private Database_Controller dbController;
     
     AlterContract_Controller(Registry_Controller main, Contract contract) {
         this.controller=main;
@@ -44,7 +44,7 @@ public class AlterContract_Controller implements Controller{
 
     private void init() {
         try {
-            dbManager = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             view.setPersonName(contract.getName());
             view.setSurname(contract.getSurname());
             view.setTaxC(contract.getTaxCode());
@@ -70,7 +70,7 @@ public class AlterContract_Controller implements Controller{
 
     private void buttonCliked(Component c) {
         Integer button = view.checkButton(c);
-        daoContract = new Contract_MYSQL(dbManager);
+        daoContract = new Contract_MYSQL(dbController);
         try{
             switch(button){
                 case 0: {

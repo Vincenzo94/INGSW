@@ -24,7 +24,7 @@ public class RemoveContract_Controller implements Controller {
         registryController = controller;
     }
     
-    protected Boolean removeContract(Contract contract){
+    Boolean removeContract(Contract contract){
         int n = JOptionPane.showConfirmDialog(registryController.getPanel(),"Are you sure to delete the contract" + contract.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(n == 0){
@@ -46,8 +46,8 @@ public class RemoveContract_Controller implements Controller {
     }
 
     private void remove(Contract contract) throws SQLException{
-        Database_Controller dbManager = Database_Controller.getDbManager();
-        DAO_Contract daoContract = new Contract_MYSQL(dbManager); 
+        Database_Controller dbController = Database_Controller.getDBController();
+        DAO_Contract daoContract = new Contract_MYSQL(dbController); 
         daoContract.remove(contract);
     }
 }

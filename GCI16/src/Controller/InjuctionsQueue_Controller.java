@@ -34,13 +34,13 @@ public class InjuctionsQueue_Controller implements Controller {
     private DefaultTableModel tableModelInjuctionsQueue = null;
     private final DefaultTableCellRenderer defaultRender;
     private List<Injuction> injuctions;
-    private final Database_Controller dbManager;
+    private final Database_Controller dbController;
     private final Operator operator;
     private Controller current;
 
-    InjuctionsQueue_Controller(Database_Controller dbManager, Operator o, Component panel) {
+    InjuctionsQueue_Controller(Database_Controller dbController, Operator o, Component panel) {
         this.operator=o;
-        this.dbManager=dbManager;
+        this.dbController=dbController;
         view=(InjuctionsQueuePanel)panel;
         view.setSize();
         injuctions = new ArrayList<>();
@@ -97,7 +97,7 @@ public class InjuctionsQueue_Controller implements Controller {
     } 
     
     private void updateInjuctionsQueue(){
-        DAO_Document daoInjuction = new Injuction_MYSQL(dbManager);
+        DAO_Document daoInjuction = new Injuction_MYSQL(dbController);
         tableModelInjuctionsQueue.setRowCount(0);
         injuctions.clear();
         try {

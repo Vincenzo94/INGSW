@@ -23,7 +23,7 @@ public class RemoveInjuction_Controller implements Controller {
     RemoveInjuction_Controller(InjuctionsQueue_Controller controller){
         injuctionsQueueController = controller;
     }
-    protected Boolean removeInjuction(Injuction injuction){
+    Boolean removeInjuction(Injuction injuction){
         int n = JOptionPane.showConfirmDialog(injuctionsQueueController.getPanel(),"Are you sure to delete the injuction" + injuction.getId()+"?",
                 "Delete Contract",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(n == 0){
@@ -45,7 +45,7 @@ public class RemoveInjuction_Controller implements Controller {
     }
 
     private void remove(Injuction injuction) throws SQLException {
-        Database_Controller dbController = Database_Controller.getDbManager();
+        Database_Controller dbController = Database_Controller.getDBController();
         DAO_Document daoDocument = new Injuction_MYSQL(dbController); 
         daoDocument.remove(injuction);
     }

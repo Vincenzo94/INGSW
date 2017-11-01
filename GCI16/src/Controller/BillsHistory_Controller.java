@@ -31,7 +31,7 @@ import javax.swing.table.TableColumnModel;
 public class BillsHistory_Controller implements Controller {
     private final Contract contract;
     private final Registry_Controller reg;
-    private Database_Controller dbManager;
+    private Database_Controller dbController;
     private final BillsHistory view;
     private final DefaultTableCellRenderer defaultRender;
     private DefaultTableModel billsModel;
@@ -53,7 +53,7 @@ public class BillsHistory_Controller implements Controller {
         view.addMouseListener(new Listener(){
             @Override
             public void mouseClicked(MouseEvent e){
-                tableCliked(e);   
+                tableCliked();   
             }
         });
         defaultRender = new DefaultTableCellRenderer() {
@@ -79,7 +79,7 @@ public class BillsHistory_Controller implements Controller {
         }
     }
 
-    private void tableCliked(MouseEvent e) {
+    private void tableCliked() {
         Integer billCont = view.getBillCount();
         if(billCont>0){
             Integer bill = view.getSelectedBill();
@@ -112,13 +112,13 @@ public class BillsHistory_Controller implements Controller {
 
     private void init() {
         try {
-            dbManager = Database_Controller.getDbManager();
+            dbController = Database_Controller.getDBController();
             billsModel = view.getTableModelBills();
             billsModel.setRowCount(0);
             String[] columns = {"Invoice N.", "Period", "State", "Due date"};
             billsModel.setColumnIdentifiers(columns);
             setDefaultRender(view.getBillTable());
-            DAO_Document daoBill = new Bill_MYSQL(dbManager);
+            DAO_Document daoBill = new Bill_MYSQL(dbController);
             bills.clear();
             bills = daoBill.getAllDocuments(contract);
             for(Bill temp : bills){
@@ -159,8 +159,7 @@ public class BillsHistory_Controller implements Controller {
         else
             JOptionPane.showConfirmDialog(view, "Invalid Selection from the table","Error",JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE);
     }
-
-    public void back() {
+    void back() {
         view.setVisible(true);
     }
     Component getPanel(){
