@@ -16,19 +16,19 @@ import java.sql.SQLException;
  */
 public class Operator_MYSQL implements DAO_Operator{
     private final String TABLE = "Operator";
-    Database_Controller dbManager;
-    public Operator_MYSQL(Database_Controller dbManager) throws SQLException{
-        this.dbManager = dbManager;
+    Database_Controller dbController;
+    public Operator_MYSQL(Database_Controller dbController) throws SQLException{
+        this.dbController = dbController;
     }
     private final String QUERY_CHECK_OPERATOR = "SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE + " WHERE ID = ? AND `password` = ?";
 
     @Override
     public Operator check(Operator o)  throws SQLException{
         Operator loggedOperator = null;
-        PreparedStatement statement = dbManager.getStatement(QUERY_CHECK_OPERATOR);
+        PreparedStatement statement = dbController.getStatement(QUERY_CHECK_OPERATOR);
         statement.setInt(1,o.getId());
         statement.setString(2, o.getPassword());
-        ResultSet rs = dbManager.doQuery(statement);
+        ResultSet rs = dbController.doQuery(statement);
         while(rs.next()){
             loggedOperator = new Operator(rs.getInt("ID"), rs.getString("password"), rs.getBoolean("isAdmin"), rs.getBoolean("isDetector"));
         }

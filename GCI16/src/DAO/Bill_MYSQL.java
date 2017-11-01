@@ -21,7 +21,7 @@ import java.util.List;
  * @author Andrea
  */
 public class Bill_MYSQL implements DAO_Document {
-    private Database_Controller dbManager = null;
+    private Database_Controller dbController = null;
     private final String TABLE_VIEW = "Bill_AUX";
     private final String TABLE = "Bill";
     private final String QUERY_GET_ALL_BILLS= " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE_VIEW + " WHERE (Operator IS NULL OR Operator = ?) AND State = 'Inserted' LIMIT 5";
@@ -29,18 +29,18 @@ public class Bill_MYSQL implements DAO_Document {
     private final String QUERY_UPDATE_STATE = " UPDATE " + Database_Controller.SCHEMA + "." + TABLE + " SET state = ? WHERE ID = ?";;
     private final String QUERY_GET_ALL_BILLS_CONTRACT = " SELECT * FROM " + Database_Controller.SCHEMA + "." + TABLE_VIEW
                                                       + " WHERE Contract = ?";   
-    public Bill_MYSQL(Database_Controller dbManager) {
-        this.dbManager = dbManager;
+    public Bill_MYSQL(Database_Controller dbController) {
+        this.dbController = dbController;
     }
 
     
 
     @Override
     public void setState(Document d) throws SQLException{
-        PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_STATE);
+        PreparedStatement statement = dbController.getStatement(QUERY_UPDATE_STATE);
         statement.setString(1, d.getState());
         statement.setInt(2, d.getId());
-        if(!dbManager.doUpdate(statement))
+        if(!dbController.doUpdate(statement))
             throw new SQLException("Unable to set State to " +d.getId());
     }
 
@@ -48,9 +48,9 @@ public class Bill_MYSQL implements DAO_Document {
     public List<?> getAllDocuments(Contract c) throws SQLException{
         List<Bill> bills = new ArrayList<>();
         
-            PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS_CONTRACT);
+            PreparedStatement statement = dbController.getStatement(QUERY_GET_ALL_BILLS_CONTRACT);
             statement.setInt(1, c.getId());
-            ResultSet rs = dbManager.doQuery(statement);
+            ResultSet rs = dbController.doQuery(statement);
             while(rs.next()){
                 bills.add(new Bill(rs.getInt(1), rs.getString(5), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15), rs.getInt(13)));
         }
@@ -60,9 +60,9 @@ public class Bill_MYSQL implements DAO_Document {
     @Override
     public List<Bill> getAllDocuments(Operator o) throws SQLException{
     List<Bill> bills = new ArrayList<>();
-    PreparedStatement statement = dbManager.getStatement(QUERY_GET_ALL_BILLS);
+    PreparedStatement statement = dbController.getStatement(QUERY_GET_ALL_BILLS);
         statement.setInt(1, o.getId());
-        ResultSet rs = dbManager.doQuery(statement);
+        ResultSet rs = dbController.doQuery(statement);
         while(rs.next()){
             if(rs.getObject(13) == null)
                 bills.add(new Bill(rs.getInt(1), rs.getString(4), rs.getDate(2), rs.getDate(3), rs.getDate(6), rs.getDate(7), rs.getFloat(8), rs.getDate(9), rs.getInt(11), rs.getInt(10), rs.getDate(4), rs.getDate(12), rs.getFloat(14), rs.getFloat(15),null));
@@ -79,10 +79,10 @@ public class Bill_MYSQL implements DAO_Document {
 
     @Override
     public <T extends Document> void setManagedOperator(T document, Operator o) throws SQLException{
-            PreparedStatement statement = dbManager.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
+            PreparedStatement statement = dbController.getStatement(QUERY_UPDATE_MANAGED_BY_OPERATOR);
             statement.setInt(1, o.getId());
             statement.setInt(2, document.getId());
-            if(!dbManager.doUpdate(statement))
+            if(!dbController.doUpdate(statement))
                 throw new SQLException("Unable to set MANAGED_BY_OPERATOR  to " +document.getId());
     }
 
