@@ -1,5 +1,8 @@
-package Model;
+package Model.Services;
 
+import Model.Bill;
+import Model.Contract;
+import Model.Injuction;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
